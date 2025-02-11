@@ -5,7 +5,7 @@
     <script src="assets/js/color-modes.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Oscar Sanchez - Portfolio</title>
+    <title>Abel Oscar Sanchez - Portfolio</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <style>
@@ -20,7 +20,7 @@
       }
       .bd-mode-toggle { z-index: 1500; }
       .bd-mode-toggle .dropdown-menu .active .bi { display: block !important; }
-
+      
       /* Fancy Navbar */
       .navbar-custom {
         background: linear-gradient(90deg, #1a237e, #6a1b9a);
@@ -37,7 +37,7 @@
         font-size: 1.4rem;
         font-weight: bold;
       }
-
+      
       /* Section Styles with Distinct Colors */
       .section {
         padding: 4rem 2rem;
@@ -46,7 +46,7 @@
       #resume {
         background-color: #1a237e;  /* Deep Navy Blue */
       }
-      #project {
+      #agentwork {
         background-color: #2e7d32;  /* Rich Dark Green */
       }
       #about {
@@ -69,72 +69,102 @@
         border-radius: 0.5rem;
         overflow-x: auto;
       }
+      a {
+        color: #ffd700;
+        text-decoration: underline;
+      }
+      a:hover {
+        color: #ffea00;
+      }
+      
+      /* New About Me Banner Style (Emulating HTML5 UP banner from Item B) */
+      .banner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 6em 2em;
+        color: #fff;
+      }
+      .banner.style3 {
+        background: linear-gradient(135deg, #004d40 0%, #00695c 100%);
+      }
+      .banner.orient-right .content { text-align: left; }
+      .banner.fullscreen { min-height: 100vh; }
+      
+      .banner .content {
+        flex: 1;
+        padding: 1em;
+      }
+      .banner .content h1 {
+        font-size: 3em;
+        margin-bottom: 0.5em;
+      }
+      .banner .icons {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 1em;
+        display: flex;
+        gap: 1em;
+      }
+      .banner .icons li { font-size: 1em; }
+      
+      .banner .major {
+        font-size: 1.2em;
+        line-height: 1.6em;
+        margin-bottom: 1em;
+      }
+      .banner .button {
+        display: inline-block;
+        background: #ffd700;
+        color: #000;
+        padding: 0.5em 1em;
+        text-decoration: none;
+        border-radius: 4px;
+        margin-right: 1em;
+      }
+      .banner .image {
+        flex: 1;
+        text-align: center;
+        padding: 1em;
+      }
+      .banner .image img {
+        max-width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      }
+      
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .banner {
+          flex-direction: column;
+          text-align: center;
+        }
+        .banner .content,
+        .banner .image {
+          width: 100%;
+          padding: 1em;
+        }
+      }
     </style>
   </head>
   <body>
     <!-- ========================== THEME TOGGLE DROPDOWN ========================== -->
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
       <symbol id="check2" viewBox="0 0 16 16">
-        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 
-                 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 
-                 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 
-                 0 0 1 .708 0z"/>
+        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
       </symbol>
       <symbol id="circle-half" viewBox="0 0 16 16">
-        <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 
-                 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+        <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
       </symbol>
       <symbol id="moon-stars-fill" viewBox="0 0 16 16">
-        <path d="M6 .278a.768.768 0 0 1 .08.858 
-                 7.208 7.208 0 0 0-.878 3.46c0 4.021 
-                 3.278 7.277 7.318 7.277.527 0 1.04-.055 
-                 1.533-.16a.787.787 0 0 1 .81.316.733.733 
-                 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 
-                 16C3.734 16 0 12.286 0 7.71 0 4.266 
-                 2.114 1.312 5.124.06A.752.752 0 0 1 
-                 6 .278z"/>
-        <path d="M10.794 3.148a.217.217 0 0 1 .412 
-                 0l.387 1.162c.173.518.579.924 1.097 
-                 1.097l1.162.387a.217.217 0 0 1 0 
-                 .412l-1.162.387a1.734 1.734 0 0 0-1.097 
-                 1.097l-.387 1.162a.217.217 0 0 1-.412 
-                 0l-.387-1.162A1.734 1.734 0 0 0 
-                 9.31 6.593l-1.162-.387a.217.217 0 
-                 0 1 0-.412l1.162-.387a1.734 1.734 0 
-                 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 
-                 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 
-                 0 0 1 0 .274l-.774.258a1.156 1.156 
-                 0 0 0-.732.732l-.258.774a.145.145 
-                 0 0 1-.274 0l-.258-.774a1.156 1.156 
-                 0 0 0-.732-.732l-.774-.258a.145.145 
-                 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/>
+        <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+        <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/>
       </symbol>
       <symbol id="sun-fill" viewBox="0 0 16 16">
-        <path d="M8 12a4 4 0 1 0 0-8 4 4 
-                 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 
-                 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 
-                 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 
-                 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 
-                 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 
-                 0 0 1 .5.5zM3 8a.5.5 0 0 
-                 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 
-                 0 1 3 8zm10.657-5.657a.5.5 
-                 0 0 1 0 .707l-1.414 1.415a.5.5 
-                 0 1 1-.707-.708l1.414-1.414a.5.5 
-                 0 0 1 .707 0zm-9.193 9.193a.5.5 
-                 0 0 1 0 .707L3.05 13.657a.5.5 
-                 0 0 1-.707-.707l1.414-1.414a.5.5 
-                 0 0 1 .707 0zm9.193 2.121a.5.5 
-                 0 0 1-.707 0l-1.414-1.414a.5.5 
-                 0 0 1 .707-.707l1.414 1.414a.5.5 
-                 0 0 1 0 .707zM4.464 4.465a.5.5 
-                 0 0 1-.707 0L2.343 3.05a.5.5 
-                 0 1 1 .707-.707l1.414 1.414a.5.5 
-                 0 0 1 0 .708z"/>
+        <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
       </symbol>
     </svg>
-
-    <!-- ========================== THEME TOGGLE DROPDOWN ========================== -->
+    
     <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
       <button class="btn btn-primary py-2 dropdown-toggle d-flex align-items-center"
               id="bd-theme" type="button" aria-expanded="false"
@@ -189,12 +219,11 @@
         </li>
       </ul>
     </div>
-    <!-- ========================== END THEME TOGGLE DROPDOWN ========================== -->
-
+    
     <!-- ========================== FANCY NAVBAR ========================== -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Oscar Sanchez</a>
+        <a class="navbar-brand" href="#">Abel Oscar Sanchez</a>
         <button class="navbar-toggler" type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent"
@@ -209,7 +238,7 @@
               <a class="nav-link" href="#resume">CV/Resume</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#project">GitHub Project</a>
+              <a class="nav-link" href="#agentwork">Agent Work</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#about">About Me</a>
@@ -218,20 +247,36 @@
         </div>
       </div>
     </nav>
-    <!-- ========================== END NAVBAR ========================== -->
-
+    
     <div class="container-fluid" style="padding-top: 100px;">
-      <!-- ========================== HEADER / INTRO ========================== -->
+      <!-- HEADER / INTRO -->
       <header class="text-center mb-5">
-        <h1 class="display-4">Oscar Sanchez</h1>
-        <p class="lead">40 Cottage Street, Wellesley, MA 02482</p>
-        <p class="lead">
-          <strong>Email:</strong> oscarsan@mit.edu &nbsp;|&nbsp; 
-          <strong>Phone:</strong> (781) 366-8473
-        </p>
+        <h1 class="display-4">Abel Oscar Sanchez</h1>
+        <p class="lead">Email: oscarsan@mit.edu &nbsp;|&nbsp; Phone: (781) 366-8473</p>
+        <p class="lead"><a href="https://www.mit.edu/~oscarsan/" target="_blank">www.mit.edu/~oscarsan/</a></p>
       </header>
-
-      <!-- ========================== CV/RESUME SECTION ========================== -->
+    
+      <!-- ABOUT ME SECTION (Updated with banner style, now first) -->
+      <section id="about" class="banner style3 orient-right content-align-left fullscreen scroll-offset">
+        <div class="content">
+          <h1>Abel Oscar Sanchez</h1>
+          <ul class="icons">
+            <li>Cambridge, MA</li>
+          </ul>
+          <p class="major">
+            I am an entrepreneurial marketing leader with a strong background in strategic branding, data analytics, and community-driven initiatives. With experience spanning education, technology, and creative industries, I specialize in developing inclusive programs, scaling organizations, and driving engagement through innovative marketing strategies.<br><br>
+            As the co-founder of Beautiful Patterns, I helped design and expand an educational initiative that empowers underrepresented communities through computational and algorithmic thinking, reaching thousands of participants across the U.S. and Mexico. My expertise extends into frontend development, data visualization, and content strategy, having worked with institutions like the Broad Institute and Microsoft to enhance accessibility and streamline complex data analysis.<br><br>
+            Beyond my technical and marketing skills, I am passionate about leveraging storytelling, digital media, and strategic partnerships to create impactful learning experiences. Fluent in both English and Spanish, I thrive in cross-cultural environments and have a proven track record of leading teams, securing funding, and optimizing outreach efforts to maximize impact.<br><br>
+            Email: <a href="mailto:oscarsan@mit.edu" style="color:#ffd700;">oscarsan@mit.edu</a>
+          </p>
+          <a href="#resume" class="button">Resume</a> &nbsp; &nbsp; <a href="#agentwork" class="button">Agent Work</a>
+        </div>
+        <div class="image">
+          <img src="img/AboutMe.png" alt="Abel Oscar Sanchez">
+        </div>
+      </section>
+    
+      <!-- CV/RESUME SECTION -->
       <section id="resume" class="section scroll-offset">
         <div class="container">
           <h2 class="section-title text-center">CV / Resume</h2>
@@ -239,14 +284,10 @@
           <div class="mb-4">
             <h4 class="fw-bold">Professional Summary</h4>
             <p>
-              Entrepreneurial marketing leader with a proven track record of designing inclusive
-              educational initiatives and scaling them across international markets. Combines a deep
-              understanding of data analytics, strategic marketing, and cross-functional collaboration
-              to drive brand awareness, audience engagement, and organizational growth.
-              Passionate about leveraging technology and data-driven insights to create impactful
-              learning experiences and empower underrepresented communities.
+              Proficient in strategic marketing to drive business growth and audience engagement. Skilled in developing scalable, innovative initiatives that enhance brand awareness and operational efficiency across global markets. Combines expertise in data strategy, cross-functional collaboration, and market insights to create impactful solutions. Passionate about leveraging AI and data to uncover new opportunities, improve decision-making, and drive meaningful results.
             </p>
           </div>
+    
           <!-- Education -->
           <div class="mb-4">
             <h4 class="fw-bold">Education</h4>
@@ -257,9 +298,10 @@
             </p>
             <ul>
               <li><strong>Relevant Coursework:</strong> Marketing Analytics, Digital Marketing Strategy, Consumer Behavior, Data Mining &amp; Visualization, Statistical Analysis for Business Decisions</li>
-              <li><strong>Honors &amp; Activities:</strong> Marketing Club (Vice President of Outreach), Data Analytics Student Association, Dean’s List Recipient, Beta Gamma Sigma Honor Society</li>
+              <li><strong>Honors &amp; Activities:</strong> Marketing Club, Data Analytics Student Association, Dean’s List</li>
             </ul>
           </div>
+    
           <!-- Professional Experience -->
           <div class="mb-4">
             <h4 class="fw-bold">Professional Experience</h4>
@@ -267,193 +309,194 @@
             <div class="mb-3">
               <h5 class="fw-bold">Co-Founder &amp; Head of Marketing | Beautiful Patterns</h5>
               <p class="mb-1"><em>Cambridge, MA &amp; Monterrey, Mexico | June 2014 – Present</em></p>
+              <p><strong>Website:</strong> <a href="https://dreamers.mit.edu" target="_blank">Dreamers.mit.edu</a></p>
               <ul>
-                <li><strong>Strategic Growth &amp; Branding:</strong> Co-founded an educational initiative focused on computational and algorithmic thinking for underrepresented communities, scaling from a pilot workshop to a program reaching over 1,000 participants annually.</li>
-                <li><strong>Marketing &amp; Outreach:</strong> Devised and executed comprehensive marketing strategies—including social media campaigns, community partnerships, and targeted email outreach—resulting in a 200% enrollment increase over three years.</li>
-                <li><strong>Curriculum Innovation:</strong> Led the design of a pioneering curriculum integrating coding exercises and real-world problem-solving scenarios, improving participant engagement and learning outcomes.</li>
-                <li><strong>Team Leadership &amp; Operations:</strong> Recruited, trained, and managed a cross-cultural team of 10+ instructors and volunteers, ensuring consistent, high-quality program delivery.</li>
-                <li><strong>Sustainable Funding &amp; Partnerships:</strong> Negotiated sponsorships, secured grants, and built long-term relationships with educational institutions and tech partners for financial sustainability.</li>
+                <li>Co-founded and led the marketing strategy for an educational initiative focused on expanding access to computational and algorithmic thinking. Scaled the program from a pilot workshop to an internationally recognized initiative, reaching over 1,000 participants annually across the U.S. and Mexico.</li>
+                <li>Developed and executed data-driven marketing strategies, leveraging AI-powered analytics, audience segmentation, and targeted digital campaigns to drive a 200% increase in enrollment over three years.</li>
+                <li>Designed and launched an AI-enhanced curriculum, integrating machine learning concepts and algorithmic problem-solving to improve engagement and learning outcomes for underrepresented communities.</li>
+                <li>Built and led a cross-functional team leveraging AI tools, optimizing instructional delivery, automating administrative workflows, and enhancing decision-making processes through data insights.</li>
+                <li>Secured strategic partnerships in the AI and tech sectors, collaborating with leading organizations to fund and expand access to AI education, ensuring long-term sustainability and broader impact.</li>
               </ul>
             </div>
-            <!-- Broad Institute IGV -->
+    
+            <!-- Broad Institute -->
             <div class="mb-3">
-              <h5 class="fw-bold">Frontend Developer – Integrative Genomics Viewer (IGV) | Broad Institute</h5>
-              <p class="mb-1"><em>Cambridge, MA | June 2016 – August 2016</em></p>
+              <h5 class="fw-bold">Data Visualization Intern &amp; Frontend Developer | Broad Institute</h5>
+              <p class="mb-1"><em>Cambridge, MA (Multiple Projects: June 2015 – August 2017)</em></p>
               <ul>
-                <li>Created interactive web interfaces to visualize complex genomic sequence alignment data, streamlining research workflows.</li>
-                <li>Engineered a custom JavaScript library to accelerate genomic data analysis, boosting tool adoption by research teams.</li>
-                <li>Collaborated with engineers and data scientists to ensure seamless integration of visualization tools.</li>
+                <li><strong>Technical Innovation:</strong> Developed interactive web interfaces and a custom JavaScript library to streamline genomic data analysis, significantly accelerating research workflows.</li>
+                <li><strong>Robust Tool Integration:</strong> Engineered a Node.js application for dynamic query visualization, enhancing data accessibility and driving actionable insights.</li>
+                <li><strong>Collaborative Execution:</strong> Worked closely with multidisciplinary teams to ensure seamless integration of visualization tools, reinforcing the Institute’s data-driven decision-making processes.</li>
               </ul>
             </div>
-            <!-- Microsoft Summer Camp -->
+    
+            <!-- Microsoft Corporation -->
             <div class="mb-3">
               <h5 class="fw-bold">Summer Camp Instructor | Microsoft Corporation</h5>
               <p class="mb-1"><em>Cambridge, MA | August 2016</em></p>
               <ul>
-                <li>Developed and led computational thinking workshops for visually impaired students, employing inclusive JavaScript-based methods.</li>
-                <li>Recognized for effectively translating complex algorithmic concepts into accessible, engaging lessons.</li>
+                <li><strong>Inclusive Educational Design:</strong> Created and delivered computational thinking workshops for visually impaired and blind students, employing innovative, tech-driven teaching methods.</li>
+                <li><strong>Complex Concept Simplification:</strong> Translated intricate algorithmic principles into accessible and engaging lessons, earning recognition for enhancing both inclusivity and creative problem-solving.</li>
+                <li>Earned recognition from program coordinators for effectively translating complex algorithmic concepts into accessible, engaging lessons.</li>
               </ul>
             </div>
-            <!-- Broad Institute Data Viz -->
+    
+            <!-- CSBXI -->
             <div class="mb-3">
-              <h5 class="fw-bold">Data Visualization Intern | Broad Institute</h5>
-              <p class="mb-1"><em>Cambridge, MA | June 2015 – August 2015</em></p>
+              <h5 class="fw-bold">Founder &amp; Chief Executive Officer | CSBXI</h5>
+              <p class="mb-1"><em>Wellesley, MA | Jan 2018 – Aug 2018</em></p>
               <ul>
-                <li>Built and tested a Node.js application enabling dynamic query visualization for genomic datasets.</li>
-                <li>Developed JavaScript libraries that streamlined data exploration, facilitating more efficient analysis.</li>
+                <li><strong>Strategic Initiative for Educational Equity:</strong> Established CSBXI as a nonprofit vehicle to generate funding and support for Patrones Hermosas, an initiative dedicated to expanding access to computational education for underrepresented communities.</li>
+                <li><strong>Fundraising &amp; Resource Mobilization:</strong> Spearheaded targeted fundraising efforts, securing critical financial support to sustain and scale Patrones Hermosas. Led community-based initiatives in Wellesley to generate awareness and engagement, resulting in funding that enabled over 1,000 students in Mexico to gain access to quality programming education.</li>
+                <li><strong>Curriculum Innovation &amp; Expansion:</strong> Designed and personally led computer science courses that focused on practical, job-ready programming skills, ensuring students could apply computational thinking beyond theoretical knowledge.</li>
+                <li><strong>Cross-Cultural Outreach &amp; Partnerships:</strong> Established strategic partnerships with academic institutions and industry leaders, including collaborations with MIT-affiliated faculty and global education advocates, to expand the reach of Patrones Hermosas.</li>
               </ul>
             </div>
+    
             <!-- Boston Direct -->
             <div class="mb-3">
               <h5 class="fw-bold">Promoting Leader | Boston Direct</h5>
-              <p class="mb-1"><em>Framingham, MA | June 2013 – February 2015</em></p>
+              <p class="mb-1"><em>Framingham, MA | June 2019 – February 2020</em></p>
               <ul>
-                <li>Led a two-person sales team with training and performance coaching that increased conversions and customer satisfaction.</li>
-                <li>Demonstrated resilience and adaptability, quickly resuming leadership following a brief health-related hiatus.</li>
+                <li><strong>Team Management &amp; Client Engagement:</strong> Managed a small sales team by implementing training and performance coaching strategies, driving improved conversion rates and enhanced customer satisfaction.</li>
+                <li><strong>Adaptability Under Pressure:</strong> Demonstrated resilience and a swift return to leadership through effective territory management during challenging market conditions.</li>
               </ul>
             </div>
           </div>
-          <!-- Leadership & Extracurricular Activities -->
-          <div class="mb-4">
-            <h4 class="fw-bold">Leadership &amp; Extracurricular Activities</h4>
-            <ul>
-              <li><strong>Marketing &amp; Fundraising Officer, Chicas Code:</strong> Designed campaigns to expand community outreach for coding education.</li>
-              <li><strong>Writer, The Bradford:</strong> Produced investigative and feature articles, honing clear and compelling communication skills.</li>
-              <li><strong>Honors Chorus Instructor:</strong> Facilitated advanced vocal training and performance workshops.</li>
-              <li><strong>Team Captain, Lacrosse:</strong> Provided strategic leadership and mentorship, boosting morale and competitive outcomes.</li>
-            </ul>
-          </div>
+    
           <!-- Technical Skills -->
           <div class="mb-4">
             <h4 class="fw-bold">Technical Skills</h4>
+            <h6 class="fw-semibold">Digital Marketing &amp; Growth Strategy</h6>
             <ul>
-              <li><strong>Programming Languages:</strong> JavaScript, Python, Node.js</li>
-              <li><strong>Tools &amp; Platforms:</strong> Docker, Swagger, Git, NPM</li>
-              <li><strong>Data Visualization &amp; Analytics:</strong> D3.js, Plotly, IGV, Excel, Tableau</li>
-              <li><strong>Languages:</strong> Spanish (Native), English (Fluent)</li>
+              <li>Social Media Marketing (Instagram, TikTok, YouTube, Twitter)</li>
+              <li>Paid Ad Campaign Management (Meta, Google Ads, TikTok Ads)</li>
+              <li>SEO Optimization (On-page &amp; Off-page)</li>
+              <li>Content Strategy &amp; Development</li>
+              <li>Influencer Marketing &amp; Outreach</li>
+              <li>Community Engagement Strategies</li>
+              <li>Copywriting &amp; Conversion-Optimized Content</li>
+            </ul>
+            <h6 class="fw-semibold">Data Analytics &amp; Performance Optimization</h6>
+            <ul>
+              <li>Google Analytics &amp; Digital Advertising Performance Analysis</li>
+              <li>A/B Testing &amp; Predictive Modeling</li>
+              <li>Market Research &amp; Competitor Analysis</li>
+              <li>SQL Querying &amp; Data Visualization (Tableau, D3.js, Plotly)</li>
+              <li>Lead Generation &amp; CRM Management (HubSpot, Klaviyo, Mailchimp)</li>
+            </ul>
+            <h6 class="fw-semibold">Creative &amp; Multimedia Content Production</h6>
+            <ul>
+              <li>Video Production &amp; Editing (Adobe Premiere Pro, Final Cut Pro, After Effects)</li>
+              <li>Motion Graphics &amp; Visual Storytelling</li>
+              <li>Audio Mixing &amp; Podcast Editing</li>
+              <li>Photography &amp; Merchandise Design Coordination</li>
+              <li>Live Stream Setup &amp; Optimization</li>
+            </ul>
+            <h6 class="fw-semibold">Web &amp; Marketing Technology</h6>
+            <ul>
+              <li>Website Performance Optimization &amp; UI/UX Principles</li>
+              <li>Web Scraping &amp; Automation (Python, JavaScript)</li>
+              <li>API Integrations (Meta Ads API, Google Analytics API, Shopify API)</li>
+              <li>E-commerce Store Setup &amp; Sales Funnel Optimization (Shopify, Printful)</li>
+              <li>Cloud Services &amp; Serverless Functions (AWS, GCP, Azure)</li>
+            </ul>
+            <h6 class="fw-semibold">Business &amp; Project Management</h6>
+            <ul>
+              <li>Branding &amp; Identity Development</li>
+              <li>Timeline Preparation &amp; Progress Monitoring</li>
+              <li>Promotional Campaigns &amp; Event Management</li>
+              <li>Financial Budgeting &amp; Forecasting</li>
+              <li>Vendor &amp; Product Testing</li>
+            </ul>
+            <h6 class="fw-semibold">Languages &amp; Communication</h6>
+            <ul>
+              <li>Fluent in English &amp; Spanish (Bilingual Marketing &amp; Content Creation)</li>
             </ul>
           </div>
+    
+          <!-- Extracurricular Activities -->
+          <div class="mb-4">
+            <h4 class="fw-bold">Extracurricular Activities</h4>
+            <ul>
+              <li>Freelance Videographer &amp; Photographer for Artists – Captured and edited high-quality visuals for musicians, creatives, and brand campaigns, enhancing their artistic identity.</li>
+              <li>Audio Engineer – Mixed and mastered music projects and podcast productions, ensuring artists have polished, professional-grade sound.</li>
+              <li>Web &amp; Digital Infrastructure Assistant – Helped independent artists build and optimize their online presence, streamlining e-commerce, website functionality, and digital distribution.</li>
+              <li>Creative &amp; Tech Consultant – Bridged the tech-art divide by providing artists with tools, strategies, and digital solutions to enhance visibility, engagement, and monetization.</li>
+            </ul>
+          </div>
+    
           <!-- Additional Information -->
           <div class="mb-4">
             <h4 class="fw-bold">Additional Information</h4>
             <ul>
-              <li>Passionate advocate for diversity in STEM and mentor to aspiring technologists and entrepreneurs.</li>
-              <li>Experienced in bilingual program delivery, expanding access and fostering global community engagement.</li>
-              <li>Committed to leveraging analytics and strategic partnerships for long-lasting social impact.</li>
+              <li>Passionate advocate for diversity in STEM and a mentor to aspiring technologists and entrepreneurs.</li>
+              <li>Experienced in bilingual program delivery, working across cultural contexts to expand access and foster global community engagement.</li>
+              <li>Committed to leveraging marketing analytics, data-driven decision-making, and strategic partnerships to create long-lasting social impact.</li>
             </ul>
           </div>
         </div>
       </section>
-      <!-- ========================== END CV/RESUME SECTION ========================== -->
-
-      <!-- ========================== GITHUB PROJECT SECTION ========================== -->
-      <section id="project" class="section scroll-offset">
+    
+      <!-- AGENT WORK SECTION -->
+      <section id="agentwork" class="section scroll-offset">
         <div class="container">
-          <h2 class="section-title text-center">GitHub Project: LLM-Based YouTube Comment Analysis</h2>
-          <h5 class="fw-bold">Project #1: LLM-Based YouTube Comment Analysis and Moderation</h5>
-          <p>Analyze and moderate YouTube comments using LLM classification and prompt engineering.</p>
-          <h6 class="fw-semibold">Overview</h6>
-          <p>This project automates the analysis and moderation of YouTube video comments using a Large Language Model (LLM). It covers:</p>
-          <ul>
-            <li>Extracting comments from YouTube</li>
-            <li>Storing them in a SQLite database</li>
-            <li>Classifying sentiment, anger, spam, and whether a response is needed</li>
-            <li>Generating responses (manually or with the LLM)</li>
-            <li>Categorizing the comments</li>
-            <li>Visualizing and exporting the final dataset</li>
-          </ul>
-          <h6 class="fw-semibold">Project Structure</h6>
-          <pre>
-moderation/
-├── 00_requirements/
-│   ├── requirements.txt
-│   └── setup_requirements.py
-├── 01_YouTube/
-│   ├── comments.json
-│   └── extraction_readme.md
-├── 02_create_db/
-│   ├── 01_read_json.py
-│   ├── 02_create_db.py
-│   ├── 03_load_json.py
-│   ├── 04_count_rows.py
-│   ├── comments.db
-│   ├── comments.json
-│   └── readme.md
-├── 02__json_split/
-│   ├── 01.json
-│   ├── 02.json
-│   ├── 03.json
-│   ├── 04.json
-│   └── comments.json
-├── 03_moderate/
-│   ├── comments.db
-│   ├── db_moderate.py
-│   └── keys.json
-├── 07_create_responses.py
-├── 07_create_responses_llm.py
-├── 08_categories.py
-├── 09_visualization.py
-├── 11_export.py
-├── 12_pipeline.py
-└── README.md
-          </pre>
-          <p><em>Note:</em> Adjust paths and names as needed based on your file organization.</p>
-          <h6 class="fw-semibold">Setup &amp; Installation</h6>
-          <ol>
-            <li>Clone or download this repository.</li>
-            <li>Open the project in your preferred IDE (e.g. PyCharm).</li>
-            <li>Create a virtual environment (optional but recommended).</li>
-            <li>Install dependencies:
-              <pre>
-# Option A: If you have setup_requirements.py
-python setup_requirements.py
-
-# Option B: Directly from requirements.txt
-pip install -r requirements.txt
-              </pre>
-            </li>
-          </ol>
-          <h6 class="fw-semibold">Step-by-Step Pipeline</h6>
-          <ol>
-            <li><strong>Install Requirements:</strong> Use setup_requirements.py or pip install -r requirements.txt.</li>
-            <li><strong>Extract Comments:</strong> Use youtube-comment-downloader or existing JSON files in 01_YouTube or 02__json_split.</li>
-            <li><strong>Count JSON Lines:</strong> Run 02_count_rows.py to confirm the number of entries.</li>
-            <li><strong>Create a SQLite Database:</strong> Run 02_create_db.py &amp; 03_load_json.py, then verify row counts.</li>
-            <li><strong>Prompt Classification (Sample):</strong> Test classification on ~25 comments.</li>
-            <li><strong>Predict Four Factors:</strong> Use db_moderate.py with OpenAI to classify sentiment, anger, spam, etc.</li>
-            <li><strong>Create Responses:</strong> Use 07_create_responses.py or 07_create_responses_llm.py for automated replies.</li>
-            <li><strong>Comment Categories:</strong> Run 08_categories.py to add a categories column or table.</li>
-            <li><strong>Analytics &amp; Visualization:</strong> Run 09_visualization.py with Plotly or similar for charts.</li>
-            <li><strong>Export a Clean Dataset:</strong> Run 11_export.py to produce a clean_dataset.json.</li>
-            <li><strong>Data Pipeline:</strong> Run 12_pipeline.py to automate the entire process end-to-end.</li>
-          </ol>
+          <h2 class="section-title text-center">Agent Work</h2>
+          <p class="text-center">Founder | Mariposai – Boston, MA (Hybrid) | January 2023 – Present</p>
+          
+          <!-- Overview Paragraph -->
+          <p>
+            At Mariposai, I established and spearheaded the development of specialized AI agents designed to automate business-specific tasks. My work has focused on driving operational efficiency, boosting productivity, and integrating innovative solutions seamlessly into existing workflows.
+          </p>
+          
+          <!-- AI-Driven Mental Health & Cognitive Resilience Tool for HR -->
+          <div class="mb-4">
+            <h5 class="fw-bold">AI-Driven Mental Health & Cognitive Resilience Tool for HR</h5>
+            <p>
+              Developed a personalized AI tool to support employee well-being by integrating real-time emotional mapping, contextual awareness, and Cognitive Expansion Therapy (CET). This solution proactively assists HR teams with burnout prevention, adaptive interventions, and strategic clarity—all while ensuring privacy and compliance.
+            </p>
+            <p>
+              <strong>CET BOT [HR]:</strong> <a href="https://chatgpt.com/g/g-679e498346108191b87bec25dd24735b-jarvis" target="_blank">https://chatgpt.com/g/g-679e498346108191b87bec25dd24735b-jarvis</a>
+            </p>
+          </div>
+          
+          <!-- ThumbGen -->
+          <div class="mb-4">
+            <h5 class="fw-bold">ThumbGen</h5>
+            <p>
+              Engineered an AI-powered system that generates high-quality, cinematic YouTube thumbnails via a single-step text-to-image workflow. A custom prompt refinement algorithm ensures thumbnails meet professional standards (3D render, HDR, dynamic lighting) while automated text styling maintains brand consistency—reducing manual design time and enhancing visual engagement.
+            </p>
+            <p>
+              <strong>ThumbGen:</strong> <a href="https://chatgpt.com/g/g-67968ff9e8a48191921f79bdf67a1ab9-thumbgen" target="_blank">https://chatgpt.com/g/g-67968ff9e8a48191921f79bdf67a1ab9-thumbgen</a>
+            </p>
+          </div>
+          
+          <!-- AI-Powered YouTube Comment Analysis & Moderation System -->
+          <div class="mb-4">
+            <h5 class="fw-bold">AI-Powered YouTube Comment Analysis & Moderation System</h5>
+            <p>
+              Created an end-to-end LLM-driven pipeline to extract, classify, and moderate YouTube comments. Key contributions include:
+            </p>
+            <ul>
+              <li><strong>Data Extraction & Storage:</strong> Developed a pipeline to scrape and store comments in a SQLite database.</li>
+              <li><strong>AI-Based Moderation:</strong> Engineered LLM classifiers for sentiment, anger, and spam detection—significantly reducing manual moderation efforts.</li>
+              <li><strong>Adaptive Response Generation:</strong> Automated context-aware responses using GPT-based models to enhance audience engagement.</li>
+              <li><strong>Analytics & Visualization:</strong> Designed interactive dashboards with Plotly to monitor trends and measure moderation impact.</li>
+              <li><strong>Integrated Workflow:</strong> Assembled a scripted, automated process that covers the entire pipeline—from data extraction through analysis to export.</li>
+            </ul>
+            <p>
+              <strong>Github LLM Content Moderation:</strong> <a href="https://github.com/OsanGen/Content-Moderation-Agent" target="_blank">https://github.com/OsanGen/Content-Moderation-Agent</a>
+            </p>
+          </div>
         </div>
       </section>
-      <!-- ========================== END GITHUB PROJECT SECTION ========================== -->
-
-      <!-- ========================== ABOUT ME SECTION ========================== -->
-      <section id="about" class="section scroll-offset">
-        <div class="container">
-          <h2 class="section-title text-center">About Me</h2>
-          <p>
-            I am an entrepreneurial marketing leader with a strong background in strategic branding, data analytics, and community-driven initiatives. With experience spanning education, technology, and creative industries, I specialize in developing inclusive programs, scaling organizations, and driving engagement through innovative marketing strategies.
-          </p>
-          <p>
-            As the co-founder of Beautiful Patterns, I helped design and expand an educational initiative that empowers underrepresented communities through computational and algorithmic thinking, reaching thousands of participants across the U.S. and Mexico. My expertise extends into frontend development, data visualization, and content strategy, having worked with institutions like the Broad Institute and Microsoft to enhance accessibility and streamline complex data analysis.
-          </p>
-          <p>
-            Beyond my technical and marketing skills, I am passionate about leveraging storytelling, digital media, and strategic partnerships to create impactful learning experiences. Fluent in both English and Spanish, I thrive in cross-cultural environments and have a proven track record of leading teams, securing funding, and optimizing outreach efforts to maximize impact.
-          </p>
-        </div>
-      </section>
-      <!-- ========================== END ABOUT ME SECTION ========================== -->
-
-      <!-- ========================== FOOTER ========================== -->
+    
+      <!-- FOOTER -->
       <footer class="text-center pt-5 border-top mb-5" style="color: #999;">
-        <p class="mb-0">&copy; 2025 Oscar Sanchez. All rights reserved.</p>
+        <p class="mb-0">&copy; 2025 Abel Oscar Sanchez. All rights reserved.</p>
       </footer>
     </div>
-
+    
     <!-- Bootstrap JS -->
     <script src="assets/js/bootstrap.bundle.min.js"></script>
   </body>
