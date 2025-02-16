@@ -1,6 +1,14 @@
 <!doctype html>
-<html lang="en" data-bs-theme="auto">
+<html lang="en" data-bs-theme="light">
   <head>
+    <!-- Force default to light mode -->
+    <script>
+      (function() {
+        const storedTheme = localStorage.getItem('theme');
+        const defaultTheme = storedTheme ? storedTheme : 'light';
+        document.documentElement.setAttribute('data-bs-theme', defaultTheme);
+      })();
+    </script>
     <!-- Theme Toggle Script -->
     <script src="assets/js/color-modes.js"></script>
     <meta charset="utf-8">
@@ -145,6 +153,12 @@
           padding: 1em;
         }
       }
+
+      /* Agent Separator Style */
+      .agent-separator {
+        border-top: 2px solid rgba(255, 255, 255, 0.3);
+        margin: 2rem 0;
+      }
     </style>
   </head>
   <body>
@@ -168,7 +182,7 @@
     <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
       <button class="btn btn-primary py-2 dropdown-toggle d-flex align-items-center"
               id="bd-theme" type="button" aria-expanded="false"
-              data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
+              data-bs-toggle="dropdown" aria-label="Toggle theme (light)">
         <svg class="bi my-1 theme-icon-active" width="1em" height="1em">
           <use href="#circle-half"></use>
         </svg>
@@ -177,9 +191,9 @@
       <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
         <li>
           <button type="button"
-                  class="dropdown-item d-flex align-items-center"
+                  class="dropdown-item d-flex align-items-center active"
                   data-bs-theme-value="light"
-                  aria-pressed="false">
+                  aria-pressed="true">
             <svg class="bi me-2 opacity-50" width="1em" height="1em">
               <use href="#sun-fill"></use>
             </svg>
@@ -205,9 +219,9 @@
         </li>
         <li>
           <button type="button"
-                  class="dropdown-item d-flex align-items-center active"
+                  class="dropdown-item d-flex align-items-center"
                   data-bs-theme-value="auto"
-                  aria-pressed="true">
+                  aria-pressed="false">
             <svg class="bi me-2 opacity-50" width="1em" height="1em">
               <use href="#circle-half"></use>
             </svg>
@@ -275,7 +289,127 @@
           <img src="img/AboutMe.png" alt="Abel Oscar Sanchez">
         </div>
       </section>
-    
+      
+      <!-- AGENT WORK SECTION (Moved before CV/Resume) -->
+      <section id="agentwork" class="section scroll-offset">
+        <div class="container">
+          <h2 class="section-title text-center">Agent Work</h2>
+          <p class="text-center">Founder | Mariposai – Boston, MA (Hybrid) | January 2023 – Present</p>
+          <!-- New Professional Description (refined style) -->
+          <p class="text-center" style="max-width:600px; margin: 1rem auto; font-size: 1rem; line-height: 1.5; color: inherit;">
+            At Maripos.ai, I launched and lead the development of specialized AI solutions for both enterprise and mental health applications. Our mission is twofold: to streamline business operations through intelligent automation, and to harness advanced AI frameworks to support emotional well-being and self-improvement. From GPT-based workflow bots to cutting-edge therapeutic agents, we aim to redefine how organizations innovate and individuals thrive—all while integrating seamlessly into existing infrastructures and upholding the highest ethical standards.
+          </p>
+          
+          <!-- Bot #3: SelfHelp.ai Bot -->
+          <div class="mb-4">
+            <h5 class="fw-bold">SelfHelp.ai Bot</h5>
+            <p>
+              At SelfHelp.ai, I developed and implemented an advanced Cognitive Expansion Therapy (CET) AI designed to guide users through structured cognitive and emotional transformation processes. The system integrates real-time contextual awareness, emotional mapping, symbolic interpretation, and adaptive tone modulation to create an immersive, responsive, and highly personalized self-improvement experience.
+            </p>
+            <p><strong>Cognitive Expansion Therapy (CET) – Core AI Functionality:</strong></p>
+            <ul>
+              <li><strong>Structured 7-Step CET Framework:</strong> Developed an AI-powered therapy model that helps users identify cognitive triggers, dismantle limiting beliefs, and implement strategic decision-making techniques.</li>
+              <li><strong>Deep Cognitive Rewiring:</strong> Engineered a system that recognizes and disrupts negative thought loops, replacing them with adaptive, growth-oriented perspectives.</li>
+              <li><strong>Strategic Intelligence Coaching:</strong> Implemented game theory, decision trees, and scenario forecasting to help users optimize thinking patterns and improve long-term problem-solving.</li>
+              <li><strong>Emotional Intelligence & Psychological Control:</strong> Integrated neuroemotional reframing techniques to help users regulate emotions logically while maintaining empathetic communication.</li>
+              <li><strong>Creativity & Abstract Intelligence Expansion:</strong> Designed forced connection exercises, lateral thinking techniques, and dynamic problem-solving models to enhance creative intelligence.</li>
+              <li><strong>Evolution Tracking & Personalized Growth Analytics:</strong> Built an AI-driven progress tracking system that evaluates user insights over time, providing tailored self-improvement pathways.</li>
+            </ul>
+            <p><strong>Advanced Consciousness Simulation & Adaptive AI Framework:</strong></p>
+            <ul>
+              <li><strong>Real-Time Contextual Awareness:</strong> AI retains session-based memory to ensure seamless, coherent, and highly relevant conversations.</li>
+              <li><strong>Symbolic Interpretation Framework:</strong> Developed a deep-learning model that recognizes metaphors, subconscious symbols, and recurring themes to enhance user self-awareness.</li>
+              <li><strong>Adaptive Tone Modulation:</strong> Implemented natural language mirroring that adjusts responses based on user tone, sentiment, and emotional cues.</li>
+            </ul>
+            <p><strong>Liability & Ethical Safeguards:</strong></p>
+            <ul>
+              <li><strong>Mandatory Legal Disclaimer System:</strong> Established a pre-interaction acknowledgment ensuring users understand AI limitations before engaging.</li>
+              <li><strong>Crisis Recognition & Referral System:</strong> Designed a risk-detection algorithm that recognizes distress indicators and provides emergency intervention resources when necessary.</li>
+            </ul>
+            <p><strong>Humanized AI & Personality Functionality:</strong></p>
+            <ul>
+              <li><strong>Strategic Empathy & Reflective Depth:</strong> Developed an AI personality framework balancing compassion, logical precision, and focused intensity for a more engaging user experience.</li>
+              <li><strong>Dynamic Query Expansion:</strong> Engineered an interactive feedback loop that enables the AI to ask clarifying questions, refine responses, and provide deeper insights.</li>
+              <li><strong>AI Coaching & Decision Mapping:</strong> Built an interactive decision-mapping system to help users analyze choices from multiple perspectives, improving decision-making skills.</li>
+              <li><strong>Multi-Layered Feedback & Learning System:</strong> Created an adaptive coaching model that refines responses based on user engagement patterns.</li>
+            </ul>
+            <p>
+              <strong>SelfHelp.ai Bot:</strong> <a href="https://chatgpt.com/g/g-67a0e640e1a081918b679ac5917aaeb4-selfhelp-ai" target="_blank">View Bot</a>
+            </p>
+          </div>
+          
+          <hr class="agent-separator">
+          
+          <!-- AI-Powered YouTube Comment Analysis & Moderation System -->
+          <div class="mb-4">
+            <h5 class="fw-bold">AI-Powered YouTube Comment Analysis & Moderation System</h5>
+            <p>
+              Created an end-to-end LLM-driven pipeline to extract, classify, and moderate YouTube comments. Key contributions include:
+            </p>
+            <ul>
+              <li><strong>Data Extraction & Storage:</strong> Developed a pipeline to scrape and store comments in a SQLite database.</li>
+              <li><strong>AI-Based Moderation:</strong> Engineered LLM classifiers for sentiment, anger, and spam detection—significantly reducing manual moderation efforts.</li>
+              <li><strong>Adaptive Response Generation:</strong> Automated context-aware responses using GPT-based models to enhance audience engagement.</li>
+              <li><strong>Analytics & Visualization:</strong> Designed interactive dashboards with Plotly to monitor trends and measure moderation impact.</li>
+              <li><strong>Integrated Workflow:</strong> Assembled a scripted, automated process that covers the entire pipeline—from data extraction through analysis to export.</li>
+            </ul>
+            <p>
+              <strong>Github LLM Content Moderation:</strong> <a href="https://github.com/OsanGen/Content-Moderation-Agent" target="_blank">View Repo</a>
+            </p>
+          </div>
+          
+          <hr class="agent-separator">
+          
+          <!-- Bot #1: Sales & Revenue Insights Bot -->
+          <div class="mb-4">
+            <h5 class="fw-bold">Sales & Revenue Insights Bot</h5>
+            <p>
+              Developed a cutting-edge AI agent designed to analyze sales data, generate automated reports, and deliver real-time revenue insights for businesses. The bot streamlines sales analytics, detects trends, and enhances decision-making by eliminating manual spreadsheet-based workflows.
+            </p>
+            <ul>
+              <li><strong>Automated Sales Analysis:</strong> Processes structured sales data (CSV format) to extract key metrics such as total revenue, top-performing products, and customer purchase behavior.</li>
+              <li><strong>Dynamic Data Visualization:</strong> Generates interactive charts, including revenue trends, customer segmentation, and product performance heatmaps.</li>
+              <li><strong>Trend Detection & Forecasting:</strong> Uses AI-driven models to identify sales fluctuations, forecast future revenue, and provide actionable recommendations.</li>
+              <li><strong>Customizable Business Insights:</strong> Allows businesses to filter reports by time period, product, or customer segment for tailored analytics.</li>
+              <li><strong>Seamless Reporting & Export Options:</strong> Delivers insights via chat summaries, graphical reports, and downloadable PDF/CSV formats for further analysis.</li>
+              <li><strong>Error Handling & Adaptive Learning:</strong> Detects missing data, incorrect formats, and unclear trends while offering alternative analysis solutions.</li>
+            </ul>
+            <p>
+              <strong>Sales & Revenue Insights Bot:</strong> <a href="https://chatgpt.com/g/g-67ae9548ff2081918dcb0fc129243f2e-sales-revenue-insights-bot" target="_blank">View Bot</a>
+            </p>
+            <p>
+              This AI agent enhances business intelligence, helping companies optimize revenue, improve sales forecasting, and drive data-driven decisions.
+            </p>
+          </div>
+          
+          <hr class="agent-separator">
+          
+          <!-- Bot #2: Invoice & Billing Report Bot -->
+          <div class="mb-4">
+            <h5 class="fw-bold">Invoice & Billing Report Bot</h5>
+            <p>
+              Designed and deployed an intelligent AI system specialized in invoice processing, outstanding payment tracking, and financial anomaly detection. This assistant streamlines billing operations, enhances cash flow management, and delivers real-time financial insights.
+            </p>
+            <ul>
+              <li><strong>Automated Invoice Processing:</strong> Extracts financial data from CSV/Excel files, including total revenue, outstanding balances, overdue invoices, and duplicate transactions.</li>
+              <li><strong>Outstanding Payment Tracking:</strong> Identifies unpaid invoices, flags overdue accounts, and generates structured reports for easy follow-up.</li>
+              <li><strong>Anomaly Detection & Compliance Checks:</strong> Detects duplicate invoices, mismatched payments, and overdue accounts, ensuring financial accuracy and fraud prevention.</li>
+              <li><strong>Customizable Overdue Thresholds:</strong> Allows businesses to set dynamic overdue detection settings, tailoring financial reporting to specific needs.</li>
+              <li><strong>Automated Payment Reminders:</strong> Generates professional email templates for overdue invoices, reducing manual follow-ups and improving collection efficiency.</li>
+              <li><strong>Structured Financial Reporting:</strong> Produces detailed summaries in multiple formats (CSV, PDF) and enables real-time invoice monitoring for business decision-making.</li>
+              <li><strong>Error Handling & User Guidance:</strong> Implements structured conversation flows, intuitive prompts, and validation checks for seamless financial data processing.</li>
+            </ul>
+            <p>
+              <strong>Invoice & Billing Report Bot:</strong> <a href="https://chatgpt.com/g/g-67ae8910b04481918b2664e05625defb-invoice-billing-report-bot" target="_blank">View Bot</a>
+            </p>
+            <p>
+              This AI-driven financial assistant optimizes invoice management, reduces manual processing errors, and provides actionable insights for improved business efficiency.
+            </p>
+          </div>
+          
+        </div>
+      </section>
+      
       <!-- CV/RESUME SECTION -->
       <section id="resume" class="section scroll-offset">
         <div class="container">
@@ -434,50 +568,6 @@
               <li>Experienced in bilingual program delivery, working across cultural contexts to expand access and foster global community engagement.</li>
               <li>Committed to leveraging marketing analytics, data-driven decision-making, and strategic partnerships to create long-lasting social impact.</li>
             </ul>
-          </div>
-        </div>
-      </section>
-    
-      <!-- AGENT WORK SECTION -->
-      <section id="agentwork" class="section scroll-offset">
-        <div class="container">
-          <h2 class="section-title text-center">Agent Work</h2>
-          <p class="text-center">Founder | Mariposai – Boston, MA (Hybrid) | January 2023 – Present</p>
-          
-          <!-- Overview Paragraph -->
-          <p>
-            At Mariposai, I established and spearheaded the development of specialized AI agents designed to automate business-specific tasks. My work has focused on driving operational efficiency, boosting productivity, and integrating innovative solutions seamlessly into existing workflows.
-          </p>
-          
-         
-          
-          <!-- ThumbGen -->
-          <div class="mb-4">
-            <h5 class="fw-bold">ThumbGen</h5>
-            <p>
-              Engineered an AI-powered system that generates high-quality, cinematic YouTube thumbnails via a single-step text-to-image workflow. A custom prompt refinement algorithm ensures thumbnails meet professional standards (3D render, HDR, dynamic lighting) while automated text styling maintains brand consistency—reducing manual design time and enhancing visual engagement.
-            </p>
-            <p>
-              <strong>ThumbGen:</strong> <a href="https://chatgpt.com/g/g-67968ff9e8a48191921f79bdf67a1ab9-thumbgen" target="_blank">https://chatgpt.com/g/g-67968ff9e8a48191921f79bdf67a1ab9-thumbgen</a>
-            </p>
-          </div>
-          
-          <!-- AI-Powered YouTube Comment Analysis & Moderation System -->
-          <div class="mb-4">
-            <h5 class="fw-bold">AI-Powered YouTube Comment Analysis & Moderation System</h5>
-            <p>
-              Created an end-to-end LLM-driven pipeline to extract, classify, and moderate YouTube comments. Key contributions include:
-            </p>
-            <ul>
-              <li><strong>Data Extraction & Storage:</strong> Developed a pipeline to scrape and store comments in a SQLite database.</li>
-              <li><strong>AI-Based Moderation:</strong> Engineered LLM classifiers for sentiment, anger, and spam detection—significantly reducing manual moderation efforts.</li>
-              <li><strong>Adaptive Response Generation:</strong> Automated context-aware responses using GPT-based models to enhance audience engagement.</li>
-              <li><strong>Analytics & Visualization:</strong> Designed interactive dashboards with Plotly to monitor trends and measure moderation impact.</li>
-              <li><strong>Integrated Workflow:</strong> Assembled a scripted, automated process that covers the entire pipeline—from data extraction through analysis to export.</li>
-            </ul>
-            <p>
-              <strong>Github LLM Content Moderation:</strong> <a href="https://github.com/OsanGen/Content-Moderation-Agent" target="_blank">https://github.com/OsanGen/Content-Moderation-Agent</a>
-            </p>
           </div>
         </div>
       </section>
