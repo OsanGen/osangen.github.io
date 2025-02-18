@@ -141,6 +141,35 @@
         box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       }
       
+      /* Enhanced Contact Info Style */
+      .contact-info {
+        background: rgba(0, 0, 0, 0.2);
+        padding: 0.8em 1em;
+        border-radius: 8px;
+        margin-top: 1.5em;
+        margin-bottom: 1.5em; /* Added extra bottom margin */
+      }
+      .contact-info .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+        margin-bottom: 0.5em;
+        font-size: 1rem;
+      }
+      .contact-info .contact-item:last-child {
+        margin-bottom: 0;
+      }
+      .contact-info svg {
+        fill: #ffd700;
+      }
+      .contact-info a {
+        color: #ffd700;
+        text-decoration: none;
+      }
+      .contact-info a:hover {
+        text-decoration: underline;
+      }
+      
       /* Responsive adjustments */
       @media (max-width: 768px) {
         .banner {
@@ -162,8 +191,8 @@
     </style>
   </head>
   <body>
-    <!-- ========================== THEME TOGGLE DROPDOWN ========================== -->
-    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+    <!-- ========================== SVG ICON DEFINITIONS ========================== -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
       <symbol id="check2" viewBox="0 0 16 16">
         <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
       </symbol>
@@ -176,6 +205,17 @@
       </symbol>
       <symbol id="sun-fill" viewBox="0 0 16 16">
         <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+      </symbol>
+      <!-- New Contact Icons -->
+      <symbol id="envelope-fill" viewBox="0 0 16 16">
+        <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555z"/>
+        <path d="M0 4.697v7.104l5.803-3.707L0 4.697zM6.761 8.83l-6.2 3.965A2 2 0 0 0 2 14h12a2 2 0 0 0 1.439-.205l-6.2-3.965L8 9.586l-1.239-.756zM16 4.697l-5.803 3.397L16 11.801V4.697z"/>
+      </symbol>
+      <symbol id="telephone-fill" viewBox="0 0 16 16">
+        <path d="M3.654 1.328a.678.678 0 0 1 .736-.102l2.261 1.13c.282.141.415.466.316.748l-.547 1.642a.678.678 0 0 1-.705.456l-1.093-.183a11.72 11.72 0 0 0 4.516 4.516l.183-1.093a.678.678 0 0 1 .456-.705l1.642-.547a.678.678 0 0 1 .748.316l1.13 2.261a.678.678 0 0 1-.102.736l-2.2 2.2a1.745 1.745 0 0 1-1.746.418c-2.013-.67-3.74-2.397-4.41-4.41a1.745 1.745 0 0 1 .418-1.746l2.2-2.2z"/>
+      </symbol>
+      <symbol id="globe" viewBox="0 0 16 16">
+        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm3.5-7h-3v3h-1v-3h-3v-1h3V5h1v3h3v1z"/>
       </symbol>
     </svg>
     
@@ -271,13 +311,32 @@
           <ul class="icons">
             <li>Cambridge, MA</li>
           </ul>
-          <!-- The contact info line has been removed as requested -->
           <p class="major">
             I am an entrepreneurial marketing leader with a strong background in strategic branding, data analytics, and community-driven initiatives. With experience spanning education, technology, and creative industries, I specialize in developing inclusive programs, scaling organizations, and driving engagement through innovative marketing strategies.<br><br>
             As the co-founder of Beautiful Patterns, I helped design and expand an educational initiative that empowers underrepresented communities through computational and algorithmic thinking, reaching thousands of participants across the U.S. and Mexico. My expertise extends into frontend development, data visualization, and content strategy, having worked with institutions like the Broad Institute and Microsoft to enhance accessibility and streamline complex data analysis.<br><br>
-            Beyond my technical and marketing skills, I am passionate about leveraging storytelling, digital media, and strategic partnerships to create impactful learning experiences. Fluent in both English and Spanish, I thrive in cross-cultural environments and have a proven track record of leading teams, securing funding, and optimizing outreach efforts to maximize impact.<br><br>
-            Email: <a href="mailto:oscarsan@mit.edu" style="color:#ffd700;">oscarsan@mit.edu</a>
+            Beyond my technical and marketing skills, I am passionate about leveraging storytelling, digital media, and strategic partnerships to create impactful learning experiences. Fluent in both English and Spanish, I thrive in cross-cultural environments and have a proven track record of leading teams, securing funding, and optimizing outreach efforts to maximize impact.
           </p>
+          <!-- Enhanced Dynamic Contact Information -->
+          <div class="contact-info">
+            <div class="contact-item">
+              <svg class="bi" width="1em" height="1em">
+                <use href="#envelope-fill"></use>
+              </svg>
+              <span>Email: <a href="mailto:oscarsan@mit.edu">oscarsan@mit.edu</a></span>
+            </div>
+            <div class="contact-item">
+              <svg class="bi" width="1em" height="1em">
+                <use href="#telephone-fill"></use>
+              </svg>
+              <span>Phone: <a href="tel:+17813668473">(781) 366-8473</a></span>
+            </div>
+            <div class="contact-item">
+              <svg class="bi" width="1em" height="1em">
+                <use href="#globe"></use>
+              </svg>
+              <span>Website: <a href="http://www.mit.edu/~oscarsan/" target="_blank" rel="noopener noreferrer">www.mit.edu/~oscarsan/</a></span>
+            </div>
+          </div>
           <a href="#resume" class="button">Resume</a> &nbsp; &nbsp; <a href="#agentwork" class="button">Agent Work</a>
         </div>
         <div class="image">
