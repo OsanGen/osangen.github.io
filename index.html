@@ -34,6 +34,14 @@
       .contact-info {
         margin-bottom: 2rem;
       }
+      /* Classy divider style */
+      .classy-divider {
+        border: 0;
+        height: 1px;
+        background-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.5), rgba(0,0,0,0));
+        margin: 40px auto;
+        width: 60%;
+      }
     </style>
   </head>
   <body>
@@ -134,7 +142,15 @@
       <section id="agentwork" class="mb-5">
         <div class="container">
           <h2 class="pb-4 mb-4 fst-italic border-bottom text-center">Agent Work</h2>
-
+          <!-- Inserted Missing Content Start -->
+          <p class="text-center mb-3"><strong>Founder | Mariposai – Boston, MA (Hybrid) | January 2023 – Present</strong></p>
+          <p class="text-center mb-4" style="max-width: 800px; margin: 0 auto;">
+            Maripos.ai specializes in crafting intelligent GPT solutions designed to optimize workflows and drive innovation. We develop custom, proprietary bots tailored to the unique needs of individual businesses while also publishing advanced GPT tools on the public GBT store, making cutting-edge automation accessible to a broader audience. Our commitment to seamless integration and ethical AI practices ensures that businesses can streamline operations and thrive in today’s dynamic digital landscape.
+          </p>
+          <!-- Classy divider inserted here -->
+          <hr class="classy-divider">
+          <h3 class="text-center mb-4">Featured AI Bots</h3>
+          <!-- Inserted Missing Content End -->
           <!-- SelfHelp.ai Bot -->
           <article class="blog-post mb-5">
             <div class="row align-items-center">
@@ -144,7 +160,7 @@
               <div class="col-md-8">
                 <h2 class="display-5">SelfHelp.ai Bot</h2>
                 <p>
-                  At SelfHelp.ai, I developed and implemented an advanced Cognitive Expansion Therapy (CET) AI that guides users through structured cognitive and emotional transformation processes. It integrates real-time contextual awareness, emotional mapping, and adaptive tone modulation for a highly personalized self-improvement experience.
+                  An advanced Cognitive Expansion Therapy (CET) AI that guides users through structured cognitive and emotional transformation processes. It integrates real-time contextual awareness, emotional mapping, and adaptive tone modulation for a highly personalized self-improvement experience.
                 </p>
                 <p><strong>Cognitive Expansion Therapy (CET) – Core AI Functionality:</strong></p>
                 <ul>
@@ -181,9 +197,7 @@
               </div>
             </div>
           </article>
-
           <hr class="my-5">
-
           <!-- AI-Powered YouTube Comment Analysis & Moderation System -->
           <article class="blog-post mb-5">
             <div class="row align-items-center">
@@ -193,7 +207,7 @@
               <div class="col-md-8">
                 <h2 class="display-5">AI-Powered YouTube Comment Analysis & Moderation System</h2>
                 <p>
-                  Created an end-to-end LLM-driven pipeline to extract, classify, and moderate YouTube comments. Key contributions include:
+                  End-to-end LLM-driven pipeline to extract, classify, and moderate YouTube comments. Functionality including:
                 </p>
                 <ul>
                   <li><strong>Data Extraction & Storage:</strong> Developed a pipeline to scrape and store comments in a SQLite database.</li>
@@ -209,9 +223,7 @@
               </div>
             </div>
           </article>
-
           <hr class="my-5">
-
           <!-- Sales & Revenue Insights Bot -->
           <article class="blog-post mb-5">
             <div class="row align-items-center">
@@ -221,7 +233,7 @@
               <div class="col-md-8">
                 <h2 class="display-5">Sales & Revenue Insights Bot</h2>
                 <p>
-                  Developed a cutting-edge AI agent designed to analyze sales data, generate automated reports, and deliver real-time revenue insights for businesses. The bot streamlines sales analytics, detects trends, and enhances decision-making by eliminating manual spreadsheet-based workflows.
+                  Cutting-edge AI agent designed to analyze sales data, generate automated reports, and deliver real-time revenue insights for businesses. The bot streamlines sales analytics, detects trends, and enhances decision-making by eliminating manual spreadsheet-based workflows.
                 </p>
                 <ul>
                   <li><strong>Automated Sales Analysis:</strong> Processes structured data (CSV) to reveal key metrics like revenue, top products, and customer behavior.</li>
@@ -238,9 +250,7 @@
               </div>
             </div>
           </article>
-
           <hr class="my-5">
-
           <!-- Invoice & Billing Report Bot -->
           <article class="blog-post mb-5">
             <div class="row align-items-center">
@@ -250,7 +260,7 @@
               <div class="col-md-8">
                 <h2 class="display-5">Invoice & Billing Report Bot</h2>
                 <p>
-                  Designed and deployed an intelligent AI system specialized in invoice processing, outstanding payment tracking, and financial anomaly detection. This assistant streamlines billing operations, enhances cash flow management, and delivers real-time financial insights.
+                  Intelligent AI system specialized in invoice processing, outstanding payment tracking, and financial anomaly detection. This assistant streamlines billing operations, enhances cash flow management, and delivers real-time financial insights.
                 </p>
                 <ul>
                   <li><strong>Automated Invoice Processing:</strong> Extracts data from CSV/Excel, including total revenue, outstanding balances, and overdue invoices.</li>
@@ -271,8 +281,8 @@
         </div>
       </section>
 
-      <!-- Separator between Agent Work and CV/Resume sections -->
-      <hr class="my-5">
+      <!-- Separator between Agent Work and CV/Resume Sections -->
+      <hr class="classy-divider">
 
       <!-- CV/Resume Section -->
       <section id="resume" class="mb-5">
