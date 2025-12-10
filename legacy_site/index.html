@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+
+<head>
+  <script src="../assets/js/color-modes.js"></script>
+  <script>
+    // Force light mode regardless of system settings
+    document.documentElement.setAttribute('data-bs-theme', 'light');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> Oscar Sanchez - Portfolio</title>
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/blog/">
+
+  <!-- New style dependencies from item [B] -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="blog.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900&amp;display=swap" rel="stylesheet">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    .bd-mode-toggle {
+      z-index: 1500;
+    }
+
+    .bd-mode-toggle .dropdown-menu .active .bi {
+      display: block !important;
+    }
+
+    /* Extra spacing for contact info */
+    .contact-info {
+      margin-bottom: 2rem;
+    }
+
+    /* Classy divider style */
+    .classy-divider {
+      border: 0;
+      height: 1px;
+      background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+      margin: 40px auto;
+      width: 60%;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Removed Light/Dark Toggle Button -->
+
+  <!-- SVG ICON DEFINITIONS from item [B] -->
+  <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+    <symbol id="check2" viewBox="0 0 16 16">
+      <path
+        d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+    </symbol>
+    <symbol id="circle-half" viewBox="0 0 16 16">
+      <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" />
+    </symbol>
+    <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+      <path
+        d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z" />
+      <path
+        d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z" />
+    </symbol>
+    <symbol id="sun-fill" viewBox="0 0 16 16">
+      <path
+        d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z" />
+    </symbol>
+  </svg>
+
+  <!-- Header: Using the [B] blog header structure and inserting [A]’s brand and nav links -->
+  <div class="container">
+    <header class="border-bottom lh-1 py-3">
+      <div class="row flex-nowrap justify-content-between align-items-center">
+        <div class="col-4">
+          <!-- (Left column intentionally left minimal) -->
+        </div>
+        <div class="col-4 text-center">
+          <a class="blog-header-logo text-body-emphasis text-decoration-none" href="#">
+            Oscar Sanchez
+          </a>
+        </div>
+        <div class="col-4 d-flex justify-content-end align-items-center">
+          <!-- (Right column left empty to match content of [A]) -->
+        </div>
+      </div>
+    </header>
+    <div class="nav-scroller py-1 mb-3 border-bottom">
+      <nav class="nav nav-underline justify-content-center">
+        <a class="nav-item nav-link" href="#resume">CV/Resume</a>
+        <a class="nav-item nav-link" href="#agentwork">Agent Work</a>
+        <a class="nav-item nav-link" href="#about">About Me</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="container">
+    <!-- About Me Section (from [A], styled as a jumbotron) -->
+    <section id="about" class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary d-flex align-items-center">
+      <div class="row w-100">
+        <div class="col-lg-7">
+          <h1 class="display-4 fst-italic"> Oscar Sanchez</h1>
+          <ul class="icons list-unstyled">
+            <li>Cambridge, MA</li>
+          </ul>
+          <p class="lead my-3">
+            Data and AI are at the core of my work as an entrepreneurial leader. I combine a strong foundation in data
+            analytics and strategic branding with a passion for pioneering AI-driven solutions that transform complex
+            information into accessible insights. As a co-founder of Beautiful Patterns, I’ve designed innovative,
+            algorithm-based educational programs that empower underrepresented communities and streamline data analysis
+            for leading institutions like the Broad Institute and Microsoft. My approach integrates cutting-edge data
+            visualization, frontend development, and digital storytelling, enabling impactful, inclusive strategies that
+            drive both technological innovation and community engagement.
+          </p>
+          <div class="contact-info">
+            <div class="contact-item">
+              <svg class="bi" width="1em" height="1em">
+                <use href="#envelope-fill"></use>
+              </svg>
+              <span>Email: <a href="mailto:oscarsan@mit.edu">oscarsan@mit.edu</a></span>
+            </div>
+            <div class="contact-item">
+              <svg class="bi" width="1em" height="1em">
+                <use href="#telephone-fill"></use>
+              </svg>
+              <span>Phone: <a href="tel:+17813668473">(781) 366-8473</a></span>
+            </div>
+            <div class="contact-item">
+              <svg class="bi" width="1em" height="1em">
+                <use href="#globe"></use>
+              </svg>
+              <span>Website: <a href="http://www.mit.edu/~oscarsan/" target="_blank"
+                  rel="noopener noreferrer">www.mit.edu/~oscarsan/</a></span>
+            </div>
+          </div>
+          <p>
+            <a href="#resume" class="btn btn-primary">Resume</a>
+            <a href="#agentwork" class="btn btn-secondary">Agent Work</a>
+          </p>
+        </div>
+        <div class="col-lg-5 d-flex justify-content-end align-items-center">
+          <img src="img/AboutMe.png" alt="Abel Oscar Sanchez" class="img-fluid rounded" style="max-width: 100%;">
+        </div>
+      </div>
+    </section>
+
+    <!-- Agent Work Section -->
+    <section id="agentwork" class="mb-5">
+      <div class="container">
+        <h2 class="pb-4 mb-4 fst-italic border-bottom text-center">Agent Work</h2>
+        <!-- Inserted Missing Content Start -->
+        <p class="text-center mb-3"><strong>Founder | Mariposai – Boston, MA (Hybrid) | January 2023 – Present</strong>
+        </p>
+        <p class="text-center mb-4" style="max-width: 800px; margin: 0 auto;">
+          Maripos.ai specializes in crafting intelligent GPT solutions designed to optimize workflows and drive
+          innovation. We develop custom, proprietary bots tailored to the unique needs of individual businesses while
+          also publishing advanced GPT tools on the public GBT store, making cutting-edge automation accessible to a
+          broader audience. Our commitment to seamless integration and ethical AI practices ensures that businesses can
+          streamline operations and thrive in today’s dynamic digital landscape.
+        </p>
+        <!-- Classy divider inserted here -->
+        <hr class="classy-divider">
+        <h3 class="text-center mb-4">Featured AI Bots</h3>
+        <!-- Inserted Missing Content End -->
+        <!-- SelfHelp.ai Bot -->
+        <article class="blog-post mb-5">
+          <div class="row align-items-center">
+            <div class="col-md-4">
+              <img src="img/sh.png" alt="SelfHelp.ai Bot" class="img-fluid rounded"
+                style="box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+            </div>
+            <div class="col-md-8">
+              <h2 class="display-5">SelfHelp.ai Bot</h2>
+              <p>
+                An advanced Cognitive Expansion Therapy (CET) AI that guides users through structured cognitive and
+                emotional transformation processes. It integrates real-time contextual awareness, emotional mapping, and
+                adaptive tone modulation for a highly personalized self-improvement experience.
+              </p>
+              <p><strong>Cognitive Expansion Therapy (CET) – Core AI Functionality:</strong></p>
+              <ul>
+                <li><strong>Structured 7-Step Framework:</strong> Helps users identify triggers, dismantle limiting
+                  beliefs, and implement strategic decision-making.</li>
+                <li><strong>Deep Cognitive Rewiring:</strong> Recognizes and disrupts negative thought loops, fostering
+                  growth-oriented perspectives.</li>
+              </ul>
+              <button id="toggleSelfHelpBtn" class="btn btn-outline-primary" type="button" data-bs-toggle="collapse"
+                data-bs-target="#selfHelpCollapse" aria-expanded="false" aria-controls="selfHelpCollapse">
+                Read More
+              </button>
+              <div class="collapse mt-3" id="selfHelpCollapse">
+                <p><strong>Advanced Consciousness Simulation & Adaptive AI Framework:</strong></p>
+                <ul>
+                  <li><strong>Real-Time Contextual Awareness:</strong> AI retains session-based memory for seamless,
+                    coherent conversations.</li>
+                  <li><strong>Symbolic Interpretation Framework:</strong> Detects metaphors, subconscious symbols, and
+                    recurring themes for deeper self-awareness.</li>
+                  <li><strong>Adaptive Tone Modulation:</strong> Mirrors user tone, sentiment, and emotional cues for
+                    more effective communication.</li>
+                </ul>
+                <p><strong>Liability & Ethical Safeguards:</strong></p>
+                <ul>
+                  <li><strong>Mandatory Legal Disclaimer System:</strong> Ensures users understand AI limitations before
+                    engaging.</li>
+                  <li><strong>Crisis Recognition & Referral System:</strong> Identifies distress indicators, providing
+                    emergency resources if needed.</li>
+                </ul>
+                <p><strong>Humanized AI & Personality Functionality:</strong></p>
+                <ul>
+                  <li><strong>Strategic Empathy & Reflective Depth:</strong> Combines compassion and logical precision
+                    for a more engaging user experience.</li>
+                  <li><strong>Dynamic Query Expansion:</strong> Enables the AI to ask clarifying questions, refine
+                    responses, and provide deeper insights.</li>
+                  <li><strong>AI Coaching & Decision Mapping:</strong> Helps users analyze choices from multiple
+                    perspectives, improving decision-making skills.</li>
+                  <li><strong>Multi-Layered Feedback & Learning System:</strong> Adapts coaching based on user
+                    engagement patterns.</li>
+                </ul>
+              </div>
+              <p class="mt-3">
+                <strong>SelfHelp.ai Bot:</strong>
+                <a href="https://chatgpt.com/g/g-67a0e640e1a081918b679ac5917aaeb4-selfhelp-ai" target="_blank">View
+                  Bot</a>
+              </p>
+            </div>
+          </div>
+        </article>
+        <hr class="my-5">
+        <!-- AI-Powered YouTube Comment Analysis & Moderation System -->
+        <article class="blog-post mb-5">
+          <div class="row align-items-center">
+            <div class="col-md-4">
+              <img src="img/git.png" alt="AI-Powered YouTube Comment Analysis & Moderation System"
+                class="img-fluid rounded" style="box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+            </div>
+            <div class="col-md-8">
+              <h2 class="display-5">AI-Powered YouTube Comment Analysis & Moderation System</h2>
+              <p>
+                End-to-end LLM-driven pipeline to extract, classify, and moderate YouTube comments. Functionality
+                including:
+              </p>
+              <ul>
+                <li><strong>Data Extraction & Storage:</strong> Developed a pipeline to scrape and store comments in a
+                  SQLite database.</li>
+                <li><strong>AI-Based Moderation:</strong> Engineered LLM classifiers for sentiment, anger, and spam
+                  detection—significantly reducing manual moderation efforts.</li>
+                <li><strong>Adaptive Response Generation:</strong> Automated context-aware responses using GPT-based
+                  models to enhance audience engagement.</li>
+                <li><strong>Analytics & Visualization:</strong> Designed interactive dashboards with Plotly to monitor
+                  trends and measure moderation impact.</li>
+                <li><strong>Integrated Workflow:</strong> Assembled a scripted, automated process covering data
+                  extraction through analysis to export.</li>
+              </ul>
+              <p>
+                <strong>Github LLM Content Moderation:</strong>
+                <a href="https://github.com/OsanGen/Content-Moderation-Agent" target="_blank">View Repo</a>
+              </p>
+            </div>
+          </div>
+        </article>
+        <hr class="my-5">
+        <!-- Sales & Revenue Insights Bot -->
+        <article class="blog-post mb-5">
+          <div class="row align-items-center">
+            <div class="col-md-4">
+              <img src="img/sr.png" alt="Sales & Revenue Insights Bot" class="img-fluid rounded"
+                style="box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+            </div>
+            <div class="col-md-8">
+              <h2 class="display-5">Sales & Revenue Insights Bot</h2>
+              <p>
+                Cutting-edge AI agent designed to analyze sales data, generate automated reports, and deliver real-time
+                revenue insights for businesses. The bot streamlines sales analytics, detects trends, and enhances
+                decision-making by eliminating manual spreadsheet-based workflows.
+              </p>
+              <ul>
+                <li><strong>Automated Sales Analysis:</strong> Processes structured data (CSV) to reveal key metrics
+                  like revenue, top products, and customer behavior.</li>
+                <li><strong>Dynamic Data Visualization:</strong> Generates interactive charts illustrating revenue
+                  trends and product performance.</li>
+                <li><strong>Trend Detection & Forecasting:</strong> Uses AI to pinpoint sales fluctuations, forecast
+                  future revenue, and offer recommendations.</li>
+                <li><strong>Customizable Business Insights:</strong> Filters reports by time, product, or segment for
+                  tailored analytics.</li>
+                <li><strong>Seamless Reporting & Export Options:</strong> Provides chat summaries, graphical reports,
+                  and downloadable files.</li>
+                <li><strong>Error Handling & Adaptive Learning:</strong> Detects missing data or unclear trends and
+                  proposes alternative solutions.</li>
+              </ul>
+              <p>
+                <strong>Sales & Revenue Insights Bot:</strong>
+                <a href="https://chatgpt.com/g/g-67ae9548ff2081918dcb0fc129243f2e-sales-revenue-insights-bot"
+                  target="_blank">View Bot</a>
+              </p>
+            </div>
+          </div>
+        </article>
+        <hr class="my-5">
+        <!-- Invoice & Billing Report Bot -->
+        <article class="blog-post mb-5">
+          <div class="row align-items-center">
+            <div class="col-md-4">
+              <img src="img/ib.png" alt="Invoice & Billing Report Bot" class="img-fluid rounded"
+                style="box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+            </div>
+            <div class="col-md-8">
+              <h2 class="display-5">Invoice & Billing Report Bot</h2>
+              <p>
+                Intelligent AI system specialized in invoice processing, outstanding payment tracking, and financial
+                anomaly detection. This assistant streamlines billing operations, enhances cash flow management, and
+                delivers real-time financial insights.
+              </p>
+              <ul>
+                <li><strong>Automated Invoice Processing:</strong> Extracts data from CSV/Excel, including total
+                  revenue, outstanding balances, and overdue invoices.</li>
+                <li><strong>Outstanding Payment Tracking:</strong> Flags unpaid invoices, overdue accounts, and
+                  generates follow-up reports.</li>
+                <li><strong>Anomaly Detection & Compliance Checks:</strong> Identifies duplicate invoices and mismatched
+                  payments, boosting accuracy.</li>
+                <li><strong>Customizable Overdue Thresholds:</strong> Lets businesses configure overdue detection
+                  settings for tailored reporting.</li>
+                <li><strong>Automated Payment Reminders:</strong> Generates professional reminders for overdue invoices
+                  to improve collection efficiency.</li>
+                <li><strong>Structured Financial Reporting:</strong> Produces summaries in various formats (CSV, PDF)
+                  for real-time monitoring.</li>
+                <li><strong>Error Handling & User Guidance:</strong> Uses structured prompts and validations for
+                  seamless data processing.</li>
+              </ul>
+              <p>
+                <strong>Invoice & Billing Report Bot:</strong>
+                <a href="https://chatgpt.com/g/g-67ae8910b04481918b2664e05625defb-invoice-billing-report-bot"
+                  target="_blank">View Bot</a>
+              </p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Separator between Agent Work and CV/Resume Sections -->
+    <hr class="classy-divider">
+
+    <!-- CV/Resume Section -->
+    <section id="resume" class="mb-5">
+      <div class="container">
+        <h2 class="pb-4 mb-4 fst-italic border-bottom text-center">CV / Resume</h2>
+        <!-- Professional Summary -->
+        <div class="mb-4">
+          <h4 class="fw-bold">Professional Summary</h4>
+          <p>
+            Strategic marketing to drive business growth and audience engagement. Skilled in developing scalable,
+            innovative initiatives that enhance brand awareness and operational efficiency across global markets.
+            Combines expertise in data strategy, cross-functional collaboration, and market insights to create impactful
+            solutions. Passionate about leveraging AI and data to uncover new opportunities, improve decision-making,
+            and drive meaningful results.
+          </p>
+        </div>
+        <!-- Education -->
+        <div class="mb-4">
+          <h4 class="fw-bold">Education</h4>
+          <h5 class="fw-semibold">B.B.A. in Marketing</h5>
+          <p class="mb-1">
+            Isenberg School of Management, University of Massachusetts Amherst — Amherst, MA <br>
+            <em>Graduation: May 2025</em>
+          </p>
+          <ul>
+            <li><strong>Relevant Coursework:</strong> Marketing Analytics, Digital Marketing Strategy, Consumer
+              Behavior, Data Mining & Visualization, Statistical Analysis for Business Decisions</li>
+            <li><strong>Honors & Activities:</strong> Marketing Club, Data Analytics Student Association, Dean’s List
+            </li>
+          </ul>
+          <h5 class="fw-semibold">
+            MIT Professional Education — Applied Generative AI for Digital Transformation, Certificate of Completion
+          </h5>
+          <p class="mb-1">
+            Cambridge, MA (Live Virtual Course) 2025
+          </p>
+          <ul>
+            <li>Completed intensive three‑week program (64 hrs) led by MIT faculty, covering neural networks,
+              autoencoders, latent‑space generation, and GitHub Copilot integration.</li>
+            <li>Mastered ChatGPT architecture, prompt engineering, browser‑extension development, plugin implementation,
+              and vector‑database retrieval workflows.</li>
+            <li>Conducted analyses of real‑world generative‑AI use cases, assessing organizational readiness,
+              bias‑mitigation strategies, and forecasting emerging trends.</li>
+          </ul>
+
+        </div>
+        <!-- Professional Experience -->
+        <div class="mb-4">
+          <h4 class="fw-bold">Professional Experience</h4>
+          <!-- Beautiful Patterns -->
+          <div class="mb-3">
+            <h5 class="fw-bold">Co-Founder & Head of Marketing | Beautiful Patterns</h5>
+            <p class="mb-1"><em>Cambridge, MA & Monterrey, Mexico | June 2014 – Present</em></p>
+            <p><strong>Website:</strong> <a href="https://dreamers.mit.edu" target="_blank">Dreamers.mit.edu</a></p>
+            <ul>
+              <li><strong>Co-founded and led</strong> an interdisciplinary educational initiative to tackle the
+                sociotechnical challenge of women’s STEM education—especially in computational fields—in the developing
+                world. Launched a pilot in 2017, scaling it into a program recognized internationally for reaching over
+                10,000 participants annually across the U.S. and Mexico.</li>
+              <li><strong>Developed a data-driven curriculum</strong> that blended engineering, computation, and social
+                sciences to address real-world challenges (e.g., economics, energy, healthcare, and infrastructure).
+                Incorporated practical “Design Patterns” (like cooking algorithms, packing optimization, and
+                currency-search strategies) to make computational thinking more accessible and engaging for
+                underrepresented girls.</li>
+              <li><strong>Built and led a cross-functional team</strong> that leveraged digital tools to optimize
+                instructional delivery, automate workflows, and inform decisions through data. Served as a full-time
+                instructor, guiding participants through hands-on activities and fostering collaborative problem-solving
+                skills.</li>
+              <li><strong>Secured strategic partnerships</strong> with MIT, MISTI (MIT International Science and
+                Technology Initiatives), and Tecnológico de Monterrey (ITESM), working closely with these institutions
+                to refine and expand the program’s reach. Oversaw marketing, including graphic/web design, social media
+                campaigns, and brand strategy to ensure cohesive outreach and maximize impact.</li>
+            </ul>
+          </div>
+          <!-- Global Gen AI Professional Network -->
+          <div class="mb-3">
+            <h5 class="fw-bold">
+              Founder &amp; Head, Gen AI Global @MIT Professional Network
+            </h5>
+            <p class="mb-1"><em>Cambridge, MA&nbsp;(Hybrid) | Jan&nbsp;2024 – Present</em></p>
+            <p><strong>Link:</strong>
+              <a href="https://www.linkedin.com/company/gen-ai-global/?viewAsMember=true" target="_blank"
+                rel="noopener noreferrer">
+                https://www.linkedin.com/company/gen-ai-global/?viewAsMember=true
+              </a>
+            </p>
+            <ul>
+              <li>Built &amp; led global generative‑AI community (0&nbsp;→&nbsp;1,000+ members in 4&nbsp;weeks),
+                engaging senior leaders from IBM, Accenture, Y Combinator; transitioned org to sustainable non‑profit
+                structure.</li>
+              <li>Oversee daily operations across all teams, systems, programming, and infrastructure, leveraging
+                advanced AI tooling to streamline execution and management.</li>
+              <li>Developed &amp; led popular Gen AI education programs (Gen AI for Non‑Coders, Discord Agent
+                Development), mentoring 10+ cohorts via flipped‑classroom &amp; asynchronous learning models.</li>
+              <li>Established &amp; managed 12 volunteer‑driven departments (Agile Ops, Cybersecurity, Ethical AI,
+                Fundraising), onboarding and coordinating 200+ volunteers; generated $4.1 M annualized ROI based on
+                industry‑standard valuation of volunteer hours.</li>
+              <li>Founded internal Agent Ops team creating open‑source automation agents, significantly enhancing
+                community operations, moderation, onboarding, and knowledge‑management efficiency.</li>
+              <li>Created AI‑driven automated content‑creation systems, growing LinkedIn followership by 2,500+ within
+                2&nbsp;months.</li>
+              <li>Led strategic AI integrations &amp; multi‑platform engagement (WhatsApp&nbsp;→&nbsp;Discord),
+                automating weekly content delivery ("Motivation Monday," "Tech Tip Tuesday") and expert‑led Q&amp;A
+                sessions.</li>
+              <li>Orchestrated collaborations with MIT faculty &amp; AI industry experts, expanding MIT Professional
+                Education’s brand and community impact within the generative‑AI ecosystem.</li>
+            </ul>
+          </div>
+
+          <!-- AIforAll Global -->
+          <div class="mb-3">
+            <h5 class="fw-bold">Co‑Founder, AIforAll&nbsp;Global&nbsp;–&nbsp;Hybrid</h5>
+            <p class="mb-1"><em>Jun&nbsp;2025 – Present</em></p>
+            <p><strong>Website:</strong>
+              <a href="https://aiforallglobal.org" target="_blank" rel="noopener noreferrer">
+                aiforallglobal.org
+              </a>
+            </p>
+            <ul>
+              <li>Responsible for designing and leading the AI Changemakers Fellowship program.</li>
+              <li>Build and maintain partnerships with global schools, NGOs, and youth organizations.</li>
+              <li>Mentor and guide youth‑led AI projects focused on education, health, climate, and justice.</li>
+              <li>Coordinate showcases, oversee publication of impact stories, and support the development of a global
+                alumni network.</li>
+              <li>Develop open‑access tools, community curricula, and manage microgrant distribution to support
+                innovation initiatives.</li>
+            </ul>
+          </div>
+
+          <!-- Broad Institute -->
+          <div class="mb-3">
+            <h5 class="fw-bold">Data Visualization Intern & Frontend Developer | Broad Institute</h5>
+            <p class="mb-1"><em>Cambridge, MA (Multiple Projects: June 2015 – August 2017)</em></p>
+            <ul>
+              <li><strong>Technical Innovation:</strong> Developed interactive web interfaces and a custom JS library to
+                streamline genomic data analysis.</li>
+              <li><strong>Robust Tool Integration:</strong> Engineered a Node.js application for dynamic query
+                visualization, enhancing data accessibility.</li>
+              <li><strong>Collaborative Execution:</strong> Worked with multidisciplinary teams to seamlessly integrate
+                visualization tools into research workflows.</li>
+            </ul>
+          </div>
+          <!-- Microsoft Corporation -->
+          <div class="mb-3">
+            <h5 class="fw-bold">Summer Camp Instructor | Microsoft Corporation</h5>
+            <p class="mb-1"><em>Cambridge, MA | August 2016</em></p>
+            <ul>
+              <li><strong>Inclusive Educational Design:</strong> Created and delivered computational thinking workshops
+                for visually impaired/blind students.</li>
+              <li><strong>Complex Concept Simplification:</strong> Translated algorithmic principles into accessible
+                lessons, earning recognition for inclusivity.</li>
+              <li>Received praise from coordinators for enhancing creative problem-solving skills among diverse
+                learners.</li>
+            </ul>
+          </div>
+          <!-- CSBXI -->
+          <div class="mb-3">
+            <h5 class="fw-bold">Founder & Chief Executive Officer | CSBXI</h5>
+            <p class="mb-1"><em>Wellesley, MA | Jan 2018 – Aug 2018</em></p>
+            <ul>
+              <li><strong>Strategic Initiative for Educational Equity:</strong> Founded CSBXI to fund and support
+                Patrones Hermosas, expanding computational education for underrepresented communities.</li>
+              <li><strong>Fundraising & Resource Mobilization:</strong> Spearheaded targeted campaigns, enabling over
+                1,000 students in Mexico to access quality programming education.</li>
+              <li><strong>Curriculum Innovation & Expansion:</strong> Led computer science courses emphasizing
+                practical, job-ready programming skills.</li>
+              <li><strong>Cross-Cultural Outreach & Partnerships:</strong> Partnered with MIT-affiliated faculty and
+                global education advocates to broaden Patrones Hermosas’s reach.</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Technical Skills -->
+        <div class="mb-4">
+          <h4 class="fw-bold">Technical Skills</h4>
+          <h6 class="fw-semibold">Digital Marketing & Growth Strategy</h6>
+          <ul>
+            <li>Social Media Marketing (Instagram, TikTok, YouTube, Twitter)</li>
+            <li>Paid Ad Campaign Management (Meta, Google Ads, TikTok Ads)</li>
+            <li>SEO Optimization (On-page & Off-page)</li>
+            <li>Content Strategy & Development</li>
+            <li>Influencer Marketing & Outreach</li>
+            <li>Community Engagement Strategies</li>
+            <li>Copywriting & Conversion-Optimized Content</li>
+          </ul>
+          <h6 class="fw-semibold">Data Analytics & Performance Optimization</h6>
+          <ul>
+            <li>Google Analytics & Digital Advertising Performance Analysis</li>
+            <li>A/B Testing & Predictive Modeling</li>
+            <li>Market Research & Competitor Analysis</li>
+            <li>SQL Querying & Data Visualization (Tableau, D3.js, Plotly)</li>
+            <li>Lead Generation & CRM Management (HubSpot, Klaviyo, Mailchimp)</li>
+          </ul>
+          <h6 class="fw-semibold">Creative & Multimedia Content Production</h6>
+          <ul>
+            <li>Video Production & Editing (Adobe Premiere Pro, Final Cut Pro, After Effects)</li>
+            <li>Motion Graphics & Visual Storytelling</li>
+            <li>Audio Mixing & Podcast Editing</li>
+            <li>Photography & Merchandise Design Coordination</li>
+            <li>Live Stream Setup & Optimization</li>
+          </ul>
+          <h6 class="fw-semibold">Web & Marketing Technology</h6>
+          <ul>
+            <li>Website Performance Optimization & UI/UX Principles</li>
+            <li>Web Scraping & Automation (Python, JavaScript)</li>
+            <li>API Integrations (Meta Ads API, Google Analytics API, Shopify API)</li>
+            <li>E-commerce Store Setup & Sales Funnel Optimization (Shopify, Printful)</li>
+            <li>Cloud Services & Serverless Functions (AWS, GCP, Azure)</li>
+          </ul>
+          <h6 class="fw-semibold">Business & Project Management</h6>
+          <ul>
+            <li>Branding & Identity Development</li>
+            <li>Timeline Preparation & Progress Monitoring</li>
+            <li>Promotional Campaigns & Event Management</li>
+            <li>Financial Budgeting & Forecasting</li>
+            <li>Vendor & Product Testing</li>
+          </ul>
+          <h6 class="fw-semibold">Languages & Communication</h6>
+          <ul>
+            <li>Fluent in English & Spanish (Bilingual Marketing & Content Creation)</li>
+          </ul>
+        </div>
+        <!-- Extracurricular Activities -->
+        <div class="mb-4">
+          <h4 class="fw-bold">Extracurricular Activities</h4>
+          <ul>
+            <li>Freelance Videographer & Photographer – Created visuals for musicians, creatives, and brand campaigns.
+            </li>
+            <li>Audio Engineer – Mixed and mastered music/podcast projects, ensuring professional-grade sound.</li>
+            <li>Web & Digital Infrastructure Assistant – Optimized e-commerce, websites, and digital distribution for
+              artists.</li>
+            <li>Creative & Tech Consultant – Provided strategies and solutions to enhance artist visibility and
+              monetization.</li>
+          </ul>
+        </div>
+        <!-- Additional Information -->
+        <div class="mb-4">
+          <h4 class="fw-bold">Additional Information</h4>
+          <ul>
+            <li>Passionate advocate for diversity in STEM and mentor to aspiring technologists.</li>
+            <li>Experienced in bilingual program delivery, expanding access and fostering global community engagement.
+            </li>
+            <li>Committed to leveraging marketing analytics, data-driven decisions, and strategic partnerships for
+              social impact.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-5 text-center text-body-secondary bg-body-tertiary">
+    <p>&copy; 2025 Oscar Sanchez. All rights reserved.</p>
+    <p class="mb-0"><a href="#">Back to top</a></p>
+  </footer>
+
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Toggle "Read More" and "Read Less" on SelfHelp.ai collapse
+    var collapseEl = document.getElementById('selfHelpCollapse');
+    var toggleBtn = document.getElementById('toggleSelfHelpBtn');
+    collapseEl.addEventListener('shown.bs.collapse', function () {
+      toggleBtn.textContent = 'Read Less';
+    });
+    collapseEl.addEventListener('hidden.bs.collapse', function () {
+      toggleBtn.textContent = 'Read More';
+    });
+  </script>
+</body>
+
+</html>
