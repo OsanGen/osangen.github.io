@@ -54,12 +54,19 @@ export default {
                 brand: {
                     primary: "hsl(var(--brand-primary))",
                     accent: "hsl(var(--brand-accent))",
+                    red: "#C30000",
+                    yellow: "#FFF11C",
+                    blue: "#85C6F5",
+                    purple: "#9600FF",
                 }
             },
             borderRadius: {
                 lg: "var(--radius)",
                 md: "calc(var(--radius) - 2px)",
                 sm: "calc(var(--radius) - 4px)",
+                xl: "1rem",   // 16px
+                "2xl": "1.25rem", // 20px
+                "3xl": "1.5rem",  // 24px
             },
             keyframes: {
                 "accordion-down": {

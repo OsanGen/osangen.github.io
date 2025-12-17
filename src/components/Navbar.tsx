@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Brain } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import {
@@ -19,11 +19,7 @@ const Navbar = () => {
 
     useEffect(() => {
         const handleScroll = () => {
-            if (window.scrollY > 10) {
-                setIsScrolled(true);
-            } else {
-                setIsScrolled(false);
-            }
+            setIsScrolled(window.scrollY > 10);
         };
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
@@ -33,9 +29,9 @@ const Navbar = () => {
 
     const navLinks = [
         { label: 'Home', path: '/' },
-        { label: 'About Me', path: '/about' },
+        { label: 'About', path: '/about' }, // Simplified label
         { label: 'Agent Work', path: '/agent-work' },
-        { label: 'CV/Resume', path: '/resume' },
+        { label: 'CV', path: '/resume' }, // Simplified label
     ];
 
     const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
@@ -47,26 +43,28 @@ const Navbar = () => {
     return (
         <nav
             className={cn(
-                'fixed top-0 w-full z-50 transition-all duration-300',
+                'fixed top-0 w-full z-50 transition-all duration-300 h-20 flex items-center',
                 isScrolled
-                    ? 'bg-[hsl(var(--footer))]/80 backdrop-blur-md shadow-lg border-b border-white/10'
+                    ? 'bg-background/90 backdrop-blur-md border-b border-border shadow-sm'
                     : 'bg-transparent'
             )}
         >
-            <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-                {/* Logo */}
+            <div className="container mx-auto px-4 flex justify-between items-center">
+                {/* Logo - Minimalist */}
                 <a
                     href="/"
                     onClick={(e) => handleNavigation(e, '/')}
-                    className="text-2xl font-bold font-heading text-white tracking-widest hover:text-brand-accent transition-colors"
+                    className="flex items-center gap-2 text-xl font-bold font-heading text-foreground group"
                 >
-                    OSCAR SANCHEZ
+                    <span className="tracking-widest group-hover:text-muted-foreground transition-colors">OSCAR SANCHEZ</span>
+                    {/* Micro-accent only */}
+                    <Brain className="text-brand-yellow w-5 h-5 fill-current opacity-80" />
                 </a>
 
-                {/* Desktop Menu */}
+                {/* Desktop Menu - Muted Links */}
                 <div className="hidden md:block">
                     <NavigationMenu>
-                        <NavigationMenuList className="space-x-2">
+                        <NavigationMenuList className="gap-2">
                             {navLinks.map((link) => (
                                 <NavigationMenuItem key={link.path}>
                                     <NavigationMenuLink
@@ -74,10 +72,10 @@ const Navbar = () => {
                                         onClick={(e) => handleNavigation(e, link.path)}
                                         className={cn(
                                             navigationMenuTriggerStyle(),
-                                            'bg-transparent hover:bg-white/5 focus:bg-white/5 data-[active]:bg-transparent data-[state=open]:bg-transparent cursor-pointer',
+                                            'bg-transparent hover:bg-transparent focus:bg-transparent data-[active]:bg-transparent data-[state=open]:bg-transparent cursor-pointer',
                                             isActive(link.path)
-                                                ? 'text-[hsl(var(--accent))] font-semibold'
-                                                : 'text-white/80 hover:text-brand-accent'
+                                                ? 'text-foreground font-semibold'
+                                                : 'text-muted-foreground hover:text-foreground font-normal'
                                         )}
                                     >
                                         {link.label}
@@ -85,52 +83,61 @@ const Navbar = () => {
                                 </NavigationMenuItem>
                             ))}
 
-                            {/* Contact Button */}
+                            {/* Calm Utility CTA */}
                             <NavigationMenuItem>
-                                <Button variant="glow" size="sm" asChild className="ml-2">
-                                    <a href="/contact" onClick={(e) => handleNavigation(e, '/contact')}>Contact</a>
+                                <Button
+                                    variant="outline"
+                                    size="sm"
+                                    asChild
+                                    className="ml-4 border-border text-foreground hover:bg-secondary hover:text-secondary-foreground transition-all rounded-lg"
+                                >
+                                    <a href="mailto:you@yourdomain.com?subject=Consultation%20Inquiry">
+                                        Email for Consultation
+                                    </a>
                                 </Button>
                             </NavigationMenuItem>
                         </NavigationMenuList>
                     </NavigationMenu>
                 </div>
 
-                {/* Mobile Menu Button */}
+                {/* Mobile Menu Button - Calm */}
                 <div className="md:hidden">
                     <button
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
-                        className="text-white hover:text-brand-accent focus:outline-none"
+                        className="text-muted-foreground hover:text-foreground focus:outline-none"
                     >
-                        {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+                        {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
                     </button>
                 </div>
             </div>
 
-            {/* Mobile Dropdown */}
+            {/* Mobile Dropdown - Dark Panel */}
             <div
                 className={cn(
-                    'md:hidden absolute top-full left-0 w-full bg-[hsl(var(--footer))] border-b border-white/10 overflow-hidden transition-all duration-300 ease-in-out',
-                    isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                    'md:hidden absolute top-20 left-0 w-full bg-background border-b border-border overflow-hidden transition-all duration-300 ease-in-out',
+                    isMenuOpen ? 'max-h-96 opacity-100 shadow-xl' : 'max-h-0 opacity-0'
                 )}
             >
-                <div className="flex flex-col p-4 space-y-4">
+                <div className="flex flex-col p-6 space-y-4">
                     {navLinks.map((link) => (
                         <a
                             key={link.path}
                             href={link.path}
                             onClick={(e) => handleNavigation(e, link.path)}
                             className={cn(
-                                'text-lg font-medium transition-colors block',
+                                'text-lg font-medium transition-colors block py-2 border-b border-transparent',
                                 isActive(link.path)
-                                    ? 'text-brand-accent'
-                                    : 'text-white/80 hover:text-brand-accent'
+                                    ? 'text-foreground border-brand-yellow/50'
+                                    : 'text-muted-foreground hover:text-foreground'
                             )}
                         >
                             {link.label}
                         </a>
                     ))}
-                    <Button variant="glow" className="w-full" asChild>
-                        <a href="/contact" onClick={(e) => handleNavigation(e, '/contact')}>Contact</a>
+                    <Button variant="outline" className="w-full mt-4" asChild>
+                        <a href="mailto:you@yourdomain.com?subject=Consultation%20Inquiry">
+                            Email for Consultation
+                        </a>
                     </Button>
                 </div>
             </div>
