@@ -1,0 +1,32 @@
+{
+  "name": "oscar-sanchez-portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "lint": "astro check",
+    "typecheck": "astro check",
+    "import:posts": "tsx scripts/import_linkedin_posts.ts",
+    "import:workshops": "tsx scripts/import_linkedin_workshops.ts"
+  },
+  "dependencies": {
+    "astro": "^4.16.19",
+    "zod": "^3.24.1",
+    "@fontsource/inter": "^5.1.1",
+    "@fontsource/sora": "^5.1.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "prettier": "^3.3.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "typescript": "^5.5.4",
+    "tsx": "^4.19.1"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

@@ -1,0 +1,146 @@
+[
+  {
+    "id": "adl-browser-only",
+    "title": "Applied Deep Learning (Browser-Only)",
+    "format": "Colab-first, session-by-session notebook",
+    "time": "6 sessions",
+    "level": "Intermediate",
+    "topics": [
+      "neural nets",
+      "metrics-first framing",
+      "reproducibility",
+      "evidence pipeline"
+    ],
+    "proof": [
+      "6-intake framework",
+      "POINTS rule",
+      "Keras baseline + deeper model + curves + JSON metrics + parity cell"
+    ],
+    "links": {
+      "repo": "",
+      "slides": "",
+      "notebook": ""
+    },
+    "cta": {
+      "label": "Start module",
+      "href": "/learn/adl-browser-only"
+    },
+    "status": "seed"
+  },
+  {
+    "id": "governed-genai-rollout",
+    "title": "Governed GenAI Rollout: Pilot to Production",
+    "format": "Workshop + checklist",
+    "time": "90 minutes",
+    "level": "All levels",
+    "topics": [
+      "human-in-the-loop",
+      "evals",
+      "risk gates",
+      "audit trails"
+    ],
+    "proof": [
+      "Diagnose value + risk",
+      "pilot with measurement and review gates",
+      "ship with repeatable patterns"
+    ],
+    "links": {
+      "repo": "",
+      "slides": "",
+      "checklist": ""
+    },
+    "cta": {
+      "label": "View workshop",
+      "href": "/workshops/governed-genai-rollout"
+    },
+    "status": "seed"
+  },
+  {
+    "id": "cogsec-playbooks",
+    "title": "CogSec Playbooks: Cognitive Security for AI Collaborators",
+    "format": "Open standard + exercises",
+    "time": "4 lessons",
+    "level": "Beginner to Advanced (tracks)",
+    "topics": [
+      "boundaries",
+      "escalation",
+      "refusal patterns",
+      "overtrust risk",
+      "dark patterns"
+    ],
+    "proof": [
+      "risk measurement templates",
+      "reference implementations"
+    ],
+    "links": {
+      "repo": "",
+      "docs": "",
+      "cases": ""
+    },
+    "cta": {
+      "label": "Explore playbooks",
+      "href": "/learn/cogsec-playbooks"
+    },
+    "status": "seed"
+  },
+  {
+    "id": "beautiful-code-theory",
+    "title": "Beautiful Code Theory: Loops, Roles, and Proof Packs",
+    "format": "Visual class (click-through) + templates",
+    "time": "45 minutes",
+    "level": "All levels",
+    "topics": [
+      "systems design",
+      "proof loops",
+      "handoffs",
+      "power-user ecosystem"
+    ],
+    "proof": [
+      "AGENTGEN -> Agent_Builder -> GEN_AI_SAAS -> Upskill_dev loop"
+    ],
+    "links": {
+      "docs": "",
+      "templates": ""
+    },
+    "cta": {
+      "label": "Start class",
+      "href": "/learn/beautiful-code-theory"
+    },
+    "status": "seed",
+    "visualClass": {
+      "title": "Beautiful Code Theory",
+      "steps": [
+        {
+          "title": "Anchor the claim",
+          "body": "Write one outcome statement and one success metric.",
+          "proofLink": "",
+          "nextAction": "Write metric threshold"
+        },
+        {
+          "title": "Define the loop",
+          "body": "Describe one action, one check, and one handoff point.",
+          "proofLink": "",
+          "nextAction": "Draw loop with arrows"
+        },
+        {
+          "title": "Create proof nodes",
+          "body": "Add evidence locations for each handoff.",
+          "proofLink": "",
+          "nextAction": "Attach data evidence"
+        },
+        {
+          "title": "Set boundaries",
+          "body": "Name refusal points and escalation paths.",
+          "proofLink": "",
+          "nextAction": "Draft escalation steps"
+        },
+        {
+          "title": "Run a short check",
+          "body": "Share one learning from a pilot and one gap to fix.",
+          "proofLink": "",
+          "nextAction": "Publish next loop"
+        }
+      ]
+    }
+  }
+]

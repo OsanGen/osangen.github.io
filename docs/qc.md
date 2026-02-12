@@ -1,0 +1,25 @@
+# QC and release gate
+
+## CogSec ship gate
+
+- [ ] Content reads at 10% zoom.
+- [ ] Body contrast meets 4.5:1 minimum.
+- [ ] Overlay text <= 12 words.
+- [ ] One accent lead per page.
+- [ ] Accent area <= 15% visible area.
+- [ ] No outer glow, no heavy gradients.
+- [ ] Proof-first pattern present: Claim, Proof, Next step.
+
+## Accessibility checks
+
+- [ ] Semantic HTML and heading order
+- [ ] Keyboard focus ring visible
+- [ ] skip-to-content link present
+- [ ] Reduced motion support
+- [ ] External links include clear affordance in context
+
+## Build checks
+
+- `npm run lint`
+- `npm run typecheck`
+- `npm run build`

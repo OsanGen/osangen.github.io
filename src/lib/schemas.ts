@@ -1,0 +1,143 @@
+import { z } from 'zod';
+
+export const ProofPackSchema = z.object({
+  label: z.string(),
+  proof: z.array(z.string()),
+});
+
+export const ExperienceEntrySchema = z.object({
+  org: z.string(),
+  role: z.string(),
+  start: z.string(),
+  end: z.string().nullable().optional(),
+  location: z.string().nullable().optional(),
+  highlights: z.array(z.string()),
+});
+
+export const EducationEntrySchema = z.object({
+  org: z.string(),
+  program: z.string(),
+  start: z.string().nullable(),
+  end: z.string().nullable(),
+});
+
+export const ProfileSchema = z.object({
+  name: z.string(),
+  location: z.string(),
+  headline: z.string(),
+  summary: z.array(z.string()),
+  what_i_do: z.array(z.string()),
+  how_i_work: z.array(z.string()),
+  proof_selected: z.array(ProofPackSchema),
+  experience: z.array(ExperienceEntrySchema),
+  education: z.array(EducationEntrySchema),
+  links: z.object({
+    linkedin: z.string(),
+    portfolio: z.string(),
+    youtube: z.string(),
+  }),
+  skills: z.array(z.string()),
+});
+
+export const GameEmbedSchema = z.object({
+  preferred: z.enum(['iframe', 'link']),
+  aspectRatio: z.string(),
+  fallback: z.string(),
+});
+
+export const GameSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  tagline: z.string(),
+  concepts: z.array(z.string()),
+  learn: z.array(z.string()),
+  deployUrl: z.string(),
+  repoUrl: z.string(),
+  embed: GameEmbedSchema,
+});
+
+export const VisualClassStepSchema = z.object({
+  title: z.string(),
+  body: z.string(),
+  proofLink: z.string().optional(),
+  nextAction: z.string(),
+});
+
+export const VisualClassSchema = z.object({
+  title: z.string(),
+  steps: z.array(VisualClassStepSchema).min(5).max(7),
+});
+
+export const ModuleSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  format: z.string(),
+  time: z.string(),
+  level: z.string(),
+  topics: z.array(z.string()),
+  proof: z.array(z.string()),
+  links: z.object({
+    repo: z.string().optional(),
+    slides: z.string().optional(),
+    notebook: z.string().optional(),
+    checklist: z.string().optional(),
+    docs: z.string().optional(),
+    cases: z.string().optional(),
+    templates: z.string().optional(),
+  }),
+  cta: z.object({
+    label: z.string(),
+    href: z.string(),
+  }),
+  status: z.string(),
+  visualClass: VisualClassSchema.optional(),
+});
+
+export const CommunityJoinSchema = z.object({
+  mode: z.string(),
+  url: z.string(),
+  label: z.string(),
+});
+
+export const CommunitySchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  type: z.string(),
+  fit: z.array(z.string()),
+  why: z.array(z.string()),
+  join: CommunityJoinSchema,
+});
+
+export const BookingEntrySchema = z.object({
+  label: z.string(),
+  url: z.string(),
+});
+
+export const BookingSchema = z.object({
+  calendly: z.object({
+    one_on_one: BookingEntrySchema,
+    teach_private: BookingEntrySchema,
+    teach_class: BookingEntrySchema,
+  }),
+  note: z.string(),
+});
+
+export const WorkshopSchema = z.object({
+  id: z.string(),
+  date: z.string(),
+  title: z.string(),
+  description: z.string().max(240),
+  replayUrl: z.string(),
+  slidesUrl: z.string(),
+  tags: z.array(z.string()),
+});
+
+export const PostSchema = z.object({
+  id: z.string(),
+  date: z.string(),
+  title: z.string(),
+  summary: z.string().max(240),
+  url: z.string(),
+  tags: z.array(z.string()),
+  proofLinks: z.array(z.string()).optional(),
+});

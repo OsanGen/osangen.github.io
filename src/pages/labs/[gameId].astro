@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Card from '../../components/Card.astro';
+import TagList from '../../components/TagList.astro';
+import GameEmbed from '../../components/GameEmbed.astro';
+import { loadGames } from '../../lib/content';
+
+const games = await loadGames();
+
+export async function getStaticPaths() {
+  const staticGames = await loadGames();
+
+  return staticGames.map((game) => ({
+    params: {
+      gameId: game.id,
+    },
+  }));
+}
+
+const game = games.find((g) => g.id === Astro.params.gameId);
+---
+<BaseLayout title={game ? `${game.title} - Labs` : 'Lab not found'} description="Game detail page">
+  {game ? (
+    <>
+      <h1>{game.title}</h1>
+      <p class="text-small">{game.tagline}</p>
+      <TagList tags={game.concepts} />
+
+      <Card>
+        <h2>What you learn</h2>
+        <ul>
+          {game.learn.map((item) => <li>{item}</li>)}
+        </ul>
+      </Card>
+
+      <h2 style="margin-top:1rem;">Play</h2>
+      <GameEmbed
+        url={game.deployUrl}
+        title={game.title}
+        aspectRatio={game.embed.aspectRatio as '16/9' | '4/3'}
+      />
+
+      <Card>
+        <h2>Controls</h2>
+        <p class="text-small">Move: WASD. Shoot: Arrow keys.</p>
+      </Card>
+
+      <Card>
+        <h2>Proof and links</h2>
+        <div style="display:flex; gap:0.6rem; flex-wrap:wrap; margin-top:0.7rem;">
+          <a class="button" href={game.deployUrl} target="_blank" rel="noopener noreferrer">Open in new tab</a>
+          {game.repoUrl ? <a class="button" href={game.repoUrl} target="_blank" rel="noopener noreferrer">Repo</a> : null}
+          <span class="text-small">This is a teaching demo. No user data collected here.</span>
+        </div>
+      </Card>
+    </>
+  ) : (
+    <Card>
+      <h2>Game not found</h2>
+      <p class="text-small">Use the labs list to open an available game.</p>
+      <a class="button" href="/labs">Back to Labs</a>
+    </Card>
+  )}
+</BaseLayout>

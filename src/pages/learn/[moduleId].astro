@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Card from '../../components/Card.astro';
+import TagList from '../../components/TagList.astro';
+import VisualClassStepper from '../../components/VisualClassStepper.astro';
+import { loadModules } from '../../lib/content';
+
+const modules = await loadModules();
+
+export async function getStaticPaths() {
+  const staticModules = await loadModules();
+
+  return staticModules.map((module) => ({
+    params: {
+      moduleId: module.id,
+    },
+  }));
+}
+
+const module = modules.find((m) => m.id === Astro.params.moduleId);
+---
+<BaseLayout title={module ? `${module.title} - Learn` : 'Module not found'} description="Module detail page">
+  {module ? (
+    <>
+      <h1>{module.title}</h1>
+      <p class="text-small">{module.format}. {module.time}. {module.level}.</p>
+      <TagList tags={module.topics} />
+
+      <Card>
+        <h2>Proof and scope</h2>
+        <ul>
+          {module.proof.map((p) => <li>{p}</li>)}
+        </ul>
+      </Card>
+
+      {module.visualClass ? (
+        <VisualClassStepper title="Visual class" steps={module.visualClass.steps} />
+      ) : (
+        <Card>
+          <h2>Visual class</h2>
+          <p class="text-small">Visual class steps are being prepared.</p>
+        </Card>
+      )}
+
+      <Card>
+        <h2>Links</h2>
+        <div style="display:flex;gap:0.7rem;flex-wrap:wrap;">
+          {module.links.repo ? <a class="button" href={module.links.repo} target="_blank" rel="noopener noreferrer">Repo</a> : <span class="text-small">Repo link pending</span>}
+          {module.links.slides ? <a class="button" href={module.links.slides} target="_blank" rel="noopener noreferrer">Slides</a> : <span class="text-small">Slides pending</span>}
+          {module.links.notebook ? <a class="button" href={module.links.notebook} target="_blank" rel="noopener noreferrer">Notebook</a> : null}
+        </div>
+      </Card>
+    </>
+  ) : (
+    <Card>
+      <h2>Module not found</h2>
+      <p class="text-small">Pick a module from the learn index.</p>
+      <a class="button" href="/learn">Back to Learn</a>
+    </Card>
+  )}
+</BaseLayout>

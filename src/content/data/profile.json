@@ -1,0 +1,174 @@
+{
+  "name": "Oscar Sanchez",
+  "location": "Greater Boston",
+  "headline": "Founder & Community Builder | Building the AI Global Community | Connecting AI Leaders to Deploy Real-World Solutions",
+  "summary": [
+    "I help teams ship governed GenAI that moves real KPIs.",
+    "I'm the founder of Gen AI Global and a Learning Facilitator with MIT Professional Education (Applied GenAI + Agentic AI).",
+    "I also co-founded AIforAll Global and Patrones Hermosos at MIT."
+  ],
+  "what_i_do": [
+    "Turn GenAI capability into measurable workflow + product leverage.",
+    "Build governance + evaluations from day one (so pilots don't die in production).",
+    "Design agentic workflows with humans-in-the-loop, clear controls, and adoption that sticks."
+  ],
+  "how_i_work": [
+    "Diagnose value + risk (what matters, what can break).",
+    "Pilot with measurement, consent, attribution, and review gates.",
+    "Ship to production and enable teams with repeatable patterns."
+  ],
+  "proof_selected": [
+    {
+      "label": "Gen AI Global",
+      "proof": [
+        "Grew 0->1,000+ members in 4 weeks.",
+        "Sustained >80% weekly active participation.",
+        "Led with an AI-assisted operating system for content, events, and engagement."
+      ]
+    },
+    {
+      "label": "Patrones Hermosos",
+      "proof": [
+        "Scaled a national STEM program with Tec de Monterrey.",
+        "2,000+ students; 300+ U.S. instructors; 600+ Mexican TAs across 23 cities.",
+        "Led course software architecture."
+      ]
+    },
+    {
+      "label": "AIforAll Global",
+      "proof": [
+        "Delivered masterclasses/bootcamps with ethics + misinformation built in.",
+        "One masterclass drew 250+ students."
+      ]
+    },
+    {
+      "label": "Teaching",
+      "proof": [
+        "Built and taught \"Applied Deep Learning (Browser-Only)\".",
+        "Created a framing framework so students justify models with metrics and evidence, not vibes."
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "org": "Gen AI Global",
+      "role": "Founder",
+      "start": "2025-03",
+      "end": null,
+      "location": "Boston, Massachusetts, United States",
+      "highlights": [
+        "Founded and lead the Global Gen AI Professional Network (MIT Professional Education-backed).",
+        "Architected AI-enhanced community platform with bots and automations (content delivery, events, engagement, resource curation).",
+        "Orchestrated WhatsApp -> Discord model with weekly rituals and monthly roundtables."
+      ]
+    },
+    {
+      "org": "Cogsec",
+      "role": "Founder",
+      "start": "2026-01",
+      "end": null,
+      "location": "Boston, Massachusetts, United States",
+      "highlights": [
+        "Nonprofit building open standards for cognitive security as AI becomes a default collaborator.",
+        "Publishes playbooks for safe agent behavior, risk measurement templates, case studies, workshops, cohorts, and a standards-building community."
+      ]
+    },
+    {
+      "org": "MIT Professional Education",
+      "role": "Learning Facilitator (Applied GenAI + Agentic AI)",
+      "start": "2025-11",
+      "end": null,
+      "location": "Boston, Massachusetts, United States",
+      "highlights": [
+        "Supports working professionals in Applied Generative AI for Digital Transformation and Applied Agentic AI for Organizational Transformation."
+      ]
+    },
+    {
+      "org": "Panamerican University",
+      "role": "Applied Deep Learning Instructor & Curriculum Architect",
+      "start": "2025-10",
+      "end": null,
+      "location": null,
+      "highlights": [
+        "Designed and taught \"Applied Deep Learning (Browser-Only)\" in Google Colab.",
+        "Built the 6-intake framing framework and POINTS rule/evidence pipeline.",
+        "Led labs on discriminative vs generative models, agentic vs generative systems, RAG chains, and validation-first coding."
+      ]
+    },
+    {
+      "org": "AIforAll Global",
+      "role": "Co-Founder",
+      "start": "2025-06",
+      "end": null,
+      "location": null,
+      "highlights": [
+        "Design and lead the AI Changemakers Fellowship.",
+        "Build global partnerships; mentor youth-led AI projects; run showcases; develop open tools and curricula."
+      ]
+    },
+    {
+      "org": "Patrones Hermosos",
+      "role": "Co-Founder",
+      "start": "2014-06",
+      "end": null,
+      "location": "Greater Boston Area",
+      "highlights": [
+        "Interdisciplinary initiative for women's STEM education in computational fields; scaled to 10,000+ annual participants across U.S. and Mexico.",
+        "Built data-driven curriculum with practical design patterns.",
+        "Secured partnerships with MIT, MISTI, and Tecnologico de Monterrey."
+      ]
+    },
+    {
+      "org": "Broad Institute of MIT and Harvard",
+      "role": "Research Assistant",
+      "start": "2015-06",
+      "end": "2017-08",
+      "location": "Boston, Massachusetts, United States",
+      "highlights": [
+        "Developed interactive web interfaces and a custom JS library to streamline genomic data analysis.",
+        "Engineered a Node.js application for dynamic query visualization."
+      ]
+    },
+    {
+      "org": "Microsoft",
+      "role": "Summer Camp Instructor",
+      "start": "2016-08",
+      "end": "2016-08",
+      "location": "Boston, Massachusetts, United States",
+      "highlights": [
+        "Created and delivered computational thinking workshops for visually impaired/blind students.",
+        "Translated algorithmic principles into accessible lessons."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "org": "MIT Professional Education",
+      "program": "Applied Agentic AI for Organizational Transformation",
+      "start": "2025-09",
+      "end": "2025-12"
+    },
+    {
+      "org": "MIT Professional Education",
+      "program": "Applied Generative AI for Digital Transformation",
+      "start": null,
+      "end": null
+    },
+    {
+      "org": "Isenberg School of Management, UMass Amherst",
+      "program": "OIM (Operations Management and Supervision)",
+      "start": null,
+      "end": null
+    }
+  ],
+  "links": {
+    "linkedin": "https://www.linkedin.com/in/oscarsanch",
+    "portfolio": "https://www.mit.edu/~oscarsan/",
+    "youtube": "https://www.youtube.com/@OscarSan-k7m"
+  },
+  "skills": [
+    "Multi-agent Systems",
+    "Clinical Research",
+    "Human Resources (HR)"
+  ]
+}

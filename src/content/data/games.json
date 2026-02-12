@@ -1,0 +1,25 @@
+[
+  {
+    "id": "ai-power-users-codex53-demo",
+    "title": "AI Power Users - Codex 5.3 Tech Demo",
+    "tagline": "Top-down corridor survival shooter. Move: WASD. Shoot: Arrow Keys.",
+    "concepts": [
+      "AI power users",
+      "interactive demo",
+      "neural-net lessons",
+      "open source learning"
+    ],
+    "learn": [
+      "Ship a playable demo as a teaching artifact.",
+      "Pair a game loop with a lesson loop (prompt -> test -> measure).",
+      "Use shareable run summaries as proof objects."
+    ],
+    "deployUrl": "https://osangen.github.io/ai-power-users-codex53-demo/",
+    "repoUrl": "",
+    "embed": {
+      "preferred": "iframe",
+      "aspectRatio": "16/9",
+      "fallback": "link"
+    }
+  }
+]

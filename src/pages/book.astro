@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Card from '../components/Card.astro';
+import { loadBooking } from '../lib/content';
+
+const booking = await loadBooking();
+const embed = Astro.url.searchParams.get('embed') === '1';
+---
+<BaseLayout title="Book - Oscar Sanchez" description="Book calls and workshops with explicit consent">
+  <h1>Book</h1>
+  <p class="text-small">Choose the option that fits your next step.</p>
+
+  <Card>
+    <h2>1:1 guidance</h2>
+    {booking.calendly.one_on_one.url ? (
+      <>
+        <a class="button" href={booking.calendly.one_on_one.url} target="_blank" rel="noopener noreferrer">{booking.calendly.one_on_one.label}</a>
+        {embed ? <iframe style="width:100%; margin-top:1rem; min-height:560px; border:1px solid var(--border);" src={booking.calendly.one_on_one.url} title="Calendly 1:1" loading="lazy"></iframe> : null}
+      </>
+    ) : (
+      <p class="text-small">Add your Calendly URL in booking.json</p>
+    )}
+  </Card>
+
+  <Card>
+    <h2>Private workshop</h2>
+    {booking.calendly.teach_private.url ? (
+      <a class="button" href={booking.calendly.teach_private.url} target="_blank" rel="noopener noreferrer">{booking.calendly.teach_private.label}</a>
+    ) : (
+      <p class="text-small">Add your Calendly URL in booking.json</p>
+    )}
+  </Card>
+
+  <Card>
+    <h2>Class or school booking</h2>
+    {booking.calendly.teach_class.url ? (
+      <a class="button" href={booking.calendly.teach_class.url} target="_blank" rel="noopener noreferrer">{booking.calendly.teach_class.label}</a>
+    ) : (
+      <p class="text-small">Add your Calendly URL in booking.json</p>
+    )}
+  </Card>
+
+  <p class="text-small">Use close and back if you want to exit this flow.</p>
+</BaseLayout>

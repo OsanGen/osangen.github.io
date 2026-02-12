@@ -1,0 +1,17 @@
+{
+  "calendly": {
+    "one_on_one": {
+      "label": "Book 1:1",
+      "url": ""
+    },
+    "teach_private": {
+      "label": "Book a private workshop",
+      "url": ""
+    },
+    "teach_class": {
+      "label": "Book a class",
+      "url": ""
+    }
+  },
+  "note": "Add real Calendly URLs. Keep friction low. No dark patterns."
+}

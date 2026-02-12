@@ -1,0 +1,80 @@
+[
+  {
+    "id": "gen-ai-global",
+    "name": "Gen AI Global",
+    "type": "professional community",
+    "fit": [
+      "exec",
+      "builder",
+      "policy"
+    ],
+    "why": [
+      "roundtables",
+      "agent labs",
+      "proof-first learning"
+    ],
+    "join": {
+      "mode": "calendly",
+      "url": "",
+      "label": "Book an intro"
+    }
+  },
+  {
+    "id": "ai-for-all-global",
+    "name": "AIforAll Global",
+    "type": "fellowship + youth projects",
+    "fit": [
+      "education",
+      "mentors",
+      "students"
+    ],
+    "why": [
+      "AI Changemakers Fellowship",
+      "youth-led projects in education, health, climate, justice"
+    ],
+    "join": {
+      "mode": "calendly",
+      "url": "",
+      "label": "Join intake"
+    }
+  },
+  {
+    "id": "cogsec",
+    "name": "Cogsec",
+    "type": "standards community",
+    "fit": [
+      "governance",
+      "builders",
+      "design",
+      "policy"
+    ],
+    "why": [
+      "open playbooks",
+      "risk templates",
+      "workshops + cohorts"
+    ],
+    "join": {
+      "mode": "calendly",
+      "url": "",
+      "label": "Join standards call"
+    }
+  },
+  {
+    "id": "ai-2027",
+    "name": "AI 2027",
+    "type": "community",
+    "fit": [
+      "builders",
+      "policy",
+      "research"
+    ],
+    "why": [
+      "upskill path and OSS contribution"
+    ],
+    "join": {
+      "mode": "calendly",
+      "url": "",
+      "label": "Get connected"
+    }
+  }
+]

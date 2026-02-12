@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { loadGames } from '../lib/content';
+import Card from '../components/Card.astro';
+import CardGrid from '../components/CardGrid.astro';
+import TagList from '../components/TagList.astro';
+import Badge from '../components/Badge.astro';
+
+const games = await loadGames();
+---
+<BaseLayout title="Labs - Oscar Sanchez" description="Playable demos and game-based AI workshops">
+  <h1>Labs</h1>
+  <p class="text-small">Learn through playable examples.</p>
+
+  <CardGrid>
+    {games.map((game, index) => (
+      <Card>
+        {index === 0 ? <Badge label="Playable" /> : null}
+        <h2 style="margin-top:0.5rem;">{game.title}</h2>
+        <p style="margin-top:0.4rem;">{game.tagline}</p>
+        <TagList tags={game.concepts} />
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:0.7rem;">
+          <a class="button" href={`/labs/${game.id}`}>Details</a>
+          <a class="button" href={game.deployUrl} target="_blank" rel="noopener noreferrer">Play</a>
+          {game.repoUrl ? (
+            <a class="button" href={game.repoUrl} target="_blank" rel="noopener noreferrer">Repo</a>
+          ) : (
+            <span class="text-small">Repo not yet added</span>
+          )}
+        </div>
+      </Card>
+    ))}
+  </CardGrid>
+</BaseLayout>

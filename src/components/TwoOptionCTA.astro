@@ -1,0 +1,30 @@
+---
+export interface Option {
+  title: string;
+  body: string;
+  href: string;
+}
+export interface Props {
+  title: string;
+  options: Option[];
+}
+const { title, options } = Astro.props;
+---
+<section class="card">
+  <h2>{title}</h2>
+  <div style="margin-top:0.75rem;display:grid;gap:0.75rem;grid-template-columns:1fr 1fr;">
+    {options.map((opt) => (
+      <a href={opt.href} class="button" style="justify-content:center;">{opt.title}</a>
+    ))}
+  </div>
+  <ul class="text-small" style="margin-top:0.75rem;padding-left:1rem;">
+    {options.map((opt) => <li>{opt.body}</li>)}
+  </ul>
+</section>
+<style>
+  @media (max-width: 680px) {
+    div {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

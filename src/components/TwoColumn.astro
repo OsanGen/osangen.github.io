@@ -1,0 +1,18 @@
+---
+export interface Props {
+  gap?: string;
+}
+const { gap = 'var(--space-4)' } = Astro.props;
+---
+<div style={`display:grid; grid-template-columns: 1.2fr 1fr; gap:${gap}; align-items:start;`}>
+  <slot name="primary" />
+  <slot name="secondary" />
+</div>
+
+<style>
+  @media (max-width: 760px) {
+    div {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,19 @@
+---
+export interface Props {
+  claim: string;
+  proof: string[];
+  nextStep: string;
+  nextHref: string;
+}
+
+const { claim, proof, nextStep, nextHref } = Astro.props;
+---
+<article class="card" aria-label="Proof block">
+  <h2>Claim</h2>
+  <p style="margin-top:0.5rem;">{claim}</p>
+  <h3 style="margin-top:1rem;">Proof</h3>
+  <ul>
+    {proof.map((item) => <li>{item}</li>)}
+  </ul>
+  <p style="margin-top:1rem;"><a href={nextHref}>{nextStep}</a></p>
+</article>

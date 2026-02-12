@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Card from '../components/Card.astro';
+import { loadProfile } from '../lib/content';
+
+const profile = await loadProfile();
+---
+<BaseLayout title="About - Oscar Sanchez" description="Bio and work patterns">
+  <h1>About</h1>
+  <div class="page-shell">
+    <Card>
+      <h2>Bio</h2>
+      <p class="text-small">{profile.headline}</p>
+      {profile.summary.map((s) => <p style="margin-top:0.5rem;">{s}</p>)}
+    </Card>
+
+    <Card>
+      <h2>What I do</h2>
+      <ul>
+        {profile.what_i_do.map((item) => <li>{item}</li>)}
+      </ul>
+    </Card>
+
+    <Card>
+      <h2>How I work</h2>
+      <ul>
+        {profile.how_i_work.map((item) => <li>{item}</li>)}
+      </ul>
+    </Card>
+
+    <Card>
+      <h2>Experience</h2>
+      {profile.experience.map((entry) => (
+        <div style="margin-bottom:0.8rem;">
+          <p><strong>{entry.role}</strong> - {entry.org}</p>
+          <p class="text-small">{entry.start} to {entry.end ?? 'present'} - {entry.location}</p>
+          <ul>
+            {entry.highlights.map((h) => <li>{h}</li>)}
+          </ul>
+        </div>
+      ))}
+    </Card>
+
+    <Card>
+      <h2>Beautiful Code Theory</h2>
+      <p class="text-small">Loop and handoff design with proof packs and visible evidence.</p>
+    </Card>
+  </div>
+</BaseLayout>

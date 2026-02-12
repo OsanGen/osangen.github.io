@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Card from '../components/Card.astro';
+import CardGrid from '../components/CardGrid.astro';
+import { loadCommunities } from '../lib/content';
+import TwoOptionCTA from '../components/TwoOptionCTA.astro';
+
+const communities = await loadCommunities();
+---
+<BaseLayout title="Join - Oscar Sanchez" description="Join open source AI communities and governance routes">
+  <h1>Join</h1>
+  <p class="text-small">Pick a route and move with evidence.</p>
+
+  <TwoOptionCTA
+    title="Choose your path"
+    options={[
+      { title: 'Ship a small win', body: 'Start with a short build.', href: '/learn' },
+      { title: 'Contribute governance', body: 'Review a safer workflow standard.', href: '/workshops' },
+    ]}
+  />
+
+  <div style="margin-top:1rem;">
+    <CardGrid>
+      {communities.map((c) => (
+        <Card>
+          <h2>{c.name}</h2>
+          <p class="text-small">{c.type}</p>
+          <p style="margin-top:0.6rem;"><strong>Who it fits:</strong> {c.fit.join(', ')}</p>
+          <p><strong>Why join:</strong></p>
+          <ul>
+            {c.why.slice(0, 3).map((w) => <li>{w}</li>)}
+          </ul>
+          {c.join.url ? (
+            <a class="button" href={c.join.url} target="_blank" rel="noopener noreferrer">{c.join.label}</a>
+          ) : (
+            <p class="text-small">Add your Calendly URL in communities.json.</p>
+          )}
+        </Card>
+      ))}
+    </CardGrid>
+  </div>
+
+  <Card>
+    <h2>Contribution path</h2>
+    <p class="text-small">Start with a GitHub issue, then solve one beginner task.</p>
+    <p class="text-small">Use a short proof note before opening a PR.</p>
+  </Card>
+
+  <p><a href="/code-of-conduct">Code of conduct</a></p>
+</BaseLayout>

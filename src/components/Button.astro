@@ -1,0 +1,21 @@
+---
+export interface Props {
+  href?: string;
+  external?: boolean;
+  variant?: 'primary' | 'ghost';
+  type?: 'button' | 'submit' | 'reset';
+}
+
+const { href, external, variant = 'primary', type = 'button' } = Astro.props;
+const cls = `button ${variant === 'ghost' ? 'ghost' : ''}`;
+---
+{href ? (
+  <a class={cls} href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>
+    <slot />
+    {external ? <span class="text-small" aria-hidden="true">"†—</span> : null}
+  </a>
+) : (
+  <button class={cls} type={type}>
+    <slot />
+  </button>
+)}

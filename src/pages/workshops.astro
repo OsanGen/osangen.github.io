@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Card from '../components/Card.astro';
+import { loadWorkshops, loadLastModifiedISO } from '../lib/content';
+import EmptyState from '../components/EmptyState.astro';
+
+const workshops = await loadWorkshops();
+const updated = await loadLastModifiedISO('workshops.json');
+---
+<BaseLayout title="Workshops - Oscar Sanchez" description="Workshop archive and import flow">
+  <h1>Workshops</h1>
+  <p class="text-small">Use a curated list of workshops. Proof-first by design.</p>
+  <p class="text-small">Last updated: {updated ? new Date(updated).toLocaleString() : 'Not available'}</p>
+
+  {workshops.length === 0 ? (
+    <EmptyState
+      title="Add workshops"
+      body="No workshop entries yet. Add data to src/content/data/workshops.json or import from LinkedIn."
+      note="Run: npm run import:workshops"
+    />
+  ) : (
+    <div class="page-shell">
+      {workshops.map((w) => (
+        <Card>
+          <h2>{w.title}</h2>
+          <p class="text-small">{w.date}</p>
+          <p style="margin-top:0.5rem;">{w.description}</p>
+          <div style="margin-top:0.6rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+            {w.replayUrl ? <a class="button" href={w.replayUrl}>Replay</a> : <span class="text-small">Replay missing</span>}
+            {w.slidesUrl ? <a class="button" href={w.slidesUrl}>Slides</a> : <span class="text-small">Slides missing</span>}
+          </div>
+        </Card>
+      ))}
+    </div>
+  )}
+
+  <Card>
+    <h2>How to add workshops</h2>
+    <p class="text-small">Provide a JSON or CSV file under private/linkedin/workshops.json or workshops.csv and run import:workshops.</p>
+    <p class="text-small"><a href="/docs">See docs for intake details</a></p>
+  </Card>
+</BaseLayout>

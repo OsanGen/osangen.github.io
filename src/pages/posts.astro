@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Card from '../components/Card.astro';
+import EmptyState from '../components/EmptyState.astro';
+import { loadPosts, loadLastModifiedISO } from '../lib/content';
+
+const posts = await loadPosts();
+const updated = await loadLastModifiedISO('posts.json');
+---
+<BaseLayout title="Posts - Oscar Sanchez" description="Curated posts feed and LinkedIn import note">
+  <h1>Posts</h1>
+  <p class="text-small">Proof-first posts for community learning, not hype.</p>
+  <p class="text-small">Last updated: {updated ? new Date(updated).toLocaleString() : 'Not available'}</p>
+
+  {posts.length === 0 ? (
+    <EmptyState
+      title="No posts yet"
+      body="No posts are loaded. Add curated post data or import from a LinkedIn export file."
+      note="Run: npm run import:posts"
+    />
+  ) : (
+    <div class="page-shell">
+      {posts.map((post) => (
+        <Card>
+          <h2>{post.title}</h2>
+          <p class="text-small">{post.date}</p>
+          <p style="margin-top:0.5rem;">{post.summary}</p>
+          <a class="button" href={post.url} target="_blank" rel="noopener noreferrer">Read source</a>
+          {post.proofLinks?.length ? (
+            <p class="text-small" style="margin-top:0.6rem;">Proof links: {post.proofLinks.length}</p>
+          ) : null}
+        </Card>
+      ))}
+    </div>
+  )}
+
+  <Card>
+    <h2>How to add posts</h2>
+    <p class="text-small">Drop private/linkedin/posts.csv or posts.json and run import:posts.</p>
+    <p class="text-small"><a href="/docs">See docs for intake details</a></p>
+  </Card>
+</BaseLayout>
