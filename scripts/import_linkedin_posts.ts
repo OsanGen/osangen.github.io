@@ -67,17 +67,17 @@ function normalizeList(value: string | string[] | undefined): string[] {
 async function readInput(): Promise<RawPost[]> {
   try {
     const csv = await fs.readFile(inputCsv, 'utf8');
-    const lines = csv.split(/\r?\n/).filter(Boolean);
+    const lines = csv.split(/\r?\n/).filter((line: string) => Boolean(line));
     if (!lines.length) return [];
-    const headers = splitCsv(lines[0]).map((h) => h.toLowerCase());
+    const headers = splitCsv(lines[0]).map((h: string) => h.toLowerCase());
     return lines
       .slice(1)
-      .filter((line) => line.trim())
-      .map((line) => {
+      .filter((line: string) => Boolean(line.trim()))
+      .map((line: string) => {
         const values = splitCsv(line);
         const row: Record<string, string> = {};
-        headers.forEach((header, i) => {
-          row[header] = values[i] ?? '';
+        headers.forEach((header, index) => {
+          row[header] = values[index] ?? '';
         });
         return {
           id: row.id || row['id'] || row['link'] || '',
@@ -108,14 +108,14 @@ function hash(s: string) {
 
 const entries = await readInput();
 const existing = await loadExisting();
-const existingUrlIndex = new Set(existing.map((row) => hash(row.url || '')));
+const existingUrlIndex = new Set(existing.map((row: RawPost) => hash(row.url || '')));
 const merged = [...existing];
 
 for (const row of entries) {
   const url = row.url?.trim() || '';
   if (!url || existingUrlIndex.has(hash(url))) continue;
   const id = row.id?.trim() || `post-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
-  const normalized = {
+  const normalized: RawPost = {
     id,
     date: row.date?.trim() || new Date().toISOString().slice(0, 10),
     title: row.title?.trim() || 'Untitled post',

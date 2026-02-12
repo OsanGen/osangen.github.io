@@ -41,14 +41,14 @@ function splitCsv(line: string): string[] {
   return out.map((item) => item.trim());
 }
 
-const normalizeList = (value: string | string[] | undefined): string[] => {
+function normalizeList(value: string | string[] | undefined): string[] {
   if (!value) return [];
   if (Array.isArray(value)) return value;
   return value
     .split(/[;,]/)
     .map((item) => item.trim())
     .filter(Boolean);
-};
+}
 
 function truncate(value: string | undefined) {
   if (!value) return '';
@@ -75,25 +75,28 @@ function hash(s: string) {
 async function readInput(): Promise<RawWorkshop[]> {
   try {
     const csv = await fs.readFile(inputCsv, 'utf8');
-    const lines = csv.split(/\r?\n/).filter(Boolean);
+    const lines = csv.split(/\r?\n/).filter((line: string) => Boolean(line));
     if (!lines.length) return [];
-    const headers = splitCsv(lines[0]).map((h) => h.toLowerCase());
-    return lines.slice(1).map((line) => {
-      const values = splitCsv(line);
-      const row: Record<string, string> = {};
-      headers.forEach((header, index) => {
-        row[header] = values[index] ?? '';
+    const headers = splitCsv(lines[0]).map((h: string) => h.toLowerCase());
+    return lines
+      .slice(1)
+      .filter((line: string) => Boolean(line.trim()))
+      .map((line: string) => {
+        const values = splitCsv(line);
+        const row: Record<string, string> = {};
+        headers.forEach((header, index) => {
+          row[header] = values[index] ?? '';
+        });
+        return {
+          id: row.id || row['title'] || '',
+          date: row.date || '',
+          title: row.title || '',
+          description: row.description || row.summary || '',
+          replayUrl: row.replayurl || row.replay || '',
+          slidesUrl: row.slidesurl || row.slides || '',
+          tags: row.tags || '',
+        };
       });
-      return {
-        id: row.id || row['title'] || '',
-        date: row.date || '',
-        title: row.title || '',
-        description: row.description || row.summary || '',
-        replayUrl: row.replayurl || row.replay || '',
-        slidesUrl: row.slidesurl || row.slides || '',
-        tags: row.tags || '',
-      };
-    });
   } catch {
     // continue
   }
@@ -101,7 +104,7 @@ async function readInput(): Promise<RawWorkshop[]> {
   try {
     const raw = await fs.readFile(inputJson, 'utf8');
     const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : parsed.workshops || [];
+    return Array.isArray(parsed) ? (parsed as RawWorkshop[]) : parsed.workshops || [];
   } catch {
     return [];
   }
@@ -109,7 +112,7 @@ async function readInput(): Promise<RawWorkshop[]> {
 
 const incoming = await readInput();
 const existing = await readExisting();
-const seen = new Set(existing.map((item) => hash(item.replayUrl || item.slidesUrl || '')));
+const seen = new Set(existing.map((item: RawWorkshop) => hash(item.replayUrl || item.slidesUrl || '')));
 const merged = [...existing];
 
 for (const row of incoming) {
@@ -117,7 +120,7 @@ for (const row of incoming) {
   const slides = (row.slidesUrl || '').trim();
   const key = hash(replay || slides);
   if (!key || seen.has(key)) continue;
-  const normalized = {
+  const normalized: RawWorkshop = {
     id: short(row.id),
     date: row.date || new Date().toISOString().slice(0, 10),
     title: row.title || 'Untitled workshop',
@@ -125,7 +128,7 @@ for (const row of incoming) {
     replayUrl: replay,
     slidesUrl: slides,
     tags: normalizeList(row.tags),
-  } as RawWorkshop;
+  };
   merged.push(normalized);
   seen.add(key);
 }
