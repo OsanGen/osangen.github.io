@@ -1,0 +1,44 @@
+---
+export interface Props {
+  title: string;
+  filterType: 'status' | 'tag' | 'audience';
+  items: string[];
+}
+
+const { title, filterType, items } = Astro.props;
+const options = Array.from(
+  new Set(
+    items
+      .map((item) => item.trim())
+      .filter((item) => item.length > 0)
+      .map((item) => item.toLowerCase())
+  )
+);
+---
+<section class="filters-chip-group">
+  <p class="text-small filters-chip-title">{title}</p>
+  <div class="filters-chip-row" role="group" aria-label={`${title} filter`}>
+    <button
+      type="button"
+      class="chip chip--active"
+      data-filter="true"
+      data-filter-type={filterType}
+      data-filter-value="all"
+      aria-pressed="true"
+    >
+      All
+    </button>
+    {options.map((item) => (
+      <button
+        type="button"
+        class="chip"
+        data-filter="true"
+        data-filter-type={filterType}
+        data-filter-value={item}
+        aria-pressed="false"
+      >
+        {item}
+      </button>
+    ))}
+  </div>
+</section>

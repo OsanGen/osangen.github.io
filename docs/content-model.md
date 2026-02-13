@@ -52,3 +52,23 @@
 - `calendly.one_on_one`, `calendly.teach_private`, `calendly.teach_class`
 - each has `{ label, url }`
 - `note`: string
+
+## gpts.json
+
+- `id`: string
+- `name`: string
+- `status`: one of `"active" | "prototype" | "archived"`
+- `tags`: string[]
+- `audience`: string[]
+- `promise`: string
+- `ships`: string
+- `how_to_use`: string[] (exactly 3 items)
+- `limits`: string[] (exactly 2 items)
+- `links`: object
+  - `use`: string
+  - `promptPack`: string
+  - `demo`: string
+- `proof`:
+  - `type`: `"image"` or `"sample_io"`
+  - for `image`: `label`, `imageUrl`, `imageAlt`
+  - for `sample_io`: `label`, `input`, `output`

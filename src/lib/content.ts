@@ -3,6 +3,7 @@ import path from 'node:path';
 import {
   CommunitySchema,
   GameSchema,
+  GPTSchema,
   ModuleSchema,
   PostSchema,
   ProfileSchema,
@@ -26,9 +27,10 @@ export const loadCommunities = () => loadJson('communities.json', z.array(Commun
 export const loadBooking = () => loadJson('booking.json', BookingSchema);
 export const loadWorkshops = () => loadJson('workshops.json', z.array(WorkshopSchema));
 export const loadPosts = () => loadJson('posts.json', z.array(PostSchema));
+export const loadGPTs = () => loadJson('gpts.json', z.array(GPTSchema));
 
 export async function loadSiteContent() {
-  const [profile, games, modules, communities, booking, workshops, posts] = await Promise.all([
+  const [profile, games, modules, communities, booking, workshops, posts, gpts] = await Promise.all([
     loadProfile(),
     loadGames(),
     loadModules(),
@@ -36,6 +38,7 @@ export async function loadSiteContent() {
     loadBooking(),
     loadWorkshops(),
     loadPosts(),
+    loadGPTs(),
   ]);
 
   return {
@@ -46,6 +49,7 @@ export async function loadSiteContent() {
     booking,
     workshops,
     posts,
+    gpts,
   };
 }
 

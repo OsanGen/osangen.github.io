@@ -1,0 +1,132 @@
+---
+import ProofIOBlock from './ProofIOBlock.astro';
+
+interface LinkBlock {
+  use: string;
+  promptPack: string;
+  demo: string;
+}
+
+interface ProofImage {
+  type: 'image';
+  label: string;
+  imageUrl: string;
+  imageAlt: string;
+}
+
+interface ProofIO {
+  type: 'sample_io';
+  label: string;
+  input: string;
+  output: string;
+}
+
+interface GPTItem {
+  id: string;
+  name: string;
+  status: 'active' | 'prototype' | 'archived';
+  tags: string[];
+  audience: string[];
+  promise: string;
+  ships: string;
+  how_to_use: string[];
+  limits: string[];
+  links: LinkBlock;
+  proof: ProofImage | ProofIO;
+}
+
+export interface Props {
+  gpt: GPTItem;
+  revealDelayMs?: number;
+}
+
+const { gpt, revealDelayMs = 0 } = Astro.props;
+
+const hasUse = gpt.links.use.trim().length > 0;
+const hasPromptPack = gpt.links.promptPack.trim().length > 0;
+const hasDemo = gpt.links.demo.trim().length > 0;
+
+const linkAttrs = (url: string) => {
+  const href = url.trim();
+  const isExternal = /^https?:\/\//.test(href);
+  return { href, isExternal };
+};
+
+const use = linkAttrs(gpt.links.use);
+const promptPack = linkAttrs(gpt.links.promptPack);
+const demo = linkAttrs(gpt.links.demo);
+---
+<article
+  class="panel-shell cog-entrance"
+  style={`--reveal-delay:${revealDelayMs}ms`}
+  data-gpt-card
+  data-gpt-id={gpt.id}
+  data-status={gpt.status}
+  data-tags={gpt.tags.map((tag) => tag.toLowerCase()).join(',')}
+  data-audience={gpt.audience.map((aud) => aud.toLowerCase()).join(',')}
+>
+  <div class="micro-rail"></div>
+  <h2>{gpt.name}</h2>
+  <p class="text-small">
+    <span class="proof-chip">Status: {gpt.status}</span>
+    <span style="margin-left:0.45rem;">
+      {gpt.audience.slice(0, 2).join(' / ')} · {gpt.ships}
+    </span>
+  </p>
+
+  <p class="text-small" style="margin-top:0.65rem;"><strong>Claim:</strong> {gpt.promise}</p>
+
+  <ProofIOBlock proof={gpt.proof} />
+
+  <p style="margin:0.75rem 0 0.45rem;"><strong>How to use:</strong></p>
+  <ol class="text-small gpt-steps">
+    {gpt.how_to_use.map((step) => <li>{step}</li>)}
+  </ol>
+
+  <p style="margin:0.6rem 0 0.2rem;"><strong>Limits:</strong> {gpt.limits.join(' | ')}</p>
+
+  <p style="margin:0.6rem 0;"><strong>Next step:</strong> Start with your highest-risk process and keep one checkpoint per cycle.</p>
+
+  <div class="cta-stack" style="margin-top:0.7rem;">
+    {hasUse ? (
+      <a
+        href={use.href}
+        class="button"
+        target={use.isExternal ? '_blank' : undefined}
+        rel={use.isExternal ? 'noopener noreferrer' : undefined}
+      >
+        Use this GPT
+      </a>
+    ) : (
+      <span class="button button--muted" aria-disabled="true">Request access to use link</span>
+    )}
+    {hasPromptPack ? (
+      <a
+        href={promptPack.href}
+        class="button"
+        target={promptPack.isExternal ? '_blank' : undefined}
+        rel={promptPack.isExternal ? 'noopener noreferrer' : undefined}
+      >
+        Prompt pack
+      </a>
+    ) : (
+      <span class="button button--muted" aria-disabled="true">Prompt pack pending</span>
+    )}
+    {hasDemo ? (
+      <a
+        href={demo.href}
+        class="button"
+        target={demo.isExternal ? '_blank' : undefined}
+        rel={demo.isExternal ? 'noopener noreferrer' : undefined}
+      >
+        Open demo
+      </a>
+    ) : (
+      <span class="button button--muted" aria-disabled="true">Demo pending</span>
+    )}
+  </div>
+
+  <div class="tag-list" aria-label="Tags" style="margin-top:0.75rem;">
+    {gpt.tags.map((tag) => <span class="badge">{tag}</span>)}
+  </div>
+</article>

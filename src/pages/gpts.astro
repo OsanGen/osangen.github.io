@@ -1,0 +1,142 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { loadGPTs } from '../lib/content';
+import GPTCard from '../components/GPTCard.astro';
+import FiltersChips from '../components/FiltersChips.astro';
+
+const gpts = await loadGPTs();
+
+const statusOptions = gpts.map((gpt) => gpt.status);
+const tagOptions = gpts.flatMap((gpt) => gpt.tags);
+const audienceOptions = gpts.flatMap((gpt) => gpt.audience);
+---
+<BaseLayout title="GPTs | Oscar Sanchez" description="Reusable GPT assistants for open-source AI learning and governance.">
+  <section class="scene-shell">
+    <h1>GPT assistants for safer AI</h1>
+    <p class="text-small" style="max-width: 70ch;">
+      Practical copilots for learning, governance, and architecture checks—designed to be transparent and auditable.
+    </p>
+    <div class="cta-stack" style="margin-top:1rem;">
+      <a class="button" href="#gpt-grid">Try a GPT</a>
+      <a class="button" href="/book">Book a session</a>
+      <a class="button" href="/join">Contribute an improvement</a>
+    </div>
+  </section>
+
+  <section class="panel-shell section" aria-labelledby="gpt-filters-heading">
+    <h2 id="gpt-filters-heading">Explore GPTs</h2>
+    <p class="text-small" style="margin-bottom:0.9rem;">
+      Filter by implementation context. Claims stay proof-first, then links and next actions.
+    </p>
+    <div class="filters" data-filter-zone>
+      <FiltersChips title="Status" filterType="status" items={statusOptions} />
+      <FiltersChips title="Tag" filterType="tag" items={tagOptions} />
+      <FiltersChips title="Audience" filterType="audience" items={audienceOptions} />
+    </div>
+    <p class="text-small" style="margin-top:0.85rem;" data-visible-count aria-live="polite"></p>
+  </section>
+
+  <section class="scene-shell section">
+    <div id="gpt-grid" class="grid" data-gpt-grid>
+      {gpts.map((gpt, idx) => <GPTCard gpt={gpt} revealDelayMs={idx * 45} />)}
+    </div>
+    <p data-empty-message hidden class="panel-shell" style="text-align:center;">
+      No GPTs match those filters. Broaden one filter and try again.
+    </p>
+  </section>
+
+  <section class="scene-shell section">
+    <article class="panel-shell">
+      <h2>Need a safer launch path?</h2>
+      <p class="text-small" style="margin-top:0.5rem;">
+        Start with one assistant, measure evidence, then expand scope only when risk and outcomes are clear.
+      </p>
+      <div class="cta-stack" style="margin-top:0.8rem;">
+        <a class="button" href="/book">Book a session</a>
+        <a class="button" href="/join">Contribute a PR</a>
+        <a class="button" href="/docs">See content model</a>
+      </div>
+    </article>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  (() => {
+    const filterButtons = Array.from(document.querySelectorAll('[data-filter="true"]'));
+    const cards = Array.from(document.querySelectorAll('[data-gpt-card]'));
+    const emptyMessage = document.querySelector('[data-empty-message]');
+    const visibleCount = document.querySelector('[data-visible-count]');
+    const activeFilters = {
+      status: 'all',
+      tag: 'all',
+      audience: 'all',
+    };
+
+    const toSet = (value = '') => value.toLowerCase().split(',').map((item) => item.trim()).filter(Boolean);
+
+    const cardMatches = (card) => {
+      const cardStatus = card.dataset.status?.toLowerCase();
+      const cardTags = toSet(card.dataset.tags);
+      const cardAudience = toSet(card.dataset.audience);
+
+      if (activeFilters.status !== 'all' && cardStatus !== activeFilters.status) {
+        return false;
+      }
+
+      if (activeFilters.tag !== 'all' && !cardTags.includes(activeFilters.tag)) {
+        return false;
+      }
+
+      if (activeFilters.audience !== 'all' && !cardAudience.includes(activeFilters.audience)) {
+        return false;
+      }
+
+      return true;
+    };
+
+    const applyFilters = () => {
+      let total = 0;
+      cards.forEach((card) => {
+        if (cardMatches(card)) {
+          card.classList.remove('gpt-hidden');
+          total += 1;
+        } else {
+          card.classList.add('gpt-hidden');
+        }
+      });
+
+      if (visibleCount) {
+        visibleCount.textContent = `${total} GPT${total === 1 ? '' : 's'} available`;
+      }
+
+      if (emptyMessage) {
+        emptyMessage.hidden = total !== 0;
+      }
+    };
+
+    const setFilter = (type, value) => {
+      activeFilters[type] = value;
+      filterButtons
+        .filter((button) => button.dataset.filterType === type)
+        .forEach((button) => {
+          const pressed = button.dataset.filterValue === value;
+          button.classList.toggle('chip--active', pressed);
+          button.setAttribute('aria-pressed', String(pressed));
+        });
+      applyFilters();
+    };
+
+    filterButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const type = button.dataset.filterType;
+        const value = button.dataset.filterValue;
+        if (!type || !value) {
+          return;
+        }
+        setFilter(type, value);
+      });
+    });
+
+    applyFilters();
+  })();
+</script>

@@ -1,0 +1,38 @@
+---
+interface ProofImage {
+  type: 'image';
+  label: string;
+  imageUrl: string;
+  imageAlt: string;
+}
+
+interface ProofIO {
+  type: 'sample_io';
+  label: string;
+  input: string;
+  output: string;
+}
+
+interface Props {
+  proof: ProofImage | ProofIO;
+}
+
+const { proof } = Astro.props;
+const isImage = proof.type === 'image';
+---
+{isImage ? (
+  <section class="proof-block">
+    <h3>{proof.label}</h3>
+    <figure>
+      <img src={proof.imageUrl} alt={proof.imageAlt} loading="lazy" />
+    </figure>
+  </section>
+) : (
+  <section class="proof-block">
+    <h3>{proof.label}</h3>
+    <p class="text-small" style="margin-bottom:0.5rem;">Sample input:</p>
+    <pre class="proof-io">{proof.input}</pre>
+    <p class="text-small" style="margin:0.9rem 0 0.5rem;">Sample output:</p>
+    <pre class="proof-io">{proof.output}</pre>
+  </section>
+)}

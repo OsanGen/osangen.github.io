@@ -1,0 +1,89 @@
+[
+  {
+    "id": "open-source-ai-tutor",
+    "name": "Open Source AI Tutor",
+    "status": "active",
+    "tags": ["Education", "Learning", "Open Source"],
+    "audience": ["Learner", "Builder", "Exec"],
+    "promise": "Turn one concept into a practical teaching path in 15 minutes.",
+    "ships": "Lesson outline + checkpoints + learner prompt pack",
+    "how_to_use": [
+      "Paste the concept and learner level.",
+      "Pick a goal and evidence target.",
+      "Run the tutor flow and review the checkpoint outputs."
+    ],
+    "limits": [
+      "Not a replacement for instructor judgment.",
+      "Outputs require contextual review before publication."
+    ],
+    "links": {
+      "use": "https://chatgpt.com/g/XXXXX-open-source-ai-tutor",
+      "promptPack": "",
+      "demo": ""
+    },
+    "proof": {
+      "type": "sample_io",
+      "label": "Sample concept to learning flow",
+      "input": "Topic: Prompt engineering for workshop leaders.\nAudience: Product learners.\nDuration: 30 minutes.",
+      "output": "3-session micro-path with one measurable checkpoint each."
+    }
+  },
+  {
+    "id": "governance-checklist-builder",
+    "name": "AI Governance Checklist Builder",
+    "status": "active",
+    "tags": ["Governance", "Policy", "Evaluation"],
+    "audience": ["Policy", "Exec", "Builder"],
+    "promise": "Convert policy text into a deployment-ready checklist.",
+    "ships": "Checklist + risk register + escalation path",
+    "how_to_use": [
+      "Paste your draft policy or risk note.",
+      "Choose deployment context and review cadence.",
+      "Export checklist and align with your review rhythm."
+    ],
+    "limits": [
+      "Not legal advice.",
+      "Human governance review is required before rollout."
+    ],
+    "links": {
+      "use": "https://chatgpt.com/g/XXXXX-governance-checklist-builder",
+      "promptPack": "",
+      "demo": ""
+    },
+    "proof": {
+      "type": "sample_io",
+      "label": "Policy statement to checklist",
+      "input": "Policy: Access to generative tools is required for internal teams with quarterly reporting.",
+      "output": "8 control checks, 4 evidence fields, 2 approval points, 1 handoff rule."
+    }
+  },
+  {
+    "id": "architecture-diagrammer",
+    "name": "Architecture Diagrammer",
+    "status": "prototype",
+    "tags": ["Architecture", "Open Source", "Builder"],
+    "audience": ["Builder", "Learner"],
+    "promise": "Turn a system spec into a first-pass architecture map.",
+    "ships": "Node list + boundaries + handoff boundaries",
+    "how_to_use": [
+      "Feed a short architecture spec.",
+      "Pick your trust boundary and scale constraints.",
+      "Generate diagram notes and review with your team."
+    ],
+    "limits": [
+      "Needs human validation for production architecture.",
+      "Not a substitute for threat modeling tools."
+    ],
+    "links": {
+      "use": "",
+      "promptPack": "",
+      "demo": ""
+    },
+    "proof": {
+      "type": "sample_io",
+      "label": "Architecture summary output",
+      "input": "Inputs: multi-tenant API, one external callback, and a compliance review queue.",
+      "output": "Node map with boundaries, data-classification tags, and deployment ownership split."
+    }
+  }
+]

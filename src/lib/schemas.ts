@@ -141,3 +141,50 @@ export const PostSchema = z.object({
   tags: z.array(z.string()),
   proofLinks: z.array(z.string()).optional(),
 });
+
+export const GPTProofImageSchema = z
+  .object({
+    type: z.literal('image'),
+    label: z.string(),
+    imageUrl: z.string(),
+    imageAlt: z.string(),
+    input: z.never(),
+    output: z.never(),
+  })
+  .strict();
+
+export const GPTProofSampleIOSchema = z
+  .object({
+    type: z.literal('sample_io'),
+    label: z.string(),
+    input: z.string(),
+    output: z.string(),
+    imageUrl: z.never(),
+    imageAlt: z.never(),
+  })
+  .strict();
+
+export const GPTProofSchema = z.discriminatedUnion('type', [
+  GPTProofImageSchema,
+  GPTProofSampleIOSchema,
+]);
+
+export const GPTLinksSchema = z.object({
+  use: z.string(),
+  promptPack: z.string(),
+  demo: z.string(),
+});
+
+export const GPTSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  status: z.enum(['active', 'prototype', 'archived']),
+  tags: z.array(z.string()),
+  audience: z.array(z.string()),
+  promise: z.string(),
+  ships: z.string(),
+  how_to_use: z.array(z.string()).length(3),
+  limits: z.array(z.string()).length(2),
+  links: GPTLinksSchema,
+  proof: GPTProofSchema,
+});

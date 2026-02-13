@@ -18,6 +18,13 @@
 - [ ] Reduced motion support
 - [ ] External links include clear affordance in context
 
+## GPT page checks
+
+- [ ] `/gpts` route includes proof-first ordering (Claim -> Proof -> Links/Next step)
+- [ ] 3 seeded cards render with valid proof fallback when links are missing
+- [ ] Filter controls remain keyboard operable
+- [ ] Empty state appears when no matches
+
 ## Build checks
 
 - `npm run lint`

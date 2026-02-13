@@ -34,6 +34,8 @@ The final values should be replaced from official CogSec reference assets.
 
 ## Use rules
 
-- No yellow field fills.
+- One accent token per scene, no stacked gradients.
+- No yellow fills on large containers.
 - No decorative noise that competes with text.
 - Use INK outlines and COG_* only on small accents.
+- Use `--accent-ink`, `--fog-subtle`, `--panel-strong`, `--stroke`, `--surface` for visual hierarchy.
