@@ -244,6 +244,23 @@ main {
   gap: var(--space-3);
 }
 
+.gpt-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.gpt-icon {
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 0.33rem;
+  border: 1px solid var(--stroke);
+  background: var(--surface);
+  padding: 0.1rem;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+
 .panel-shell--command .proof-meta {
   margin-top: 0.18rem;
 }
@@ -612,6 +629,11 @@ footer {
 }
 
 @media (max-width: 760px) {
+  .gpt-icon {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+
   .cta-stack,
   .filters-chip-row {
     gap: 0.45rem;

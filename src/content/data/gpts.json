@@ -1,89 +1,64 @@
 [
   {
-    "id": "open-source-ai-tutor",
-    "name": "Open Source AI Tutor",
+    "id": "brand-book-gen-bot",
+    "name": "Brand Book Gen Bot",
     "status": "active",
-    "tags": ["Education", "Learning", "Open Source"],
-    "audience": ["Learner", "Builder", "Exec"],
-    "promise": "Turn one concept into a practical teaching path in 15 minutes.",
-    "ships": "Lesson outline + checkpoints + learner prompt pack",
+    "tags": ["Brand", "Marketing", "Content System"],
+    "audience": ["Founder", "Marketing", "Builder", "Exec"],
+    "promise": "Turn founder ideas into a brand book your whole team can execute, with structure technical teams can operationalize.",
+    "ships": "Brand narrative + voice rules + design-token starter + export-ready manifests",
     "how_to_use": [
-      "Paste the concept and learner level.",
-      "Pick a goal and evidence target.",
-      "Run the tutor flow and review the checkpoint outputs."
+      "Share what your brand does, who it serves, and how it should feel.",
+      "Choose outputs you need now: voice guide, visual system, asset map, and rollout pack.",
+      "Review section-by-section, approve, then export for team use."
     ],
     "limits": [
-      "Not a replacement for instructor judgment.",
-      "Outputs require contextual review before publication."
+      "Still requires human approval for legal and compliance claims.",
+      "Quality depends on concrete inputs; vague prompts produce generic output."
     ],
     "links": {
-      "use": "",
+      "use": "https://chatgpt.com/g/g-68c70e0cd15c8191bd0d8f49fa4907c9-brandbookgen",
       "promptPack": "",
       "demo": ""
     },
+    "icon": {
+      "src": "/icons/brandbookgen.svg",
+      "alt": "Brand Book Gen Bot icon"
+    },
     "proof": {
       "type": "sample_io",
-      "label": "Sample concept to learning flow",
-      "input": "Topic: Prompt engineering for workshop leaders.\nAudience: Product learners.\nDuration: 30 minutes.",
-      "output": "3-session micro-path with one measurable checkpoint each."
+      "label": "Brand context to launch pack",
+      "input": "Brand: fintech education platform for startups.\nAudience: founder, growth lead, design lead.\nGoal: create consistent internal and external brand assets in one week.",
+      "output": "Generated brand_book_manifest (audience, value, tone, language boundaries).\ndesign_tokens_schema (type scale, spacing rules, icon and background policy).\nimage_manifest_template (hero, social, and deck asset rules)."
     }
   },
   {
-    "id": "governance-checklist-builder",
-    "name": "AI Governance Checklist Builder",
+    "id": "nano-prompt-coach",
+    "name": "Nano Prompt Coach",
     "status": "active",
-    "tags": ["Governance", "Policy", "Evaluation"],
-    "audience": ["Policy", "Exec", "Builder"],
-    "promise": "Convert policy text into a deployment-ready checklist.",
-    "ships": "Checklist + risk register + escalation path",
+    "tags": ["Prompting", "Image Generation", "Gemini", "Creativity"],
+    "audience": ["Creator", "Marketing", "Builder", "Exec"],
+    "promise": "Turn rough image ideas into production-quality Nano Banana Pro prompts through a guided, one-question-at-a-time workflow, then return copy-ready drafts with a final improvement pass.",
+    "ships": "Prompt coaching flow + quick templates by use case + initial draft, boosted draft, and final checked prompt",
     "how_to_use": [
-      "Paste your draft policy or risk note.",
-      "Choose deployment context and review cadence.",
-      "Export checklist and align with your review rhythm."
+      "Paste your rough idea, target use case, or existing draft.",
+      "Answer one short clarification question at a time so the bot builds a precise image brief.",
+      "Review the final, triple-checked prompt and run it directly in Nano Banana Pro."
     ],
     "limits": [
-      "Not legal advice.",
-      "Human governance review is required before rollout."
+      "The final image quality still depends on model generation limits and your own iteration budget.",
+      "Safety, legal, and policy checks remain platform-governed before generation is possible."
     ],
     "links": {
-      "use": "",
+      "use": "https://chatgpt.com/g/g-6928734ed0a48191a5c2edf9785284de-nano-prompt-coach",
       "promptPack": "",
       "demo": ""
     },
     "proof": {
       "type": "sample_io",
-      "label": "Policy statement to checklist",
-      "input": "Policy: Access to generative tools is required for internal teams with quarterly reporting.",
-      "output": "8 control checks, 4 evidence fields, 2 approval points, 1 handoff rule."
-    }
-  },
-  {
-    "id": "architecture-diagrammer",
-    "name": "Architecture Diagrammer",
-    "status": "prototype",
-    "tags": ["Architecture", "Open Source", "Builder"],
-    "audience": ["Builder", "Learner"],
-    "promise": "Turn a system spec into a first-pass architecture map.",
-    "ships": "Node list + boundaries + handoff boundaries",
-    "how_to_use": [
-      "Feed a short architecture spec.",
-      "Pick your trust boundary and scale constraints.",
-      "Generate diagram notes and review with your team."
-    ],
-    "limits": [
-      "Needs human validation for production architecture.",
-      "Not a substitute for threat modeling tools."
-    ],
-    "links": {
-      "use": "",
-      "promptPack": "",
-      "demo": ""
-    },
-    "proof": {
-      "type": "sample_io",
-      "label": "Architecture summary output",
-      "input": "Inputs: multi-tenant API, one external callback, and a compliance review queue.",
-      "output": "Node map with boundaries, data-classification tags, and deployment ownership split."
+      "label": "Rough idea to refined prompt sequence",
+      "input": "Goal: editorial poster for a climate startup launch.\nSubject: founder speaking on rooftop.\nStyle: documentary film look.\nText needed: include headline \"Launch week starts tomorrow\".\nUser asks: keep people/brand consistent in two versions.",
+      "output": "Initial draft, boost pass, and final prompt with explicit Goal, Subject, Composition, Location, Action, Camera, Lighting, Color grading, Aspect ratio, Resolution, Text block, Constraints, and fact-use rules, then a brief note on what changed."
     }
   }
 ]

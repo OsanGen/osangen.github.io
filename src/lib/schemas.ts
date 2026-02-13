@@ -163,9 +163,15 @@ export const GPTProofSchema = z.discriminatedUnion('type', [
   GPTProofSampleIOSchema,
 ]);
 
+export const GPTIconSchema = z.object({
+  src: z.string(),
+  alt: z.string(),
+});
+
 export type GPTProofImage = z.infer<typeof GPTProofImageSchema>;
 export type GPTProofSampleIO = z.infer<typeof GPTProofSampleIOSchema>;
 export type GPTProof = z.infer<typeof GPTProofSchema>;
+export type GPTIcon = z.infer<typeof GPTIconSchema>;
 
 export const GPTLinksSchema = z.object({
   use: z.string(),
@@ -185,6 +191,7 @@ export const GPTSchema = z.object({
   limits: z.array(z.string()).length(2),
   links: GPTLinksSchema,
   proof: GPTProofSchema,
+  icon: GPTIconSchema.optional(),
 });
 
 export type GPT = z.infer<typeof GPTSchema>;

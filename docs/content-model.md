@@ -72,3 +72,6 @@
   - `type`: `"image"` or `"sample_io"`
   - for `image`: `label`, `imageUrl`, `imageAlt`
   - for `sample_io`: `label`, `input`, `output`
+- `icon?`:
+  - `src`: string
+  - `alt`: string

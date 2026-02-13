@@ -45,7 +45,10 @@ const demo = linkAttrs(gpt.links.demo);
     <p class="proof-chip proof-chip--status">Status: {statusLabel}</p>
     <p class="proof-meta">{audienceLine}</p>
   </div>
-  <h2>{gpt.name}</h2>
+  <div class="gpt-title-row">
+    {gpt.icon ? <img src={gpt.icon.src} alt={gpt.icon.alt} class="gpt-icon" loading="lazy" decoding="async" /> : null}
+    <h2>{gpt.name}</h2>
+  </div>
   <p class="proof-meta">
     Outcome: {gpt.ships}
   </p>
