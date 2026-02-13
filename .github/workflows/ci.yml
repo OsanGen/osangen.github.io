@@ -17,6 +17,7 @@ jobs:
           node-version: '20'
       - run: npm ci
       - run: npm run lint
+      - run: npm run validate:content
       - run: npm run build
       - name: Check external links
         uses: lycheeverse/lychee-action@v1

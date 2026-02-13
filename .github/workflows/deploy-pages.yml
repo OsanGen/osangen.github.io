@@ -26,6 +26,7 @@ jobs:
           node-version: "20"
       - run: npm ci
       - run: npm run lint
+      - run: npm run validate:content
       - run: npm run build
       - name: Validate GPT route output
         run: |

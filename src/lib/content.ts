@@ -50,7 +50,13 @@ export const loadGPTs = async () => {
   const gpts = await loadJsonCached('gpts.json', z.array(GPTSchema));
   const hasPlaceholderLink = gpts.some((gpt: GPT) => {
     const allLinks = [gpt.links.use, gpt.links.promptPack, gpt.links.demo];
-    return allLinks.some(isUnavailableLink);
+    return allLinks.some((value) => {
+      const normalized = value.trim().toLowerCase();
+      return (
+        normalized.length > 0 &&
+        LINK_PLACEHOLDER_PATTERN.test(normalized)
+      );
+    });
   });
 
   if (hasPlaceholderLink) {

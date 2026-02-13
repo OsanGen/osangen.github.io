@@ -26,6 +26,7 @@ const audienceLine = gpt.audience.length > 0 ? gpt.audience.join(' / ') : 'Gener
 const use = linkAttrs(gpt.links.use);
 const promptPack = linkAttrs(gpt.links.promptPack);
 const demo = linkAttrs(gpt.links.demo);
+
 ---
 <article
   class="panel-shell panel-shell--command cog-entrance"
@@ -79,7 +80,9 @@ const demo = linkAttrs(gpt.links.demo);
         Use this GPT
       </a>
     ) : (
-      <span class="button button--muted" aria-disabled="true">Request access</span>
+      <button type="button" class="button button--muted" aria-disabled="true" title="Link not available yet">
+        Request access
+      </button>
     )}
     {promptPack.available ? (
       <a
@@ -91,7 +94,9 @@ const demo = linkAttrs(gpt.links.demo);
         Prompt pack
       </a>
     ) : (
-      <span class="button button--muted" aria-disabled="true">Prompt pack pending</span>
+      <button type="button" class="button button--muted" aria-disabled="true" title="Link not available yet">
+        Prompt pack pending
+      </button>
     )}
     {demo.available ? (
       <a
@@ -103,7 +108,9 @@ const demo = linkAttrs(gpt.links.demo);
         Open demo
       </a>
     ) : (
-      <span class="button button--muted" aria-disabled="true">Demo pending</span>
+      <button type="button" class="button button--muted" aria-disabled="true" title="Link not available yet">
+        Demo pending
+      </button>
     )}
   </div>
 
