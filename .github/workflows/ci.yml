@@ -28,5 +28,3 @@ jobs:
             --timeout 20
             --no-cache
             ./public/sitemap.xml
-            ./src
-            ./docs
