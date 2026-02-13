@@ -18,13 +18,49 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run build
-      - uses: lycheeverse/lychee-action@v2
-        id: link-check
-        with:
-          args: >
-            --verbose
-            --no-progress
-            --max-concurrency 4
-            --timeout 20
-            --no-cache
-            ./public/sitemap.xml
+      - name: Validate sitemap routes in built output
+        run: |
+          python3 - <<'PY'
+          import re
+          import sys
+          import xml.etree.ElementTree as ET
+          from pathlib import Path
+
+          dist = Path('dist')
+          tree = ET.parse('public/sitemap.xml')
+          root = tree.getroot()
+          namespace = {'ns': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
+          urls = [loc.text.strip() for loc in root.findall('.//ns:loc', namespace) if loc.text]
+
+          missing = []
+          for url in urls:
+            if not url:
+              continue
+            path = re.sub(r'^https?://[^/]+', '', url)
+            path = path.strip()
+            if path == '' or path == '/':
+              path = 'index'
+            if path.startswith('/'):
+              path = path[1:]
+            candidates = []
+            candidates.append(Path(path))
+            if path:
+              candidates.append(Path(path) / 'index.html')
+              if not path.endswith('.html'):
+                candidates.append(Path(path + '.html'))
+            else:
+              candidates.append(Path('index.html'))
+
+            exists = False
+            for candidate in candidates:
+              if (dist / candidate).exists():
+                exists = True
+                break
+            if not exists:
+              missing.append(path)
+
+          if missing:
+            print('Missing generated pages:', ', '.join(missing))
+            sys.exit(1)
+          print('Sitemap routes all present in dist.')
+          PY
