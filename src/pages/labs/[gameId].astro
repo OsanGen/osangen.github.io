@@ -5,18 +5,16 @@ import TagList from '../../components/TagList.astro';
 import GameEmbed from '../../components/GameEmbed.astro';
 import { loadGames } from '../../lib/content';
 
-const games = await loadGames();
-
 export async function getStaticPaths() {
-  const staticGames = await loadGames();
-
-  return staticGames.map((game) => ({
+  const games = await loadGames();
+  return games.map((game) => ({
     params: {
       gameId: game.id,
     },
   }));
 }
 
+const games = await loadGames();
 const game = games.find((g) => g.id === Astro.params.gameId);
 ---
 <BaseLayout title={game ? `${game.title} - Labs` : 'Lab not found'} description="Game detail page">

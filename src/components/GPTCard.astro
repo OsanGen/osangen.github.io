@@ -1,55 +1,27 @@
 ---
 import ProofIOBlock from './ProofIOBlock.astro';
-
-interface LinkBlock {
-  use: string;
-  promptPack: string;
-  demo: string;
-}
-
-interface ProofImage {
-  type: 'image';
-  label: string;
-  imageUrl: string;
-  imageAlt: string;
-}
-
-interface ProofIO {
-  type: 'sample_io';
-  label: string;
-  input: string;
-  output: string;
-}
-
-interface GPTItem {
-  id: string;
-  name: string;
-  status: 'active' | 'prototype' | 'archived';
-  tags: string[];
-  audience: string[];
-  promise: string;
-  ships: string;
-  how_to_use: string[];
-  limits: string[];
-  links: LinkBlock;
-  proof: ProofImage | ProofIO;
-}
+import type { GPT } from '../lib/schemas';
 
 export interface Props {
-  gpt: GPTItem;
+  gpt: GPT;
   revealDelayMs?: number;
 }
 
 const { gpt, revealDelayMs = 0 } = Astro.props;
 
-const hasUse = gpt.links.use.trim().length > 0;
-const hasPromptPack = gpt.links.promptPack.trim().length > 0;
-const hasDemo = gpt.links.demo.trim().length > 0;
+const isUnavailableLink = (value = '') => {
+  const normalized = value.trim().toLowerCase();
+  return !normalized || /xxxxx|placeholder|todo|temp/.test(normalized);
+};
 
 const linkAttrs = (url: string) => {
   const href = url.trim();
-  const isExternal = /^https?:\/\//.test(href);
-  return { href, isExternal };
+  const available = !isUnavailableLink(href);
+  return {
+    href,
+    available,
+    isExternal: available && /^https?:\/\//.test(href),
+  };
 };
 
 const statusLabel = gpt.status === 'active' ? 'Active' : gpt.status === 'prototype' ? 'Prototype' : 'Archived';
@@ -98,7 +70,7 @@ const demo = linkAttrs(gpt.links.demo);
   <p class="proof-meta">Start with your highest-risk process and keep one checkpoint per cycle.</p>
 
   <div class="cta-stack" style="margin-top:0.75rem;">
-    {hasUse ? (
+    {use.available ? (
       <a
         href={use.href}
         class="button"
@@ -110,7 +82,7 @@ const demo = linkAttrs(gpt.links.demo);
     ) : (
       <span class="button button--muted" aria-disabled="true">Request access</span>
     )}
-    {hasPromptPack ? (
+    {promptPack.available ? (
       <a
         href={promptPack.href}
         class="button"
@@ -122,7 +94,7 @@ const demo = linkAttrs(gpt.links.demo);
     ) : (
       <span class="button button--muted" aria-disabled="true">Prompt pack pending</span>
     )}
-    {hasDemo ? (
+    {demo.available ? (
       <a
         href={demo.href}
         class="button"

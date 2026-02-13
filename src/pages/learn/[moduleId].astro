@@ -5,18 +5,16 @@ import TagList from '../../components/TagList.astro';
 import VisualClassStepper from '../../components/VisualClassStepper.astro';
 import { loadModules } from '../../lib/content';
 
-const modules = await loadModules();
-
 export async function getStaticPaths() {
-  const staticModules = await loadModules();
-
-  return staticModules.map((module) => ({
+  const modules = await loadModules();
+  return modules.map((module) => ({
     params: {
       moduleId: module.id,
     },
   }));
 }
 
+const modules = await loadModules();
 const module = modules.find((m) => m.id === Astro.params.moduleId);
 ---
 <BaseLayout title={module ? `${module.title} - Learn` : 'Module not found'} description="Module detail page">

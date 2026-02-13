@@ -17,7 +17,7 @@
       "Outputs require contextual review before publication."
     ],
     "links": {
-      "use": "https://chatgpt.com/g/XXXXX-open-source-ai-tutor",
+      "use": "",
       "promptPack": "",
       "demo": ""
     },
@@ -46,7 +46,7 @@
       "Human governance review is required before rollout."
     ],
     "links": {
-      "use": "https://chatgpt.com/g/XXXXX-governance-checklist-builder",
+      "use": "",
       "promptPack": "",
       "demo": ""
     },

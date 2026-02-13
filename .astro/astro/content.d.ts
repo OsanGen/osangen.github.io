@@ -160,6 +160,11 @@ declare module 'astro:content' {
   collection: "data";
   data: any
 };
+"gpts": {
+	id: "gpts";
+  collection: "data";
+  data: any
+};
 "modules": {
 	id: "modules";
   collection: "data";
