@@ -19,6 +19,7 @@ jobs:
       - run: npm run lint
       - run: npm run build
       - uses: lycheeverse/lychee-action@v2
+        id: link-check
         with:
           args: >
             --verbose
@@ -26,6 +27,6 @@ jobs:
             --max-concurrency 4
             --timeout 20
             --no-cache
-            "./public/sitemap.xml"
-            "./src/**/*.astro"
-            "./docs/**/*.md"
+            ./public/sitemap.xml
+            ./src
+            ./docs
