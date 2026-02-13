@@ -93,5 +93,34 @@
       "input": "Concept: launch teaser for a climate innovation summit.\nObjective: show founder, product demo gesture, and one audience reaction in 20 seconds.\nTotal seconds: 20, clip seconds: 10, aspect_ratio: 16:9, target: sora_app.\nMust-include: founder in studio, product interface glow, logo reveal in final beat.\nHard constraints: keep one main action per clip and minimize moving objects.",
       "output": "SCENE 1 / 2\nDURATION: 10s\nASPECT: 16:9\nTARGET: sora_app\nPROMPT:\nWide shot of a founder at a clean product studio, stepping forward to the edge of a curved screen and gesturing for attention, then pivoting to reveal a simple interface. Keep the action focused and physically plausible.\nCamera: slow dolly-in, cinematic 50mm feel, medium depth of field.\nAction beats (timed): 0-3s founder enters frame and centers, 3-7s founder points at screen, 7-10s founder closes with upward glance and hold.\nLighting: soft key light from left, cool blue rim on screens, warm practical accents. Palette: cobalt, mint, charcoal, warm white.\nAudio intent: low ambient room tone, subtle UI whoosh, no background vocals.\nDIALOGUE:\n- Founder: \"Watch this reveal; the timeline changes in seconds.\"\nCONTINUITY NOTES:\n- Subject anchors: founder, matte-black jacket, holographic interface, brand mark in lower-right.\n- Palette anchors: cobalt, mint, charcoal, warm-white.\n- Camera language: dolly-in, medium framing, deliberate pauses.\nNEXT:\nChoose one: approve, remix, regenerate, next."
     }
+  },
+  {
+    "id": "l-d-gen",
+    "name": "L&D Gen",
+    "status": "active",
+    "tags": ["Learning", "Development", "Content", "Prompt Engineering"],
+    "audience": ["Learning", "Ops", "Marketing", "Builder", "Exec"],
+    "promise": "Turn training goals into high-impact learning assets fast, with prompts that map to measurable outcomes and rollout-ready learning modules.",
+    "ships": "Curriculum framing, measurable learning objectives, lesson-to-prompt packs, and quality checkpoints for consistency.",
+    "how_to_use": [
+      "State the training topic, audience role, and outcome you need to improve.",
+      "Choose format constraints: lesson length, depth level, tone, and deliverable type.",
+      "Review each generated module, approve, and publish when the objective and assessment criteria are met."
+    ],
+    "limits": [
+      "Content quality is strongest when the role, audience, and performance benchmark are explicit.",
+      "Compliance, legal, and policy-sensitive topics require human review before distribution."
+    ],
+    "links": {
+      "use": "https://chatgpt.com/g/g-6894bf09fdec81919f119d38a758f06a-l-d-gen",
+      "promptPack": "",
+      "demo": ""
+    },
+    "proof": {
+      "type": "sample_io",
+      "label": "Training goal to module plan",
+      "input": "Goal: onboard new safety reviewers in 2 weeks.\nAudience: internal operations team (new hire, low exposure).\nOutcome: reduce onboarding mistakes by 35%.\nConstraints: executive tone for leadership share, 30-minute total session, include two check-in questions.",
+      "output": "Module plan with objective map, three 10-minute lessons, scenario-based prompts, discussion questions, and a scoring rubric for knowledge checks.\nEach lesson includes: learning goal, key messages, risks to avoid, example prompts, and adaptation notes for mixed-skill learners."
+    }
   }
 ]
