@@ -1,6 +1,7 @@
 ---
 import ProofIOBlock from './ProofIOBlock.astro';
 import type { GPT } from '../lib/schemas';
+import { isUnavailableLink } from '../lib/content';
 
 export interface Props {
   gpt: GPT;
@@ -8,11 +9,6 @@ export interface Props {
 }
 
 const { gpt, revealDelayMs = 0 } = Astro.props;
-
-const isUnavailableLink = (value = '') => {
-  const normalized = value.trim().toLowerCase();
-  return !normalized || /xxxxx|placeholder|todo|temp/.test(normalized);
-};
 
 const linkAttrs = (url: string) => {
   const href = url.trim();

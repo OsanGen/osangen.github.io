@@ -15,6 +15,12 @@ import { z } from 'zod';
 
 const contentRoot = path.join(process.cwd(), 'src', 'content', 'data');
 const cache = new Map<string, Promise<unknown>>();
+const LINK_PLACEHOLDER_PATTERN = /\b(?:placeholder|todo|xxxxx|temp)\b/i;
+
+export const isUnavailableLink = (value = '') => {
+  const normalized = value.trim().toLowerCase();
+  return !normalized || LINK_PLACEHOLDER_PATTERN.test(normalized);
+};
 
 function loadJsonCached<T>(filename: string, schema: z.ZodSchema<T>): Promise<T> {
   const existing = cache.get(filename);
@@ -43,8 +49,8 @@ export const loadPosts = () => loadJsonCached('posts.json', z.array(PostSchema))
 export const loadGPTs = async () => {
   const gpts = await loadJsonCached('gpts.json', z.array(GPTSchema));
   const hasPlaceholderLink = gpts.some((gpt: GPT) => {
-    const allLinks = [gpt.links.use, gpt.links.promptPack, gpt.links.demo].map((value) => value.toLowerCase());
-    return allLinks.some((value) => value.includes('xxxxx') || value.includes('placeholder') || value.includes('todo'));
+    const allLinks = [gpt.links.use, gpt.links.promptPack, gpt.links.demo];
+    return allLinks.some(isUnavailableLink);
   });
 
   if (hasPlaceholderLink) {
