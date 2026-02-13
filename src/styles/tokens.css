@@ -1,8 +1,8 @@
 :root {
   --white: #ffffff;
-  --ink: #12131a;
+  --ink: #10121a;
   --ink-soft: #20273a;
-  --ink-subtle: #364157;
+  --ink-subtle: #3b445c;
   --fog: #f4f6fb;
   --accent-ink: #171924;
   --fog-subtle: #fbfcff;
@@ -10,11 +10,19 @@
   --stroke: #d7deec;
   --surface-soft: #f7f9ff;
   --surface: #ffffff;
+  --surface-panel: #ffffff;
+  --surface-dim: #f7f9ff;
+  --ink-faint: #56607d;
 
   --cog-yellow: #e6c36f;
   --cog-blue: #5d79ff;
   --cog-mint: #53bfbf;
   --cog-pink: #df6f95;
+  --cog-brain: #f4bc3f;
+  --cog-navy: #2f3b5a;
+
+  --motion-entrance: 180ms;
+  --motion-step: 42ms;
 
   --bg: var(--white);
   --text: var(--ink);
@@ -35,7 +43,7 @@
   --space-7: 3.5rem;
   --space-8: 4.5rem;
 
-  --radius-lg: 1.25rem;
+  --radius-lg: 1.125rem;
   --radius-sm: 10px;
   --radius-pill: 999px;
 

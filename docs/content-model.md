@@ -68,6 +68,7 @@
   - `use`: string
   - `promptPack`: string
   - `demo`: string
+- Empty strings on links are treated as "not yet available" and render safe fallback actions in UI.
 - `proof`:
   - `type`: `"image"` or `"sample_io"`
   - for `image`: `label`, `imageUrl`, `imageAlt`
@@ -75,3 +76,4 @@
 - `icon?`:
   - `src`: string
   - `alt`: string
+  - optional; omit when no icon asset is available.

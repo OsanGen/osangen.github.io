@@ -60,5 +60,38 @@
       "input": "Goal: editorial poster for a climate startup launch.\nSubject: founder speaking on rooftop.\nStyle: documentary film look.\nText needed: include headline \"Launch week starts tomorrow\".\nUser asks: keep people/brand consistent in two versions.",
       "output": "Initial draft, boost pass, and final prompt with explicit Goal, Subject, Composition, Location, Action, Camera, Lighting, Color grading, Aspect ratio, Resolution, Text block, Constraints, and fact-use rules, then a brief note on what changed."
     }
+  },
+  {
+    "id": "sora-prompt-coach",
+    "name": "Sora Prompting Coach",
+    "status": "active",
+    "tags": ["Sora", "Video", "Prompt Engineering", "Production"],
+    "audience": ["Creator", "Marketing", "Builder", "Exec", "Learning"],
+    "promise": "Turn vague story ideas into reliable Sora-ready scene prompts, one clip at a time, so teams can iterate quickly without prompt chaos.",
+    "ships": "State capture + clip planning + beat-timed scene prompts + continuity locks + platform-target mapping (sora_app / sora_web_editor / sora_2_api).",
+    "how_to_use": [
+      "Tell the bot your concept, mood, and must-keep elements.",
+      "Pick total length, clip length, aspect ratio, and whether you need dialogue.",
+      "Approve each scene, then remix or regenerate scene-by-scene for controlled quality."
+    ],
+    "limits": [
+      "Complex scenes compete for clip fidelity; the bot keeps one main action per clip and uses timed beats to improve control.",
+      "Dialogue and policy restrictions are enforced by platform constraints; prompts are constrained by duration and safety settings."
+    ],
+    "links": {
+      "use": "",
+      "promptPack": "",
+      "demo": ""
+    },
+    "icon": {
+      "src": "/icons/sora-prompt-coach.svg",
+      "alt": "Sora Prompting Coach icon"
+    },
+    "proof": {
+      "type": "sample_io",
+      "label": "Concept \u2192 scene blueprint",
+      "input": "Concept: launch teaser for a climate innovation summit.\nObjective: show founder, product demo gesture, and one audience reaction in 20 seconds.\nTotal seconds: 20, clip seconds: 10, aspect_ratio: 16:9, target: sora_app.\nMust-include: founder in studio, product interface glow, logo reveal in final beat.\nHard constraints: keep one main action per clip and minimize moving objects.",
+      "output": "SCENE 1 / 2\nDURATION: 10s\nASPECT: 16:9\nTARGET: sora_app\nPROMPT:\nWide shot of a founder at a clean product studio, stepping forward to the edge of a curved screen and gesturing for attention, then pivoting to reveal a simple interface. Keep the action focused and physically plausible.\nCamera: slow dolly-in, cinematic 50mm feel, medium depth of field.\nAction beats (timed): 0-3s founder enters frame and centers, 3-7s founder points at screen, 7-10s founder closes with upward glance and hold.\nLighting: soft key light from left, cool blue rim on screens, warm practical accents. Palette: cobalt, mint, charcoal, warm white.\nAudio intent: low ambient room tone, subtle UI whoosh, no background vocals.\nDIALOGUE:\n- Founder: \"Watch this reveal; the timeline changes in seconds.\"\nCONTINUITY NOTES:\n- Subject anchors: founder, matte-black jacket, holographic interface, brand mark in lower-right.\n- Palette anchors: cobalt, mint, charcoal, warm-white.\n- Camera language: dolly-in, medium framing, deliberate pauses.\nNEXT:\nChoose one: approve, remix, regenerate, next."
+    }
   }
 ]

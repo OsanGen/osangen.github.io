@@ -1,0 +1,36 @@
+name: Sync GitHub icon assets
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 11 * * 1"
+
+permissions:
+  contents: write
+
+jobs:
+  sync-icons:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Sync icon assets from GitHub
+        env:
+          ICON_SYNC_ENABLED: "true"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ICON_SYNC_MANIFEST_PATH: scripts/icon-sync.manifest.json
+        run: node scripts/sync-github-icons.mjs
+      - name: Commit updated icons
+        run: |
+          if git status --short public/icons | grep -q .; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add public/icons
+            git status --short public/icons
+            git commit -m "chore(icons): sync branded icon assets from GitHub"
+            git push
+          else
+            echo "No icon updates detected."
+          fi

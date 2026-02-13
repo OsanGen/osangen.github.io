@@ -16,20 +16,20 @@ const uniqueTags = Array.from(new Set(tagOptions));
 const uniqueAudiences = Array.from(new Set(audienceOptions));
 ---
 <BaseLayout title="Lean Agents | Oscar Sanchez" description="Reusable Lean agents for faster execution and better output quality.">
-  <section class="hero-shell scene-shell scene-accent command-shell" style="--scene-accent: var(--cog-blue);">
+<section class="hero-shell scene-shell scene-accent command-shell gpts-hero" style="--scene-accent: var(--cog-blue);">
     <p class="hero-eyebrow">Proof-first operations for AI copilots</p>
-    <h1>Lean Agents with clearer outcomes</h1>
+    <h1>Lean Agents, made proof-first</h1>
     <p class="text-small deck-subtitle" style="max-width: 70ch;">
-      Claim. Proof. Decision. This is the workflow every assistant follows here.
+      Claim. Proof. Decision. A practical execution stack for teams that want clarity without bloat.
     </p>
 
     <div class="command-row" aria-label="Decision rail">
       <span class="proof-chip">Claim → proof → next step</span>
       <span class="proof-chip">Evidence before expansion</span>
-        <span class="proof-chip">{totalCount} seeded agents</span>
+      <span class="proof-chip">{totalCount} ready agents</span>
     </div>
 
-    <div class="cta-stack" style="margin-top:0.65rem;">
+    <div class="cta-stack gpts-actions" style="margin-top:0.65rem;">
       <a class="button button--primary" href="#gpt-grid">Try a GPT</a>
       <a class="button" href="/book">Book a session</a>
       <a class="button" href="/join">Contribute an improvement</a>
@@ -66,7 +66,7 @@ const uniqueAudiences = Array.from(new Set(audienceOptions));
 
   <section class="scene-shell section" aria-labelledby="gpts-grid-heading">
     <h2 id="gpts-grid-heading" class="text-small" style="margin:0;">Available GPT cards</h2>
-    <div id="gpt-grid" class="grid" data-gpt-grid>
+    <div id="gpt-grid" class="gpts-grid" data-gpt-grid>
       {gpts.map((gpt, idx) => <GPTCard gpt={gpt} revealDelayMs={idx * 45} />)}
     </div>
     <p data-empty-message hidden class="panel-shell" style="text-align:center;">

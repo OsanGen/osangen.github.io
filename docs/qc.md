@@ -30,3 +30,4 @@
 - `npm run lint`
 - `npm run typecheck`
 - `npm run build`
+- `npm run icons:sync` (optional; only when icon manifest updates)

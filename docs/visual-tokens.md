@@ -39,6 +39,9 @@ The final values should be replaced from official CogSec reference assets.
 - `--panel-strong`: active filters, selected chips, and command rail states.
 - `--stroke`: all card/section boundaries and thin dividers.
 - `--surface`: default page shells and content surfaces.
+- `--surface-panel`: elevated panels with high contrast borders.
+- `--surface-dim`: muted secondary surfaces for metadata and proof rails.
+- `--cog-brain`: accent token for Oscar branding.
 - `--scene-accent`: single per-section accent signal, never used on multiple cards in one scene.
 
 ## Use rules

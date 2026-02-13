@@ -18,7 +18,8 @@ body {
   font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   color: var(--text);
   background:
-    radial-gradient(circle at 100% 0%, var(--fog-subtle) 0%, transparent 45%),
+    radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--cog-yellow) 8%, transparent) 0%, transparent 32%),
+    linear-gradient(180deg, var(--fog-subtle) 0%, var(--surface) 42%, var(--surface) 100%),
     var(--surface);
   line-height: 1.5;
 }
@@ -105,8 +106,13 @@ main {
   gap: var(--space-3);
 }
 
+.gpts-shell {
+  display: grid;
+  gap: var(--space-3);
+}
+
 .card {
-  background: var(--panel);
+  background: var(--panel-strong);
   border: 1px solid var(--stroke);
   border-radius: var(--radius-lg);
   padding: var(--space-4);
@@ -115,7 +121,7 @@ main {
 .panel-shell,
 .surface-shell,
 .visual-shell {
-  background: var(--surface);
+  background: var(--surface-panel);
   border: 1px solid var(--stroke);
   border-radius: var(--radius-lg);
   padding: var(--space-4);
@@ -132,9 +138,9 @@ main {
   position: absolute;
   top: 0;
   left: 0;
-  width: 0.3rem;
+  width: 0.34rem;
   height: 100%;
-  background: transparent;
+  background: color-mix(in srgb, var(--scene-accent, var(--accent)) 18%, transparent);
   transition: background-color 220ms ease;
 }
 
@@ -157,12 +163,13 @@ main {
 .hero-shell {
   padding: var(--space-6);
   background:
-    linear-gradient(180deg, #ffffff 0%, var(--fog-subtle) 100%);
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 84%, var(--cog-yellow) 8%) 0%, var(--fog-subtle) 100%);
   border: 1px solid var(--stroke);
   border-radius: calc(var(--radius-lg) + 0.35rem);
   box-shadow: var(--shadow-soft);
   position: relative;
   overflow: hidden;
+  transition: transform var(--motion-entrance) ease, box-shadow var(--motion-entrance) ease;
 }
 
 .hero-shell::after {
@@ -199,6 +206,7 @@ main {
   gap: 0.45rem;
   margin-top: 0.15rem;
   margin-bottom: 0.2rem;
+  min-height: 1.75rem;
 }
 
 .hero-eyebrow {
@@ -228,6 +236,7 @@ main {
   display: inline-flex;
   align-items: center;
   line-height: 1;
+  background: var(--surface-soft);
 }
 
 .micro-rail {
@@ -351,7 +360,7 @@ main {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  transition: transform 160ms ease, border-color 160ms ease, background-color 160ms ease, color 160ms ease;
+  transition: transform var(--motion-entrance) ease, border-color 160ms ease, background-color 160ms ease, color 160ms ease;
 }
 
 .button:hover,
@@ -391,6 +400,20 @@ main {
   display: inline-flex;
   flex-wrap: wrap;
   gap: 0.65rem;
+}
+
+.gpts-actions {
+  margin-top: 0.45rem;
+}
+
+.gpts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: var(--space-4);
+}
+
+.gpts-grid > * {
+  min-width: 0;
 }
 
 .text-small {
@@ -445,6 +468,14 @@ main {
   padding: 0.8rem;
   white-space: pre-wrap;
   overflow-x: auto;
+  font-size: 0.84rem;
+  line-height: 1.42;
+}
+
+.proof-meta-block {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 0.35rem;
 }
 
 .proof-meta {
@@ -496,6 +527,10 @@ main {
   gap: 0.45rem;
 }
 
+.chip-cloud {
+  justify-content: flex-start;
+}
+
 .meta {
   font-size: 0.88rem;
   color: #3a4052;
@@ -511,9 +546,11 @@ main {
 .site-header {
   border-bottom: 1px solid var(--stroke);
   background: var(--surface);
+  backdrop-filter: blur(6px);
   position: sticky;
   top: 0;
   z-index: 20;
+  border-bottom-color: color-mix(in srgb, var(--stroke) 82%, transparent);
 }
 
 .header-inner {
@@ -529,6 +566,28 @@ main {
   font-weight: 600;
   text-decoration: none;
   color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.54rem;
+}
+
+.brand-lockup {
+  letter-spacing: -0.01em;
+}
+
+.brand-mark {
+  width: 1.06rem;
+  height: 1.06rem;
+  border-radius: 0.28rem;
+  border: 1px solid var(--stroke);
+  background: #ffffff;
+  padding: 0.06rem;
+  box-shadow: 0 4px 14px rgba(246, 188, 63, 0.22);
+}
+
+.brand-name {
+  display: inline-flex;
+  align-items: baseline;
 }
 
 .site-nav {
@@ -582,7 +641,7 @@ footer {
 .cog-entrance {
   --reveal-delay: 0ms;
   opacity: 0;
-  animation: cog-slide-in 220ms ease forwards;
+  animation: cog-slide-in var(--motion-entrance) cubic-bezier(0.2, 0.65, 0.25, 1) forwards;
   animation-delay: var(--reveal-delay);
 }
 
@@ -594,6 +653,26 @@ footer {
   animation: cog-slide-in 240ms ease forwards;
 }
 
+.gpts-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.gpts-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 15% 10%, color-mix(in srgb, var(--scene-accent) 14%, transparent) 0, transparent 52%);
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.gpts-hero > * {
+  position: relative;
+  z-index: 1;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .button,
   .chip,
@@ -601,6 +680,7 @@ footer {
   .cog-entrance,
   .cog-float,
   .scene-reveal,
+  .hero-shell,
   .hero-shell::after {
     transition: none !important;
     animation: none !important;
@@ -632,6 +712,11 @@ footer {
   .gpt-icon {
     width: 1.4rem;
     height: 1.4rem;
+  }
+
+  .brand-mark {
+    width: 1rem;
+    height: 1rem;
   }
 
   .cta-stack,

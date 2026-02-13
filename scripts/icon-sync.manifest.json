@@ -1,0 +1,26 @@
+{
+  "repo": {
+    "owner": "simple-icons",
+    "name": "simple-icons",
+    "ref": "master"
+  },
+  "files": [
+    {
+      "sourcePath": "icons/openai.svg",
+      "destPath": "public/icons/openai-external.svg",
+      "required": false
+    },
+    {
+      "sourcePath": "icons/google-gemini.svg",
+      "destPath": "public/icons/gemini-external.svg",
+      "required": false
+    },
+    {
+      "sourcePath": "icons/youtube.svg",
+      "destPath": "public/icons/youtube-external.svg",
+      "required": false
+    }
+  ],
+  "description": "Sync optional GPT icon assets from a public GitHub repo.",
+  "purpose": "Reduce local SVG maintenance and keep icon assets fresh."
+}
