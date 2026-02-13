@@ -148,10 +148,7 @@ export const GPTProofImageSchema = z
     label: z.string(),
     imageUrl: z.string(),
     imageAlt: z.string(),
-    input: z.never(),
-    output: z.never(),
-  })
-  .strict();
+  });
 
 export const GPTProofSampleIOSchema = z
   .object({
@@ -159,10 +156,7 @@ export const GPTProofSampleIOSchema = z
     label: z.string(),
     input: z.string(),
     output: z.string(),
-    imageUrl: z.never(),
-    imageAlt: z.never(),
-  })
-  .strict();
+  });
 
 export const GPTProofSchema = z.discriminatedUnion('type', [
   GPTProofImageSchema,

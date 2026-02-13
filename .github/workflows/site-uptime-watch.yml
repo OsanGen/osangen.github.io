@@ -1,0 +1,21 @@
+name: Site uptime watch
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+jobs:
+  watch-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check homepage and GPT route
+        run: |
+          set -euo pipefail
+          for url in https://osangen.github.io/ https://osangen.github.io/gpts; do
+            code=$(curl -sS -o /dev/null -w '%{http_code}' "$url")
+            if [ "$code" != "200" ]; then
+              echo "Endpoint check failed: $url returned $code"
+              exit 1
+            fi
+          done
