@@ -55,6 +55,7 @@ export const GameSchema = z.object({
   repoUrl: z.string(),
   embed: GameEmbedSchema,
 });
+export type Game = z.infer<typeof GameSchema>;
 
 export const VisualClassStepSchema = z.object({
   title: z.string(),
@@ -92,6 +93,7 @@ export const ModuleSchema = z.object({
   status: z.string(),
   visualClass: VisualClassSchema.optional(),
 });
+export type Module = z.infer<typeof ModuleSchema>;
 
 export const CommunityJoinSchema = z.object({
   mode: z.string(),

@@ -24,6 +24,8 @@ const statusLabel = gpt.status === 'active' ? 'Active' : gpt.status === 'prototy
 const audienceLine = gpt.audience.length > 0 ? gpt.audience.join(' / ') : 'General';
 const visibleTags = gpt.tags.slice(0, 3);
 const hiddenTagCount = Math.max(0, gpt.tags.length - visibleTags.length);
+const detailsId = `lean-agent-details-${gpt.id}`;
+const detailsPanelId = `${detailsId}-panel`;
 
 const use = linkAttrs(gpt.links.use);
 const promptPack = linkAttrs(gpt.links.promptPack);
@@ -79,9 +81,14 @@ const demo = linkAttrs(gpt.links.demo);
     {hiddenTagCount > 0 ? <span class="badge">+{hiddenTagCount}</span> : null}
   </div>
 
-  <details class="agent-details" name="lean-agent-details">
-    <summary>See proof, usage, and limits</summary>
-    <div class="agent-details-body">
+  <details
+    class="agent-details"
+    data-agent-details
+    name="lean-agent-details"
+    id={detailsId}
+  >
+    <summary aria-controls={detailsPanelId}>See proof, usage, and limits</summary>
+    <div class="agent-details-body" id={detailsPanelId}>
       <ProofIOBlock proof={gpt.proof} mode="full" />
 
       <p class="proof-headline">How to use</p>

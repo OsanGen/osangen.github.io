@@ -4,6 +4,7 @@ import Card from '../../components/Card.astro';
 import TagList from '../../components/TagList.astro';
 import VisualClassStepper from '../../components/VisualClassStepper.astro';
 import { loadModules } from '../../lib/content';
+import type { Module } from '../../lib/schemas';
 
 export async function getStaticPaths() {
   const modules = await loadModules();
@@ -11,11 +12,13 @@ export async function getStaticPaths() {
     params: {
       moduleId: module.id,
     },
+    props: {
+      module,
+    },
   }));
 }
 
-const modules = await loadModules();
-const module = modules.find((m) => m.id === Astro.params.moduleId);
+const { module } = Astro.props as { module?: Module };
 ---
 <BaseLayout title={module ? `${module.title} - Learn` : 'Module not found'} description="Module detail page">
   {module ? (

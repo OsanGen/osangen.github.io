@@ -4,6 +4,7 @@ import Card from '../../components/Card.astro';
 import TagList from '../../components/TagList.astro';
 import GameEmbed from '../../components/GameEmbed.astro';
 import { loadGames } from '../../lib/content';
+import type { Game } from '../../lib/schemas';
 
 export async function getStaticPaths() {
   const games = await loadGames();
@@ -11,11 +12,13 @@ export async function getStaticPaths() {
     params: {
       gameId: game.id,
     },
+    props: {
+      game,
+    },
   }));
 }
 
-const games = await loadGames();
-const game = games.find((g) => g.id === Astro.params.gameId);
+const { game } = Astro.props as { game?: Game };
 ---
 <BaseLayout title={game ? `${game.title} - Labs` : 'Lab not found'} description="Game detail page">
   {game ? (

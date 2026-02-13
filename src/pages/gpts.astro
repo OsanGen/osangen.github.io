@@ -88,6 +88,7 @@ const uniqueAudiences = Array.from(new Set(audienceOptions));
   (() => {
     const filterButtons = Array.from(document.querySelectorAll('[data-filter="true"]'));
     const cards = Array.from(document.querySelectorAll('[data-gpt-card]'));
+    const detailSections = Array.from(document.querySelectorAll('details[data-agent-details]'));
     const emptyMessage = document.querySelector('[data-empty-message]');
     const visibleCount = document.querySelector('[data-visible-count]');
     const activeFilters = {
@@ -161,13 +162,17 @@ const uniqueAudiences = Array.from(new Set(audienceOptions));
       });
     });
 
-    filterButtons.forEach((button) => {
-      button.addEventListener('keydown', (event) => {
-        if (event.key !== 'Enter' && event.key !== ' ') {
+    detailSections.forEach((details) => {
+      details.addEventListener('toggle', () => {
+        if (!details.open) {
           return;
         }
-        event.preventDefault();
-        button.click();
+
+        detailSections.forEach((other) => {
+          if (other !== details) {
+            other.open = false;
+          }
+        });
       });
     });
 
