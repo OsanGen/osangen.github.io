@@ -32,6 +32,15 @@ The final values should be replaced from official CogSec reference assets.
 - No outer glows, no heavy gradients.
 - Shadows only subtle soft UI shadow.
 
+## Token role matrix
+
+- `--accent-ink`: heading scale, labels, command rails, and any non-urgent text emphasis.
+- `--fog-subtle`: breathable neutral surface fill for low-contrast blocks.
+- `--panel-strong`: active filters, selected chips, and command rail states.
+- `--stroke`: all card/section boundaries and thin dividers.
+- `--surface`: default page shells and content surfaces.
+- `--scene-accent`: single per-section accent signal, never used on multiple cards in one scene.
+
 ## Use rules
 
 - One accent token per scene, no stacked gradients.

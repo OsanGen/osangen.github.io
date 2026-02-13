@@ -21,18 +21,18 @@ const { proof } = Astro.props;
 const isImage = proof.type === 'image';
 ---
 {isImage ? (
-  <section class="proof-block">
-    <h3>{proof.label}</h3>
-    <figure>
+<section class="proof-block">
+    <h3 class="proof-headline">{proof.label}</h3>
+    <figure class="proof-media">
       <img src={proof.imageUrl} alt={proof.imageAlt} loading="lazy" />
     </figure>
   </section>
 ) : (
   <section class="proof-block">
-    <h3>{proof.label}</h3>
-    <p class="text-small" style="margin-bottom:0.5rem;">Sample input:</p>
-    <pre class="proof-io">{proof.input}</pre>
-    <p class="text-small" style="margin:0.9rem 0 0.5rem;">Sample output:</p>
-    <pre class="proof-io">{proof.output}</pre>
+    <h3 class="proof-headline">{proof.label}</h3>
+    <p class="proof-meta" style="margin-bottom:0.4rem;">Sample input:</p>
+    <pre class="proof-io" role="text">{proof.input}</pre>
+    <p class="proof-meta" style="margin:0.9rem 0 0.4rem;">Sample output:</p>
+    <pre class="proof-io" role="text">{proof.output}</pre>
   </section>
 )}

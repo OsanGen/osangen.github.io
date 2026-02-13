@@ -9,24 +9,52 @@ const gpts = await loadGPTs();
 const statusOptions = gpts.map((gpt) => gpt.status);
 const tagOptions = gpts.flatMap((gpt) => gpt.tags);
 const audienceOptions = gpts.flatMap((gpt) => gpt.audience);
+const totalCount = gpts.length;
+
+const uniqueStatuses = Array.from(new Set(statusOptions));
+const uniqueTags = Array.from(new Set(tagOptions));
+const uniqueAudiences = Array.from(new Set(audienceOptions));
 ---
 <BaseLayout title="GPTs | Oscar Sanchez" description="Reusable GPT assistants for open-source AI learning and governance.">
-  <section class="scene-shell">
-    <h1>GPT assistants for safer AI</h1>
-    <p class="text-small" style="max-width: 70ch;">
-      Practical copilots for learning, governance, and architecture checks—designed to be transparent and auditable.
+  <section class="hero-shell scene-shell scene-accent command-shell" style="--scene-accent: var(--cog-blue);">
+    <p class="hero-eyebrow">Proof-first operations for AI copilots</p>
+    <h1>Reusable GPTs with clearer outcomes</h1>
+    <p class="text-small deck-subtitle" style="max-width: 70ch;">
+      Claim. Proof. Decision. This is the workflow every assistant follows here.
     </p>
-    <div class="cta-stack" style="margin-top:1rem;">
-      <a class="button" href="#gpt-grid">Try a GPT</a>
+
+    <div class="command-row" aria-label="Decision rail">
+      <span class="proof-chip">Claim → proof → next step</span>
+      <span class="proof-chip">Evidence before expansion</span>
+      <span class="proof-chip">{totalCount} seeded assistants</span>
+    </div>
+
+    <div class="cta-stack" style="margin-top:0.65rem;">
+      <a class="button button--primary" href="#gpt-grid">Try a GPT</a>
       <a class="button" href="/book">Book a session</a>
       <a class="button" href="/join">Contribute an improvement</a>
     </div>
+
+    <div class="decision-rail">
+      <div class="decision-stat">
+        <strong>{uniqueStatuses.length}</strong>
+        <span class="muted">active statuses represented</span>
+      </div>
+      <div class="decision-stat">
+        <strong>{uniqueTags.length}</strong>
+        <span class="muted">audience and use-case tags</span>
+      </div>
+      <div class="decision-stat">
+        <strong>{uniqueAudiences.length}</strong>
+        <span class="muted">target audience groups</span>
+      </div>
+    </div>
   </section>
 
-  <section class="panel-shell section" aria-labelledby="gpt-filters-heading">
+  <section class="panel-shell section scene-accent" style="--scene-accent: var(--cog-mint);" aria-labelledby="gpt-filters-heading">
     <h2 id="gpt-filters-heading">Explore GPTs</h2>
     <p class="text-small" style="margin-bottom:0.9rem;">
-      Filter by implementation context. Claims stay proof-first, then links and next actions.
+      Filter by status, tag, or audience. Proof-first ordering is locked in every card.
     </p>
     <div class="filters" data-filter-zone>
       <FiltersChips title="Status" filterType="status" items={statusOptions} />
@@ -36,7 +64,8 @@ const audienceOptions = gpts.flatMap((gpt) => gpt.audience);
     <p class="text-small" style="margin-top:0.85rem;" data-visible-count aria-live="polite"></p>
   </section>
 
-  <section class="scene-shell section">
+  <section class="scene-shell section" aria-labelledby="gpts-grid-heading">
+    <h2 id="gpts-grid-heading" class="text-small" style="margin:0;">Available GPT cards</h2>
     <div id="gpt-grid" class="grid" data-gpt-grid>
       {gpts.map((gpt, idx) => <GPTCard gpt={gpt} revealDelayMs={idx * 45} />)}
     </div>
@@ -45,18 +74,16 @@ const audienceOptions = gpts.flatMap((gpt) => gpt.audience);
     </p>
   </section>
 
-  <section class="scene-shell section">
-    <article class="panel-shell">
-      <h2>Need a safer launch path?</h2>
-      <p class="text-small" style="margin-top:0.5rem;">
-        Start with one assistant, measure evidence, then expand scope only when risk and outcomes are clear.
-      </p>
-      <div class="cta-stack" style="margin-top:0.8rem;">
-        <a class="button" href="/book">Book a session</a>
-        <a class="button" href="/join">Contribute a PR</a>
-        <a class="button" href="/docs">See content model</a>
-      </div>
-    </article>
+  <section class="hero-shell scene-shell scene-accent" style="--scene-accent: var(--cog-pink);">
+    <h2>Need a safer launch path?</h2>
+    <p class="text-small" style="max-width: 70ch;">
+      Start with one assistant, collect proof, and scale only when risk and outcome signals stay positive.
+    </p>
+    <div class="cta-stack" style="margin-top:0.8rem;">
+      <a class="button button--primary" href="/book">Book a session</a>
+      <a class="button" href="/join">Contribute a PR</a>
+      <a class="button" href="/docs">See content model</a>
+    </div>
   </section>
 </BaseLayout>
 
@@ -134,6 +161,16 @@ const audienceOptions = gpts.flatMap((gpt) => gpt.audience);
           return;
         }
         setFilter(type, value);
+      });
+    });
+
+    filterButtons.forEach((button) => {
+      button.addEventListener('keydown', (event) => {
+        if (event.key !== 'Enter' && event.key !== ' ') {
+          return;
+        }
+        event.preventDefault();
+        button.click();
       });
     });
 

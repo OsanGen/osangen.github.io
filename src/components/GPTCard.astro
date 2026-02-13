@@ -52,12 +52,15 @@ const linkAttrs = (url: string) => {
   return { href, isExternal };
 };
 
+const statusLabel = gpt.status === 'active' ? 'Active' : gpt.status === 'prototype' ? 'Prototype' : 'Archived';
+const audienceLine = gpt.audience.length > 0 ? gpt.audience.join(' / ') : 'General';
+
 const use = linkAttrs(gpt.links.use);
 const promptPack = linkAttrs(gpt.links.promptPack);
 const demo = linkAttrs(gpt.links.demo);
 ---
 <article
-  class="panel-shell cog-entrance"
+  class="panel-shell panel-shell--command cog-entrance"
   style={`--reveal-delay:${revealDelayMs}ms`}
   data-gpt-card
   data-gpt-id={gpt.id}
@@ -65,29 +68,36 @@ const demo = linkAttrs(gpt.links.demo);
   data-tags={gpt.tags.map((tag) => tag.toLowerCase()).join(',')}
   data-audience={gpt.audience.map((aud) => aud.toLowerCase()).join(',')}
 >
-  <div class="micro-rail"></div>
+  <div class="micro-rail" aria-hidden="true"></div>
+  <div class="command-line">
+    <p class="proof-chip proof-chip--status">Status: {statusLabel}</p>
+    <p class="proof-meta">{audienceLine}</p>
+  </div>
   <h2>{gpt.name}</h2>
-  <p class="text-small">
-    <span class="proof-chip">Status: {gpt.status}</span>
-    <span style="margin-left:0.45rem;">
-      {gpt.audience.slice(0, 2).join(' / ')} · {gpt.ships}
-    </span>
+  <p class="proof-meta">
+    Outcome: {gpt.ships}
   </p>
 
-  <p class="text-small" style="margin-top:0.65rem;"><strong>Claim:</strong> {gpt.promise}</p>
+  <p class="proof-headline">Claim</p>
+  <p>{gpt.promise}</p>
 
+  <p class="proof-headline">Proof</p>
   <ProofIOBlock proof={gpt.proof} />
 
-  <p style="margin:0.75rem 0 0.45rem;"><strong>How to use:</strong></p>
-  <ol class="text-small gpt-steps">
+  <p class="proof-headline">How to use</p>
+  <ol class="gpt-steps">
     {gpt.how_to_use.map((step) => <li>{step}</li>)}
   </ol>
 
-  <p style="margin:0.6rem 0 0.2rem;"><strong>Limits:</strong> {gpt.limits.join(' | ')}</p>
+  <p class="proof-headline">Limits</p>
+  <ul class="gpt-limits">
+    {gpt.limits.map((limit) => <li>{limit}</li>)}
+  </ul>
 
-  <p style="margin:0.6rem 0;"><strong>Next step:</strong> Start with your highest-risk process and keep one checkpoint per cycle.</p>
+  <p class="proof-headline">Next step</p>
+  <p class="proof-meta">Start with your highest-risk process and keep one checkpoint per cycle.</p>
 
-  <div class="cta-stack" style="margin-top:0.7rem;">
+  <div class="cta-stack" style="margin-top:0.75rem;">
     {hasUse ? (
       <a
         href={use.href}
@@ -98,7 +108,7 @@ const demo = linkAttrs(gpt.links.demo);
         Use this GPT
       </a>
     ) : (
-      <span class="button button--muted" aria-disabled="true">Request access to use link</span>
+      <span class="button button--muted" aria-disabled="true">Request access</span>
     )}
     {hasPromptPack ? (
       <a
