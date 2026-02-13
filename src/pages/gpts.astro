@@ -127,6 +127,10 @@ const uniqueAudiences = Array.from(new Set(audienceOptions));
           total += 1;
         } else {
           card.classList.add('gpt-hidden');
+          const details = card.querySelector('details[data-agent-details]');
+          if (details) {
+            details.removeAttribute('open');
+          }
         }
       });
 
