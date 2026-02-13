@@ -22,6 +22,8 @@ const linkAttrs = (url: string) => {
 
 const statusLabel = gpt.status === 'active' ? 'Active' : gpt.status === 'prototype' ? 'Prototype' : 'Archived';
 const audienceLine = gpt.audience.length > 0 ? gpt.audience.join(' / ') : 'General';
+const visibleTags = gpt.tags.slice(0, 3);
+const hiddenTagCount = Math.max(0, gpt.tags.length - visibleTags.length);
 
 const use = linkAttrs(gpt.links.use);
 const promptPack = linkAttrs(gpt.links.promptPack);
@@ -29,7 +31,7 @@ const demo = linkAttrs(gpt.links.demo);
 
 ---
 <article
-  class="panel-shell panel-shell--command cog-entrance"
+  class="panel-shell panel-shell--command agent-card cog-entrance"
   style={`--reveal-delay:${revealDelayMs}ms`}
   data-gpt-card
   data-gpt-id={gpt.id}
@@ -46,75 +48,85 @@ const demo = linkAttrs(gpt.links.demo);
     {gpt.icon ? <img src={gpt.icon.src} alt={gpt.icon.alt} class="gpt-icon" loading="lazy" decoding="async" /> : null}
     <h2>{gpt.name}</h2>
   </div>
-  <p class="proof-meta">
-    Outcome: {gpt.ships}
+  <p class="agent-summary line-clamp-2">
+    <strong class="agent-label">Outcome:</strong> {gpt.ships}
   </p>
+  <p class="agent-summary line-clamp-3">{gpt.promise}</p>
 
-  <p class="proof-headline">Claim</p>
-  <p>{gpt.promise}</p>
+  <div class="agent-preview">
+    <ProofIOBlock proof={gpt.proof} mode="preview" maxChars={220} />
+  </div>
 
-  <p class="proof-headline">Proof</p>
-  <ProofIOBlock proof={gpt.proof} />
-
-  <p class="proof-headline">How to use</p>
-  <ol class="gpt-steps">
-    {gpt.how_to_use.map((step) => <li>{step}</li>)}
-  </ol>
-
-  <p class="proof-headline">Limits</p>
-  <ul class="gpt-limits">
-    {gpt.limits.map((limit) => <li>{limit}</li>)}
-  </ul>
-
-  <p class="proof-headline">Next step</p>
-  <p class="proof-meta">Start with your highest-risk process and keep one checkpoint per cycle.</p>
-
-  <div class="cta-stack" style="margin-top:0.75rem;">
+  <div class="cta-stack agent-actions">
     {use.available ? (
       <a
         href={use.href}
-        class="button"
+        class="button button--primary"
         target={use.isExternal ? '_blank' : undefined}
         rel={use.isExternal ? 'noopener noreferrer' : undefined}
       >
         Use this GPT
       </a>
     ) : (
-      <button type="button" class="button button--muted" aria-disabled="true" title="Link not available yet">
+      <button type="button" class="button button--muted" aria-disabled="true" title="Link not available yet" disabled>
         Request access
-      </button>
-    )}
-    {promptPack.available ? (
-      <a
-        href={promptPack.href}
-        class="button"
-        target={promptPack.isExternal ? '_blank' : undefined}
-        rel={promptPack.isExternal ? 'noopener noreferrer' : undefined}
-      >
-        Prompt pack
-      </a>
-    ) : (
-      <button type="button" class="button button--muted" aria-disabled="true" title="Link not available yet">
-        Prompt pack pending
-      </button>
-    )}
-    {demo.available ? (
-      <a
-        href={demo.href}
-        class="button"
-        target={demo.isExternal ? '_blank' : undefined}
-        rel={demo.isExternal ? 'noopener noreferrer' : undefined}
-      >
-        Open demo
-      </a>
-    ) : (
-      <button type="button" class="button button--muted" aria-disabled="true" title="Link not available yet">
-        Demo pending
       </button>
     )}
   </div>
 
-  <div class="tag-list" aria-label="Tags" style="margin-top:0.75rem;">
-    {gpt.tags.map((tag) => <span class="badge">{tag}</span>)}
+  <div class="tag-list agent-tag-list" aria-label="Tags">
+    {visibleTags.map((tag) => <span class="badge">{tag}</span>)}
+    {hiddenTagCount > 0 ? <span class="badge">+{hiddenTagCount}</span> : null}
   </div>
+
+  <details class="agent-details" name="lean-agent-details">
+    <summary>See proof, usage, and limits</summary>
+    <div class="agent-details-body">
+      <ProofIOBlock proof={gpt.proof} mode="full" />
+
+      <p class="proof-headline">How to use</p>
+      <ol class="gpt-steps">
+        {gpt.how_to_use.map((step) => <li>{step}</li>)}
+      </ol>
+
+      <p class="proof-headline">Limits</p>
+      <ul class="gpt-limits">
+        {gpt.limits.map((limit) => <li>{limit}</li>)}
+      </ul>
+
+      <p class="proof-headline">Next step</p>
+      <p class="proof-meta">Start with your highest-risk process and keep one checkpoint per cycle.</p>
+
+      <div class="cta-stack agent-resource-row">
+        {promptPack.available ? (
+          <a
+            href={promptPack.href}
+            class="button"
+            target={promptPack.isExternal ? '_blank' : undefined}
+            rel={promptPack.isExternal ? 'noopener noreferrer' : undefined}
+          >
+            Prompt pack
+          </a>
+        ) : (
+          <button type="button" class="button button--muted" aria-disabled="true" title="Link not available yet" disabled>
+            Prompt pack pending
+          </button>
+        )}
+        {demo.available ? (
+          <a
+            href={demo.href}
+            class="button"
+            target={demo.isExternal ? '_blank' : undefined}
+            rel={demo.isExternal ? 'noopener noreferrer' : undefined}
+          >
+            Open demo
+          </a>
+        ) : (
+          <button type="button" class="button button--muted" aria-disabled="true" title="Link not available yet" disabled>
+            Demo pending
+          </button>
+        )}
+      </div>
+    </div>
+  </details>
 </article>

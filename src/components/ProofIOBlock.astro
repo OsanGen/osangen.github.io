@@ -3,17 +3,40 @@ import type { GPTProof } from '../lib/schemas';
 
 interface Props {
   proof: GPTProof;
+  mode?: 'preview' | 'full';
+  maxChars?: number;
 }
 
-const { proof } = Astro.props;
+const { proof, mode = 'full', maxChars = 220 } = Astro.props;
 const isImage = proof.type === 'image';
+const normalizeInline = (value: string) => value.replace(/\s+/g, ' ').trim();
+const truncate = (value: string, limit: number) =>
+  value.length <= limit ? value : `${value.slice(0, limit).trimEnd()}...`;
+
+const previewOutput =
+  !isImage && mode === 'preview'
+    ? truncate(normalizeInline(proof.output), maxChars)
+    : '';
 ---
-{isImage ? (
+{isImage && mode === 'preview' ? (
+  <section class="proof-block proof-block--preview">
+    <p class="proof-headline">{proof.label}</p>
+    <figure class="proof-media proof-media--preview">
+      <img src={proof.imageUrl} alt={proof.imageAlt} loading="lazy" />
+    </figure>
+  </section>
+) : isImage ? (
   <section class="proof-block">
     <h3 class="proof-headline">{proof.label}</h3>
     <figure class="proof-media">
       <img src={proof.imageUrl} alt={proof.imageAlt} loading="lazy" />
     </figure>
+  </section>
+) : mode === 'preview' ? (
+  <section class="proof-block proof-block--preview">
+    <p class="proof-headline">{proof.label}</p>
+    <p class="proof-meta proof-meta--tight">Sample output</p>
+    <p class="proof-preview-text">{previewOutput}</p>
   </section>
 ) : (
   <section class="proof-block">

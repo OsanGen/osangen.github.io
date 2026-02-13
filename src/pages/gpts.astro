@@ -53,19 +53,19 @@ const uniqueAudiences = Array.from(new Set(audienceOptions));
 
   <section class="panel-shell section scene-accent" style="--scene-accent: var(--cog-mint);" aria-labelledby="gpt-filters-heading">
     <h2 id="gpt-filters-heading">Explore Lean Agents</h2>
-    <p class="text-small" style="margin-bottom:0.9rem;">
-      Filter by status, tag, or audience. Proof-first ordering is locked in every card.
+    <p class="text-small" style="margin-bottom:0.55rem;">
+      Filter by status, tag, or audience. Cards now open compact by default.
     </p>
     <div class="filters" data-filter-zone>
       <FiltersChips title="Status" filterType="status" items={statusOptions} />
       <FiltersChips title="Tag" filterType="tag" items={tagOptions} />
       <FiltersChips title="Audience" filterType="audience" items={audienceOptions} />
     </div>
-    <p class="text-small" style="margin-top:0.85rem;" data-visible-count aria-live="polite"></p>
+    <p class="text-small" style="margin-top:0.6rem;" data-visible-count aria-live="polite"></p>
   </section>
 
   <section class="scene-shell section" aria-labelledby="gpts-grid-heading">
-    <h2 id="gpts-grid-heading" class="text-small" style="margin:0;">Available GPT cards</h2>
+    <h2 id="gpts-grid-heading" class="text-small" style="margin:0;">Available Lean Agents</h2>
     <div id="gpt-grid" class="gpts-grid" data-gpt-grid>
       {gpts.map((gpt, idx) => <GPTCard gpt={gpt} revealDelayMs={idx * 45} />)}
     </div>
@@ -74,12 +74,9 @@ const uniqueAudiences = Array.from(new Set(audienceOptions));
     </p>
   </section>
 
-  <section class="hero-shell scene-shell scene-accent" style="--scene-accent: var(--cog-pink);">
-    <h2>Need a safer launch path?</h2>
-    <p class="text-small" style="max-width: 70ch;">
-      Start with one assistant, collect proof, and scale only when risk and outcome signals stay positive.
-    </p>
-    <div class="cta-stack" style="margin-top:0.8rem;">
+  <section class="panel-shell section scene-accent gpts-cta-strip" style="--scene-accent: var(--cog-pink);">
+    <p class="text-small">Start with one agent, validate proof, then scale.</p>
+    <div class="cta-stack">
       <a class="button button--primary" href="/book">Book a session</a>
       <a class="button" href="/join">Contribute a PR</a>
       <a class="button" href="/docs">See content model</a>
@@ -133,7 +130,7 @@ const uniqueAudiences = Array.from(new Set(audienceOptions));
       });
 
       if (visibleCount) {
-      visibleCount.textContent = `${total} agent${total === 1 ? '' : 's'} available`;
+        visibleCount.textContent = `${total} agent${total === 1 ? '' : 's'} available`;
       }
 
       if (emptyMessage) {
