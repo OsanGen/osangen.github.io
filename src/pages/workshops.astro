@@ -13,14 +13,40 @@ const [profile, workshops, modules] = await Promise.all([
 ]);
 const updated = await loadLastModifiedISO('workshops.json');
 const visualModules = modules.filter((module) => Boolean(module.visualClass));
-const kineticTeachingLadder = [
-  'Order enters as a request and travels through stations.',
-  'Route decisions are visible and explainable.',
-  'Escalation is explicit when confidence is low.',
-  'Throughput and accuracy are tracked as behavior changes.',
-];
+const workshopGuides = {
+  'kinetic-kitchen-2-0': {
+    primaryLabel: 'Open live experience',
+    secondaryLabel: 'How this teaches',
+    secondaryHref: '/workshops#kinetic-kitchen-teaching',
+    teachingTitle: 'How The Kinetic Kitchen 2.0 teaches',
+    teachingBullets: [
+      'Order enters as a request and travels through stations.',
+      'Route decisions are visible and explainable.',
+      'Escalation is explicit when confidence is low.',
+      'Throughput and accuracy are tracked as behavior changes.',
+    ],
+    proofLine:
+      'A compact, visible workflow simulation that makes routing, guardrails, and outcomes explicit so learners can follow policy reasoning and spot failure modes quickly.',
+  },
+  'policy-gatekeeper': {
+    primaryLabel: 'Open live experience',
+    secondaryLabel: 'How this teaches',
+    secondaryHref: '/workshops#policy-gatekeeper-teaching',
+    teachingTitle: 'How Policy Gatekeeper teaches',
+    teachingBullets: [
+      'Tickets enter as requests and are routed by policy lanes.',
+      'Policy checks are surfaced before any move is applied.',
+      'Weak-confidence decisions are explicitly escalated for review.',
+      'Outcome status updates show why a policy route was chosen or rejected.',
+    ],
+    proofLine:
+      'A visual policy-routing environment for teaching rule design with explicit escalation, guardrails, and visible decision outcomes.',
+  },
+} as const;
 const isExternalLink = (url: string) => /^https?:\/\//i.test(url.trim());
-const isKinetic = (id: string) => id === 'kinetic-kitchen-2-0';
+const getWorkshopGuide = (id: string) => workshopGuides[id as keyof typeof workshopGuides];
+const hasGuide = (id: string) => Object.prototype.hasOwnProperty.call(workshopGuides, id);
+const guidedWorkshops = workshops.filter((w) => hasGuide(w.id));
 ---
 <BaseLayout title="Workshops - Oscar Sanchez" description="Workshop archive and import flow">
   <h1>Visuals & Workshops</h1>
@@ -38,7 +64,7 @@ const isKinetic = (id: string) => id === 'kinetic-kitchen-2-0';
     ) : (
       <CardGrid gap="var(--space-3)" align="start">
         {workshops.map((w) => {
-          const kinetic = isKinetic(w.id);
+          const guide = getWorkshopGuide(w.id);
           return (
             <Card>
               <h3>{w.title}</h3>
@@ -47,33 +73,27 @@ const isKinetic = (id: string) => id === 'kinetic-kitchen-2-0';
               <div class="cta-stack" style="margin-top:0.6rem;">
                 {w.replayUrl ? (
                   <a
-                    class={`button ${kinetic ? 'button--primary' : ''}`}
+                    class={`button ${guide ? 'button--primary' : ''}`}
                     href={w.replayUrl}
                     target={isExternalLink(w.replayUrl) ? '_blank' : undefined}
                     rel={isExternalLink(w.replayUrl) ? 'noopener noreferrer' : undefined}
                   >
-                    {kinetic ? 'Open live experience' : 'Replay'}
+                    {guide ? guide.primaryLabel : 'Replay'}
                   </a>
                 ) : (
-                  <span class="text-small">{kinetic ? 'Live experience unavailable' : 'Replay missing'}</span>
+                  <span class="text-small">{guide ? 'Live experience unavailable' : 'Replay missing'}</span>
                 )}
                 {w.slidesUrl ? (
-                  kinetic ? (
-                    <a class="button" href={w.slidesUrl}>
-                      How this teaches
-                    </a>
-                  ) : (
-                    <a
-                      class="button"
-                      href={w.slidesUrl}
-                      target={isExternalLink(w.slidesUrl) ? '_blank' : undefined}
-                      rel={isExternalLink(w.slidesUrl) ? 'noopener noreferrer' : undefined}
-                    >
-                      Slides
-                    </a>
-                  )
+                  <a
+                    class="button"
+                    href={guide ? guide.secondaryHref : w.slidesUrl}
+                    target={guide ? undefined : isExternalLink(w.slidesUrl) ? '_blank' : undefined}
+                    rel={guide ? undefined : isExternalLink(w.slidesUrl) ? 'noopener noreferrer' : undefined}
+                  >
+                    {guide ? guide.secondaryLabel : 'Slides'}
+                  </a>
                 ) : (
-                  <span class="text-small">{kinetic ? 'Teaching notes unavailable' : 'Slides missing'}</span>
+                  <span class="text-small">{guide ? 'Teaching notes unavailable' : 'Slides missing'}</span>
                 )}
               </div>
             </Card>
@@ -83,19 +103,28 @@ const isKinetic = (id: string) => id === 'kinetic-kitchen-2-0';
     )}
   </section>
 
-  {workshops.some((w) => isKinetic(w.id)) ? (
+  {guidedWorkshops.length > 0 ? (
     <section class="panel-shell">
-      <h2 id="kinetic-kitchen-teaching">How this teaches</h2>
-      <p class="text-small">The Kinetic Kitchen 2.0 is a compact, visible workflow simulation for rapid AI operations learning.</p>
+      <h2>How these visuals teach</h2>
       <CardGrid gap="var(--space-3)" align="start">
-        <Card>
-          <h3>Learning ladder</h3>
-          <ol class="catalog-summary">
-            {kineticTeachingLadder.map((step) => (
-              <li>{step}</li>
-            ))}
-          </ol>
-        </Card>
+        {guidedWorkshops.map((w) => {
+          const guide = getWorkshopGuide(w.id);
+          if (!guide) {
+            return null;
+          }
+
+          return (
+            <section id={`${w.id}-teaching`} class="panel-shell">
+              <h3>{guide.teachingTitle}</h3>
+              <p class="text-small">{guide.proofLine}</p>
+              <ol class="catalog-summary">
+                {guide.teachingBullets.map((step) => (
+                  <li>{step}</li>
+                ))}
+              </ol>
+            </section>
+          );
+        })}
       </CardGrid>
     </section>
   ) : null}

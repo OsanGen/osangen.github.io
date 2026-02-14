@@ -1,5 +1,20 @@
 [
   {
+    "id": "policy-gatekeeper",
+    "date": "2026-02-14",
+    "title": "Policy Gatekeeper",
+    "description": "Turn policy checks into a visual routing system you can teach from: policy tickets, rule evaluation, escalation, and outcome signals stay visible all the way through.",
+    "replayUrl": "https://policydemo-mpnai4wm.manus.space",
+    "slidesUrl": "/workshops#policy-gatekeeper-teaching",
+    "tags": [
+      "Policy",
+      "Workflow",
+      "Safety",
+      "Decision routing",
+      "Learning by simulation"
+    ]
+  },
+  {
     "id": "kinetic-kitchen-2-0",
     "date": "2026-02-14",
     "title": "The Kinetic Kitchen 2.0",
