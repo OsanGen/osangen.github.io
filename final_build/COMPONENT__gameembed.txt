@@ -1,7 +1,7 @@
 Component: `src/components/GameEmbed.astro`
 
 Purpose:
-- Render either an iframe embed or a direct-link fallback/card mode for labs.
+- Render either a user-initiated iframe embed or a direct-link mode for labs.
 - Keep interaction simple and resilient when iframe embed is blocked.
 
 Inputs:
@@ -11,16 +11,17 @@ Inputs:
 - Optional `aspectRatio: '16/9' | '4/3'` (defaults to `'16/9'`)
 
 Outputs:
-- If `preferred === 'iframe'`: framed iframe with a hidden fallback panel + fallback link and optional external link row.
+- If `preferred === 'iframe'`: a launch button renders first, then loads iframe on demand.
+- After launch, a 5s timeout, load error, or blocked render shows fallback panel.
+- A direct external open link remains available in all iframe/link states.
 - If `preferred === 'link'`: single primary button opening the URL in a new tab.
 
 State:
 - No component state; optional inline script tracks whether iframe load/timeout should reveal fallback.
-
-Edge cases:
+- Edge cases:
 - Internal `encodeURI(url)` is used for safe attribute use.
-- Timeout (4.5s) or load error displays fallback panel.
-- Duplicate new-tab link is avoided in link mode.
+- Timeout (5s) or load error displays fallback panel.
+- Duplicate new-tab links are constrained to one canonical CTA outside the embed shell.
 
 Dependencies:
 - Caller passes game embed preferences from `src/content/data/games.json`.

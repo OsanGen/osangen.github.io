@@ -9,6 +9,7 @@ interface Props {
 const { url, title, preferred = 'iframe', aspectRatio = '16/9' } = Astro.props;
 const safeUrl = encodeURI(url);
 const ratio = aspectRatio === '16/9' ? '56.25%' : '75%';
+const frameId = `game-frame-${Math.random().toString(36).slice(2, 8)}`;
 ---
 <div class="card">
   {preferred === 'link' ? (
@@ -21,21 +22,42 @@ const ratio = aspectRatio === '16/9' ? '56.25%' : '75%';
       data-game-embed
       data-url={safeUrl}
     >
-      <iframe
-        title={title}
-        src={safeUrl}
-        loading="lazy"
-        referrerpolicy="no-referrer"
-        allowfullscreen
-        style="border:0; position:absolute; inset:0; width:100%; height:100%;"
-      ></iframe>
-      <div class="fallback" hidden style="display:none; position:absolute; inset:0; align-items:center; justify-content:center; padding:1rem; background:var(--panel); text-align:center;">
+      <button
+        class="button button--primary"
+        type="button"
+        data-game-embed-launch
+        aria-label={`Load interactive demo: ${title}`}
+        style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:2;"
+      >
+        Load interactive demo
+      </button>
+      <p
+        class="text-small"
+        style="position:absolute; bottom:0.75rem; left:1rem; right:1rem; z-index:2; margin:0; text-align:center; background:color-mix(in srgb, var(--panel), var(--ink) 4%); padding:0.35rem 0.55rem; border-radius:999px;"
+      >
+        If embedding is blocked, open the game in a new tab.
+      </p>
+      <div
+        class="fallback"
+        data-game-embed-fallback
+        hidden
+        style="display:none; position:absolute; inset:0; align-items:center; justify-content:center; padding:1rem; background:var(--panel); text-align:center; z-index:3;"
+      >
         <div>
           <p>The embed is blocked in this browser.</p>
           <p><a href={safeUrl} target="_blank" rel="noopener noreferrer">Open in new tab</a></p>
           <p>If embed is blocked, use the new-tab link.</p>
         </div>
       </div>
+      <iframe
+        title={title}
+        loading="lazy"
+        referrerpolicy="no-referrer"
+        allowfullscreen
+        id={frameId}
+        data-game-embed-frame
+        style="border:0; position:absolute; inset:0; width:100%; height:100%; display:none;"
+      ></iframe>
     </div>
   )}
   {preferred === 'iframe' ? <p class="text-small" style="margin-top:0.5rem;"><a href={safeUrl} target="_blank" rel="noopener noreferrer">Open in new tab</a></p> : null}
@@ -44,31 +66,51 @@ const ratio = aspectRatio === '16/9' ? '56.25%' : '75%';
   <script is:inline>
     const roots = document.querySelectorAll('[data-game-embed]');
     roots.forEach((node) => {
-      const url = node.getAttribute('data-url') || '';
-      const frame = node.querySelector('iframe');
-      const fallback = node.querySelector('.fallback');
+      const frame = node.querySelector('[data-game-embed-frame]');
+      const launchButton = node.querySelector('[data-game-embed-launch]');
+      const fallback = node.querySelector('[data-game-embed-fallback]');
       if (!frame || !fallback) return;
+      const url = node.getAttribute('data-url') || '';
+      if (!url) return;
 
       const showFallback = () => {
-        fallback.hidden = false;
+        fallback.style.display = 'flex';
         frame.style.display = 'none';
+        if (launchButton) launchButton.style.display = 'none';
+        fallback.hidden = false;
       };
 
-      let settled = false;
-      const timer = window.setTimeout(() => {
-        if (!settled) showFallback();
-      }, 4500);
+      const loadFrame = () => {
+        if (frame.dataset.loaded === 'true') return;
+        frame.dataset.loaded = 'true';
+        frame.setAttribute('src', url);
+        frame.style.display = 'block';
+        if (launchButton) launchButton.hidden = true;
 
-      frame.addEventListener('error', () => {
-        settled = true;
-        window.clearTimeout(timer);
-        showFallback();
-      });
+        let settled = false;
+        const timer = window.setTimeout(() => {
+          if (!settled) showFallback();
+        }, 5000);
 
-      frame.addEventListener('load', () => {
-        settled = true;
-        window.clearTimeout(timer);
-      });
+        frame.addEventListener('error', () => {
+          settled = true;
+          window.clearTimeout(timer);
+          showFallback();
+        }, { once: true });
+
+        frame.addEventListener('load', () => {
+          settled = true;
+          window.clearTimeout(timer);
+          frame.style.opacity = '1';
+          frame.style.transition = 'opacity 180ms ease';
+          if (fallback) fallback.hidden = true;
+          if (launchButton) launchButton.hidden = true;
+        }, { once: true });
+      };
+
+      if (launchButton) {
+        launchButton.addEventListener('click', loadFrame, { once: true });
+      }
 
       const openLink = node.closest('.card')?.querySelector('a[href]');
       if (openLink) openLink.setAttribute('href', url);

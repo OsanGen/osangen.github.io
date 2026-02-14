@@ -1,3 +1,5 @@
 # CURRENT_GAPS
 - visual-pass for global shell effects | pending | Validate accent and motion behavior at /, /labs, /workshops, /gpts, and /resume on desktop/mobile.
 - service-worker deployment verification | pending | Deploy build and run a smoke check on a throttled/offline path.
+- sitemap generation coverage | pending | regenerate and spot-check that /workshops/{id} appears in public/sitemap.xml.
+- lab embed performance optimization | pending | Verify GameEmbed click-to-load behavior and fallback on a real iframe URL.

@@ -54,9 +54,10 @@ const escapeXml = (value) =>
     .replace(/'/g, '&apos;');
 
 const generateSitemap = async () => {
-  const [gpts, games] = await Promise.all([
+  const [gpts, games, workshops] = await Promise.all([
     readJson('gpts.json'),
     readJson('games.json'),
+    readJson('workshops.json'),
   ]);
 
   const dynamicGpts = gpts
@@ -69,7 +70,17 @@ const generateSitemap = async () => {
     .filter((id) => typeof id === 'string' && id.trim().length > 0)
     .map((id) => `/labs/${encodeURIComponent(id)}`);
 
-  const paths = unique([...STATIC_ROUTES, ...dynamicGpts, ...dynamicGames]).sort((a, b) =>
+  const dynamicWorkshops = workshops
+    .map((workshop) => workshop?.id)
+    .filter((id) => typeof id === 'string' && id.trim().length > 0)
+    .map((id) => `/workshops/${encodeURIComponent(id)}`);
+
+  const paths = unique([
+    ...STATIC_ROUTES,
+    ...dynamicGpts,
+    ...dynamicGames,
+    ...dynamicWorkshops,
+  ]).sort((a, b) =>
     a.localeCompare(b),
   );
 
