@@ -14,6 +14,20 @@ const [profile, workshops, modules] = await Promise.all([
 const updated = await loadLastModifiedISO('workshops.json');
 const visualModules = modules.filter((module) => Boolean(module.visualClass));
 const workshopGuides = {
+  'kinetic-proof': {
+    primaryLabel: 'Open live experience',
+    secondaryLabel: 'How this teaches',
+    secondaryHref: '/workshops#kinetic-proof-teaching',
+    teachingTitle: 'How Kinetic Proof teaches',
+    teachingBullets: [
+      'Input events enter a proof-first flow and stay visible through each validation stage.',
+      'Validation gates show schema and policy checks before decisions are applied.',
+      'Decision outcomes report why a state passed, warned, or was blocked.',
+      'Quality and trust improve through traceable, explicit status signals.',
+    ],
+    proofLine:
+      'A low-noise, evidence-first simulation where each stage is auditable, deterministic, and directly tied to operational AI outcomes.',
+  },
   'neural-glass': {
     primaryLabel: 'Open live experience',
     secondaryLabel: 'How this teaches',

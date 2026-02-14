@@ -15,6 +15,21 @@
     ]
   },
   {
+    "id": "kinetic-proof",
+    "date": "2026-02-14",
+    "title": "Kinetic Proof",
+    "description": "Learn how evidence-heavy governance flows work under pressure: validation, schema checks, and decision outcomes are visible end-to-end.",
+    "replayUrl": "https://aaot8-osan.manus.space",
+    "slidesUrl": "/workshops#kinetic-proof-teaching",
+    "tags": [
+      "Governance workflow",
+      "Laboratory instrument",
+      "Decision proof",
+      "Validation",
+      "Operational AI"
+    ]
+  },
+  {
     "id": "policy-gatekeeper",
     "date": "2026-02-14",
     "title": "Policy Gatekeeper",
