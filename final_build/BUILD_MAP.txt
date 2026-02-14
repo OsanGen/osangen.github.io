@@ -1,19 +1,10 @@
-Website architecture map:
-- Pages layer (`src/pages/*.astro`) consumes JSON data through `src/lib/content.ts` and renders route-specific shells.
-  - Core user routes: `/`, `/gpts`, `/gpts/{id}`, `/labs`, `/labs/{gameId}`, `/workshops`, `/workshops/{id}`, `/join`, `/book`, `/resume`, `/more`, `/about`, `/posts`, `/docs`, `/code-of-conduct`.
-- Shared shell (`src/layouts/BaseLayout.astro`) injects metadata, header, footer, and global style imports.
-- Header (`src/components/Header.astro`) owns the minimal nav and external Book CTA.
-- Style system:
-  - Tokens (`src/styles/tokens.css`) define CogSec pastel variables and semantic surfaces.
-  - Global presentation (`src/styles/global.css`) applies low-noise surfaces plus minimal motion (`cog-entrance`, `cog-orbit`, `cog-breathe`) and catalog accent rails.
-- Content model (`src/lib/schemas.ts`, `src/lib/content.ts`) validates and loads JSON from `src/content/data`.
-- Directory components:
-  - `GPTCard` at `src/components/GPTCard.astro`
-  - `GameEmbed`, `Card`, `CardGrid`, `TagList`, `Badge` in `src/components` for content cards and detail surfaces.
-- Route pages using new compact patterns:
-  - `/` and `/gpts` and `/gpts/{id}`: one-screen route map + subtle per-card accents.
-  - `/labs` and `/workshops` index: minimal listing shells.
-  - `/workshops/{id}`: detail pages for long teaching content.
-- Validation/build pipeline:
-  - `npm run lint`, `npm run validate:content`, `npm run build`.
-- Remaining known risk: mobile/low-power runtime cost of new animation layer.
+# BUILD_MAP
+- `src/styles/tokens.css`: defines canonical OSAN/CogSec pastel design tokens and baseline surfaces.
+- `src/styles/global.css`: global utility classes and component styles for layout, motion, nav, cards, and proof-first patterns using token palette.
+- `src/components/Header.astro` + header styles in global.css: controls global shell navigation and Book CTA.
+- `src/components/GPTCard.astro`: card row for each GPT directory entry (name, one-line outcome, tags, Open button).
+- `src/pages/index.astro`: homepage router shell (hero + 3 route cards).
+- `src/pages/workshops.astro`: workshop listing page with visual classes and workshop cards.
+- `src/pages/workshops/[id].astro`: workshop detail page with proof line and teaching details.
+- `scripts/generate-sitemap.mjs` + `public/sitemap.xml`: build-time sitemap generation.
+- `src/lib/content.ts` + `src/lib/schemas.ts`: content loading, validation, and typing.

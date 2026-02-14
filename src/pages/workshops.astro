@@ -4,79 +4,94 @@ import Card from '../components/Card.astro';
 import CardGrid from '../components/CardGrid.astro';
 import TagList from '../components/TagList.astro';
 import { loadModules, loadWorkshops, loadLastModifiedISO } from '../lib/content';
-import type { Module } from '../lib/schemas';
+import type { Module, Workshop } from '../lib/schemas';
 
 const [modules, workshops] = await Promise.all([loadModules(), loadWorkshops()]);
 const updated = await loadLastModifiedISO('workshops.json');
 const visualClasses = modules.filter((module) => Boolean(module.visualClass));
-const workshopCards = workshops.slice(0, 12);
 
 const ctaForClass = (module: Module) => ({
   label: module.cta.label || 'Open',
   href: module.cta.href || '/workshops',
   isExternal: /^https?:\/\//i.test(module.cta.href || ''),
 });
+
+const ctaForWorkshop = (workshop: Workshop) => {
+  const replayHref = (workshop.replayUrl || '').trim();
+  const slidesHref = (workshop.slidesUrl || '').trim();
+  const href = replayHref || slidesHref || `/workshops/${workshop.id}`;
+  const isExternal = /^https?:\/\//i.test(href);
+  return {
+    label: replayHref ? 'Replay' : slidesHref ? 'Slides' : 'Open details',
+    href,
+    isExternal,
+  };
+};
 ---
 <BaseLayout title="Learn - Oscar Sanchez" description="Visual classes and workshops in one clean map.">
-  <h1>Learn</h1>
-  <p class="text-small">One clean map to classes and practical workshop sessions.</p>
-  <p class="text-small muted">Last updated: {updated ? new Date(updated).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Not available'}</p>
+  <div class="page-shell" style="--scene-accent: var(--cog-blue);">
+    <h1>Learn</h1>
+    <p class="text-small">One clean map to classes and practical workshop sessions.</p>
+    <p class="text-small muted">Last updated: {updated ? new Date(updated).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Not available'}</p>
 
-  <section class="panel-shell" style="--scene-accent: var(--cog-mint);">
-    <h2>Visual classes</h2>
-    {visualClasses.length === 0 ? (
-      <p class="text-small">No visual classes are published yet.</p>
-    ) : (
-      <CardGrid gap="var(--space-3)" align="start">
-        {visualClasses.map((module, index) => {
-          const cta = ctaForClass(module);
-          return (
-            <Card>
-              <article class="catalog-card-stack catalog-item cog-entrance" style={`--reveal-delay:${index * 45}ms; --catalog-accent: var(--cog-mint);`}>
-                <h3>{module.title}</h3>
-                <p class="text-small catalog-meta">{module.time} · {module.level}</p>
-                <TagList tags={module.topics} compact maxItems={3} />
-                <a
-                  class="button catalog-cta"
-                  href={cta.href}
-                  target={cta.isExternal ? '_blank' : undefined}
-                  rel={cta.isExternal ? 'noopener noreferrer' : undefined}
-                >
-                  {cta.label}
-                </a>
-              </article>
-            </Card>
-          );
-        })}
-      </CardGrid>
-    )}
-  </section>
+    <section class="panel-shell">
+      <h2>Visual classes</h2>
+      {visualClasses.length === 0 ? (
+        <p class="text-small">No visual classes are published yet.</p>
+      ) : (
+        <CardGrid gap="var(--space-3)" align="start">
+          {visualClasses.map((module, index) => {
+            const cta = ctaForClass(module);
+            return (
+              <Card>
+                <article class="catalog-card-stack catalog-item cog-entrance" style={`--reveal-delay:${index * 45}ms;`}>
+                  <h3>{module.title}</h3>
+                  <p class="text-small catalog-meta">{module.time} · {module.level}</p>
+                  <TagList tags={module.topics} compact maxItems={3} />
+                  <a
+                    class="button catalog-cta"
+                    href={cta.href}
+                    target={cta.isExternal ? '_blank' : undefined}
+                    rel={cta.isExternal ? 'noopener noreferrer' : undefined}
+                  >
+                    {cta.label}
+                  </a>
+                </article>
+              </Card>
+            );
+          })}
+        </CardGrid>
+      )}
+    </section>
 
-  <section class="panel-shell" style="--scene-accent: var(--cog-pink);">
-    <h2>Workshops</h2>
-    {workshopCards.length === 0 ? (
-      <p class="text-small">No workshop entries yet.</p>
-    ) : (
-      <CardGrid gap="var(--space-3)" align="start">
-        {workshopCards.map((workshop, index) => {
-          return (
-            <Card>
-              <article class="catalog-card-stack catalog-item cog-entrance" style={`--reveal-delay:${index * 45}ms; --catalog-accent: var(--cog-pink);`}>
-                <p class="text-small catalog-meta">Workshop</p>
-                <h3>{workshop.title}</h3>
-                <p class="text-small catalog-meta">{workshop.date}</p>
-                <TagList tags={workshop.tags} compact maxItems={3} />
-                <a
-                  class="button catalog-cta"
-                  href={`/workshops/${workshop.id}`}
-                >
-                  Open details
-                </a>
-              </article>
-            </Card>
-          );
-        })}
-      </CardGrid>
-    )}
-  </section>
+    <section class="panel-shell">
+      <h2>Workshops</h2>
+      {workshops.length === 0 ? (
+        <p class="text-small">No workshop entries yet.</p>
+      ) : (
+        <CardGrid gap="var(--space-3)" align="start">
+          {workshops.map((workshop, index) => {
+            const cta = ctaForWorkshop(workshop);
+            return (
+              <Card>
+                <article class="catalog-card-stack catalog-item cog-entrance" style={`--reveal-delay:${index * 45}ms;`}>
+                  <p class="text-small catalog-meta">{workshop.date}</p>
+                  <h3>{workshop.title}</h3>
+                  <TagList tags={workshop.tags} compact maxItems={3} />
+                  <a
+                    class="button catalog-cta"
+                    href={cta.href}
+                    target={cta.isExternal ? '_blank' : undefined}
+                    rel={cta.isExternal ? 'noopener noreferrer' : undefined}
+                  >
+                    {cta.label}
+                  </a>
+                </article>
+              </Card>
+            );
+          })}
+        </CardGrid>
+      )}
+    </section>
+  </div>
 </BaseLayout>

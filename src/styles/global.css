@@ -256,6 +256,7 @@ main {
 
 .scene-accent {
   --scene-accent: var(--accent);
+  --scene-accent-soft: color-mix(in srgb, var(--scene-accent) 16%, transparent);
 }
 
 .scene-accent::before {
@@ -284,7 +285,7 @@ main {
   right: -4.3rem;
   width: 14rem;
   height: 14rem;
-  border: 1px solid var(--cog-blue-soft);
+  border: 1px solid var(--scene-accent-soft);
   border-radius: 34% 66% 48% 52%;
   animation: cog-orbit var(--motion-float) ease-in-out infinite;
   pointer-events: none;
@@ -358,7 +359,7 @@ main {
   top: 0.9rem;
   width: 0.16rem;
   height: calc(100% - 1.8rem);
-  background: var(--cog-blue-soft);
+  background: var(--scene-accent-soft);
   border-radius: 999px;
   opacity: 0.6;
 }
@@ -368,7 +369,8 @@ main {
 }
 
 .route-card {
-  --route-accent: var(--cog-blue);
+  --route-accent: var(--scene-accent, var(--accent));
+  --route-accent-soft: color-mix(in srgb, var(--route-accent) 16%, transparent);
   position: relative;
   border-left: 0;
   display: grid;
@@ -403,6 +405,7 @@ main {
   height: 0.42rem;
   border-radius: 999px;
   background: color-mix(in srgb, var(--route-accent) 70%, var(--fog));
+  animation: cog-dot 6s ease-in-out infinite;
 }
 
 .route-card h2,
@@ -783,8 +786,8 @@ main {
 
 .nav-cta {
   border-width: 1px;
-  background: color-mix(in srgb, var(--cog-blue) 12%, transparent);
-  border-color: color-mix(in srgb, var(--cog-blue) 44%, var(--stroke));
+  background: color-mix(in srgb, var(--scene-accent, var(--accent)) 12%, transparent);
+  border-color: color-mix(in srgb, var(--scene-accent, var(--accent)) 44%, var(--stroke));
   color: var(--ink);
   font-size: 0.84rem;
   padding-inline: 0.95rem;
@@ -937,7 +940,7 @@ main {
   width: 0.5rem;
   height: 0.5rem;
   border-radius: 50%;
-  background: var(--accent);
+  background: var(--scene-accent, var(--accent));
   margin-right: 0.45rem;
 }
 
@@ -1089,7 +1092,7 @@ main {
   width: 0.35rem;
   height: 0.35rem;
   border-radius: 999px;
-  background: var(--accent);
+  background: var(--scene-accent, var(--accent));
   margin-left: 0.4rem;
 }
 
@@ -1300,5 +1303,20 @@ footer {
   100% {
     transform: translateX(0) scale(0.96);
     opacity: 0.65;
+  }
+}
+
+@keyframes cog-dot {
+  0% {
+    transform: translateY(0);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--route-accent, var(--accent)) 24%, transparent);
+  }
+  50% {
+    transform: translateY(2px);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--route-accent, var(--accent)) 14%, transparent);
+  }
+  100% {
+    transform: translateY(0);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--route-accent, var(--accent)) 24%, transparent);
   }
 }

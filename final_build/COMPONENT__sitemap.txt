@@ -1,0 +1,23 @@
+# Component Spec: `scripts/generate-sitemap.mjs`
+
+## Purpose
+Generate `public/sitemap.xml` from static routes and dynamic content IDs at build time.
+
+## Inputs / Outputs
+- Inputs: `src/content/data/gpts.json`, `src/content/data/games.json`.
+- Output: `public/sitemap.xml` containing deduplicated sorted URLs.
+
+## State
+- Deterministic file write with URL escaping.
+- No persistent runtime state.
+
+## Edge Cases
+- Missing JSON files fall back to empty arrays.
+- Duplicate/invalid IDs are filtered.
+
+## Dependencies
+- Node.js `fs/promises` and `path`, content JSON files, `npm run prebuild` hook.
+
+## Acceptance Checks
+- Includes static routes from `STATIC_ROUTES`.
+- Includes `/gpts/{id}` and `/labs/{id}` for available records.

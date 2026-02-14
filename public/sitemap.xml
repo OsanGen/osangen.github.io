@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>/</loc></url>
-  <url><loc>/labs</loc></url>
-  <url><loc>/gpts</loc></url>
-  <url><loc>/resume</loc></url>
-  <url><loc>/more</loc></url>
-  <url><loc>/workshops</loc></url>
-  <url><loc>/posts</loc></url>
-  <url><loc>/join</loc></url>
-  <url><loc>/book</loc></url>
-  <url><loc>/about</loc></url>
-  <url><loc>/docs</loc></url>
-  <url><loc>/code-of-conduct</loc></url>
+  <url><loc>https://osangen.github.io/</loc></url>
+  <url><loc>https://osangen.github.io/about</loc></url>
+  <url><loc>https://osangen.github.io/book</loc></url>
+  <url><loc>https://osangen.github.io/code-of-conduct</loc></url>
+  <url><loc>https://osangen.github.io/docs</loc></url>
+  <url><loc>https://osangen.github.io/gpts</loc></url>
+  <url><loc>https://osangen.github.io/gpts/brand-book-gen-bot</loc></url>
+  <url><loc>https://osangen.github.io/gpts/l-d-gen</loc></url>
+  <url><loc>https://osangen.github.io/gpts/nano-prompt-coach</loc></url>
+  <url><loc>https://osangen.github.io/gpts/sora-prompt-coach</loc></url>
+  <url><loc>https://osangen.github.io/join</loc></url>
+  <url><loc>https://osangen.github.io/labs</loc></url>
+  <url><loc>https://osangen.github.io/labs/ai-power-users-codex53-demo</loc></url>
+  <url><loc>https://osangen.github.io/more</loc></url>
+  <url><loc>https://osangen.github.io/posts</loc></url>
+  <url><loc>https://osangen.github.io/resume</loc></url>
+  <url><loc>https://osangen.github.io/workshops</loc></url>
 </urlset>

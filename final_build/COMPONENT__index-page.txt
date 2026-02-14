@@ -1,0 +1,24 @@
+# Component Spec: `src/pages/index.astro`
+
+## Purpose
+Landing router that reduces cognitive load by presenting one clear path section (hero + 3 route cards).
+
+## Inputs / Outputs
+- Inputs: `games`, `modules`, `workshops`, `communities` loaded from content loaders.
+- Output: Rendered home page with route cards for Labs / Learn / Join.
+
+## State
+- Stateless render.
+- No local mutable state.
+
+## Edge Cases
+- Pluralization must remain readable at 1 item and >1 items.
+- Keeps hero text under the requested brevity thresholds.
+
+## Dependencies
+- `BaseLayout`, `Card`, `CardGrid`, `loadGames`, `loadModules`, `loadWorkshops`, `loadCommunities`.
+
+## Acceptance Checks
+- Hero has <=1 headline sentence and <=1 lede line.
+- Exactly 3 route cards rendered.
+- No removed sections like “Featured open resources” or LinkedIn source-of-truth block appear on this page.

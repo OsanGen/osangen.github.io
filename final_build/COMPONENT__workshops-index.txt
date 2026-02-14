@@ -1,0 +1,26 @@
+# Component Spec: `src/pages/workshops.astro`
+
+## Purpose
+Clean workshop index that separates Visual classes and Workshops into concise card grids with one CTA each.
+
+## Inputs / Outputs
+- Inputs: `modules` and `workshops` content from `src/lib/content`.
+- Outputs: Two compact sections:
+  - Visual classes cards with time/level + one CTA.
+  - Workshops cards with title + date + one CTA (`Replay` or `Slides`).
+
+## State
+- Stateless listing page.
+- Uses static rendering with `cog-entrance` animation delays.
+
+## Edge Cases
+- Empty lists render a short muted fallback copy.
+- If a workshop has neither replay nor slides URL, CTA defaults to `Open details`.
+
+## Dependencies
+- `BaseLayout`, `Card`, `CardGrid`, `TagList`, content loader types from `../lib/schemas` and content getters.
+
+## Acceptance Checks
+- No long teaching bullets / long-form blocks on index.
+- “Last updated” line rendered in muted text.
+- No more than one CTA per workshop card.

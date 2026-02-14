@@ -1,0 +1,25 @@
+# Component Spec: `src/pages/workshops/[id].astro`
+
+## Purpose
+Workshop detail route with full description, proof line, and optional teaching bullets.
+
+## Inputs / Outputs
+- Inputs: Workshop list from `loadWorkshops`, URL param `id` from `getStaticPaths`.
+- Outputs: Detailed page with description, proof section, teaching section, and Replay/Slides action.
+
+## State
+- Stateless per-static-path render.
+- Loads selected workshop object from build-time props.
+
+## Edge Cases
+- Missing workshop id renders fallback not-found panel.
+- Missing `proofLine` shows muted fallback sentence.
+- Teaching bullets may be absent and render muted fallback copy.
+- `audienceLine` is rendered when present.
+
+## Dependencies
+- `BaseLayout`, `loadWorkshops`, `Workshop` schema.
+
+## Acceptance Checks
+- Proof content is disclosed via `<details>` blocks.
+- Content remains short and scannable by default.

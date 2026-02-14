@@ -1,27 +1,22 @@
-Component: `src/components/Header.astro`
+# Component Spec: `src/components/Header.astro`
 
-Purpose:
-- Keep top-level navigation minimal and one-line on common widths.
-- Surface the external `Book` action as a primary-style CTA rather than a nav link.
+## Purpose
+Primary site nav with reduced items and a prominent Book CTA as a button.
 
-Inputs:
-- Runtime `Astro.url.pathname` for active link state.
+## Inputs / Outputs
+- Inputs: current pathname from `Astro.url.pathname`.
+- Output: Header with nav links and a right-side `Book` button.
 
-Outputs:
-- Header markup with brand lockup, four short nav labels, and a right-side CTA button to Calendly.
+## State
+- Stateless, path-based current-item highlighting.
 
-State:
-- No mutable state; purely render-time nav map and current path detection.
+## Edge Cases
+- Root path normalization (`/` vs `/foo/`).
+- External Calendly CTA always opens a new tab safely.
 
-Edge cases:
-- Active-state logic treats `/` as exact match and route prefixes for other sections.
-- External CTA opens in a new tab and preserves `rel="noopener noreferrer"`.
+## Dependencies
+- `header` styles in `src/styles/global.css`.
 
-Dependencies:
-- `src/styles/global.css` classes: `.site-header`, `.site-nav`, `.header-right`, `.nav-link`, `.nav-cta`.
-- Shared route table (`/labs`, `/workshops`, `/join`, `/resume`).
-
-Acceptance checks:
-- Primary nav shows only: Labs, Learn, Join, Resume.
-- Book appears as a button on the right side.
-- Page path `/` and section routes highlight expected nav item.
+## Acceptance Checks
+- Four concise nav labels: Labs, Learn, Join, Resume.
+- Book action is button-like on the right and not a nav link.

@@ -1,0 +1,24 @@
+# Component Spec: `src/components/GPTCard.astro`
+
+## Purpose
+Minimal directory card for GPT entries with concise metadata and one primary action.
+
+## Inputs / Outputs
+- Inputs: `gpt` object and optional `revealDelayMs`, optional `sceneAccent` override.
+- Output: Card with `name`, one-line outcome, 0-3 tags, and one `Open` CTA.
+
+## State
+- Stateless UI component.
+- Uses CSS animation delay for reveal motion.
+
+## Edge Cases
+- `gpt` tags may exceed 3 items and are capped by `TagList`.
+- Missing icon renders plain title row.
+
+## Dependencies
+- `TagList.astro`, `GPT` schema.
+- Global styles and token-driven accents.
+
+## Acceptance Checks
+- No micro rail or extra secondary UI rails.
+- Outcome line stays compact via `line-clamp-2`.

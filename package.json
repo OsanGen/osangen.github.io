@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
+    "prebuild": "npm run sitemap:generate",
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
@@ -13,7 +14,8 @@
     "typecheck": "astro check",
     "icons:sync": "ICON_SYNC_ENABLED=true node scripts/sync-github-icons.mjs",
     "import:posts": "tsx scripts/import_linkedin_posts.ts",
-    "import:workshops": "tsx scripts/import_linkedin_workshops.ts"
+    "import:workshops": "tsx scripts/import_linkedin_workshops.ts",
+    "sitemap:generate": "node scripts/generate-sitemap.mjs"
   },
   "dependencies": {
     "astro": "^4.16.19",

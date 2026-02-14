@@ -1,0 +1,27 @@
+# Component Spec: `src/styles/tokens.css` + `src/styles/global.css`
+
+## Purpose
+Define and apply CogSec pastel token system with minimal, proof-first surface/stroke/shadow semantics.
+
+## Inputs / Outputs
+- Inputs: design token values and scene-level accent overrides.
+- Outputs:
+  - `tokens.css`: canonical variables for WHITE/INK/FOG and 4 Cog accents.
+  - `global.css`: tokenized component styling, subtle motion, and deck/card patterns.
+
+## State
+- Static CSS variable tokens and class-based style definitions.
+- No mutable state.
+
+## Edge Cases
+- Missing accent overrides should default to `var(--accent)` (COG_BLUE).
+- Scene accent tokens should remain stable across cards and navigation states.
+- Decorative effects should remain subtle and non-heavy.
+
+## Dependencies
+- Font imports from `@fontsource`, token references from `tokens.css`.
+
+## Acceptance Checks
+- `--accent` resolves to `var(--cog-blue)`.
+- `--fog`, `--surface`, `--panel`, `--stroke`, and `--shadow` remain as canonical surfaces.
+- Non-token hardcoded colors in token-critical paths are avoided.

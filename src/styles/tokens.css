@@ -14,10 +14,6 @@
   --cog-blue: #2D63FF;
   --cog-mint: #27B3B3;
   --cog-pink: #D9424F;
-  --cog-yellow-soft: color-mix(in srgb, var(--cog-yellow) 16%, transparent);
-  --cog-blue-soft: color-mix(in srgb, var(--cog-blue) 16%, transparent);
-  --cog-mint-soft: color-mix(in srgb, var(--cog-mint) 16%, transparent);
-  --cog-pink-soft: color-mix(in srgb, var(--cog-pink) 16%, transparent);
 
   --motion-entrance: 180ms;
   --motion-step: 42ms;

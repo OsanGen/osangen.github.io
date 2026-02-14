@@ -18,7 +18,10 @@ export async function getStaticPaths() {
 const { workshop } = Astro.props as { workshop?: Workshop };
 const actionHref = workshop?.replayUrl || workshop?.slidesUrl;
 const actionLabel = workshop?.replayUrl ? 'Replay' : 'Slides';
+const audienceLine = workshop?.audienceLine?.trim();
 const actionIsExternal = actionHref ? /^https?:\/\//i.test(actionHref) : false;
+const hasProofLine = Boolean(workshop?.proofLine?.trim());
+const hasTeachingBullets = Boolean(workshop?.teachingBullets?.length);
 ---
 <BaseLayout title={workshop ? `${workshop.title} | Oscar Sanchez` : 'Workshop not found'} description={workshop ? workshop.description : 'Workshop details'}>
   {workshop ? (
@@ -32,22 +35,31 @@ const actionIsExternal = actionHref ? /^https?:\/\//i.test(actionHref) : false;
       <section class="panel-shell">
         <h2>Description</h2>
         <p class="text-small">{workshop.description}</p>
+        {audienceLine ? <p class="text-small muted">Audience: {audienceLine}</p> : null}
       </section>
 
       <section class="panel-shell">
         <details class="agent-details" open>
-          <summary>Proof + teaching notes</summary>
+          <summary>Proof</summary>
           <div class="agent-details-body">
-            {workshop.proofLine ? <p>{workshop.proofLine}</p> : null}
-            {workshop.teachingBullets && workshop.teachingBullets.length > 0 ? (
-              <ol>
-                {workshop.teachingBullets.map((bullet) => (
-                  <li>{bullet}</li>
-                ))}
-              </ol>
-            ) : null}
+            {hasProofLine ? <p>{workshop.proofLine}</p> : <p class="muted">Add a proof line to enrich this detail page.</p>}
           </div>
         </details>
+      </section>
+
+      <section class="panel-shell">
+        {hasTeachingBullets ? (
+          <details class="agent-details">
+            <summary>Teaching bullets</summary>
+            <div class="agent-details-body">
+              <ol>
+                {workshop.teachingBullets?.map((bullet) => <li>{bullet}</li>)}
+              </ol>
+            </div>
+          </details>
+        ) : (
+          <p class="text-small muted">No teaching bullets published yet.</p>
+        )}
       </section>
 
       {actionHref ? (
