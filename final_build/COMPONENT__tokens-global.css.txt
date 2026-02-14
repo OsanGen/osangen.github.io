@@ -7,16 +7,22 @@ Define and apply CogSec pastel token system with minimal, proof-first surface/st
 - Inputs: design token values and scene-level accent overrides.
 - Outputs:
   - `tokens.css`: canonical variables for WHITE/INK/FOG and 4 Cog accents.
-  - `global.css`: tokenized component styling, subtle motion, and deck/card patterns.
+  - `tokens.css`: bubble motif variables (`--bubble-size-*`, offsets, opacities).
+  - `global.css`: tokenized component styling, subtle motion, deck/card patterns, and centralized bubble motif rendering.
 
 ## State
 - Static CSS variable tokens and class-based style definitions.
 - No mutable state.
+- Bubble motif rendering state is declarative through CSS selectors:
+  - shared motif surfaces: `.hero-shell`, `.bubble-surface`
+  - automatic non-hero target: first top-level `.card`/`.panel-shell`/`.surface-shell`/`.visual-shell` in `.site-page`
 
 ## Edge Cases
 - Missing accent overrides should default to `var(--accent)` (COG_BLUE).
 - Scene accent tokens should remain stable across cards and navigation states.
 - Decorative effects should remain subtle and non-heavy.
+- In browsers without `:has`, hero pages may still render motif on first top-level content surface as graceful fallback.
+- Reduced-motion mode must disable bubble motif animations.
 
 ## Dependencies
 - Font imports from `@fontsource`, token references from `tokens.css`.
@@ -25,3 +31,9 @@ Define and apply CogSec pastel token system with minimal, proof-first surface/st
 - `--accent` resolves to `var(--cog-blue)`.
 - `--fog`, `--surface`, `--panel`, `--stroke`, and `--shadow` remain as canonical surfaces.
 - Non-token hardcoded colors in token-critical paths are avoided.
+- Bubble motif is visible on every route through at least one of:
+  - hero surface bubble
+  - first non-hero top-level surface bubble
+  - low-opacity `.site-page` fallback bubble layer
+- Route accent tint drives motif color on each page (no fixed global red override).
+- Mobile breakpoints (`<=900px`, `<=560px`) scale bubble size/offset/dot to avoid overflow.

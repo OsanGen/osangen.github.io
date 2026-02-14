@@ -67,6 +67,18 @@ body::after {
   border-radius: calc(var(--radius-lg) + 0.3rem);
   animation: cog-page-enter 0.4s cubic-bezier(0.17, 0.89, 0.33, 1) forwards;
   overflow: clip;
+  background-image:
+    radial-gradient(
+      circle at calc(100% + var(--bubble-size-sm)) calc(var(--bubble-size-sm) * -0.36),
+      color-mix(in srgb, var(--scene-accent, var(--accent)) var(--bubble-fallback-opacity), transparent) 0,
+      transparent calc(var(--bubble-size-lg) * 0.76)
+    ),
+    radial-gradient(
+      circle at calc(100% - 1rem) calc(100% - 1rem),
+      color-mix(in srgb, var(--scene-accent, var(--accent)) 18%, transparent) 0,
+      transparent 0.72rem
+    );
+  background-repeat: no-repeat;
 }
 
 .site-page::before,
@@ -329,10 +341,6 @@ main {
   --scene-accent-soft: color-mix(in srgb, var(--scene-accent) 16%, transparent);
 }
 
-.scene-accent::before {
-  background: var(--scene-accent);
-}
-
 .scene-shell--hero {
   gap: var(--space-4);
 }
@@ -343,35 +351,64 @@ main {
   border: 1px solid var(--stroke);
   border-radius: calc(var(--radius-lg) + 0.35rem);
   box-shadow: var(--shadow);
-  position: relative;
-  overflow: hidden;
   transition: transform var(--motion-entrance) ease, box-shadow var(--motion-entrance) ease;
 }
 
-.hero-shell::before {
-  content: '';
-  position: absolute;
-  top: -2.5rem;
-  right: -4.3rem;
-  width: 14rem;
-  height: 14rem;
-  border: 1px solid var(--scene-accent-soft);
-  border-radius: 34% 66% 48% 52%;
-  animation: cog-orbit var(--motion-float) ease-in-out infinite;
-  pointer-events: none;
+:where(.hero-shell, .bubble-surface, .site-page > :is(.card, .panel-shell, .surface-shell, .visual-shell):first-of-type) {
+  --bubble-accent: var(--scene-accent, var(--page-accent, var(--accent)));
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
 }
 
-.hero-shell::after {
+:where(.hero-shell, .bubble-surface, .site-page > :is(.card, .panel-shell, .surface-shell, .visual-shell):first-of-type) > * {
+  position: relative;
+  z-index: 1;
+}
+
+:where(.hero-shell, .bubble-surface, .site-page > :is(.card, .panel-shell, .surface-shell, .visual-shell):first-of-type)::before,
+:where(.hero-shell, .bubble-surface, .site-page > :is(.card, .panel-shell, .surface-shell, .visual-shell):first-of-type)::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+
+:where(.hero-shell, .bubble-surface, .site-page > :is(.card, .panel-shell, .surface-shell, .visual-shell):first-of-type)::before {
+  top: var(--bubble-offset-y);
+  right: var(--bubble-offset-x);
+  width: var(--bubble-size-lg);
+  height: var(--bubble-size-lg);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--bubble-accent) 76%, transparent);
+  opacity: var(--bubble-opacity);
+  animation: cog-bubble-drift calc(var(--motion-float) * 1.75) ease-in-out infinite;
+}
+
+.hero-shell.scene-accent::before,
+.bubble-surface.scene-accent::before {
+  background: color-mix(in srgb, var(--scene-accent) 76%, transparent);
+}
+
+:where(.hero-shell, .bubble-surface, .site-page > :is(.card, .panel-shell, .surface-shell, .visual-shell):first-of-type)::after {
   content: '';
   position: absolute;
   right: 1.2rem;
   bottom: 1.2rem;
-  width: 0.65rem;
-  height: 0.65rem;
+  width: var(--bubble-dot-size);
+  height: var(--bubble-dot-size);
   border-radius: 50%;
-  background: var(--scene-accent, var(--accent));
-  animation: cog-breathe var(--motion-float) ease-in-out infinite;
+  background: color-mix(in srgb, var(--bubble-accent) 88%, var(--ink) 12%);
+  opacity: var(--bubble-dot-opacity);
+  animation: cog-breathe calc(var(--motion-float) * 0.72) ease-in-out infinite;
   pointer-events: none;
+}
+
+@supports selector(.site-page:has(> .hero-shell)) {
+  .site-page:has(> .hero-shell) > :is(.card, .panel-shell, .surface-shell, .visual-shell):first-of-type::before,
+  .site-page:has(> .hero-shell) > :is(.card, .panel-shell, .surface-shell, .visual-shell):first-of-type::after {
+    content: none;
+  }
 }
 
 .command-shell {
@@ -1252,9 +1289,22 @@ footer {
     animation: none !important;
     transform: none !important;
   }
+
+  :where(.hero-shell, .bubble-surface, .site-page > :is(.card, .panel-shell, .surface-shell, .visual-shell):first-of-type)::before,
+  :where(.hero-shell, .bubble-surface, .site-page > :is(.card, .panel-shell, .surface-shell, .visual-shell):first-of-type)::after {
+    animation: none !important;
+    transform: none !important;
+  }
 }
 
 @media (max-width: 900px) {
+  :root {
+    --bubble-size-lg: clamp(7.2rem, 40vw, 11.8rem);
+    --bubble-size-sm: clamp(4.1rem, 18vw, 6rem);
+    --bubble-offset-x: -2.05rem;
+    --bubble-offset-y: -1.85rem;
+  }
+
   .container,
   .container-wide {
     width: min(100vw - 1.2rem, 100%);
@@ -1271,6 +1321,11 @@ footer {
 
   .site-nav {
     gap: 0.35rem;
+  }
+
+  :where(.hero-shell, .bubble-surface, .site-page > :is(.card, .panel-shell, .surface-shell, .visual-shell):first-of-type)::after {
+    right: 0.95rem;
+    bottom: 0.95rem;
   }
 }
 
@@ -1327,6 +1382,14 @@ footer {
 }
 
 @media (max-width: 560px) {
+  :root {
+    --bubble-size-lg: clamp(5.4rem, 46vw, 9.3rem);
+    --bubble-size-sm: clamp(3.4rem, 22vw, 4.8rem);
+    --bubble-dot-size: 0.58rem;
+    --bubble-offset-x: -1.45rem;
+    --bubble-offset-y: -1.35rem;
+  }
+
   .site-nav {
     margin-top: 0.2rem;
     gap: 0.4rem;
@@ -1336,6 +1399,11 @@ footer {
 
   .site-nav::-webkit-scrollbar {
     display: none;
+  }
+
+  :where(.hero-shell, .bubble-surface, .site-page > :is(.card, .panel-shell, .surface-shell, .visual-shell):first-of-type)::after {
+    right: 0.72rem;
+    bottom: 0.72rem;
   }
 }
 
@@ -1378,6 +1446,18 @@ footer {
   100% {
     transform: translateX(0) scale(0.96);
     opacity: 0.65;
+  }
+}
+
+@keyframes cog-bubble-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.98);
+  }
+  50% {
+    transform: translate3d(-0.4rem, 0.35rem, 0) scale(1.04);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(0.98);
   }
 }
 

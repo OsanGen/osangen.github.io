@@ -16,15 +16,23 @@ State:
 - CSS custom properties stored on `:root` in `src/styles/tokens.css`.
 - Derived property: `--accent` defaults to `var(--cog-blue)` unless a scene-level override sets `--scene-accent`.
 - Active design-surface vocabulary: `--surface`, `--panel`, `--stroke`, `--shadow`.
+- Bubble motif token family now lives in `src/styles/tokens.css`:
+  - `--bubble-size-lg`, `--bubble-size-sm`, `--bubble-dot-size`
+  - `--bubble-offset-x`, `--bubble-offset-y`
+  - `--bubble-opacity`, `--bubble-dot-opacity`, `--bubble-fallback-opacity`
 
 Edge cases:
 - Legacy surface variants (`surface-panel`, `surface-soft`, `surface-dim`, `panel-strong`, `fog-subtle`) are intentionally removed from active usage.
 - Non-essential decorative gradients and non-token hardcoded colors in global stylesheet are replaced by panel/surface token usage.
 - Any future page-specific accent override should still use one of the four canonical accents.
+- On browsers without `:has`, pages with hero sections may show motif on hero + first top-level surface; this is accepted fallback behavior.
 
 Dependencies:
 - Tokens consumed by all pages through global imports in base layout.
 - Page-level accent intent controlled by `--scene-accent` declarations on scene containers.
+- Bubble motif recipe applied globally via selectors in `src/styles/global.css`:
+  - `:where(.hero-shell, .bubble-surface, .site-page > :is(.card, .panel-shell, .surface-shell, .visual-shell):first-of-type)`
+  - plus `@supports selector(.site-page:has(> .hero-shell))` guard to suppress duplicate first-surface motif when hero exists.
 
 Acceptance checks:
 - `src/styles/tokens.css` has only one active accent set for each required tone and `--accent: var(--cog-blue)`.
@@ -33,6 +41,10 @@ Acceptance checks:
 - Decorative gradients are limited to non-essential utility; no mandatory brand-mark hardcoded yellow shadow or non-token panel tinting remains.
 - Global page shell now applies scene-wide animated accent rails from `--page-accent` for every route.
 - All pages receive a shared motion entry (`cog-page-enter`) plus ambient route accent orbiting elements anchored in tokenized color values.
+- Hero and reusable bubble surfaces share one centralized motif recipe (large top-right bubble + bottom-right dot), route-tinted from `--scene-accent`/`--page-accent`.
+- Non-hero routes automatically receive motif on the first major top-level surface (`.card`/`.panel-shell`/`.surface-shell`/`.visual-shell`).
+- Text-only routes retain a subtle page-frame radial motif through `.site-page` background layers.
+- `prefers-reduced-motion: reduce` disables motif animations and transforms.
 
 2026 follow-up updates:
 - Added soft accent token family in `src/styles/tokens.css`:
@@ -41,3 +53,4 @@ Acceptance checks:
   - `--cog-mint-soft`
   - `--cog-pink-soft`
 - Added `--motion-float` duration token and route-reference animation keyframe usage in `src/styles/global.css` for subtle hero motion.
+- Added global bubble motif system with `@keyframes cog-bubble-drift` and responsive bubble token overrides at `<=900px` and `<=560px`.
