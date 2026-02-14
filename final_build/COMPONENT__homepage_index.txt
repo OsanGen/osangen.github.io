@@ -25,3 +25,8 @@ Acceptance checks:
 - Multi-section catalog/featured blocks removed from homepage.
 - Above-fold consists of hero + three route cards only.
 - H1, subtitle, and CTA count remain concise.
+
+Post-update behavior:
+- Homepage now includes a secondary "Executive reference lane" panel with a compact set of external GitHub project references for route alignment with executive demos.
+- Route cards now carry per-card accent token metadata (`--route-accent`) to reinforce color depth without increasing visual noise.
+- Subtle motion is applied via `cog-entrance` + shared keyframes in `src/styles/global.css` (`cog-orbit`, `cog-breathe`).

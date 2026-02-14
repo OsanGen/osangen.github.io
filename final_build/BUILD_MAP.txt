@@ -8,4 +8,5 @@ Website architecture map:
 - Schema guardrails live in `src/lib/schemas.ts` and are executed in loader+validator.
 - Build/validation pipeline runs `npm run lint` (`astro check`), `npm run validate:content`, and `npm run build`.
 - Remaining pipeline risk: sitemap generation does not currently assert dynamic `[id]` routes for SEO parity with full route set.
+- Homepage now includes a "reference lane" card grid on `/` linking to external GitHub demos for demonstration tone calibration.
 - CI and maintenance scripts: `scripts/validate-content.ts`, `scripts/import_linkedin_posts.ts`, `scripts/import_linkedin_workshops.ts`, `scripts/sync-github-icons.mjs`.

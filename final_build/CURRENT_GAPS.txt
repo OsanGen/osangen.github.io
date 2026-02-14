@@ -6,3 +6,4 @@
 - (component-debt | open | Either remove or wire unused components (`Button`, `FiltersChips`, `ProofBlock`, `TwoColumn`, `VisualClassStepper`) to avoid dead surface.)
 - (module-cta-beautiful-code | completed | Fixed broken workshop hash CTA in `src/content/data/modules.json` to `/workshops`.)
 - (design-token-cleanup | completed | Run build and manual QA for `/src/styles/tokens.css` + `/src/styles/global.css` visual token consistency and confirm no legacy surface variants remain in active CSS.)
+- (homepage-motion-performance | open | Validate low-end mobile and reduced-motion behavior for new hero/inspiration motion keyframes.)

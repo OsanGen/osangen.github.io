@@ -18,18 +18,45 @@ const routeCards = [
     href: '/labs',
     subtitle: `${games.length} game ${games.length === 1 ? 'lab' : 'labs'}`,
     action: 'Open labs',
+    accent: 'var(--cog-blue)',
   },
   {
     title: 'Learn',
     href: '/workshops',
     subtitle: `${workshops.length} workshop${workshops.length === 1 ? '' : 's'}`,
     action: 'Open learn',
+    accent: 'var(--cog-mint)',
   },
   {
     title: 'Join',
     href: '/join',
     subtitle: `${communities.length} community${communities.length === 1 ? '' : 's'}`,
     action: 'Join community',
+    accent: 'var(--cog-pink)',
+  },
+];
+
+const inspirationDeck = [
+  {
+    title: 'Portfolio motion patterns',
+    href: 'https://github.com/Sofiane-Bahmed/portfolio-template',
+    blurb: 'Clean animated motion + Framer-style transitions for fast executive demos.',
+    accent: 'var(--cog-yellow)',
+    cta: 'Open source',
+  },
+  {
+    title: 'Astro minimal portfolio',
+    href: 'https://github.com/RyanFitzgerald/devportfolio',
+    blurb: 'Lean Astro portfolio structure that maps well to proof-first navigation.',
+    accent: 'var(--cog-blue)',
+    cta: 'Open source',
+  },
+  {
+    title: 'Interactive portfolio engine',
+    href: 'https://github.com/Jayant-1/3D-Portfolio',
+    blurb: 'High-impact interaction patterns for stronger first impressions.',
+    accent: 'var(--cog-mint)',
+    cta: 'Open source',
   },
 ];
 
@@ -51,7 +78,10 @@ const bookHref = 'https://calendly.com/abellou/30min';
     <CardGrid gap="var(--space-3)" align="start">
       {routeCards.map((card, index) => (
         <Card>
-          <article class={`route-card cog-entrance`} style={`--reveal-delay:${index * 60}ms`}>
+          <article
+            class="route-card cog-entrance"
+            style={`--reveal-delay:${index * 60}ms; --route-accent:${card.accent};`}
+          >
             <h2>{card.title}</h2>
             <p class="text-small line-clamp-1">{card.subtitle}</p>
             <a class="button" href={card.href}>
@@ -62,4 +92,30 @@ const bookHref = 'https://calendly.com/abellou/30min';
       ))}
     </CardGrid>
   </div>
+
+  <section class="panel-shell panel-shell--command visual-shell motion-scene">
+    <p class="resource-card-kicker">Executive reference lane</p>
+    <h2>GitHub projects that score high with clients</h2>
+    <p class="text-small muted">
+      Real examples I route prospects to for polished interaction and confidence.
+    </p>
+    <div class="reference-grid">
+      <CardGrid gap="var(--space-3)" align="start">
+        {inspirationDeck.map((item, index) => (
+          <Card>
+            <article
+              class="inspiration-card cog-entrance"
+              style={`--reveal-delay:${220 + index * 70}ms; --route-accent:${item.accent};`}
+            >
+              <h3>{item.title}</h3>
+              <p class="text-small">{item.blurb}</p>
+              <a class="button button--ghost" href={item.href} target="_blank" rel="noopener noreferrer">
+                {item.cta}
+              </a>
+            </article>
+          </Card>
+        ))}
+      </CardGrid>
+    </div>
+  </section>
 </BaseLayout>

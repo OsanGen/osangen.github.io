@@ -260,6 +260,32 @@ main {
   transition: transform var(--motion-entrance) ease, box-shadow var(--motion-entrance) ease;
 }
 
+.hero-shell::before {
+  content: '';
+  position: absolute;
+  top: -2.5rem;
+  right: -4.3rem;
+  width: 14rem;
+  height: 14rem;
+  border: 1px solid var(--cog-blue-soft);
+  border-radius: 34% 66% 48% 52%;
+  animation: cog-orbit var(--motion-float) ease-in-out infinite;
+  pointer-events: none;
+}
+
+.hero-shell::after {
+  content: '';
+  position: absolute;
+  right: 1.2rem;
+  bottom: 1.2rem;
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  background: var(--scene-accent, var(--accent));
+  animation: cog-breathe var(--motion-float) ease-in-out infinite;
+  pointer-events: none;
+}
+
 .command-shell {
   gap: var(--space-4);
 }
@@ -305,21 +331,113 @@ main {
 
 .route-grid {
   margin-top: var(--space-2);
+  position: relative;
+}
+
+.route-grid::before {
+  content: '';
+  position: absolute;
+  left: 0.45rem;
+  top: 0.9rem;
+  width: 0.16rem;
+  height: calc(100% - 1.8rem);
+  background: var(--cog-blue-soft);
+  border-radius: 999px;
+  opacity: 0.6;
+}
+
+.reference-grid {
+  margin-top: var(--space-3);
 }
 
 .route-card {
+  --route-accent: var(--cog-blue);
+  position: relative;
+  border-left: 0;
   display: grid;
   gap: 0.55rem;
   min-height: 11rem;
+  padding: 0.45rem 0.55rem 0.55rem;
+  transition: transform 220ms ease, filter 220ms ease;
+}
+
+.route-card::before {
+  content: '';
+  position: absolute;
+  top: 0.9rem;
+  left: -0.54rem;
+  width: 0.24rem;
+  height: calc(100% - 1.8rem);
+  border-radius: 999px;
+  background: var(--route-accent);
+  opacity: 0.9;
+}
+
+.route-card:hover {
+  transform: translateY(-1px);
+}
+
+.route-card::after {
+  content: '';
+  position: absolute;
+  right: 0.85rem;
+  top: 0.85rem;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--route-accent) 70%, var(--fog));
+}
+
+.route-card h2,
+.inspiration-card h3 {
+  margin-inline-end: 1.6rem;
 }
 
 .route-card p {
   color: var(--ink-subtle);
+  min-height: 1.45rem;
 }
 
 .route-card .button {
   margin-top: auto;
   width: fit-content;
+}
+
+.inspiration-card {
+  --route-accent: var(--cog-mint);
+  display: grid;
+  gap: 0.55rem;
+  min-height: 10.4rem;
+  position: relative;
+  padding-right: 0.7rem;
+}
+
+.inspiration-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -0.54rem;
+  width: 0.24rem;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--route-accent);
+}
+
+.inspiration-card .button {
+  width: fit-content;
+}
+
+.motion-scene {
+  position: relative;
+}
+
+.motion-scene .route-card,
+.motion-scene .inspiration-card {
+  animation-delay: calc(var(--reveal-delay, 0ms));
+}
+
+.inspiration-grid {
+  margin-top: var(--space-2);
 }
 
 .proof-chip {
@@ -602,6 +720,7 @@ main {
 .button:hover,
 .button:focus-visible {
   transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--scene-accent, var(--accent)) 60%, var(--ink));
 }
 
 .button:focus-visible,
@@ -630,6 +749,8 @@ main {
 
 .button.button--ghost {
   background: var(--surface);
+  border-color: color-mix(in srgb, var(--scene-accent, var(--accent)) 34%, var(--stroke));
+  color: var(--ink);
 }
 
 .cta-stack {
@@ -645,7 +766,8 @@ main {
 
 .nav-cta {
   border-width: 1px;
-  background: color-mix(in srgb, var(--ink) 5%, transparent);
+  background: color-mix(in srgb, var(--cog-blue) 12%, transparent);
+  border-color: color-mix(in srgb, var(--cog-blue) 44%, var(--stroke));
   color: var(--ink);
   font-size: 0.84rem;
   padding-inline: 0.95rem;
@@ -654,6 +776,7 @@ main {
 .nav-cta:hover,
 .nav-cta:focus-visible {
   background: var(--ink);
+  border-color: var(--ink);
   color: var(--white);
 }
 
@@ -1005,6 +1128,11 @@ footer {
   animation-delay: var(--reveal-delay);
 }
 
+.cog-entrance--long {
+  animation-timing-function: cubic-bezier(0.18, 0.84, 0.25, 1);
+  animation-duration: calc(var(--motion-entrance) * 1.6);
+}
+
 .scene-reveal {
   animation: cog-slide-in 240ms ease forwards;
 }
@@ -1025,7 +1153,7 @@ footer {
   .cog-entrance,
   .scene-reveal,
   .hero-shell {
-    transition: none !important;
+  transition: none !important;
     animation: none !important;
     transform: none !important;
   }
@@ -1125,5 +1253,35 @@ footer {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes cog-orbit {
+  0% {
+    transform: rotate(0deg) scale(0.99);
+    opacity: 0.35;
+  }
+  50% {
+    transform: rotate(180deg) scale(1.03);
+    opacity: 0.65;
+  }
+  100% {
+    transform: rotate(360deg) scale(0.99);
+    opacity: 0.35;
+  }
+}
+
+@keyframes cog-breathe {
+  0% {
+    transform: translateX(0) scale(0.96);
+    opacity: 0.65;
+  }
+  50% {
+    transform: translateX(-2px) scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0) scale(0.96);
+    opacity: 0.65;
   }
 }

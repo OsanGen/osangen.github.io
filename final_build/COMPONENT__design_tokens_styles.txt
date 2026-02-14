@@ -31,3 +31,11 @@ Acceptance checks:
 - `src/styles/global.css` contains no hardcoded accent-color hex literals except token definitions.
 - Legacy extra surface variants are absent from active style usage.
 - Decorative gradients are limited to non-essential utility; no mandatory brand-mark hardcoded yellow shadow or non-token panel tinting remains.
+
+2026 follow-up updates:
+- Added soft accent token family in `src/styles/tokens.css`:
+  - `--cog-yellow-soft`
+  - `--cog-blue-soft`
+  - `--cog-mint-soft`
+  - `--cog-pink-soft`
+- Added `--motion-float` duration token and route-reference animation keyframe usage in `src/styles/global.css` for subtle hero motion.
