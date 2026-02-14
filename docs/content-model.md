@@ -38,6 +38,7 @@
 ## workshops.json
 
 - `id`, `date`, `title`, `description`, `replayUrl`, `slidesUrl`, `tags[]`
+- `slidesUrl` can point to a notes anchor (for example `/workshops#kinetic-kitchen-teaching`) when a downloadable slide deck is not available.
 
 ## posts.json
 

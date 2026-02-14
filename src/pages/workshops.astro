@@ -13,6 +13,14 @@ const [profile, workshops, modules] = await Promise.all([
 ]);
 const updated = await loadLastModifiedISO('workshops.json');
 const visualModules = modules.filter((module) => Boolean(module.visualClass));
+const kineticTeachingLadder = [
+  'Order enters as a request and travels through stations.',
+  'Route decisions are visible and explainable.',
+  'Escalation is explicit when confidence is low.',
+  'Throughput and accuracy are tracked as behavior changes.',
+];
+const isExternalLink = (url: string) => /^https?:\/\//i.test(url.trim());
+const isKinetic = (id: string) => id === 'kinetic-kitchen-2-0';
 ---
 <BaseLayout title="Workshops - Oscar Sanchez" description="Workshop archive and import flow">
   <h1>Visuals & Workshops</h1>
@@ -29,32 +37,68 @@ const visualModules = modules.filter((module) => Boolean(module.visualClass));
       />
     ) : (
       <CardGrid gap="var(--space-3)" align="start">
-        {workshops.map((w) => (
-          <Card>
-            <h3>{w.title}</h3>
-            <p class="text-small">{w.date}</p>
-            <p style="margin-top:0.5rem;">{w.description}</p>
-            <div class="cta-stack" style="margin-top:0.6rem;">
-              {w.replayUrl ? (
-                <a class="button" href={w.replayUrl} target="_blank" rel="noopener noreferrer">
-                  Replay
-                </a>
-              ) : (
-                <span class="text-small">Replay missing</span>
-              )}
-              {w.slidesUrl ? (
-                <a class="button" href={w.slidesUrl} target="_blank" rel="noopener noreferrer">
-                  Slides
-                </a>
-              ) : (
-                <span class="text-small">Slides missing</span>
-              )}
-            </div>
-          </Card>
-        ))}
+        {workshops.map((w) => {
+          const kinetic = isKinetic(w.id);
+          return (
+            <Card>
+              <h3>{w.title}</h3>
+              <p class="text-small">{w.date}</p>
+              <p style="margin-top:0.5rem;">{w.description}</p>
+              <div class="cta-stack" style="margin-top:0.6rem;">
+                {w.replayUrl ? (
+                  <a
+                    class={`button ${kinetic ? 'button--primary' : ''}`}
+                    href={w.replayUrl}
+                    target={isExternalLink(w.replayUrl) ? '_blank' : undefined}
+                    rel={isExternalLink(w.replayUrl) ? 'noopener noreferrer' : undefined}
+                  >
+                    {kinetic ? 'Open live experience' : 'Replay'}
+                  </a>
+                ) : (
+                  <span class="text-small">{kinetic ? 'Live experience unavailable' : 'Replay missing'}</span>
+                )}
+                {w.slidesUrl ? (
+                  kinetic ? (
+                    <a class="button" href={w.slidesUrl}>
+                      How this teaches
+                    </a>
+                  ) : (
+                    <a
+                      class="button"
+                      href={w.slidesUrl}
+                      target={isExternalLink(w.slidesUrl) ? '_blank' : undefined}
+                      rel={isExternalLink(w.slidesUrl) ? 'noopener noreferrer' : undefined}
+                    >
+                      Slides
+                    </a>
+                  )
+                ) : (
+                  <span class="text-small">{kinetic ? 'Teaching notes unavailable' : 'Slides missing'}</span>
+                )}
+              </div>
+            </Card>
+          );
+        })}
       </CardGrid>
     )}
   </section>
+
+  {workshops.some((w) => isKinetic(w.id)) ? (
+    <section class="panel-shell">
+      <h2 id="kinetic-kitchen-teaching">How this teaches</h2>
+      <p class="text-small">The Kinetic Kitchen 2.0 is a compact, visible workflow simulation for rapid AI operations learning.</p>
+      <CardGrid gap="var(--space-3)" align="start">
+        <Card>
+          <h3>Learning ladder</h3>
+          <ol class="catalog-summary">
+            {kineticTeachingLadder.map((step) => (
+              <li>{step}</li>
+            ))}
+          </ol>
+        </Card>
+      </CardGrid>
+    </section>
+  ) : null}
 
   <section class="panel-shell">
     <h2>Image-based visual learning</h2>

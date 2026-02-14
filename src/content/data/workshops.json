@@ -1,1 +1,17 @@
-[]
+[
+  {
+    "id": "kinetic-kitchen-2-0",
+    "date": "2026-02-14",
+    "title": "The Kinetic Kitchen 2.0",
+    "description": "Watch an AI agent workflow as a restaurant order: intake, routing, escalation, and completion. No code, no jargon. Learners see decisions, guardrails, edge-case handling, and KPI behavior as the order moves.",
+    "replayUrl": "https://kinetickit-acameqrq.manus.space",
+    "slidesUrl": "/workshops#kinetic-kitchen-teaching",
+    "tags": [
+      "AI workflow",
+      "Interactive visual",
+      "Agent operations",
+      "No-code learning",
+      "Guardrails"
+    ]
+  }
+]
