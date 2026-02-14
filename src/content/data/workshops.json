@@ -1,5 +1,20 @@
 [
   {
+    "id": "vpn-cost-lab",
+    "date": "2026-02-14",
+    "title": "VPN Cost Lab",
+    "description": "Estimate AI deployment spend step-by-step: each request path, policy rule, and routing tradeoff stays visible so teams can reason from evidence to decision.",
+    "replayUrl": "https://vpncostlab-omvhm8um.manus.space",
+    "slidesUrl": "/workshops#vpn-cost-lab-teaching",
+    "tags": [
+      "AI cost modeling",
+      "Presenter-focused",
+      "Decision simulation",
+      "Policy checks",
+      "Cost transparency"
+    ]
+  },
+  {
     "id": "neural-glass",
     "date": "2026-02-14",
     "title": "Neural Glass",

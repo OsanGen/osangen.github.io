@@ -14,6 +14,20 @@ const [profile, workshops, modules] = await Promise.all([
 const updated = await loadLastModifiedISO('workshops.json');
 const visualModules = modules.filter((module) => Boolean(module.visualClass));
 const workshopGuides = {
+  'vpn-cost-lab': {
+    primaryLabel: 'Open live experience',
+    secondaryLabel: 'How this teaches',
+    secondaryHref: '/workshops#vpn-cost-lab-teaching',
+    teachingTitle: 'How VPN Cost Lab teaches',
+    teachingBullets: [
+      'Start with a concrete cost scenario: users, latency targets, and safety guardrails.',
+      'Compare request, policy, and routing choices while watching spend impact appear in real time.',
+      'Review why safety or policy checks are triggered before high-cost decisions are finalized.',
+      'Approve final outputs using outcome quality, confidence, and total cost tradeoffs.',
+    ],
+    proofLine:
+      'A presenter-friendly cost simulator that makes spend logic, policy checks, and tradeoffs explicit for fast teaching adoption.',
+  },
   'kinetic-proof': {
     primaryLabel: 'Open live experience',
     secondaryLabel: 'How this teaches',
