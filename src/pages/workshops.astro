@@ -130,7 +130,11 @@ const workshopGuides = {
 const isExternalLink = (url: string) => /^https?:\/\//i.test(url.trim());
 const getWorkshopGuide = (id: string) => workshopGuides[id as keyof typeof workshopGuides];
 const hasGuide = (id: string) => Object.prototype.hasOwnProperty.call(workshopGuides, id);
-const guidedWorkshops = workshops.filter((w) => hasGuide(w.id));
+const LEAN_WORKSHOP_ID = 'leanagents-workshop-chatgpt-apps';
+const leanWorkshop = workshops.find((w) => w.id === LEAN_WORKSHOP_ID) ?? null;
+const visualLearningWorkshops = workshops.filter((w) => w.id !== LEAN_WORKSHOP_ID);
+const guidedVisualWorkshops = visualLearningWorkshops.filter((w) => hasGuide(w.id));
+const leanWorkshopGuide = leanWorkshop ? getWorkshopGuide(leanWorkshop.id) : undefined;
 ---
 <BaseLayout title="Workshops - Oscar Sanchez" description="Workshop archive and import flow">
   <h1>Visuals & Workshops</h1>
@@ -138,16 +142,57 @@ const guidedWorkshops = workshops.filter((w) => hasGuide(w.id));
   <p class="text-small">Last updated: {updated ? new Date(updated).toLocaleString() : 'Not available'}</p>
 
   <section class="panel-shell">
-    <h2>Open workshops</h2>
-    {workshops.length === 0 ? (
+    <h2>Workshop</h2>
+    {!leanWorkshop ? (
       <EmptyState
         title="Add workshops"
-        body="No workshop entries yet. Add data to src/content/data/workshops.json or import from LinkedIn."
+        body="Lean Agents Workshop entry not found. Add it to src/content/data/workshops.json."
         note="Run: npm run import:workshops"
       />
     ) : (
       <CardGrid gap="var(--space-3)" align="start">
-        {workshops.map((w) => {
+        <Card>
+          <h3>{leanWorkshop.title}</h3>
+          <p class="text-small">{leanWorkshop.date}</p>
+          <p style="margin-top:0.5rem;">{leanWorkshop.description}</p>
+          <div class="cta-stack" style="margin-top:0.6rem;">
+            {leanWorkshop.replayUrl ? (
+              <a
+                class={`button ${leanWorkshopGuide ? 'button--primary' : ''}`}
+                href={leanWorkshop.replayUrl}
+                target={isExternalLink(leanWorkshop.replayUrl) ? '_blank' : undefined}
+                rel={isExternalLink(leanWorkshop.replayUrl) ? 'noopener noreferrer' : undefined}
+              >
+                {leanWorkshopGuide ? leanWorkshopGuide.primaryLabel : 'Replay'}
+              </a>
+            ) : (
+              <span class="text-small">{leanWorkshopGuide ? 'Live experience unavailable' : 'Replay missing'}</span>
+            )}
+            {leanWorkshop.slidesUrl ? (
+              <a
+                class="button"
+                href={leanWorkshopGuide ? leanWorkshopGuide.secondaryHref : leanWorkshop.slidesUrl}
+                target={leanWorkshopGuide ? undefined : isExternalLink(leanWorkshop.slidesUrl) ? '_blank' : undefined}
+                rel={leanWorkshopGuide ? undefined : isExternalLink(leanWorkshop.slidesUrl) ? 'noopener noreferrer' : undefined}
+              >
+                {leanWorkshopGuide ? leanWorkshopGuide.secondaryLabel : 'Slides'}
+              </a>
+            ) : (
+              <span class="text-small">{leanWorkshopGuide ? 'Teaching notes unavailable' : 'Slides missing'}</span>
+            )}
+          </div>
+        </Card>
+      </CardGrid>
+    )}
+  </section>
+
+  <section class="panel-shell">
+    <h2>Visual learning</h2>
+    {visualLearningWorkshops.length === 0 && visualModules.length === 0 ? (
+      <p class="text-small">No visual-learning entries yet.</p>
+    ) : (
+      <CardGrid gap="var(--space-3)" align="start">
+        {visualLearningWorkshops.map((w) => {
           const guide = getWorkshopGuide(w.id);
           return (
             <Card>
@@ -183,15 +228,41 @@ const guidedWorkshops = workshops.filter((w) => hasGuide(w.id));
             </Card>
           );
         })}
+        {visualModules.map((module) => (
+          <Card>
+            <div id={`visual-module-${module.id}`}>
+              <h3>{module.title}</h3>
+              <p class="text-small">{module.time} · {module.level}</p>
+              <TagList tags={module.topics} compact maxItems={3} />
+              <p class="catalog-summary">{module.format}</p>
+              <a class="button catalog-cta" href={module.cta.href}>Open visual class</a>
+            </div>
+          </Card>
+        ))}
       </CardGrid>
     )}
   </section>
 
-  {guidedWorkshops.length > 0 ? (
+  {leanWorkshop && leanWorkshopGuide ? (
     <section class="panel-shell">
-      <h2>How these visuals teach</h2>
+      <h2>How this workshop teaches</h2>
+      <section id={`${leanWorkshop.id}-teaching`} class="panel-shell">
+        <h3>{leanWorkshopGuide.teachingTitle}</h3>
+        <p class="text-small">{leanWorkshopGuide.proofLine}</p>
+        <ol class="catalog-summary">
+          {leanWorkshopGuide.teachingBullets.map((step) => (
+            <li>{step}</li>
+          ))}
+        </ol>
+      </section>
+    </section>
+  ) : null}
+
+  {guidedVisualWorkshops.length > 0 ? (
+    <section class="panel-shell">
+      <h2>How visual learning teaches</h2>
       <CardGrid gap="var(--space-3)" align="start">
-        {guidedWorkshops.map((w) => {
+        {guidedVisualWorkshops.map((w) => {
           const guide = getWorkshopGuide(w.id);
           if (!guide) {
             return null;
@@ -212,27 +283,6 @@ const guidedWorkshops = workshops.filter((w) => hasGuide(w.id));
       </CardGrid>
     </section>
   ) : null}
-
-  <section class="panel-shell">
-    <h2>Image-based visual learning</h2>
-    {visualModules.length === 0 ? (
-      <p class="text-small">No visual modules yet. Add a <code>visualClass</code> block to teaching modules to surface here.</p>
-    ) : (
-      <CardGrid gap="var(--space-3)" align="start">
-        {visualModules.map((module) => (
-          <Card>
-            <div id={`visual-module-${module.id}`}>
-              <h3>{module.title}</h3>
-              <p class="text-small">{module.time} · {module.level}</p>
-              <TagList tags={module.topics} compact maxItems={3} />
-              <p class="catalog-summary">{module.format}</p>
-              <a class="button catalog-cta" href={module.cta.href}>Open visual class</a>
-            </div>
-          </Card>
-        ))}
-      </CardGrid>
-    )}
-  </section>
 
   <section class="panel-shell">
     <h2>Latest tools and links</h2>

@@ -16,7 +16,9 @@ const [profile, games, modules, gpts, workshops] = await Promise.all([
 const featuredGames = games.slice(0, 3);
 const featuredGPTs = gpts.slice(0, 3);
 const featuredWorkshops = workshops.slice(0, 3);
-const featuredVisualModules = modules.filter((module) => Boolean(module.visualClass)).slice(0, 2);
+const featuredVisualModules = modules
+  .filter((module) => Boolean(module.visualClass) && module.id !== 'beautiful-code-theory')
+  .slice(0, 2);
 
 const featureCards = [
   {
