@@ -13,19 +13,12 @@ const [profile, games, modules, gpts, workshops] = await Promise.all([
   loadGPTs(),
   loadWorkshops(),
 ]);
-const featuredModules = modules.slice(0, 3);
 const featuredGames = games.slice(0, 3);
 const featuredGPTs = gpts.slice(0, 3);
 const featuredWorkshops = workshops.slice(0, 3);
 const featuredVisualModules = modules.filter((module) => Boolean(module.visualClass)).slice(0, 2);
 
 const featureCards = [
-  {
-    title: 'Learning',
-    href: '/learn',
-    subtitle: `${modules.length} modules, workshops, and reusable teaching paths.`,
-    action: 'Browse learning',
-  },
   {
     title: 'Educational Games',
     href: '/labs',
@@ -69,7 +62,7 @@ const featureCards = [
         Pick the route below to get started in one click.
       </p>
       <div class="cta-stack">
-        <a class="button button--primary" href="/learn">Start with Learning</a>
+        <a class="button button--primary" href="/workshops">Explore visuals</a>
         <a class="button" href="/labs">Try Educational Games</a>
       </div>
     </section>
@@ -92,22 +85,6 @@ const featureCards = [
 
     <section class="panel-shell">
       <h2>Featured open resources</h2>
-      <div class="catalog-shell">
-        <h3 class="text-small">Featured teaching modules</h3>
-        <CardGrid gap="var(--space-3)" align="start">
-          {featuredModules.map((module) => (
-            <Card>
-              <div class="catalog-card-stack">
-                <h3>{module.title}</h3>
-                <p class="catalog-meta">{module.level} · {module.time}</p>
-                <TagList tags={module.topics} compact maxItems={3} />
-                <a class="button catalog-cta" href={module.cta.href}>Open module</a>
-              </div>
-            </Card>
-          ))}
-        </CardGrid>
-      </div>
-
       <div class="catalog-shell">
         <h3 class="text-small">Featured open games</h3>
         <CardGrid gap="var(--space-3)" align="start">
@@ -159,7 +136,7 @@ const featureCards = [
                 <p class="text-small featured-meta">Visual learning</p>
                 <h3>{module.title}</h3>
                 <p class="catalog-summary">Step-by-step visual loops, proofs, and checkpoints.</p>
-                <a class="button catalog-cta" href={`/learn/${module.id}`}>Open visual class</a>
+                <a class="button catalog-cta" href={`/workshops#visual-module-${module.id}`}>Open visual class</a>
               </div>
             </Card>
           ))}

@@ -23,7 +23,7 @@
     },
     "cta": {
       "label": "Start module",
-      "href": "/learn/adl-browser-only"
+      "href": "/workshops"
     },
     "status": "seed"
   },
@@ -51,7 +51,7 @@
     },
     "cta": {
       "label": "View workshop",
-      "href": "/workshops/governed-genai-rollout"
+      "href": "/workshops"
     },
     "status": "seed"
   },
@@ -79,7 +79,7 @@
     },
     "cta": {
       "label": "Explore playbooks",
-      "href": "/learn/cogsec-playbooks"
+      "href": "/workshops"
     },
     "status": "seed"
   },
@@ -104,7 +104,7 @@
     },
     "cta": {
       "label": "Start class",
-      "href": "/learn/beautiful-code-theory"
+      "href": "/workshops#visual-module-beautiful-code-theory"
     },
     "status": "seed",
     "visualClass": {

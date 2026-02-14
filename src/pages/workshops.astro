@@ -221,11 +221,13 @@ const guidedWorkshops = workshops.filter((w) => hasGuide(w.id));
       <CardGrid gap="var(--space-3)" align="start">
         {visualModules.map((module) => (
           <Card>
-            <h3>{module.title}</h3>
-            <p class="text-small">{module.time} · {module.level}</p>
-            <TagList tags={module.topics} compact maxItems={3} />
-            <p class="catalog-summary">{module.format}</p>
-            <a class="button catalog-cta" href={module.cta.href}>Open visual class</a>
+            <div id={`visual-module-${module.id}`}>
+              <h3>{module.title}</h3>
+              <p class="text-small">{module.time} · {module.level}</p>
+              <TagList tags={module.topics} compact maxItems={3} />
+              <p class="catalog-summary">{module.format}</p>
+              <a class="button catalog-cta" href={module.cta.href}>Open visual class</a>
+            </div>
           </Card>
         ))}
       </CardGrid>
