@@ -2,85 +2,178 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 import Card from '../components/Card.astro';
-import TagList from '../components/TagList.astro';
-import ProofBlock from '../components/ProofBlock.astro';
-import TwoOptionCTA from '../components/TwoOptionCTA.astro';
-import { loadSiteContent } from '../lib/content';
 import CardGrid from '../components/CardGrid.astro';
-import TwoColumn from '../components/TwoColumn.astro';
+import TagList from '../components/TagList.astro';
+import { loadGames, loadModules, loadGPTs, loadWorkshops, loadProfile } from '../lib/content';
 
-const { profile, games, modules } = await loadSiteContent();
-const featuredGames = games.slice(0, 3);
+const [profile, games, modules, gpts, workshops] = await Promise.all([
+  loadProfile(),
+  loadGames(),
+  loadModules(),
+  loadGPTs(),
+  loadWorkshops(),
+]);
 const featuredModules = modules.slice(0, 3);
-const proofBullets = profile.proof_selected.slice(0, 4).flatMap((entry) => entry.proof);
+const featuredGames = games.slice(0, 3);
+const featuredGPTs = gpts.slice(0, 3);
+const featuredWorkshops = workshops.slice(0, 3);
+const featuredVisualModules = modules.filter((module) => Boolean(module.visualClass)).slice(0, 2);
+
+const featureCards = [
+  {
+    title: 'Open Source Teaching',
+    href: '/learn',
+    subtitle: `${modules.length} modules, workshops, and reusable teaching paths.`,
+    action: 'Browse teaching',
+  },
+  {
+    title: 'Educational Games',
+    href: '/labs',
+    subtitle: `${games.length} open games with proof-aligned walkthroughs.`,
+    action: 'Play demos',
+  },
+  {
+    title: 'Lean Agents',
+    href: '/gpts',
+    subtitle: `${gpts.length} practical agents for execution, prompting, and production flow.`,
+    action: 'Open agent directory',
+  },
+  {
+    title: 'Visuals & Workshops',
+    href: '/workshops',
+    subtitle: `${workshops.length} workshop artifacts and visual learning pathways.`,
+    action: 'Explore visuals',
+  },
+  {
+    title: 'Resume',
+    href: '/resume',
+    subtitle: 'Career proof, teaching, and operational track record.',
+    action: 'View resume',
+  },
+];
 ---
-<BaseLayout title={`Home - ${profile.name}`} description="Proof-first portfolio and open source AI labs">
+<BaseLayout title={`Home - ${profile.name}`} description="Open-source teaching repository for practical AI governance, education, and execution workflows.">
   <SectionHeader
-    title="Built for teams building governed AI."
-    subtitle="I share proof-first patterns through demos, modules, and community routes."
+    title="Open-source teaching repository for AI builders"
+    subtitle="Everything here is reusable, proof-first content: modules, games, agents, and workshops in one place."
   />
-  <div class="page-shell">
-    <Card>
-      <p>Build, measure, and ship with evidence.</p>
-      <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-top:0.75rem;">
-        <a class="button" href="/labs">Labs</a>
-        <a class="button" href="/learn">Learn</a>
-        <a class="button" href="/book">Book</a>
+  <div class="repo-shell">
+    <section class="hero-shell scene-shell scene-accent command-shell" style="--scene-accent: var(--cog-blue);">
+      <p class="hero-eyebrow">Open-source teaching repo</p>
+      <h1>Open everything, explain everything, prove everything.</h1>
+      <p class="text-small deck-subtitle">
+        This site is a living repository of open teaching artifacts: educational games, guided labs, lean agents, visuals,
+        and tools people can use immediately.
+      </p>
+      <p class="text-small">
+        Pick the route below to get started in one click.
+      </p>
+      <div class="cta-stack">
+        <a class="button button--primary" href="/learn">Start with Open Source Teaching</a>
+        <a class="button" href="/labs">Try Educational Games</a>
       </div>
-    </Card>
+    </section>
 
-    <ProofBlock claim="Oscar's work is built from measurable outcomes." proof={proofBullets} nextStep="Browse featured labs" nextHref="/labs" />
-
-    <section class="panel-shell featured-section scene-accent" style="--scene-accent: var(--cog-blue);">
-      <h2>Featured labs</h2>
+    <section class="panel-shell">
+      <h2>What you can use here</h2>
       <CardGrid gap="var(--space-3)" align="start">
-        {featuredGames.map((game) => (
-          <article class="featured-card">
-            <h3>{game.title}</h3>
-            <p class="featured-meta">{game.tagline}</p>
-            <TagList tags={game.concepts} compact maxItems={3} />
-            <div class="featured-cta-row">
-              <a class="button button--primary featured-cta" href={`/labs/${game.id}`}>Open</a>
+        {featureCards.map((card) => (
+          <Card>
+            <div class="resource-card-stack">
+              <p class="resource-card-kicker">Route</p>
+              <h2>{card.title}</h2>
+              <p class="text-small catalog-summary">{card.subtitle}</p>
+              <a class="button button--primary catalog-cta" href={card.href}>{card.action}</a>
             </div>
-          </article>
+          </Card>
         ))}
       </CardGrid>
     </section>
 
-    <section class="panel-shell featured-section scene-accent" style="--scene-accent: var(--cog-mint);">
-      <h2>Featured learning</h2>
-      <CardGrid gap="var(--space-3)" align="start">
-        {featuredModules.map((module) => (
-          <article class="featured-card">
-            <h3>{module.title}</h3>
-            <p class="text-small featured-meta">{module.level} - {module.time}</p>
-            <TagList tags={module.topics} compact maxItems={3} />
-            <a class="button button--primary featured-cta" href={module.cta.href}>{module.cta.label}</a>
-          </article>
-        ))}
-      </CardGrid>
+    <section class="panel-shell">
+      <h2>Featured open resources</h2>
+      <div class="catalog-shell">
+        <h3 class="text-small">Featured teaching modules</h3>
+        <CardGrid gap="var(--space-3)" align="start">
+          {featuredModules.map((module) => (
+            <Card>
+              <div class="catalog-card-stack">
+                <h3>{module.title}</h3>
+                <p class="catalog-meta">{module.level} · {module.time}</p>
+                <TagList tags={module.topics} compact maxItems={3} />
+                <a class="button catalog-cta" href={module.cta.href}>Open module</a>
+              </div>
+            </Card>
+          ))}
+        </CardGrid>
+      </div>
+
+      <div class="catalog-shell">
+        <h3 class="text-small">Featured open games</h3>
+        <CardGrid gap="var(--space-3)" align="start">
+          {featuredGames.map((game) => (
+            <Card>
+              <div class="catalog-card-stack">
+                <h3>{game.title}</h3>
+                <p class="catalog-summary">{game.tagline}</p>
+                <TagList tags={game.concepts} compact maxItems={3} />
+                <a class="button catalog-cta" href={`/labs/${game.id}`}>Open game</a>
+              </div>
+            </Card>
+          ))}
+        </CardGrid>
+      </div>
+
+      <div class="catalog-shell">
+        <h3 class="text-small">Featured lean agents</h3>
+        <CardGrid gap="var(--space-3)" align="start">
+          {featuredGPTs.map((gpt) => (
+            <Card>
+              <div class="catalog-card-stack">
+                <p class="text-small featured-meta"><strong>{gpt.status}</strong> · {gpt.audience[0]}</p>
+                <h3>{gpt.name}</h3>
+                <p class="catalog-summary">{gpt.short_desc}</p>
+                <a class="button catalog-cta" href={`/gpts/${gpt.id}`}>Open agent</a>
+              </div>
+            </Card>
+          ))}
+        </CardGrid>
+      </div>
+
+      <div class="catalog-shell">
+        <h3 class="text-small">Featured visuals + workshops</h3>
+        <CardGrid gap="var(--space-3)" align="start">
+          {featuredWorkshops.map((workshop) => (
+            <Card>
+              <div class="catalog-card-stack">
+                <p class="text-small featured-meta">Workshop</p>
+                <h3>{workshop.title}</h3>
+                <p class="catalog-summary">{workshop.date}</p>
+                <a class="button catalog-cta" href="/workshops">Open workshop page</a>
+              </div>
+            </Card>
+          ))}
+          {featuredVisualModules.map((module) => (
+            <Card>
+              <div class="catalog-card-stack">
+                <p class="text-small featured-meta">Visual learning</p>
+                <h3>{module.title}</h3>
+                <p class="catalog-summary">Step-by-step visual loops, proofs, and checkpoints.</p>
+                <a class="button catalog-cta" href={`/learn/${module.id}`}>Open visual class</a>
+              </div>
+            </Card>
+          ))}
+        </CardGrid>
+      </div>
     </section>
 
-    <TwoOptionCTA
-      title="Choose your path"
-      options={[
-        { title: 'Ship a small win', body: 'Build a measurable demo and share proof.', href: '/learn' },
-        { title: 'Contribute governance', body: 'Review a risk template and join a playbook loop.', href: '/join' },
-      ]}
-    />
-
-    <TwoColumn>
-      <Card slot="primary">
-        <h2>Bio snapshot</h2>
-        <p style="margin-top:0.5rem;">{profile.summary[0]}</p>
-        <p class="text-small" style="margin-top:0.5rem;">{profile.summary[1]}</p>
-      </Card>
-      <Card slot="secondary">
-        <h2>Proof highlights</h2>
-        <ul style="margin-top:0.5rem;">
-          {proofBullets.map((item) => <li>{item}</li>)}
-        </ul>
-      </Card>
-    </TwoColumn>
+    <section class="panel-shell scene-accent command-shell" style="--scene-accent: var(--cog-mint);">
+      <h2>LinkedIn is the source of truth for updates and live links</h2>
+      <p class="text-small">Connect to the author network and see where teaching and workshops are discussed and released.</p>
+      <div class="cta-stack">
+        <a class="button" href={profile.links.linkedin} target="_blank" rel="noopener noreferrer">Open LinkedIn</a>
+        <a class="button" href="/workshops">Open visuals + workshops</a>
+      </div>
+    </section>
   </div>
 </BaseLayout>

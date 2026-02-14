@@ -1,38 +1,107 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Card from '../components/Card.astro';
-import { loadWorkshops, loadLastModifiedISO } from '../lib/content';
+import CardGrid from '../components/CardGrid.astro';
+import TagList from '../components/TagList.astro';
+import { loadWorkshops, loadModules, loadProfile, loadLastModifiedISO } from '../lib/content';
 import EmptyState from '../components/EmptyState.astro';
 
-const workshops = await loadWorkshops();
+const [profile, workshops, modules] = await Promise.all([
+  loadProfile(),
+  loadWorkshops(),
+  loadModules(),
+]);
 const updated = await loadLastModifiedISO('workshops.json');
+const visualModules = modules.filter((module) => Boolean(module.visualClass));
 ---
 <BaseLayout title="Workshops - Oscar Sanchez" description="Workshop archive and import flow">
-  <h1>Workshops</h1>
-  <p class="text-small">Use a curated list of workshops. Proof-first by design.</p>
+  <h1>Visuals & Workshops</h1>
+  <p class="text-small">One place for image-first teaching assets, workshop links, and reusable resources.</p>
   <p class="text-small">Last updated: {updated ? new Date(updated).toLocaleString() : 'Not available'}</p>
 
-  {workshops.length === 0 ? (
-    <EmptyState
-      title="Add workshops"
-      body="No workshop entries yet. Add data to src/content/data/workshops.json or import from LinkedIn."
-      note="Run: npm run import:workshops"
-    />
-  ) : (
-    <div class="page-shell">
-      {workshops.map((w) => (
+  <section class="panel-shell">
+    <h2>Open workshops</h2>
+    {workshops.length === 0 ? (
+      <EmptyState
+        title="Add workshops"
+        body="No workshop entries yet. Add data to src/content/data/workshops.json or import from LinkedIn."
+        note="Run: npm run import:workshops"
+      />
+    ) : (
+      <CardGrid gap="var(--space-3)" align="start">
+        {workshops.map((w) => (
+          <Card>
+            <h3>{w.title}</h3>
+            <p class="text-small">{w.date}</p>
+            <p style="margin-top:0.5rem;">{w.description}</p>
+            <div class="cta-stack" style="margin-top:0.6rem;">
+              {w.replayUrl ? (
+                <a class="button" href={w.replayUrl} target="_blank" rel="noopener noreferrer">
+                  Replay
+                </a>
+              ) : (
+                <span class="text-small">Replay missing</span>
+              )}
+              {w.slidesUrl ? (
+                <a class="button" href={w.slidesUrl} target="_blank" rel="noopener noreferrer">
+                  Slides
+                </a>
+              ) : (
+                <span class="text-small">Slides missing</span>
+              )}
+            </div>
+          </Card>
+        ))}
+      </CardGrid>
+    )}
+  </section>
+
+  <section class="panel-shell">
+    <h2>Image-based visual learning</h2>
+    {visualModules.length === 0 ? (
+      <p class="text-small">No visual modules yet. Add a <code>visualClass</code> block to teaching modules to surface here.</p>
+    ) : (
+      <CardGrid gap="var(--space-3)" align="start">
+        {visualModules.map((module) => (
+          <Card>
+            <h3>{module.title}</h3>
+            <p class="text-small">{module.time} · {module.level}</p>
+            <TagList tags={module.topics} compact maxItems={3} />
+            <p class="catalog-summary">{module.format}</p>
+            <a class="button catalog-cta" href={module.cta.href}>Open visual class</a>
+          </Card>
+        ))}
+      </CardGrid>
+    )}
+  </section>
+
+  <section class="panel-shell">
+    <h2>Latest tools and links</h2>
+    <p class="text-small">Primary source of open-source activity and announcements.</p>
+    <CardGrid gap="var(--space-3)" align="start">
+      <Card>
+        <h3>LinkedIn</h3>
+        <p class="text-small">Follow updates, workshops, and new teaching drops.</p>
+        <a class="button button--primary" href={profile.links.linkedin} target="_blank" rel="noopener noreferrer">
+          Open LinkedIn
+        </a>
+      </Card>
+      <Card>
+        <h3>Portfolio</h3>
+        <p class="text-small">Long-form profile, repos, and external references.</p>
+        <a class="button" href={profile.links.portfolio} target="_blank" rel="noopener noreferrer">
+          Open portfolio
+        </a>
+      </Card>
+      {profile.links.youtube ? (
         <Card>
-          <h2>{w.title}</h2>
-          <p class="text-small">{w.date}</p>
-          <p style="margin-top:0.5rem;">{w.description}</p>
-          <div style="margin-top:0.6rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
-            {w.replayUrl ? <a class="button" href={w.replayUrl}>Replay</a> : <span class="text-small">Replay missing</span>}
-            {w.slidesUrl ? <a class="button" href={w.slidesUrl}>Slides</a> : <span class="text-small">Slides missing</span>}
-          </div>
+          <h3>YouTube</h3>
+          <p class="text-small">Replays, walkthroughs, and public sessions.</p>
+          <a class="button" href={profile.links.youtube} target="_blank" rel="noopener noreferrer">Open channel</a>
         </Card>
-      ))}
-    </div>
-  )}
+      ) : null}
+    </CardGrid>
+  </section>
 
   <Card>
     <h2>How to add workshops</h2>

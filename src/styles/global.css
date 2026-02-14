@@ -98,6 +98,11 @@ main {
   gap: var(--space-5);
 }
 
+.repo-shell {
+  display: grid;
+  gap: var(--space-4);
+}
+
 .scene-shell {
   display: grid;
   gap: var(--space-3);
@@ -164,6 +169,20 @@ main {
   flex-direction: column;
   gap: 0.5rem;
   min-height: 100%;
+}
+
+.resource-card-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.resource-card-kicker {
+  font-size: 0.76rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0;
 }
 
 .catalog-meta {
