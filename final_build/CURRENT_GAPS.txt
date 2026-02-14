@@ -1,2 +1,2 @@
 # CURRENT_GAPS
-- deploy.push-step | open | commit staged changes (including token/style/page updates) and run `git push origin main`.
+- no-open-gaps | completed | Validation/build/sitemap/deploy checks are complete and pushed.
