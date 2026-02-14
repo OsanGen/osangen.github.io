@@ -38,7 +38,7 @@
 ## workshops.json
 
 - `id`, `date`, `title`, `description`, `replayUrl`, `slidesUrl`, `tags[]`
-- `slidesUrl` can point to a notes anchor (for example `/workshops#kinetic-kitchen-teaching`, `/workshops#policy-gatekeeper-teaching`, `/workshops#kinetic-proof-teaching`, `/workshops#vpn-cost-lab-teaching`, or `/workshops#vibe-to-pral-teaching`) when a downloadable slide deck is not available.
+- `slidesUrl` can point to a notes anchor (for example `/workshops#kinetic-kitchen-teaching`, `/workshops#policy-gatekeeper-teaching`, `/workshops#kinetic-proof-teaching`, `/workshops#vpn-cost-lab-teaching`, `/workshops#vibe-to-pral-teaching`, or `/workshops#ghost-machine-teaching`) when a downloadable slide deck is not available.
 
 ## posts.json
 

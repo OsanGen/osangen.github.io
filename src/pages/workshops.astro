@@ -14,6 +14,20 @@ const [profile, workshops, modules] = await Promise.all([
 const updated = await loadLastModifiedISO('workshops.json');
 const visualModules = modules.filter((module) => Boolean(module.visualClass));
 const workshopGuides = {
+  'ghost-machine': {
+    primaryLabel: 'Open live experience',
+    secondaryLabel: 'How this teaches',
+    secondaryHref: '/workshops#ghost-machine-teaching',
+    teachingTitle: 'How Ghost Machine teaches',
+    teachingBullets: [
+      'Start with a high-level intent and map it to the first state transition.',
+      'Advance through state-by-state snapshots so each step is complete and independently auditable.',
+      'Watch checks make tradeoffs explicit before each move is accepted or rejected.',
+      'Use the generated proof log to explain why the system moved, paused, or escalated.',
+    ],
+    proofLine:
+      'A stateless, proof-first simulator where each transition is a full, testable evidence unit with transparent logic.',
+  },
   'vibe-to-pral': {
     primaryLabel: 'Open live experience',
     secondaryLabel: 'How this teaches',

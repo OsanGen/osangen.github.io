@@ -1,5 +1,20 @@
 [
   {
+    "id": "ghost-machine",
+    "date": "2026-02-14",
+    "title": "Ghost Machine",
+    "description": "Learn stateless AI workflow evolution with high signal and low noise: each state is auditable, explainable, and built from visible evidence rather than hidden magic.",
+    "replayUrl": "https://ghostdemo-kjctspsn.manus.space",
+    "slidesUrl": "/workshops#ghost-machine-teaching",
+    "tags": [
+      "Workflow evolution",
+      "Stateless systems",
+      "Proof-first design",
+      "Decision states",
+      "High data-ink"
+    ]
+  },
+  {
     "id": "vibe-to-pral",
     "date": "2026-02-14",
     "title": "Vibe-to-PRAL",
