@@ -1,5 +1,20 @@
 [
   {
+    "id": "vibe-to-pral",
+    "date": "2026-02-14",
+    "title": "Vibe-to-PRAL",
+    "description": "Turn a vague idea into a diagram-first PRAL workflow: structure appears step by step while inputs, gates, and handoffs stay visible and teachable.",
+    "replayUrl": "https://vibetopal-vbc22hcv.manus.space",
+    "slidesUrl": "/workshops#vibe-to-pral-teaching",
+    "tags": [
+      "Diagram-first learning",
+      "PRAL workflow",
+      "Progressive disclosure",
+      "Systems thinking",
+      "Decision routing"
+    ]
+  },
+  {
     "id": "vpn-cost-lab",
     "date": "2026-02-14",
     "title": "VPN Cost Lab",

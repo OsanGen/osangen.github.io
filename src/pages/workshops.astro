@@ -14,6 +14,20 @@ const [profile, workshops, modules] = await Promise.all([
 const updated = await loadLastModifiedISO('workshops.json');
 const visualModules = modules.filter((module) => Boolean(module.visualClass));
 const workshopGuides = {
+  'vibe-to-pral': {
+    primaryLabel: 'Open live experience',
+    secondaryLabel: 'How this teaches',
+    secondaryHref: '/workshops#vibe-to-pral-teaching',
+    teachingTitle: 'How Vibe-to-PRAL teaches',
+    teachingBullets: [
+      'Start from a vague intent and define objective, policy scope, and quality threshold.',
+      'Advance step-by-step as each validation gate confirms intent before progression.',
+      'Watch the diagram map intake to transformation, routing, and handoff with explicit state transitions.',
+      'Compare speed, confidence, and risk tradeoffs before each finalized action.',
+    ],
+    proofLine:
+      'A guided workflow where uncertain input becomes an auditable PRAL sequence with transparent gates, explicit transitions, and explainable output.',
+  },
   'vpn-cost-lab': {
     primaryLabel: 'Open live experience',
     secondaryLabel: 'How this teaches',
