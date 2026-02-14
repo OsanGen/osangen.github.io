@@ -15,6 +15,21 @@
     ]
   },
   {
+    "id": "manus-workshop",
+    "date": "2026-02-14",
+    "title": "Manus Evidence-First Workshop",
+    "description": "Learn how to evaluate AI agent tools with public evidence, from rubric setup to candidate ranking and a procurement-ready recommendation pack.",
+    "replayUrl": "https://www.linkedin.com/events/manusworkshop7413933458843934720/theater/",
+    "slidesUrl": "/workshops#manus-workshop-teaching",
+    "tags": [
+      "Visual learning",
+      "AI procurement",
+      "Decision scoring",
+      "Citations",
+      "Agent evaluation"
+    ]
+  },
+  {
     "id": "ghost-machine",
     "date": "2026-02-14",
     "title": "Ghost Machine",
