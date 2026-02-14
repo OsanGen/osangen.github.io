@@ -12,7 +12,9 @@ const [profile, workshops, modules] = await Promise.all([
   loadModules(),
 ]);
 const updated = await loadLastModifiedISO('workshops.json');
-const visualModules = modules.filter((module) => Boolean(module.visualClass));
+const visualModules = modules.filter(
+  (module) => Boolean(module.visualClass) && module.id !== 'beautiful-code-theory',
+);
 const workshopGuides = {
   'leanagents-workshop-chatgpt-apps': {
     primaryLabel: 'Open live experience',
