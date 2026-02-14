@@ -2,184 +2,34 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { loadGPTs } from '../lib/content';
 import GPTCard from '../components/GPTCard.astro';
-import FiltersChips from '../components/FiltersChips.astro';
 
 const gpts = await loadGPTs();
-
-const statusOptions = gpts.map((gpt) => gpt.status);
-const tagOptions = gpts.flatMap((gpt) => gpt.tags);
-const audienceOptions = gpts.flatMap((gpt) => gpt.audience);
-const totalCount = gpts.length;
-
-const uniqueStatuses = Array.from(new Set(statusOptions));
-const uniqueTags = Array.from(new Set(tagOptions));
-const uniqueAudiences = Array.from(new Set(audienceOptions));
 ---
-<BaseLayout title="Lean Agents | Oscar Sanchez" description="Reusable execution tools for faster decisions and clearer outcomes.">
-<section class="hero-shell scene-shell scene-accent command-shell gpts-hero" style="--scene-accent: var(--cog-blue);">
-    <p class="hero-eyebrow">Proof-first operations for AI copilots</p>
-    <h1>Lean Agents, made proof-first</h1>
-    <p class="text-small deck-subtitle" style="max-width: 70ch;">
-      Claim. Proof. Decision. A practical execution stack for teams that want clarity without bloat.
+<BaseLayout title="Lean Agents | Oscar Sanchez" description="Lean agents directory for practical AI workflows and execution support.">
+  <section class="hero-shell scene-shell scene-accent command-shell gpts-hero" style="--scene-accent: var(--cog-blue);">
+    <p class="hero-eyebrow">Lean Agents directory</p>
+    <h1>Find the right lean agent fast</h1>
+    <p class="text-small deck-subtitle">
+      Choose an agent, open it, and start execution. Full methods and proof notes live on each agent detail page.
     </p>
-
-    <div class="command-row" aria-label="Decision rail">
-      <span class="proof-chip">Claim → proof → next step</span>
-      <span class="proof-chip">Evidence before expansion</span>
-      <span class="proof-chip">{totalCount} ready agents</span>
-    </div>
-
-    <div class="cta-stack gpts-actions" style="margin-top:0.65rem;">
-      <a class="button button--primary" href="#gpt-grid">Try a GPT</a>
+    <div class="cta-stack gpts-actions">
+      <a class="button button--primary" href="#gpt-grid">Browse agents</a>
       <a class="button" href="/book">Book a session</a>
-      <a class="button" href="/join">Contribute an improvement</a>
     </div>
-
-    <div class="decision-rail">
-      <div class="decision-stat">
-        <strong>{uniqueStatuses.length}</strong>
-        <span class="muted">active statuses represented</span>
-      </div>
-      <div class="decision-stat">
-        <strong>{uniqueTags.length}</strong>
-        <span class="muted">audience and use-case tags</span>
-      </div>
-      <div class="decision-stat">
-        <strong>{uniqueAudiences.length}</strong>
-        <span class="muted">target audience groups</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="panel-shell section scene-accent" style="--scene-accent: var(--cog-mint);" aria-labelledby="gpt-filters-heading">
-    <h2 id="gpt-filters-heading">Explore Lean Agents</h2>
-    <p class="text-small" style="margin-bottom:0.55rem;">
-      Filter by status, tag, or audience. Cards now open compact by default.
-    </p>
-    <div class="filters" data-filter-zone>
-      <FiltersChips title="Status" filterType="status" items={statusOptions} />
-      <FiltersChips title="Tag" filterType="tag" items={tagOptions} />
-      <FiltersChips title="Audience" filterType="audience" items={audienceOptions} />
-    </div>
-    <p class="text-small" style="margin-top:0.6rem;" data-visible-count aria-live="polite"></p>
   </section>
 
   <section class="scene-shell section" aria-labelledby="gpts-grid-heading">
-    <h2 id="gpts-grid-heading" class="text-small" style="margin:0;">Available Lean Agents</h2>
-    <div id="gpt-grid" class="gpts-grid" data-gpt-grid>
+    <h2 id="gpts-grid-heading" class="text-small">Available Lean Agents</h2>
+    <div id="gpt-grid" class="gpts-grid">
       {gpts.map((gpt, idx) => <GPTCard gpt={gpt} revealDelayMs={idx * 45} />)}
     </div>
-    <p data-empty-message hidden class="panel-shell" style="text-align:center;">
-      No agents match those filters. Broaden one filter and try again.
-    </p>
   </section>
 
-  <section class="panel-shell section scene-accent gpts-cta-strip" style="--scene-accent: var(--cog-pink);">
-    <p class="text-small">Start with one agent, validate proof, then scale.</p>
+  <section class="panel-shell section gpts-cta-strip">
+    <p class="text-small">Need learning paths, workshops, and community routes?</p>
     <div class="cta-stack">
-      <a class="button button--primary" href="/book">Book a session</a>
-      <a class="button" href="/join">Contribute a PR</a>
-      <a class="button" href="/docs">See content model</a>
+      <a class="button" href="/more">Open more</a>
+      <a class="button" href="/resume">View resume</a>
     </div>
   </section>
 </BaseLayout>
-
-<script is:inline>
-  (() => {
-    const filterButtons = Array.from(document.querySelectorAll('[data-filter="true"]'));
-    const cards = Array.from(document.querySelectorAll('[data-gpt-card]'));
-    const detailSections = Array.from(document.querySelectorAll('details[data-agent-details]'));
-    const emptyMessage = document.querySelector('[data-empty-message]');
-    const visibleCount = document.querySelector('[data-visible-count]');
-    const activeFilters = {
-      status: 'all',
-      tag: 'all',
-      audience: 'all',
-    };
-
-    const toSet = (value = '') => value.toLowerCase().split(',').map((item) => item.trim()).filter(Boolean);
-
-    const cardMatches = (card) => {
-      const cardStatus = card.dataset.status?.toLowerCase();
-      const cardTags = toSet(card.dataset.tags);
-      const cardAudience = toSet(card.dataset.audience);
-
-      if (activeFilters.status !== 'all' && cardStatus !== activeFilters.status) {
-        return false;
-      }
-
-      if (activeFilters.tag !== 'all' && !cardTags.includes(activeFilters.tag)) {
-        return false;
-      }
-
-      if (activeFilters.audience !== 'all' && !cardAudience.includes(activeFilters.audience)) {
-        return false;
-      }
-
-      return true;
-    };
-
-    const applyFilters = () => {
-      let total = 0;
-      cards.forEach((card) => {
-        if (cardMatches(card)) {
-          card.classList.remove('gpt-hidden');
-          total += 1;
-        } else {
-          card.classList.add('gpt-hidden');
-          const details = card.querySelector('details[data-agent-details]');
-          if (details) {
-            details.removeAttribute('open');
-          }
-        }
-      });
-
-      if (visibleCount) {
-        visibleCount.textContent = `${total} agent${total === 1 ? '' : 's'} available`;
-      }
-
-      if (emptyMessage) {
-        emptyMessage.hidden = total !== 0;
-      }
-    };
-
-    const setFilter = (type, value) => {
-      activeFilters[type] = value;
-      filterButtons
-        .filter((button) => button.dataset.filterType === type)
-        .forEach((button) => {
-          const pressed = button.dataset.filterValue === value;
-          button.classList.toggle('chip--active', pressed);
-          button.setAttribute('aria-pressed', String(pressed));
-        });
-      applyFilters();
-    };
-
-    filterButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        const type = button.dataset.filterType;
-        const value = button.dataset.filterValue;
-        if (!type || !value) {
-          return;
-        }
-        setFilter(type, value);
-      });
-    });
-
-    detailSections.forEach((details) => {
-      details.addEventListener('toggle', () => {
-        if (!details.open) {
-          return;
-        }
-
-        detailSections.forEach((other) => {
-          if (other !== details) {
-            other.open = false;
-          }
-        });
-      });
-    });
-
-    applyFilters();
-  })();
-</script>

@@ -1,9 +1,18 @@
 ---
 export interface Props {
   tags: string[];
+  maxItems?: number;
+  compact?: boolean;
 }
-const { tags } = Astro.props;
+const { tags, maxItems, compact = false } = Astro.props;
+
+const safeTags = tags.filter((tag) => tag.trim().length > 0);
+const limitedTags = typeof maxItems === 'number' && maxItems > 0
+  ? safeTags.slice(0, maxItems)
+  : safeTags;
+const overflowCount = Math.max(0, safeTags.length - limitedTags.length);
 ---
-<div class="tag-list" aria-label="Tags">
-  {tags.map((tag) => <span class="badge">{tag}</span>)}
+<div class:list={['tag-list', compact && 'tag-list--compact']} aria-label="Tags">
+  {limitedTags.map((tag) => <span class="badge">{tag}</span>)}
+  {overflowCount > 0 ? <span class="badge badge--overflow">+{overflowCount}</span> : null}
 </div>

@@ -60,6 +60,8 @@
 - `status`: one of `"active" | "prototype" | "archived"`
 - `tags`: string[]
 - `audience`: string[]
+- `short_desc`: string (directory summary, max 160 chars)
+- `link`: string (canonical listing CTA target; internal `/...` or `https://...`)
 - `promise`: string
 - `ships`: string
 - `how_to_use`: string[] (exactly 3 items)
@@ -69,6 +71,8 @@
   - `promptPack`: string
   - `demo`: string
 - Empty strings on links are treated as "not yet available" and render safe fallback actions in UI.
+- `short_desc` + `link` power the `/gpts` directory listing cards.
+- Long fields (`proof`, `how_to_use`, `limits`, `links`) are used on `/gpts/[id]` detail pages.
 - `proof`:
   - `type`: `"image"` or `"sample_io"`
   - for `image`: `label`, `imageUrl`, `imageAlt`

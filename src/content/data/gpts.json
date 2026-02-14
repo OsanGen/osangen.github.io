@@ -5,6 +5,8 @@
     "status": "active",
     "tags": ["Brand", "Marketing", "Content System"],
     "audience": ["Founder", "Marketing", "Builder", "Exec"],
+    "short_desc": "Turn founder vision into a team-ready brand system with clear voice, visual rules, and operational handoff artifacts.",
+    "link": "https://chatgpt.com/g/g-68c70e0cd15c8191bd0d8f49fa4907c9-brandbookgen",
     "promise": "Turn founder ideas into a brand book your whole team can execute, with structure technical teams can operationalize.",
     "ships": "Brand narrative + voice rules + design-token starter + export-ready manifests",
     "how_to_use": [
@@ -38,6 +40,8 @@
     "status": "active",
     "tags": ["Prompting", "Image Generation", "Gemini", "Creativity"],
     "audience": ["Creator", "Marketing", "Builder", "Exec"],
+    "short_desc": "Convert rough image ideas into clean production prompts through guided clarification, then ship a final prompt ready for generation.",
+    "link": "https://chatgpt.com/g/g-6928734ed0a48191a5c2edf9785284de-nano-prompt-coach",
     "promise": "Turn rough image ideas into production-quality Nano Banana Pro prompts through a guided, one-question-at-a-time workflow, then return copy-ready drafts with a final improvement pass.",
     "ships": "Prompt coaching flow + quick templates by use case + initial draft, boosted draft, and final checked prompt",
     "how_to_use": [
@@ -67,6 +71,8 @@
     "status": "active",
     "tags": ["Sora", "Video", "Prompt Engineering", "Production"],
     "audience": ["Creator", "Marketing", "Builder", "Exec", "Learning"],
+    "short_desc": "Shape messy video ideas into scene-by-scene Sora prompts with timing, continuity, and platform constraints built in.",
+    "link": "/gpts/sora-prompt-coach",
     "promise": "Turn vague story ideas into reliable Sora-ready scene prompts, one clip at a time, so teams can iterate quickly without prompt chaos.",
     "ships": "State capture + clip planning + beat-timed scene prompts + continuity locks + platform-target mapping (sora_app / sora_web_editor / sora_2_api).",
     "how_to_use": [
@@ -100,6 +106,8 @@
     "status": "active",
     "tags": ["Learning", "Development", "Content", "Prompt Engineering"],
     "audience": ["Learning", "Ops", "Marketing", "Builder", "Exec"],
+    "short_desc": "Translate training goals into measurable learning modules with structured prompts, rubrics, and rollout-ready content.",
+    "link": "https://chatgpt.com/g/g-6894bf09fdec81919f119d38a758f06a-l-d-gen",
     "promise": "Turn training goals into high-impact learning assets fast, with prompts that map to measurable outcomes and rollout-ready learning modules.",
     "ships": "Curriculum framing, measurable learning objectives, lesson-to-prompt packs, and quality checkpoints for consistency.",
     "how_to_use": [

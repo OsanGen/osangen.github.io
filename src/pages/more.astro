@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Card from '../components/Card.astro';
+import CardGrid from '../components/CardGrid.astro';
+
+const moreLinks = [
+  { title: 'Learn', body: 'Structured modules and practical classes.', href: '/learn' },
+  { title: 'Workshops', body: 'Sessions, replays, and workshop artifacts.', href: '/workshops' },
+  { title: 'Posts', body: 'Short insights and external writeups.', href: '/posts' },
+  { title: 'Join', body: 'Community and collaboration routes.', href: '/join' },
+  { title: 'About', body: 'Short profile and proof highlights.', href: '/about' },
+  { title: 'Docs', body: 'Content models, QC, and system docs.', href: '/docs' },
+  { title: 'Code of Conduct', body: 'Participation standards and norms.', href: '/code-of-conduct' },
+];
+---
+<BaseLayout title="More - Oscar Sanchez" description="Secondary site sections and references.">
+  <h1>More</h1>
+  <p class="text-small">Secondary pages and references in one place.</p>
+
+  <div class="catalog-shell">
+    <CardGrid gap="var(--space-3)" align="start">
+      {moreLinks.map((item) => (
+        <Card>
+          <div class="catalog-card-stack">
+            <h2>{item.title}</h2>
+            <p class="catalog-summary">{item.body}</p>
+            <a class="button catalog-cta" href={item.href}>Open</a>
+          </div>
+        </Card>
+      ))}
+    </CardGrid>
+  </div>
+</BaseLayout>

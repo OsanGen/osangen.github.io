@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Card from '../components/Card.astro';
+import { loadProfile } from '../lib/content';
+
+const profile = await loadProfile();
+---
+<BaseLayout title="Resume - Oscar Sanchez" description="Professional experience, education, and selected proof highlights.">
+  <h1>Resume</h1>
+  <p class="text-small">Long-form work history and selected outcomes.</p>
+
+  <div class="page-shell">
+    <Card>
+      <h2>Summary</h2>
+      <p class="text-small">{profile.headline}</p>
+      {profile.summary.map((item) => <p class="catalog-summary">{item}</p>)}
+      <p class="text-small" style="margin-top:0.6rem;">Download PDF coming soon.</p>
+    </Card>
+
+    <Card>
+      <h2>Experience</h2>
+      {profile.experience.map((entry) => (
+        <div class="resume-item">
+          <p><strong>{entry.role}</strong> - {entry.org}</p>
+          <p class="text-small">{entry.start} to {entry.end ?? 'present'}{entry.location ? ` - ${entry.location}` : ''}</p>
+          <ul>
+            {entry.highlights.map((highlight) => <li>{highlight}</li>)}
+          </ul>
+        </div>
+      ))}
+    </Card>
+
+    <Card>
+      <h2>Education</h2>
+      {profile.education.map((entry) => (
+        <div class="resume-item">
+          <p><strong>{entry.program}</strong> - {entry.org}</p>
+          <p class="text-small">{entry.start ?? 'start TBD'} to {entry.end ?? 'end TBD'}</p>
+        </div>
+      ))}
+    </Card>
+
+    <Card>
+      <h2>Selected proof</h2>
+      {profile.proof_selected.map((entry) => (
+        <div class="resume-item">
+          <p><strong>{entry.label}</strong></p>
+          <ul>
+            {entry.proof.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      ))}
+    </Card>
+  </div>
+</BaseLayout>

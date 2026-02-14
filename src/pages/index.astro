@@ -31,35 +31,35 @@ const proofBullets = profile.proof_selected.slice(0, 4).flatMap((entry) => entry
 
     <ProofBlock claim="Oscar's work is built from measurable outcomes." proof={proofBullets} nextStep="Browse featured labs" nextHref="/labs" />
 
-    <Card>
+    <section class="panel-shell featured-section scene-accent" style="--scene-accent: var(--cog-blue);">
       <h2>Featured labs</h2>
-      <CardGrid>
+      <CardGrid gap="var(--space-3)" align="start">
         {featuredGames.map((game) => (
-          <article class="card">
+          <article class="featured-card">
             <h3>{game.title}</h3>
-            <p style="margin-top:0.5rem;">{game.tagline}</p>
-            <TagList tags={game.concepts} />
-            <div style="margin-top:0.8rem; display:flex; gap:0.5rem;">
-              <a class="button" href={`/labs/${game.id}`}>Open</a>
+            <p class="featured-meta">{game.tagline}</p>
+            <TagList tags={game.concepts} compact maxItems={3} />
+            <div class="featured-cta-row">
+              <a class="button button--primary featured-cta" href={`/labs/${game.id}`}>Open</a>
             </div>
           </article>
         ))}
       </CardGrid>
-    </Card>
+    </section>
 
-    <Card>
+    <section class="panel-shell featured-section scene-accent" style="--scene-accent: var(--cog-mint);">
       <h2>Featured learning</h2>
-      <CardGrid>
+      <CardGrid gap="var(--space-3)" align="start">
         {featuredModules.map((module) => (
-          <article class="card">
+          <article class="featured-card">
             <h3>{module.title}</h3>
-            <p class="text-small" style="margin-top:0.5rem;">{module.level} - {module.time}</p>
-            <TagList tags={module.topics} />
-            <a class="button" style="margin-top:0.7rem;" href={module.cta.href}>{module.cta.label}</a>
+            <p class="text-small featured-meta">{module.level} - {module.time}</p>
+            <TagList tags={module.topics} compact maxItems={3} />
+            <a class="button button--primary featured-cta" href={module.cta.href}>{module.cta.label}</a>
           </article>
         ))}
       </CardGrid>
-    </Card>
+    </section>
 
     <TwoOptionCTA
       title="Choose your path"

@@ -1,0 +1,113 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProofIOBlock from '../../components/ProofIOBlock.astro';
+import TagList from '../../components/TagList.astro';
+import { loadGPTs, isUnavailableLink } from '../../lib/content';
+import type { GPT } from '../../lib/schemas';
+
+export async function getStaticPaths() {
+  const gpts = await loadGPTs();
+  return gpts.map((gpt) => ({
+    params: {
+      id: gpt.id,
+    },
+    props: {
+      gpt,
+    },
+  }));
+}
+
+const { gpt } = Astro.props as { gpt?: GPT };
+const useHref = gpt ? gpt.links.use.trim() : '';
+const hasUseLink = gpt ? !isUnavailableLink(useHref) : false;
+const useIsExternal = hasUseLink && /^https?:\/\//.test(useHref);
+const promptPackHref = gpt ? gpt.links.promptPack.trim() : '';
+const demoHref = gpt ? gpt.links.demo.trim() : '';
+const hasPromptPack = gpt ? !isUnavailableLink(promptPackHref) : false;
+const hasDemo = gpt ? !isUnavailableLink(demoHref) : false;
+const promptPackExternal = hasPromptPack && /^https?:\/\//.test(promptPackHref);
+const demoExternal = hasDemo && /^https?:\/\//.test(demoHref);
+---
+<BaseLayout title={gpt ? `${gpt.name} | Lean Agents` : 'Agent not found'} description="Lean agent detail with usage, proof, and limits.">
+  {gpt ? (
+    <div class="page-shell">
+      <section class="hero-shell scene-shell scene-accent" style="--scene-accent: var(--cog-blue);">
+        <p class="hero-eyebrow">Lean Agent detail</p>
+        <h1>{gpt.name}</h1>
+        <p class="text-small deck-subtitle">{gpt.short_desc}</p>
+        <p class="text-small"><strong>Outcome:</strong> {gpt.ships}</p>
+        <TagList tags={gpt.tags} compact maxItems={3} />
+        <div class="cta-stack">
+          {hasUseLink ? (
+            <a
+              href={useHref}
+              class="button button--primary"
+              target={useIsExternal ? '_blank' : undefined}
+              rel={useIsExternal ? 'noopener noreferrer' : undefined}
+            >
+              Open agent
+            </a>
+          ) : (
+            <span class="text-small">Public agent link coming soon.</span>
+          )}
+          <a href="/gpts" class="button">Back to directory</a>
+        </div>
+      </section>
+
+      <section class="panel-shell">
+        <h2>Proof</h2>
+        <ProofIOBlock proof={gpt.proof} mode="full" />
+      </section>
+
+      <section class="panel-shell">
+        <h2>How to use</h2>
+        <ol class="gpt-steps">
+          {gpt.how_to_use.map((step) => <li>{step}</li>)}
+        </ol>
+      </section>
+
+      <section class="panel-shell">
+        <h2>Limits</h2>
+        <ul class="gpt-limits">
+          {gpt.limits.map((limit) => <li>{limit}</li>)}
+        </ul>
+      </section>
+
+      <section class="panel-shell">
+        <h2>Additional resources</h2>
+        <div class="cta-stack">
+          {hasPromptPack ? (
+            <a
+              class="button"
+              href={promptPackHref}
+              target={promptPackExternal ? '_blank' : undefined}
+              rel={promptPackExternal ? 'noopener noreferrer' : undefined}
+            >
+              Prompt pack
+            </a>
+          ) : (
+            <span class="text-small">Prompt pack pending</span>
+          )}
+          {hasDemo ? (
+            <a
+              class="button"
+              href={demoHref}
+              target={demoExternal ? '_blank' : undefined}
+              rel={demoExternal ? 'noopener noreferrer' : undefined}
+            >
+              Open demo
+            </a>
+          ) : (
+            <span class="text-small">Demo pending</span>
+          )}
+        </div>
+      </section>
+    </div>
+  ) : (
+    <section class="panel-shell">
+      <h1>Agent not found</h1>
+      <p class="text-small">Return to Lean Agents to open an available entry.</p>
+      <a href="/gpts" class="button">Back to Lean Agents</a>
+    </section>
+  )}
+</BaseLayout>

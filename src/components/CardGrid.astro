@@ -1,9 +1,10 @@
 ---
 export interface Props {
   gap?: string;
+  align?: 'start' | 'stretch';
 }
-const { gap = 'var(--space-4)' } = Astro.props;
+const { gap = 'var(--space-4)', align = 'start' } = Astro.props;
 ---
-<div class="grid" style={`gap:${gap}`}>
+<div class="grid" style={`gap:${gap};--grid-align-items:${align};`}>
   <slot />
 </div>

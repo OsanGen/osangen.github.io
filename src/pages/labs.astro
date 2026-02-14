@@ -12,21 +12,23 @@ const games = await loadGames();
   <h1>Labs</h1>
   <p class="text-small">Learn through playable examples.</p>
 
-  <CardGrid>
+  <CardGrid gap="var(--space-3)" align="start">
     {games.map((game, index) => (
       <Card>
-        {index === 0 ? <Badge label="Playable" /> : null}
-        <h2 style="margin-top:0.5rem;">{game.title}</h2>
-        <p style="margin-top:0.4rem;">{game.tagline}</p>
-        <TagList tags={game.concepts} />
-        <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:0.7rem;">
-          <a class="button" href={`/labs/${game.id}`}>Details</a>
-          <a class="button" href={game.deployUrl} target="_blank" rel="noopener noreferrer">Play</a>
-          {game.repoUrl ? (
-            <a class="button" href={game.repoUrl} target="_blank" rel="noopener noreferrer">Repo</a>
-          ) : (
-            <span class="text-small">Repo not yet added</span>
-          )}
+        <div class="catalog-card-stack">
+          {index === 0 ? <Badge label="Playable" /> : null}
+          <h2>{game.title}</h2>
+          <p class="catalog-summary">{game.tagline}</p>
+          <TagList tags={game.concepts} compact maxItems={3} />
+          <div class="catalog-actions">
+            <a class="button" href={`/labs/${game.id}`}>Details</a>
+            <a class="button button--primary" href={game.deployUrl} target="_blank" rel="noopener noreferrer">Play</a>
+            {game.repoUrl ? (
+              <a class="button" href={game.repoUrl} target="_blank" rel="noopener noreferrer">Repo</a>
+            ) : (
+              <span class="text-small">Repo not yet added</span>
+            )}
+          </div>
         </div>
       </Card>
     ))}

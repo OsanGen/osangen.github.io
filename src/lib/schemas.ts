@@ -187,6 +187,8 @@ export const GPTSchema = z.object({
   status: z.enum(['active', 'prototype', 'archived']),
   tags: z.array(z.string()),
   audience: z.array(z.string()),
+  short_desc: z.string().max(160),
+  link: z.string().min(1),
   promise: z.string(),
   ships: z.string(),
   how_to_use: z.array(z.string()).length(3),

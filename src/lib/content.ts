@@ -16,10 +16,17 @@ import { z } from 'zod';
 const contentRoot = path.join(process.cwd(), 'src', 'content', 'data');
 const cache = new Map<string, Promise<unknown>>();
 const LINK_PLACEHOLDER_PATTERN = /\b(?:placeholder|todo|xxxxx|temp)\b/i;
+const HTTP_LINK_PATTERN = /^https?:\/\//i;
 
 export const isUnavailableLink = (value = '') => {
   const normalized = value.trim().toLowerCase();
   return !normalized || LINK_PLACEHOLDER_PATTERN.test(normalized);
+};
+
+const isCanonicalAgentLink = (value = '') => {
+  const normalized = value.trim();
+  if (!normalized) return false;
+  return normalized.startsWith('/') || HTTP_LINK_PATTERN.test(normalized);
 };
 
 function loadJsonCached<T>(filename: string, schema: z.ZodSchema<T>): Promise<T> {
@@ -48,6 +55,13 @@ export const loadWorkshops = () => loadJsonCached('workshops.json', z.array(Work
 export const loadPosts = () => loadJsonCached('posts.json', z.array(PostSchema));
 export const loadGPTs = async () => {
   const gpts = await loadJsonCached('gpts.json', z.array(GPTSchema));
+  const invalidListingLinks = gpts.filter((gpt: GPT) => !isCanonicalAgentLink(gpt.link));
+
+  if (invalidListingLinks.length > 0) {
+    const ids = invalidListingLinks.map((gpt: GPT) => gpt.id).join(', ');
+    throw new Error(`Invalid GPT listing link for: ${ids}. Use /internal-path or https:// URL.`);
+  }
+
   const hasPlaceholderLink = gpts.some((gpt: GPT) => {
     const allLinks = [gpt.links.use, gpt.links.promptPack, gpt.links.demo];
     return allLinks.some((value) => {

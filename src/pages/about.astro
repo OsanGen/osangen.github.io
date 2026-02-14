@@ -4,46 +4,34 @@ import Card from '../components/Card.astro';
 import { loadProfile } from '../lib/content';
 
 const profile = await loadProfile();
+const proofBullets = profile.proof_selected.flatMap((entry) => entry.proof).slice(0, 3);
 ---
-<BaseLayout title="About - Oscar Sanchez" description="Bio and work patterns">
+<BaseLayout title="About - Oscar Sanchez" description="Short professional snapshot and proof highlights.">
   <h1>About</h1>
   <div class="page-shell">
     <Card>
-      <h2>Bio</h2>
+      <h2>Snapshot</h2>
       <p class="text-small">{profile.headline}</p>
-      {profile.summary.map((s) => <p style="margin-top:0.5rem;">{s}</p>)}
+      {profile.summary.slice(0, 2).map((item) => <p class="catalog-summary">{item}</p>)}
     </Card>
 
     <Card>
-      <h2>What I do</h2>
+      <h2>Proof highlights</h2>
       <ul>
-        {profile.what_i_do.map((item) => <li>{item}</li>)}
+        {proofBullets.map((item) => <li>{item}</li>)}
       </ul>
     </Card>
 
     <Card>
-      <h2>How I work</h2>
-      <ul>
-        {profile.how_i_work.map((item) => <li>{item}</li>)}
-      </ul>
-    </Card>
-
-    <Card>
-      <h2>Experience</h2>
-      {profile.experience.map((entry) => (
-        <div style="margin-bottom:0.8rem;">
-          <p><strong>{entry.role}</strong> - {entry.org}</p>
-          <p class="text-small">{entry.start} to {entry.end ?? 'present'} - {entry.location}</p>
-          <ul>
-            {entry.highlights.map((h) => <li>{h}</li>)}
-          </ul>
-        </div>
-      ))}
-    </Card>
-
-    <Card>
-      <h2>Beautiful Code Theory</h2>
-      <p class="text-small">Loop and handoff design with proof packs and visible evidence.</p>
+      <h2>Links</h2>
+      <div class="cta-stack">
+        <a class="button" href={profile.links.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a class="button" href={profile.links.youtube} target="_blank" rel="noopener noreferrer">YouTube</a>
+        <a class="button" href={profile.links.portfolio} target="_blank" rel="noopener noreferrer">Portfolio</a>
+      </div>
+      <div class="cta-stack" style="margin-top:0.75rem;">
+        <a class="button button--primary" href="/resume">Open resume</a>
+      </div>
     </Card>
   </div>
 </BaseLayout>

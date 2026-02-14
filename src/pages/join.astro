@@ -19,22 +19,24 @@ const communities = await loadCommunities();
     ]}
   />
 
-  <div style="margin-top:1rem;">
-    <CardGrid>
+  <div class="catalog-shell">
+    <CardGrid gap="var(--space-3)" align="start">
       {communities.map((c) => (
         <Card>
-          <h2>{c.name}</h2>
-          <p class="text-small">{c.type}</p>
-          <p style="margin-top:0.6rem;"><strong>Who it fits:</strong> {c.fit.join(', ')}</p>
-          <p><strong>Why join:</strong></p>
-          <ul>
-            {c.why.slice(0, 3).map((w) => <li>{w}</li>)}
-          </ul>
-          {c.join.url ? (
-            <a class="button" href={c.join.url} target="_blank" rel="noopener noreferrer">{c.join.label}</a>
-          ) : (
-            <p class="text-small">Add your Calendly URL in communities.json.</p>
-          )}
+          <div class="catalog-card-stack">
+            <h2>{c.name}</h2>
+            <p class="text-small catalog-meta">{c.type}</p>
+            <p class="catalog-summary"><strong>Who it fits:</strong> {c.fit.join(', ')}</p>
+            <p><strong>Why join:</strong></p>
+            <ul>
+              {c.why.slice(0, 3).map((w) => <li>{w}</li>)}
+            </ul>
+            {c.join.url ? (
+              <a class="button button--primary catalog-cta" href={c.join.url} target="_blank" rel="noopener noreferrer">{c.join.label}</a>
+            ) : (
+              <p class="text-small">Add your Calendly URL in communities.json.</p>
+            )}
+          </div>
         </Card>
       ))}
     </CardGrid>

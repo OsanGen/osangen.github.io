@@ -31,6 +31,8 @@ jobs:
       - name: Validate GPT route output
         run: |
           test -f dist/gpts/index.html || (echo "Missing dist/gpts/index.html - /gpts route did not build." && exit 1)
+          test -f dist/resume/index.html || (echo "Missing dist/resume/index.html - /resume route did not build." && exit 1)
+          test -f dist/more/index.html || (echo "Missing dist/more/index.html - /more route did not build." && exit 1)
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
