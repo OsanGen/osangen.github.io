@@ -10,6 +10,28 @@ export interface Props {
 }
 
 const { title, description } = Astro.props;
+
+const pathKey = (Astro.url.pathname.replace(/\/$/, '') || '/');
+const accentByRoute: Array<[string, string]> = [
+  ['/', 'var(--cog-blue)'],
+  ['/labs', 'var(--cog-pink)'],
+  ['/gpts', 'var(--cog-yellow)'],
+  ['/workshops', 'var(--cog-mint)'],
+  ['/join', 'var(--cog-yellow)'],
+  ['/resume', 'var(--cog-blue)'],
+  ['/about', 'var(--cog-mint)'],
+  ['/more', 'var(--cog-pink)'],
+  ['/posts', 'var(--cog-blue)'],
+];
+
+const pageAccent = accentByRoute.find(([route]) => {
+  if (route === '/') {
+    return pathKey === '/';
+  }
+  return pathKey.startsWith(route);
+})?.[1] ?? 'var(--cog-blue)';
+
+const pageId = pathKey === '/' ? 'home' : pathKey.replace('/', '').split('/')[0];
 ---
 <!doctype html>
 <html lang="en">
@@ -24,10 +46,10 @@ const { title, description } = Astro.props;
     <title>{title}</title>
     <meta name="theme-color" content="#ffffff" />
   </head>
-  <body>
+  <body data-page={pageId} style={`--page-accent: ${pageAccent};`}>
     <a href="#main-content" class="skip-link">Skip to content</a>
     <Header />
-    <main id="main-content" class="container">
+    <main id="main-content" class="container site-page">
       <slot />
     </main>
     <Footer />

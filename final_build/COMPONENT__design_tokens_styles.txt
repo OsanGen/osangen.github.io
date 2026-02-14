@@ -31,6 +31,8 @@ Acceptance checks:
 - `src/styles/global.css` contains no hardcoded accent-color hex literals except token definitions.
 - Legacy extra surface variants are absent from active style usage.
 - Decorative gradients are limited to non-essential utility; no mandatory brand-mark hardcoded yellow shadow or non-token panel tinting remains.
+- Global page shell now applies scene-wide animated accent rails from `--page-accent` for every route.
+- All pages receive a shared motion entry (`cog-page-enter`) plus ambient route accent orbiting elements anchored in tokenized color values.
 
 2026 follow-up updates:
 - Added soft accent token family in `src/styles/tokens.css`:

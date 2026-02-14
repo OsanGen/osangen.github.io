@@ -3,14 +3,18 @@
 Purpose:
 - Compose global page skeleton with shared metadata, nav/footer shell, and root container.
 - Provide a single shared insertion point for global runtime side effects (service worker registration).
+- Compute and apply a route-scoped accent token at the page shell level.
 
 Inputs:
 - `Props`: `title` (required), `description` (optional)
 - Child slot content for page-specific rendering.
 - `ServiceWorkerRegister` component import and mount point in the `<body>`.
+- URL path (from `Astro.url.pathname`) to determine route-level accent and `data-page`.
 
 Outputs:
 - Fully formed HTML document scaffold (`<!doctype html>`), global metadata tags, and consistent main/layout structure.
+- Root `<body>` with `--page-accent` token and `data-page` attribute.
+- Main content wrapped in `.site-page` class for global page-level motion shell.
 
 State:
 - No internal business logic state.
@@ -19,6 +23,7 @@ State:
 Edge cases:
 - Missing description falls back to default portfolio summary.
 - Header/footer still render for all routes because layout is shared.
+- Dynamic path normalization ensures `/section` and `/section/` resolve to the same accent rule.
 
 Dependencies:
 - `src/styles/global.css` (global tokenized style layer)
@@ -28,3 +33,5 @@ Dependencies:
 Acceptance checks:
 - Pages render with consistent container and skip link semantics.
 - Manifest link and service worker mount are present in all layout-rendered routes.
+- Route-scoped accent updates every page using one canonical CogSec accent token.
+- One page-shell animation + border accent layer is present on every layout-rendered route.
