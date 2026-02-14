@@ -1,0 +1,31 @@
+Component/page: `src/pages/gpts.astro`
+
+Purpose:
+- Provide a calm, low-noise directory of Lean Agents.
+- Keep layout minimal and add subtle per-item pacing/accent variation.
+
+Inputs:
+- `loadGPTs()` from `src/lib/content.ts`.
+- Internal list of accent tokens used to vary `GPTCard` scene color.
+
+Outputs:
+- Hero with concise title and deck.
+- `gpts-grid` card set where each `GPTCard` receives:
+  - `sceneAccent` token
+  - `revealDelayMs` for staggered entrance.
+- CTA strip for navigation to related routes.
+
+State:
+- No interactive state; render-time list mapping.
+
+Edge cases:
+- Empty dataset would render an empty grid with no crash path change.
+- External links in CTA remain unchanged from existing token semantics.
+
+Dependencies:
+- `GPTCard.astro` and `src/styles/global.css` (`.gpts-grid`, `.cog-entrance`, `.scene-accent`).
+
+Acceptance checks:
+- One card row has minimal metadata with one primary “Open” style CTA per item.
+- No busy micro rails or decorative rails remain in cards.
+- Accent token used through CSS variables instead of hardcoded colors.

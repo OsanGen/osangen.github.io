@@ -5,16 +5,18 @@ import type { GPT } from '../lib/schemas';
 export interface Props {
   gpt: GPT;
   revealDelayMs?: number;
+  sceneAccent?: string;
 }
 
-const { gpt, revealDelayMs = 0 } = Astro.props;
+const { gpt, revealDelayMs = 0, sceneAccent } = Astro.props;
 const linkHref = gpt.link.trim();
 const isExternal = /^https?:\/\//.test(linkHref);
+const accentToken = sceneAccent || 'var(--accent)';
 
 ---
 <article
   class="panel-shell panel-shell--command agent-card agent-card--directory cog-entrance"
-  style={`--reveal-delay:${revealDelayMs}ms`}
+  style={`--reveal-delay:${revealDelayMs}ms; --scene-accent:${accentToken}; --route-accent:${accentToken};`}
 >
   <div class="gpt-title-row">
     {gpt.icon ? <img src={gpt.icon.src} alt={gpt.icon.alt} class="gpt-icon" loading="lazy" decoding="async" /> : null}

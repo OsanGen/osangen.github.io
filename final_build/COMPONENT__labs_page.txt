@@ -1,0 +1,30 @@
+Component/page: `src/pages/labs.astro`
+
+Purpose:
+- Render the `/labs` page as a compact list of playable demos with low-noise visual treatment.
+- Emphasize teaching loops and execution actions with cleaner card rhythm.
+
+Inputs:
+- `loadGames()` from `src/lib/content.ts`.
+
+Outputs:
+- Hero block in pink-accent scene.
+- Card grid of games, each with title, tagline, compact concept tags, and actions:
+  - Details, Play, optional Repo.
+
+State:
+- No client-side state.
+- Build-time index-based animation delay via `cog-entrance`.
+
+Edge cases:
+- Missing `repoUrl` shows fallback muted text.
+- Index-based reveal offsets scale with item order.
+
+Dependencies:
+- `Card`, `CardGrid`, `TagList`, `Badge`.
+- `src/styles/global.css` classes: `.catalog-item`, `.catalog-card-stack`, `.cog-entrance`.
+
+Acceptance checks:
+- No additional long descriptions on index.
+- Cards maintain readable spacing and subtle accent side bar.
+- Repo action does not error when URL missing from content.

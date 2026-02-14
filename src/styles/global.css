@@ -171,6 +171,23 @@ main {
   min-height: 100%;
 }
 
+.catalog-item {
+  --catalog-accent: var(--scene-accent, var(--accent));
+  position: relative;
+}
+
+.catalog-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -0.3rem;
+  width: 0.21rem;
+  height: 100%;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--catalog-accent) 84%, var(--ink));
+  opacity: 0.9;
+}
+
 .resource-card-stack {
   display: flex;
   flex-direction: column;

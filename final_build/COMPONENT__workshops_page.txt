@@ -1,80 +1,34 @@
 Component/page: `src/pages/workshops.astro`
-Purpose:
-- Render a compact `/workshops` learning index with two sections: visual classes and workshop list.
-- Keep each card minimal with title + one-line metadata + one primary CTA.
 
-Inputs/outputs:
-- Loads `workshops` and `modules` via `loadWorkshops` and `loadModules`.
-- Reads optional `updated` timestamp via `loadLastModifiedISO('workshops.json')`.
-- Outputs the rendered index UI and links to detail routes at `/workshops/{id}`.
+Purpose:
+- Render a compact learning index composed of two sections: Visual classes and Workshops.
+- Keep the index short and scannable, with no long teaching blocks.
+
+Inputs:
+- `loadModules()`, `loadWorkshops()`, `loadLastModifiedISO('workshops.json')` from `src/lib/content.ts`.
+
+Outputs:
+- Intro with last updated date.
+- `Visual classes` section: card grid with title + `time · level` + up to 3 tags + one CTA.
+- `Workshops` section: card grid with title + date + up to 3 tags + one CTA to `/workshops/{id}`.
 
 State:
-- No client state; derived values at build time.
-- Derived groups: `visualClasses`, `workshopCards`.
+- No client-side state.
+- Build-time derived groups:
+  - `visualClasses` from modules where `visualClass` is truthy.
+  - `workshopCards` from workshop list (currently limited for compactness).
 
 Edge cases:
-- Empty visual classes and empty workshop lists render concise fallback text.
-- Missing or stale workshop timestamps degrade to `Not available` without breaking render.
+- Empty sections render concise fallback copy.
+- Missing `loadLastModifiedISO` date shows `Not available`.
+- If no workshop links are present, cards are hidden/empty due dataset control.
 
 Dependencies:
-- `TagList` for compact tag chips.
-- `Card`, `CardGrid` for layout.
-- Detail route: `src/pages/workshops/[id].astro`.
+- `Card`, `CardGrid`, `TagList` components.
+- `/workshops/{id}` detail route.
+- `src/styles/global.css` (`catalog-item`, `.cog-entrance`, `--scene-accent`) for accent-led, lower-noise cards.
 
 Acceptance checks:
-- Exactly two card regions on the index: visual classes and workshops.
-- No inline long teaching-guide sections are present on index.
-- Each workshop card has one CTA to open its detail route.
-
-Component/page: `src/pages/workshops/[id].astro`
-Purpose:
-- Render detailed workshop content on a dedicated route using the workshop data model.
-- Keep long/technical content inside a `<details>` disclosure while preserving quick skim at top.
-
-Inputs/outputs:
-- Static route generation from `getStaticPaths` over `loadWorkshops()`.
-- Input prop: `{ workshop }` from params.
-- Outputs title, date, description, optional proof line, optional teaching bullets, primary action CTA, and back link.
-
-State:
-- No local client state; all content is server-rendered/static by Astro.
-
-Edge cases:
-- Missing or malformed workshop record renders a short not-found panel.
-- Optional fields render only when present (`proofLine`, `teachingBullets`).
-- `actionHref` uses `replayUrl` when present, otherwise falls back to `slidesUrl`.
-
-Dependencies:
-- Detail route is in the same content model flow as `src/pages/workshops.astro`.
-- Workshop types from `src/lib/schemas.ts` and `loadWorkshops`.
-
-Acceptance checks:
-- `/workshops/{id}` resolves for each item in `workshops.json`.
-- Long text is nested in a `<details open>` block by default.
-- No duplicate teaching bullet content remains on `/workshops` index.
-
-Component/page: `src/pages/workshops/[id].astro`
-Purpose:
-- Render detailed workshop content from data model fields.
-- Show description, optional proof line, and optional teaching bullets.
-- Keep expanded teaching context in `<details open>` for readability control.
-
-Inputs/outputs:
-- Static paths generated from `loadWorkshops`.
-- Inputs: `id` route param and typed `Workshop` payload in Astro props.
-- Outputs: description panel, proof/teaching detail panel, action CTA, and back link.
-
-State:
-- No client state.
-
-Edge cases:
-- Missing `proofLine` or `teachingBullets` renders only the fields available.
-- Missing workshop record renders a small not-found panel.
-
-Dependencies:
-- Workshop schema type plus content loader in `src/lib/schemas.ts` and `src/lib/content.ts`.
-
-Acceptance checks:
-- Detail page includes full description.
-- Long content is wrapped in a default-open `details` block.
-- A missing optional CTA target does not block rendering.
+- No in-page long teaching prose or “How this teaches” sections.
+- Two card regions only.
+- One CTA per card, with workshops deep-linking to detail pages.

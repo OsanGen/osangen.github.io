@@ -1,12 +1,19 @@
 Website architecture map:
-- Pages layer (`src/pages/*.astro`) reads JSON from content loader and renders routes.
-  - Core user routes: `/`, `/gpts`, `/gpts/[id]`, `/labs`, `/labs/[gameId]`, `/workshops`, `/workshops/[id]`, `/posts`, `/join`, `/book`, `/about`, `/resume`, `/more`, `/docs`, `/code-of-conduct`.
-- Shared layout (`src/layouts/BaseLayout.astro`) adds global header/footer, metadata, and style imports.
-- Header (`src/components/Header.astro`) owns the primary nav simplification and external Book CTA.
-- Components provide reusable UI cards, grids, ctas, and specialized renderers (`GameEmbed`, `GPTCard`, etc.) and are imported by pages.
-- Content source is JSON under `src/content/data` and loaded through `src/lib/content.ts` (with `getWorkshopById` helper for detail lookups).
-- Schema guardrails live in `src/lib/schemas.ts` and are executed in loader+validator.
-- Build/validation pipeline runs `npm run lint` (`astro check`), `npm run validate:content`, and `npm run build`.
-- Remaining pipeline risk: sitemap generation does not currently assert dynamic `[id]` routes for SEO parity with full route set.
-- Homepage now includes a "reference lane" card grid on `/` linking to external GitHub demos for demonstration tone calibration.
-- CI and maintenance scripts: `scripts/validate-content.ts`, `scripts/import_linkedin_posts.ts`, `scripts/import_linkedin_workshops.ts`, `scripts/sync-github-icons.mjs`.
+- Pages layer (`src/pages/*.astro`) consumes JSON data through `src/lib/content.ts` and renders route-specific shells.
+  - Core user routes: `/`, `/gpts`, `/gpts/{id}`, `/labs`, `/labs/{gameId}`, `/workshops`, `/workshops/{id}`, `/join`, `/book`, `/resume`, `/more`, `/about`, `/posts`, `/docs`, `/code-of-conduct`.
+- Shared shell (`src/layouts/BaseLayout.astro`) injects metadata, header, footer, and global style imports.
+- Header (`src/components/Header.astro`) owns the minimal nav and external Book CTA.
+- Style system:
+  - Tokens (`src/styles/tokens.css`) define CogSec pastel variables and semantic surfaces.
+  - Global presentation (`src/styles/global.css`) applies low-noise surfaces plus minimal motion (`cog-entrance`, `cog-orbit`, `cog-breathe`) and catalog accent rails.
+- Content model (`src/lib/schemas.ts`, `src/lib/content.ts`) validates and loads JSON from `src/content/data`.
+- Directory components:
+  - `GPTCard` at `src/components/GPTCard.astro`
+  - `GameEmbed`, `Card`, `CardGrid`, `TagList`, `Badge` in `src/components` for content cards and detail surfaces.
+- Route pages using new compact patterns:
+  - `/` and `/gpts` and `/gpts/{id}`: one-screen route map + subtle per-card accents.
+  - `/labs` and `/workshops` index: minimal listing shells.
+  - `/workshops/{id}`: detail pages for long teaching content.
+- Validation/build pipeline:
+  - `npm run lint`, `npm run validate:content`, `npm run build`.
+- Remaining known risk: mobile/low-power runtime cost of new animation layer.

@@ -17,22 +17,22 @@ const ctaForClass = (module: Module) => ({
   isExternal: /^https?:\/\//i.test(module.cta.href || ''),
 });
 ---
-<BaseLayout title="Learn - Oscar Sanchez" description="Visual classes and workshops in one clean route.">
+<BaseLayout title="Learn - Oscar Sanchez" description="Visual classes and workshops in one clean map.">
   <h1>Learn</h1>
   <p class="text-small">One clean map to classes and practical workshop sessions.</p>
   <p class="text-small muted">Last updated: {updated ? new Date(updated).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Not available'}</p>
 
-  <section class="panel-shell">
+  <section class="panel-shell" style="--scene-accent: var(--cog-mint);">
     <h2>Visual classes</h2>
     {visualClasses.length === 0 ? (
       <p class="text-small">No visual classes are published yet.</p>
     ) : (
       <CardGrid gap="var(--space-3)" align="start">
-        {visualClasses.map((module) => {
+        {visualClasses.map((module, index) => {
           const cta = ctaForClass(module);
           return (
             <Card>
-              <div class="catalog-card-stack">
+              <article class="catalog-card-stack catalog-item cog-entrance" style={`--reveal-delay:${index * 45}ms; --catalog-accent: var(--cog-mint);`}>
                 <h3>{module.title}</h3>
                 <p class="text-small catalog-meta">{module.time} · {module.level}</p>
                 <TagList tags={module.topics} compact maxItems={3} />
@@ -44,7 +44,7 @@ const ctaForClass = (module: Module) => ({
                 >
                   {cta.label}
                 </a>
-              </div>
+              </article>
             </Card>
           );
         })}
@@ -52,16 +52,16 @@ const ctaForClass = (module: Module) => ({
     )}
   </section>
 
-  <section class="panel-shell">
+  <section class="panel-shell" style="--scene-accent: var(--cog-pink);">
     <h2>Workshops</h2>
     {workshopCards.length === 0 ? (
       <p class="text-small">No workshop entries yet.</p>
     ) : (
       <CardGrid gap="var(--space-3)" align="start">
-        {workshopCards.map((workshop) => {
+        {workshopCards.map((workshop, index) => {
           return (
             <Card>
-              <div class="catalog-card-stack">
+              <article class="catalog-card-stack catalog-item cog-entrance" style={`--reveal-delay:${index * 45}ms; --catalog-accent: var(--cog-pink);`}>
                 <p class="text-small catalog-meta">Workshop</p>
                 <h3>{workshop.title}</h3>
                 <p class="text-small catalog-meta">{workshop.date}</p>
@@ -72,7 +72,7 @@ const ctaForClass = (module: Module) => ({
                 >
                   Open details
                 </a>
-              </div>
+              </article>
             </Card>
           );
         })}

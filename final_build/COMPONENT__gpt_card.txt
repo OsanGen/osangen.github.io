@@ -1,28 +1,36 @@
 Component: `src/components/GPTCard.astro`
 
 Purpose:
-- Render a calmer GPT directory card with reduced visual noise.
-- Preserve name, outcome, concise tag preview, and one primary CTA.
+- Render a calm directory card for a single GPT entry with low visual noise and fast scanability.
+- Keep one outcome line, up to 3 compact tags, and one open action.
 
 Inputs:
 - `gpt: GPT` from `src/lib/schemas.ts`.
-- Optional `revealDelayMs` for list entry animation timing.
+- Optional `revealDelayMs?: number` for animation timing.
+- Optional `sceneAccent?: string` to override scene/route accent for this card.
 
 Outputs:
-- Card with title, single-line outcome (`line-clamp-2`), compact tag list (max 3), and a primary action button.
+- Root `<article>` using `cog-entrance` with CSS vars:
+  - `--reveal-delay`
+  - `--scene-accent`
+  - `--route-accent`
+- Title, optional icon, outcome line (line-clamped to 2), optional compact `TagList`, and one primary action link.
 
 State:
-- No client-side state.
+- No local/interactive state.
 
 Edge cases:
-- Icon is optional and rendered only when available.
-- Tags can be empty; empty arrays render compactly.
-- Link is opened in a new tab only when URL is external (`https://` or `http://`).
+- Optional GPT icon is omitted when missing.
+- External links open in a new tab with rel protections.
+- Long outcomes remain constrained by `line-clamp-2`.
+- `sceneAccent` defaults to `var(--accent)` when absent.
 
 Dependencies:
-- `TagList`, `proof` sections, and directory styles in `src/styles/global.css` (`agent-card*`, `.line-clamp-2`, `.panel-shell`).
+- `TagList` for compact tags.
+- `src/styles/global.css` for `.agent-card--directory`, `.line-clamp-2`, `.cog-entrance`, and button styles.
 
 Acceptance checks:
-- No micro rail block exists in card.
-- Outcome text is constrained to two lines max.
-- CTA exists and points to `gpt.link`.
+- No micro rail element is rendered.
+- Outcome does not become a paragraph due line clamping.
+- Card shows only the required minimal fields and one open CTA.
+- Per-item accent can be passed from `src/pages/gpts.astro` and is visible via `--route-accent`.
