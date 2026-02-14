@@ -1,0 +1,36 @@
+# Component Spec: `public/sw.js` + `src/components/ServiceWorkerRegister.astro`
+
+## Purpose
+Implement a lightweight runtime performance layer with service worker caching to reduce repeated network cost, improve repeat navigation speed, and support graceful offline behavior.
+
+## Inputs / Outputs
+- Input:
+  - Browser requests for navigations and same-origin static assets.
+  - `BaseLayout.astro` mounting point (`ServiceWorkerRegister` component).
+- Output:
+  - Registered service worker lifecycle (`install`, `activate`, `fetch`) orchestration.
+  - Cache-first asset responses and network-first documents with cache fallback.
+
+## State
+- Three named caches:
+  - `osan-core-<version>`
+  - `osan-assets-<version>`
+  - `osan-documents-<version>`
+- In-memory state handled by the browser cache API and client-controlled update flow.
+
+## Edge cases
+- Pre-cache failures for unavailable routes are tolerated and ignored.
+- Network failures for navigations/pages fall back to cached document for last known availability.
+- Off-origin requests are ignored by the worker so CDN/API calls are unaffected.
+- Registration failures are caught and intentionally non-fatal in constrained browsers.
+
+## Dependencies
+- `src/layouts/BaseLayout.astro` (for injection in every shell page).
+- `public/manifest.webmanifest` (install metadata used in browser install flow).
+- Browser Cache API/Service Worker APIs.
+
+## Acceptance checks
+- Service worker is registered exactly once from shared layout.
+- Static script/style/font/image/font/svg/json/text/xml/txt requests use cache-first strategy.
+- Document requests use network-first with stale fallback.
+- New routes remain accessible under normal connectivity and degrade gracefully offline.

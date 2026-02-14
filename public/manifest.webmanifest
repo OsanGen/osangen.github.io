@@ -1,0 +1,19 @@
+{
+  "name": "Oscar Sanchez",
+  "short_name": "Oscar",
+  "description": "Open-source AI education, cleanly.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/icons/oscar-cog-brain.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

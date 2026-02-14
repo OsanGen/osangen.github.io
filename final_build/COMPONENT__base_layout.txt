@@ -1,0 +1,30 @@
+# Component Spec: `src/layouts/BaseLayout.astro`
+
+Purpose:
+- Compose global page skeleton with shared metadata, nav/footer shell, and root container.
+- Provide a single shared insertion point for global runtime side effects (service worker registration).
+
+Inputs:
+- `Props`: `title` (required), `description` (optional)
+- Child slot content for page-specific rendering.
+- `ServiceWorkerRegister` component import and mount point in the `<body>`.
+
+Outputs:
+- Fully formed HTML document scaffold (`<!doctype html>`), global metadata tags, and consistent main/layout structure.
+
+State:
+- No internal business logic state.
+- Renders static shell and static metadata at build time.
+
+Edge cases:
+- Missing description falls back to default portfolio summary.
+- Header/footer still render for all routes because layout is shared.
+
+Dependencies:
+- `src/styles/global.css` (global tokenized style layer)
+- `src/components/Header.astro`, `src/components/Footer.astro`
+- `src/components/ServiceWorkerRegister.astro` (performance layer mount).
+
+Acceptance checks:
+- Pages render with consistent container and skip link semantics.
+- Manifest link and service worker mount are present in all layout-rendered routes.

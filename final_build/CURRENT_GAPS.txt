@@ -1,2 +1,2 @@
 # CURRENT_GAPS
-- no-open-gaps | completed | Validation/build/sitemap/deploy checks are complete and pushed.
+- service-worker deployment verification | pending | Deploy build and run a smoke check on a throttled/offline path.

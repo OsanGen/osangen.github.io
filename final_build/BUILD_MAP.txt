@@ -8,3 +8,7 @@
 - `src/pages/workshops/[id].astro`: workshop detail page with proof line and teaching details.
 - `scripts/generate-sitemap.mjs` + `public/sitemap.xml`: build-time sitemap generation.
 - `src/lib/content.ts` + `src/lib/schemas.ts`: content loading, validation, and typing.
+- `src/layouts/BaseLayout.astro`: layout shell and host page chrome, now includes service worker registration component.
+- `src/components/ServiceWorkerRegister.astro`: registers the service worker in-browser for runtime caching/offline support.
+- `public/sw.js`: offline/runtime caching service worker (`core`, `asset`, and `document` caches).
+- `public/manifest.webmanifest`: manifest metadata for installability and offline entry behavior.
