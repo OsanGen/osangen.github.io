@@ -5,6 +5,7 @@ const navItems = [
   { label: 'Lean Agents', href: '/gpts' },
   { label: 'Visuals & Workshops', href: '/workshops' },
   { label: 'Resume', href: '/resume' },
+  { label: 'Book', href: 'https://calendly.com/abellou/30min' },
 ];
 
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
@@ -25,11 +26,18 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
     </a>
     <nav class="site-nav" aria-label="Primary">
       {navItems.map((item) => {
-        const isCurrent = item.href === '/' ? currentPath === '/' : currentPath.startsWith(item.href);
+        const isExternal = item.href.startsWith('http://') || item.href.startsWith('https://');
+        const isCurrent = isExternal
+          ? false
+          : item.href === '/'
+            ? currentPath === '/'
+            : currentPath.startsWith(item.href);
         return (
           <a
             href={item.href}
             class="nav-link"
+            target={isExternal ? '_blank' : undefined}
+            rel={isExternal ? 'noopener noreferrer' : undefined}
             aria-current={isCurrent ? 'page' : undefined}
           >
             {item.label}
