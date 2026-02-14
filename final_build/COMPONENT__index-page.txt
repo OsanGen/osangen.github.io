@@ -1,24 +1,27 @@
-# Component Spec: `src/pages/index.astro`
+# Component: `src/pages/index.astro`
 
-## Purpose
-Landing router that reduces cognitive load by presenting one clear path section (hero + 3 route cards).
+Purpose:
+- Turn the homepage into a compact router with minimal prose and three clear entry points.
 
-## Inputs / Outputs
-- Inputs: `games`, `modules`, `workshops`, `communities` loaded from content loaders.
-- Output: Rendered home page with route cards for Labs / Learn / Join.
+Inputs:
+- `loadGames`, `loadModules`, `loadWorkshops`, and `loadCommunities` from content loader.
 
-## State
+Outputs:
+- Hero shell with short headline, one-line lede, two top CTAs (Labs, Book).
+- Three route cards (`Labs`, `Learn`, `Join`) each with one count subtitle and one CTA.
+
+State:
 - Stateless render.
-- No local mutable state.
 
-## Edge Cases
-- Pluralization must remain readable at 1 item and >1 items.
-- Keeps hero text under the requested brevity thresholds.
+Edge cases:
+- Pluralization handles singular/plural and zero values.
+- Communities route fallback if there are no entries still renders valid subtitles (`0 communities`).
 
-## Dependencies
-- `BaseLayout`, `Card`, `CardGrid`, `loadGames`, `loadModules`, `loadWorkshops`, `loadCommunities`.
+Dependencies:
+- `Card` and `CardGrid` layout components.
+- Tokens and scene styles in `src/styles/global.css` (`.hero-shell`, `.route-grid`, `.route-card`).
 
-## Acceptance Checks
-- Hero has <=1 headline sentence and <=1 lede line.
-- Exactly 3 route cards rendered.
-- No removed sections like “Featured open resources” or LinkedIn source-of-truth block appear on this page.
+Acceptance checks:
+- Multi-section catalog blocks are not used on homepage.
+- Above-fold consists of hero + three route cards only.
+- H1, subtitle, and CTA count remain concise.

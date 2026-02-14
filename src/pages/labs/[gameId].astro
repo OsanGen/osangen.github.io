@@ -4,7 +4,14 @@ import Card from '../../components/Card.astro';
 import TagList from '../../components/TagList.astro';
 import GameEmbed from '../../components/GameEmbed.astro';
 import { loadGames } from '../../lib/content';
+import { isExternalUrl, isUnavailableLink, sanitizeLink } from '../../lib/link-utils';
 import type { Game } from '../../lib/schemas';
+
+interface CtaState {
+  href: string;
+  isExternal: boolean;
+  enabled: boolean;
+}
 
 export async function getStaticPaths() {
   const games = await loadGames();
@@ -19,6 +26,35 @@ export async function getStaticPaths() {
 }
 
 const { game } = Astro.props as { game?: Game };
+
+const isExternal = (href = '') => isExternalUrl(href);
+const formatFallbackText = (value: string | undefined, fallback: string) => value?.trim() || fallback;
+
+const deriveRepoCta = (rawUrl: string | undefined): CtaState => {
+  const href = sanitizeLink(rawUrl || '');
+
+  if (!href || isUnavailableLink(href)) {
+    return {
+      href: '',
+      isExternal: false,
+      enabled: false,
+    };
+  }
+
+  return {
+    href,
+    isExternal: isExternal(href),
+    enabled: true,
+  };
+};
+
+const repoCta = game ? deriveRepoCta(game.repoUrl) : { href: '', isExternal: false, enabled: false };
+const playCtaHref = sanitizeLink(game?.deployUrl || '');
+const playCta = {
+  href: playCtaHref,
+  isExternal: isExternal(playCtaHref),
+};
+const playFallback = formatFallbackText(game?.deployUrl, 'Open in new tab link unavailable.');
 ---
 <BaseLayout title={game ? `${game.title} - Labs` : 'Lab not found'} description="Game detail page">
   {game ? (
@@ -35,12 +71,18 @@ const { game } = Astro.props as { game?: Game };
       </Card>
 
       <h2 style="margin-top:1rem;">Play</h2>
-      <GameEmbed
-        url={game.deployUrl}
-        title={game.title}
-        preferred={game.embed.preferred}
-        aspectRatio={game.embed.aspectRatio as '16/9' | '4/3'}
-      />
+      {playCta.href ? (
+        <GameEmbed
+          url={playCta.href}
+          title={game.title}
+          preferred={game.embed.preferred}
+          aspectRatio={game.embed.aspectRatio as '16/9' | '4/3'}
+        />
+      ) : (
+        <Card>
+          <p class="text-small">{playFallback}</p>
+        </Card>
+      )}
 
       <Card>
         <h2>Controls</h2>
@@ -50,9 +92,16 @@ const { game } = Astro.props as { game?: Game };
       <Card>
         <h2>Proof and links</h2>
         <div style="display:flex; gap:0.6rem; flex-wrap:wrap; margin-top:0.7rem;">
-          <a class="button" href={game.deployUrl} target="_blank" rel="noopener noreferrer">Open in new tab</a>
-          {game.repoUrl ? <a class="button" href={game.repoUrl} target="_blank" rel="noopener noreferrer">Repo</a> : null}
-          <span class="text-small">This is a teaching demo. No user data collected here.</span>
+          {playCta.href ? (
+            <a class="button" href={playCta.href} target={playCta.isExternal ? '_blank' : undefined} rel={playCta.isExternal ? 'noopener noreferrer' : undefined}>Open in new tab</a>
+          ) : null}
+          {repoCta.enabled ? (
+            <a class="button" href={repoCta.href} target={repoCta.isExternal ? '_blank' : undefined} rel={repoCta.isExternal ? 'noopener noreferrer' : undefined}>
+              Repo
+            </a>
+          ) : (
+            <span class="text-small">Repo not yet added</span>
+          )}
         </div>
       </Card>
     </>

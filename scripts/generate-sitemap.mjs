@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { isCoreWorkshopId } from '../src/lib/workshop-catalog.ts';
 
 const BASE_URL = 'https://osangen.github.io';
 
@@ -21,7 +22,19 @@ const STATIC_ROUTES = [
   '/code-of-conduct',
 ];
 
-const toAbsolute = (route) => `${BASE_URL}${route}`;
+const normalizeRoute = (prefix, id) => {
+  if (typeof id !== 'string') {
+    return null;
+  }
+
+  const raw = id.trim();
+  if (!raw) {
+    return null;
+  }
+
+  const encoded = encodeURIComponent(raw);
+  return `${prefix}${encoded}`;
+};
 
 const readJson = async (filename) => {
   try {
@@ -33,16 +46,11 @@ const readJson = async (filename) => {
   }
 };
 
-const unique = (items) => {
-  const seen = new Set();
-  return items.filter((item) => {
-    if (seen.has(item)) {
-      return false;
-    }
+const toAbsolute = (route) => `${BASE_URL}${route}`;
 
-    seen.add(item);
-    return true;
-  });
+const dedupeSorted = (items) => {
+  const sorted = [...items].sort((a, b) => a.localeCompare(b));
+  return Array.from(new Set(sorted));
 };
 
 const escapeXml = (value) =>
@@ -50,7 +58,7 @@ const escapeXml = (value) =>
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
+    .replace(/\"/g, '&quot;')
     .replace(/'/g, '&apos;');
 
 const generateSitemap = async () => {
@@ -60,43 +68,39 @@ const generateSitemap = async () => {
     readJson('workshops.json'),
   ]);
 
-  const dynamicGpts = gpts
-    .map((gpt) => gpt?.id)
-    .filter((id) => typeof id === 'string' && id.trim().length > 0)
-    .map((id) => `/gpts/${encodeURIComponent(id)}`);
+  const dynamic = [
+    ...gpts.flatMap((item) => {
+      const route = normalizeRoute('/gpts/', item?.id);
+      return route ? [route] : [];
+    }),
+    ...games.flatMap((item) => {
+      const route = normalizeRoute('/labs/', item?.id);
+      return route ? [route] : [];
+    }),
+    ...workshops.flatMap((item) => {
+      if (!isCoreWorkshopId(item?.id)) {
+        return [];
+      }
 
-  const dynamicGames = games
-    .map((game) => game?.id)
-    .filter((id) => typeof id === 'string' && id.trim().length > 0)
-    .map((id) => `/labs/${encodeURIComponent(id)}`);
+      const route = normalizeRoute('/workshops/', item?.id);
+      return route ? [route] : [];
+    }),
+  ];
 
-  const dynamicWorkshops = workshops
-    .map((workshop) => workshop?.id)
-    .filter((id) => typeof id === 'string' && id.trim().length > 0)
-    .map((id) => `/workshops/${encodeURIComponent(id)}`);
-
-  const paths = unique([
-    ...STATIC_ROUTES,
-    ...dynamicGpts,
-    ...dynamicGames,
-    ...dynamicWorkshops,
-  ]).sort((a, b) =>
-    a.localeCompare(b),
-  );
-
+  const validRoutes = dedupeSorted([...STATIC_ROUTES, ...dynamic]);
   const lines = [
     '<?xml version="1.0" encoding="UTF-8"?>',
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
   ];
 
-  for (const route of paths) {
+  validRoutes.forEach((route) => {
     lines.push(`  <url><loc>${escapeXml(toAbsolute(route))}</loc></url>`);
-  }
+  });
 
   lines.push('</urlset>');
 
   await fs.writeFile(PUBLIC_SITEMAP_PATH, `${lines.join('\n')}\n`, 'utf8');
-  console.log(`Generated sitemap with ${paths.length} routes.`);
+  console.log(`Generated sitemap with ${validRoutes.length} routes.`);
 };
 
 generateSitemap().catch((error) => {

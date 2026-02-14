@@ -19,8 +19,8 @@ Outputs:
 State:
 - No component state; optional inline script tracks whether iframe load/timeout should reveal fallback.
 - Edge cases:
-- Internal `encodeURI(url)` is used for safe attribute use.
-- Timeout (5s) or load error displays fallback panel.
+- URL values are sanitized with shared link helper.
+- `timeout/load` is gated by explicit load-start state to avoid repeated triggers.
 - Duplicate new-tab links are constrained to one canonical CTA outside the embed shell.
 
 Dependencies:

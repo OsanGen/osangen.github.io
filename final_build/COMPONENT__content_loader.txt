@@ -17,9 +17,9 @@ Key invariants:
 - `loadJsonCached` guarantees one parse+validate pass per file per process.
 - `validate:content` currently checks GPT links and proof blocks; other datasets are structurally typed via Zod.
 
-Edge cases:
-- Duplicate parsing errors remain cached in Promise map for process lifetime.
+- Duplicate parsing failures are removed from cache on reject so retries can recover.
 - Missing or placeholder links in GPT resource fields can warn without hard-failing (existing behavior).
+- Empty or whitespace-only `repoUrl` / proof links are normalized to absent values during schema parse.
 - `getWorkshopById` returns `null` when id is not found.
 
 Dependencies:

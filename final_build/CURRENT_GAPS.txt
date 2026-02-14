@@ -1,5 +1,7 @@
 # CURRENT_GAPS
 - visual-pass for global shell effects | pending | Validate accent and motion behavior at /, /labs, /workshops, /gpts, and /resume on desktop/mobile.
 - service-worker deployment verification | pending | Deploy build and run a smoke check on a throttled/offline path.
-- sitemap generation coverage | pending | regenerate and spot-check that /workshops/{id} appears in public/sitemap.xml.
 - lab embed performance optimization | pending | Verify GameEmbed click-to-load behavior and fallback on a real iframe URL.
+- manual runtime smoke pass | pending | Run local preview and load /, /gpts, /gpts/{id}, /workshops, /workshops/{id}, /labs, /labs/{id}; confirm external/inactive links and GameEmbed fallback behavior.
+- workshop route policy smoke | completed | Verified by build output: only `/workshops/leanagents-workshop-chatgpt-apps` and `/workshops/manus-workshop` are generated; `/workshops/ghost-machine` is not generated.
+- production deploy | pending | Push current branch to `main` to trigger GitHub Pages deployment workflow.

@@ -1,26 +1,29 @@
-# Component Spec: `src/pages/workshops.astro`
+# Component: `src/pages/workshops.astro` (visual taxonomy surface)
 
-## Purpose
-Clean workshop index that separates Visual classes and Workshops into concise card grids with one CTA each.
+Purpose:
+- Provide a single Learn catalog route split into two deterministic blocks:
+  - Core workshops (with canonical detail pages).
+  - Visual classes (module cards plus non-core workshop cards).
 
-## Inputs / Outputs
-- Inputs: `modules` and `workshops` content from `src/lib/content`.
-- Outputs: Two compact sections:
-  - Visual classes cards with time/level + one CTA.
-  - Workshops cards with title + date + one CTA (`Replay` or `Slides`).
+Inputs:
+- `loadModules()`, `loadWorkshops()`, `loadLastModifiedISO('workshops.json')`.
+- `splitWorkshops()` and `isDisplayableVisualClassModule()` from `src/lib/workshop-catalog.ts`.
 
-## State
-- Stateless listing page.
-- Uses static rendering with `cog-entrance` animation delays.
+Outputs:
+- Visual class list and workshop list sections with one action button per card.
+- Last-updated timestamp for `workshops.json`.
 
-## Edge Cases
-- Empty lists render a short muted fallback copy.
-- If a workshop has neither replay nor slides URL, CTA defaults to `Open details`.
+State:
+- No client-side state.
+- All routing groups are computed at build time in page frontmatter.
 
-## Dependencies
-- `BaseLayout`, `Card`, `CardGrid`, `TagList`, content loader types from `../lib/schemas` and content getters.
+Edge cases:
+- Workshop entries with missing replay/slides render internal fallback CTA.
+- Non-core workshops never render direct `/workshops/{id}` detail CTA in visual class section.
 
-## Acceptance Checks
-- No long teaching bullets / long-form blocks on index.
-- “Last updated” line rendered in muted text.
-- No more than one CTA per workshop card.
+Dependencies:
+- `Card`, `CardGrid`, `TagList`, `src/lib/link-utils.ts`.
+
+Acceptance checks:
+- Visual classes section includes non-core workshop-backed cards.
+- Core workshop section contains only canonical IDs: `leanagents-workshop-chatgpt-apps`, `manus-workshop`.

@@ -1,0 +1,30 @@
+# Component: `src/lib/workshop-catalog.ts`
+
+Purpose:
+- Centralize workshop taxonomy decisions used across pages and scripts.
+
+Inputs:
+- `Workshop[]` and `Module[]` data structures from schemas.
+
+Outputs:
+- Canonical constants and helpers:
+  - `CORE_WORKSHOP_IDS`
+  - `isCoreWorkshop`
+  - `isCoreWorkshopId` (alias)
+  - `isVisualClassWorkshopId`
+  - `splitWorkshops`
+  - `isDisplayableVisualClassModule`
+
+State:
+- Pure in-memory helper set, no runtime side effects.
+
+Edge cases:
+- Workshop id normalization is case-insensitive by trimming/lowercasing incoming IDs.
+- The visual-class module blocklist prevents excluded modules from showing even if content still exists.
+
+Dependencies:
+- `src/lib/schemas.ts`.
+
+Acceptance checks:
+- All callers use `splitWorkshops()` for workshop grouping.
+- Route-level logic and sitemap generation depend only on `CORE_WORKSHOP_IDS`.

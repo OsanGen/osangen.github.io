@@ -4,50 +4,115 @@ import Card from '../components/Card.astro';
 import CardGrid from '../components/CardGrid.astro';
 import TagList from '../components/TagList.astro';
 import { loadModules, loadWorkshops, loadLastModifiedISO } from '../lib/content';
+import { isDisplayableVisualClassModule, splitWorkshops } from '../lib/workshop-catalog';
+import { isExternalUrl, isUnavailableLink, sanitizeLink } from '../lib/link-utils';
 import type { Module, Workshop } from '../lib/schemas';
 
 const [modules, workshops] = await Promise.all([loadModules(), loadWorkshops()]);
 const updated = await loadLastModifiedISO('workshops.json');
-const visualClasses = modules.filter((module) => Boolean(module.visualClass));
 
-const ctaForClass = (module: Module) => ({
-  label: module.cta.label || 'Open',
-  href: module.cta.href || '/workshops',
-  isExternal: /^https?:\/\//i.test(module.cta.href || ''),
-});
+const { coreWorkshops, visualClassWorkshops } = splitWorkshops(workshops);
+const visualClassModules = modules.filter(isDisplayableVisualClassModule);
+const updatedLabel = updated
+  ? new Date(updated).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+  : 'Not available';
 
-const ctaForWorkshop = (workshop: Workshop) => {
-  const replayHref = (workshop.replayUrl || '').trim();
-  const slidesHref = (workshop.slidesUrl || '').trim();
-  const href = replayHref || slidesHref || `/workshops/${workshop.id}`;
-  const isExternal = /^https?:\/\//i.test(href);
+interface CtaState {
+  href: string;
+  isExternal: boolean;
+  label: string;
+}
+
+type VisualClassCard = {
+  title: string;
+  meta: string;
+  tags: string[];
+  cta: CtaState;
+};
+
+const sanitize = (value = '') => sanitizeLink(value);
+
+const isExternal = (href = '') => isExternalUrl(href);
+
+const isValidReplayOrSlides = (href = '') => {
+  const normalized = sanitize(href);
+  return normalized && !isUnavailableLink(normalized) && isExternalUrl(normalized);
+};
+
+const buildModuleCta = (module: Module): CtaState => {
+  const href = sanitize(module.cta?.href || '');
+  const label = sanitize(module.cta?.label || '');
+
   return {
-    label: replayHref ? 'Replay' : slidesHref ? 'Slides' : 'Open details',
-    href,
-    isExternal,
+    href: href || '/workshops',
+    isExternal: isExternal(href || '/workshops'),
+    label: label || 'Open class',
   };
 };
+
+const buildWorkshopCta = (workshop: Workshop, fallbackToIndex = false): CtaState => {
+  if (isValidReplayOrSlides(workshop.replayUrl)) {
+    return {
+      href: sanitize(workshop.replayUrl || ''),
+      isExternal: true,
+      label: 'Replay',
+    };
+  }
+
+  if (isValidReplayOrSlides(workshop.slidesUrl)) {
+    return {
+      href: sanitize(workshop.slidesUrl || ''),
+      isExternal: true,
+      label: 'Slides',
+    };
+  }
+
+  return {
+    href: fallbackToIndex ? '/workshops' : `/workshops/${workshop.id}`,
+    isExternal: false,
+    label: fallbackToIndex ? 'Open class' : 'Open details',
+  };
+};
+
+const visualClassCards: VisualClassCard[] = [
+  ...visualClassModules.map((module) => ({
+    title: module.title,
+    meta: `${module.time} · ${module.level}`,
+    tags: module.topics,
+    cta: buildModuleCta(module),
+  })),
+  ...visualClassWorkshops.map((workshop) => ({
+    title: workshop.title,
+    meta: workshop.date,
+    tags: workshop.tags,
+    cta: buildWorkshopCta(workshop, true),
+  })),
+];
+
+const workshopsWithCta = coreWorkshops.map((workshop: Workshop) => ({
+  workshop,
+  cta: buildWorkshopCta(workshop),
+}));
 ---
 <BaseLayout title="Learn - Oscar Sanchez" description="Visual classes and workshops in one clean map.">
   <div class="page-shell" style="--scene-accent: var(--cog-blue);">
     <h1>Learn</h1>
     <p class="text-small">One clean map to classes and practical workshop sessions.</p>
-    <p class="text-small muted">Last updated: {updated ? new Date(updated).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Not available'}</p>
+    <p class="text-small muted">Last updated: {updatedLabel}</p>
 
     <section class="panel-shell">
       <h2>Visual classes</h2>
-      {visualClasses.length === 0 ? (
+      {visualClassCards.length === 0 ? (
         <p class="text-small">No visual classes are published yet.</p>
       ) : (
         <CardGrid gap="var(--space-3)" align="start">
-          {visualClasses.map((module, index) => {
-            const cta = ctaForClass(module);
+          {visualClassCards.map(({ cta, title, meta, tags }, index) => {
             return (
               <Card>
                 <article class="catalog-card-stack catalog-item cog-entrance" style={`--reveal-delay:${index * 45}ms;`}>
-                  <h3>{module.title}</h3>
-                  <p class="text-small catalog-meta">{module.time} · {module.level}</p>
-                  <TagList tags={module.topics} compact maxItems={3} />
+                  <h3>{title}</h3>
+                  <p class="text-small catalog-meta">{meta}</p>
+                  <TagList tags={tags} compact maxItems={3} />
                   <a
                     class="button catalog-cta"
                     href={cta.href}
@@ -66,12 +131,11 @@ const ctaForWorkshop = (workshop: Workshop) => {
 
     <section class="panel-shell">
       <h2>Workshops</h2>
-      {workshops.length === 0 ? (
+      {workshopsWithCta.length === 0 ? (
         <p class="text-small">No workshop entries yet.</p>
       ) : (
         <CardGrid gap="var(--space-3)" align="start">
-          {workshops.map((workshop, index) => {
-            const cta = ctaForWorkshop(workshop);
+          {workshopsWithCta.map(({ workshop, cta }, index) => {
             return (
               <Card>
                 <article class="catalog-card-stack catalog-item cog-entrance" style={`--reveal-delay:${index * 45}ms;`}>

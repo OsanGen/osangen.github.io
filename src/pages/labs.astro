@@ -5,8 +5,48 @@ import Card from '../components/Card.astro';
 import CardGrid from '../components/CardGrid.astro';
 import TagList from '../components/TagList.astro';
 import Badge from '../components/Badge.astro';
+import { isExternalUrl, isUnavailableLink, sanitizeLink } from '../lib/link-utils';
 
 const games = await loadGames();
+
+interface CtaState {
+  href: string;
+  isExternal: boolean;
+  visible: boolean;
+}
+
+const isExternal = (href = '') => isExternalUrl(href);
+
+const buildRepoCta = (url?: string): CtaState => {
+  const href = sanitizeLink(url || '');
+
+  if (!href || isUnavailableLink(href)) {
+    return {
+      href: '',
+      isExternal: false,
+      visible: false,
+    };
+  }
+
+  return {
+    href,
+    isExternal: isExternal(href),
+    visible: true,
+  };
+};
+
+const gameCards = games.map((game, index) => {
+  const deployHref = sanitizeLink(game.deployUrl);
+  const repo = buildRepoCta(game.repoUrl);
+
+  return {
+    game,
+    index,
+    deployHref,
+    repo,
+    deployIsExternal: isExternal(deployHref),
+  };
+});
 ---
 <BaseLayout title="Labs - Oscar Sanchez" description="Playable demos and game-based AI workshops">
   <section class="hero-shell scene-shell scene-accent command-shell" style="--scene-accent: var(--cog-pink);">
@@ -16,22 +56,36 @@ const games = await loadGames();
   </section>
 
   <CardGrid gap="var(--space-3)" align="start">
-    {games.map((game, index) => (
+    {gameCards.map((item) => (
       <Card>
         <article
           class="catalog-item cog-entrance"
-          style={`--reveal-delay:${index * 45}ms; --catalog-accent: var(--cog-pink);`}
+          style={`--reveal-delay:${item.index * 45}ms; --catalog-accent: var(--cog-pink);`}
         >
           <div class="catalog-card-stack">
-            {index === 0 ? <Badge label="Playable" /> : null}
-            <h2>{game.title}</h2>
-            <p class="catalog-summary">{game.tagline}</p>
-            <TagList tags={game.concepts} compact maxItems={3} />
+            {item.index === 0 ? <Badge label="Playable" /> : null}
+            <h2>{item.game.title}</h2>
+            <p class="catalog-summary">{item.game.tagline}</p>
+            <TagList tags={item.game.concepts} compact maxItems={3} />
             <div class="catalog-actions">
-              <a class="button" href={`/labs/${game.id}`}>Details</a>
-              <a class="button button--primary" href={game.deployUrl} target="_blank" rel="noopener noreferrer">Play</a>
-              {game.repoUrl ? (
-                <a class="button" href={game.repoUrl} target="_blank" rel="noopener noreferrer">Repo</a>
+              <a class="button" href={`/labs/${item.game.id}`}>Details</a>
+              <a
+                class="button button--primary"
+                href={item.deployHref}
+                target={item.deployIsExternal ? '_blank' : undefined}
+                rel={item.deployIsExternal ? 'noopener noreferrer' : undefined}
+              >
+                Play
+              </a>
+              {item.repo.visible ? (
+                <a
+                  class="button"
+                  href={item.repo.href}
+                  target={item.repo.isExternal ? '_blank' : undefined}
+                  rel={item.repo.isExternal ? 'noopener noreferrer' : undefined}
+                >
+                  Repo
+                </a>
               ) : (
                 <span class="text-small">Repo not yet added</span>
               )}

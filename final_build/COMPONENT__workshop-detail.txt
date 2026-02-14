@@ -1,25 +1,27 @@
-# Component Spec: `src/pages/workshops/[id].astro`
+Component Spec: `src/pages/workshops/[id].astro`
 
-## Purpose
-Workshop detail route with full description, proof line, and optional teaching bullets.
+Purpose:
+- Render full workshop detail pages for canonical workshop sessions only.
 
-## Inputs / Outputs
-- Inputs: Workshop list from `loadWorkshops`, URL param `id` from `getStaticPaths`.
-- Outputs: Detailed page with description, proof section, teaching section, and Replay/Slides action.
+Inputs:
+- `loadWorkshops()` from `src/lib/content.ts`.
+- `isCoreWorkshopId()` from `src/lib/workshop-catalog.ts` in `getStaticPaths`.
 
-## State
-- Stateless per-static-path render.
-- Loads selected workshop object from build-time props.
+Outputs:
+- Detail rendering for `/workshops/leanagents-workshop-chatgpt-apps` and `/workshops/manus-workshop`.
+- Not-found fallback panel for missing or non-core IDs.
 
-## Edge Cases
-- Missing workshop id renders fallback not-found panel.
-- Missing `proofLine` shows muted fallback sentence.
-- Teaching bullets may be absent and render muted fallback copy.
-- `audienceLine` is rendered when present.
+State:
+- No client-side state; props are passed from static path generation.
 
-## Dependencies
-- `BaseLayout`, `loadWorkshops`, `Workshop` schema.
+Edge cases:
+- Non-core workshop IDs are excluded from static path list.
+- Missing proof bullets/lines render muted fallback content.
+- Missing action links render fallback copy instead of broken anchors.
 
-## Acceptance Checks
-- Proof content is disclosed via `<details>` blocks.
-- Content remains short and scannable by default.
+Dependencies:
+- `BaseLayout`, `loadWorkshops`, `Workshop` schema, `isCoreWorkshopId`.
+
+Acceptance checks:
+- Only two canonical workshop detail routes are built.
+- Non-core routes (e.g. `ghost-machine`) do not have generated detail pages.

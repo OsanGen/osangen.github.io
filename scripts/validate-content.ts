@@ -1,4 +1,10 @@
 import {
+  isCanonicalLink,
+  isExternalUrl,
+  isInternalPath,
+  isUnavailableLink,
+} from '../src/lib/link-utils';
+import {
   loadBooking,
   loadCommunities,
   loadGames,
@@ -8,13 +14,6 @@ import {
   loadProfile,
   loadWorkshops,
 } from '../src/lib/content';
-
-const LINK_PLACEHOLDER_PATTERN = /\b(?:placeholder|todo|xxxxx|temp)\b/i;
-const LINK_SCHEMES = /^https?:\/\//i;
-
-const isPlaceholder = (value: string) => LINK_PLACEHOLDER_PATTERN.test(value.trim().toLowerCase());
-
-const isExternalLink = (value: string) => LINK_SCHEMES.test(value);
 
 const checkLinkField = ({
   label,
@@ -40,15 +39,15 @@ const checkLinkField = ({
     return;
   }
 
-  if (isPlaceholder(trimmed)) {
+  if (isUnavailableLink(trimmed)) {
     messages.push(`${label}: contains placeholder token`);
     return;
   }
 
-  const isInternal = trimmed.startsWith('/');
-  const isExternal = isExternalLink(trimmed);
+  const isInternal = isInternalPath(trimmed);
+  const isExternal = isExternalUrl(trimmed);
 
-  if (!isInternal && !isExternal) {
+  if (!isCanonicalLink(trimmed)) {
     messages.push(`${label}: must be an https(s) URL or app path`);
     return;
   }
@@ -213,15 +212,17 @@ const main = async () => {
       messages,
     });
 
-    post.proofLinks?.forEach((proofLink, index) => {
-      checkLinkField({
-        label: `${post.id}: proofLinks[${index}]`,
-        value: proofLink,
-        required: false,
-        allowInternal: false,
-        messages,
+    if (post.proofLinks && post.proofLinks.length > 0) {
+      post.proofLinks.forEach((proofLink: string, index: number) => {
+        checkLinkField({
+          label: `${post.id}: proofLinks[${index}]`,
+          value: proofLink,
+          required: false,
+          allowInternal: false,
+          messages,
+        });
       });
-    });
+    }
   });
 
   checkLinkField({

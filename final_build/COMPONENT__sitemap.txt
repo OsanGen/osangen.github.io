@@ -5,6 +5,7 @@ Generate `public/sitemap.xml` from static routes and dynamic content IDs at buil
 
 ## Inputs / Outputs
 - Inputs: `src/content/data/gpts.json`, `src/content/data/games.json`, `src/content/data/workshops.json`.
+- Uses `CORE_WORKSHOP_IDS` from `src/lib/workshop-catalog.ts` to gate workshop routes.
 - Output: `public/sitemap.xml` containing deduplicated sorted URLs.
 
 ## State
@@ -16,9 +17,9 @@ Generate `public/sitemap.xml` from static routes and dynamic content IDs at buil
 - Duplicate/invalid IDs are filtered.
 
 ## Dependencies
-- Node.js `fs/promises` and `path`, content JSON files, `npm run prebuild` hook.
+- Node.js `fs/promises` and `path`, content JSON files, `src/lib/workshop-catalog.ts`, `npm run prebuild` hook.
 
 ## Acceptance Checks
 - Includes static routes from `STATIC_ROUTES`.
 - Includes `/gpts/{id}` and `/labs/{id}` for available records.
-- Includes `/workshops/{id}` for available records.
+- Includes `/workshops/{id}` only when the workshop id is in `CORE_WORKSHOP_IDS`.

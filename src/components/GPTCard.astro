@@ -1,6 +1,7 @@
 ---
 import TagList from './TagList.astro';
 import type { GPT } from '../lib/schemas';
+import { isExternalUrl } from '../lib/link-utils';
 
 export interface Props {
   gpt: GPT;
@@ -10,9 +11,8 @@ export interface Props {
 
 const { gpt, revealDelayMs = 0, sceneAccent } = Astro.props;
 const linkHref = gpt.link.trim();
-const isExternal = /^https?:\/\//.test(linkHref);
+const isExternal = isExternalUrl(linkHref);
 const accentToken = sceneAccent || 'var(--accent)';
-
 ---
 <article
   class="panel-shell panel-shell--command agent-card agent-card--directory cog-entrance"

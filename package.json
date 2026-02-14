@@ -15,7 +15,7 @@
     "icons:sync": "ICON_SYNC_ENABLED=true node scripts/sync-github-icons.mjs",
     "import:posts": "tsx scripts/import_linkedin_posts.ts",
     "import:workshops": "tsx scripts/import_linkedin_workshops.ts",
-    "sitemap:generate": "node scripts/generate-sitemap.mjs"
+    "sitemap:generate": "tsx scripts/generate-sitemap.mjs"
   },
   "dependencies": {
     "astro": "^4.16.19",

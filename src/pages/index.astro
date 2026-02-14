@@ -1,8 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { loadGames, loadModules, loadWorkshops, loadCommunities } from '../lib/content';
 import Card from '../components/Card.astro';
 import CardGrid from '../components/CardGrid.astro';
-import { loadCommunities, loadGames, loadModules, loadWorkshops } from '../lib/content';
+import { sanitizeLink } from '../lib/link-utils';
+import { isDisplayableVisualClassModule, splitWorkshops } from '../lib/workshop-catalog';
 
 const [games, modules, workshops, communities] = await Promise.all([
   loadGames(),
@@ -11,29 +13,37 @@ const [games, modules, workshops, communities] = await Promise.all([
   loadCommunities(),
 ]);
 
-const visualClassCount = modules.filter((module) => Boolean(module.visualClass)).length;
+const { coreWorkshops, visualClassWorkshops } = splitWorkshops(workshops);
+const moduleVisualClassCount = modules.filter(isDisplayableVisualClassModule).length;
+const visualClassCount = moduleVisualClassCount + visualClassWorkshops.length;
+
+const pluralize = (count: number, singular: string, plural: string) =>
+  `${count} ${count === 1 ? singular : plural}`;
+
 const routeCards = [
   {
     title: 'Labs',
     href: '/labs',
-    subtitle: `${games.length} game ${games.length === 1 ? 'lab' : 'labs'}`,
+    subtitle: pluralize(games.length, 'game', 'games'),
     action: 'Open labs',
   },
   {
     title: 'Learn',
     href: '/workshops',
-    subtitle: `${workshops.length} workshop${workshops.length === 1 ? '' : 's'}`,
+    subtitle: pluralize(coreWorkshops.length, 'workshop', 'workshops'),
     action: 'Open learn',
   },
   {
     title: 'Join',
     href: '/join',
-    subtitle: `${communities.length} community${communities.length === 1 ? '' : 's'}`,
+    subtitle: pluralize(communities.length, 'community', 'communities'),
     action: 'Join community',
   },
 ];
 
-const bookHref = 'https://calendly.com/abellou/30min';
+const bookHref = sanitizeLink('https://calendly.com/abellou/30min');
+const visualClassSummary =
+  `${visualClassCount} ${visualClassCount === 1 ? 'visual class' : 'visual classes'} and growing public content.`;
 ---
 <BaseLayout title="Oscar Sanchez" description="Open-source AI education, cleanly.">
   <section class="hero-shell scene-shell scene-accent command-shell">
@@ -44,7 +54,7 @@ const bookHref = 'https://calendly.com/abellou/30min';
       <a class="button button--primary" href="/labs">Open Labs</a>
       <a class="button" href={bookHref} target="_blank" rel="noopener noreferrer">Book</a>
     </div>
-    <p class="muted">Plus {visualClassCount} {visualClassCount === 1 ? 'visual class' : 'visual classes'} and growing public content.</p>
+    <p class="muted">Plus {visualClassSummary}</p>
   </section>
 
   <div class="route-grid" style="--scene-accent: var(--cog-blue);">

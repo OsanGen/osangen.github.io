@@ -3,7 +3,7 @@ const CORE_CACHE = `osan-core-${VERSION}`;
 const ASSET_CACHE = `osan-assets-${VERSION}`;
 const DOC_CACHE = `osan-documents-${VERSION}`;
 
-const CORE_ROUTES = [
+const STATIC_APP_ROUTES = [
   '/',
   '/index.html',
   '/about',
@@ -22,35 +22,10 @@ const CORE_ROUTES = [
   '/manifest.webmanifest',
 ];
 
-self.addEventListener('install', (event) => {
-  event.waitUntil(
-    (async () => {
-      const cache = await caches.open(CORE_CACHE);
-      await Promise.all(
-        CORE_ROUTES.map((route) =>
-          cache.add(new Request(route, { cache: 'reload' })).catch(() => {
-            // Ignore 404s or transient fetch failures for pre-cache steps.
-          }),
-        ),
-      );
-      await self.skipWaiting();
-    })(),
-  );
-});
+const NAV_FALLBACKS = ['/', '/index.html'];
 
-self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    (async () => {
-      const keys = await caches.keys();
-      await Promise.all(
-        keys
-          .filter((key) => [CORE_CACHE, ASSET_CACHE, DOC_CACHE].indexOf(key) === -1)
-          .map((key) => caches.delete(key)),
-      );
-      await self.clients.claim();
-    })(),
-  );
-});
+const sortRoutes = (routes) => [...new Set(routes)].sort((left, right) => left.localeCompare(right));
+const CORE_ROUTES = sortRoutes(STATIC_APP_ROUTES);
 
 const isStaticAsset = (request) => {
   const destination = request.destination;
@@ -92,6 +67,7 @@ const networkFirst = async (request, cacheName) => {
     if (response && response.ok) {
       await cache.put(request, response.clone());
     }
+
     return response;
   } catch (error) {
     const cached = await cache.match(request);
@@ -99,9 +75,52 @@ const networkFirst = async (request, cacheName) => {
       return cached;
     }
 
-    return cache.match('/') || new Response('Offline', { status: 503, statusText: 'Offline' });
+    throw error;
   }
 };
+
+const buildFallbackDocument = async (cacheName) => {
+  const cache = await caches.open(cacheName);
+
+  for (const fallback of NAV_FALLBACKS) {
+    const response = await cache.match(fallback);
+    if (response) {
+      return response;
+    }
+  }
+
+  return null;
+};
+
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    (async () => {
+      const cache = await caches.open(CORE_CACHE);
+      await Promise.all(
+        CORE_ROUTES.map((route) =>
+          cache.add(new Request(route, { cache: 'reload' })).catch((error) => {
+            console.warn('Service worker pre-cache failed for route', route, error);
+          })
+        )
+      );
+      await self.skipWaiting();
+    })()
+  );
+});
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    (async () => {
+      const keys = await caches.keys();
+      await Promise.all(
+        keys
+          .filter((key) => [CORE_CACHE, ASSET_CACHE, DOC_CACHE].indexOf(key) === -1)
+          .map((key) => caches.delete(key))
+      );
+      await self.clients.claim();
+    })()
+  );
+});
 
 self.addEventListener('fetch', (event) => {
   const request = event.request;
@@ -116,7 +135,23 @@ self.addEventListener('fetch', (event) => {
   }
 
   if (request.mode === 'navigate') {
-    event.respondWith(networkFirst(request, DOC_CACHE));
+    event.respondWith(
+      (async () => {
+        try {
+          return await networkFirst(request, DOC_CACHE);
+        } catch (error) {
+          const fallback = await buildFallbackDocument(DOC_CACHE);
+          if (fallback) {
+            return fallback;
+          }
+
+          return new Response('Offline', {
+            status: 503,
+            statusText: 'Offline',
+          });
+        }
+      })()
+    );
     return;
   }
 

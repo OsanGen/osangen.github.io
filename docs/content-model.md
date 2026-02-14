@@ -22,7 +22,7 @@
 - `concepts`: string[]
 - `learn`: string[]
 - `deployUrl`: string
-- `repoUrl`: string
+- `repoUrl`: optional string (`string`), treated as absent when empty/whitespace
 - `embed`: `{ preferred: 'iframe'|'link', aspectRatio: string, fallback: string }`
 
 ## modules.json
@@ -43,6 +43,7 @@
 ## posts.json
 
 - `id`, `date`, `title`, `summary`, `url`, `tags[]`, `proofLinks[]?`
+- Empty `proofLinks` entries are ignored during schema parse. The runtime validator treats `proofLinks` as optional links and supports both CSV lists and array formats.
 
 ## communities.json
 

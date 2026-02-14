@@ -1,34 +1,37 @@
-Component/page: `src/pages/workshops.astro`
+# Component/page: `src/pages/workshops.astro`
 
 Purpose:
-- Render a compact learning index composed of two sections: Visual classes and Workshops.
-- Keep the index short and scannable, with no long teaching blocks.
+- Render Learn index with explicit Workshop taxonomy buckets:
+  - Core workshops section (2 canonical workshop detail routes).
+  - Visual classes section (module visual classes + non-core workshop-derived visual classes).
+- Keep output concise with stable CTA behavior and no broken detail route assumptions.
 
 Inputs:
-- `loadModules()`, `loadWorkshops()`, `loadLastModifiedISO('workshops.json')` from `src/lib/content.ts`.
+- `loadModules()` and `loadWorkshops()` from `src/lib/content.ts`.
+- `loadLastModifiedISO('workshops.json')`.
+- Helper splitting logic from `src/lib/workshop-catalog.ts`.
 
 Outputs:
-- Intro with last updated date.
-- `Visual classes` section: card grid with title + `time · level` + up to 3 tags + one CTA.
-- `Workshops` section: card grid with title + date + up to 3 tags + one CTA to `/workshops/{id}`.
+- Intro with last-updated date.
+- `Visual classes` section with module-based cards and visual-class workshop cards.
+- `Workshops` section with cards only for canonical workshop IDs.
 
 State:
 - No client-side state.
-- Build-time derived groups:
-  - `visualClasses` from modules where `visualClass` is truthy.
-  - `workshopCards` from workshop list (currently limited for compactness).
+- Build-time derivations:
+  - `splitWorkshops(workshops)` for canonical vs visual-class workshops.
+  - `visualClassModules` from modules with `visualClass` and not blocked by catalog policy.
 
 Edge cases:
-- Empty sections render concise fallback copy.
-- Missing `loadLastModifiedISO` date shows `Not available`.
-- If no workshop links are present, cards are hidden/empty due dataset control.
+- Missing dates/labels fall back to safe route text and/or `/workshops` cta.
+- Duplicate or empty workshop/module fields do not crash card rendering.
+- Module helper blocks display for configured non-visual-class modules.
 
 Dependencies:
-- `Card`, `CardGrid`, `TagList` components.
-- `/workshops/{id}` detail route.
-- `src/styles/global.css` (`catalog-item`, `.cog-entrance`, `--scene-accent`) for accent-led, lower-noise cards.
+- `Card`, `CardGrid`, `TagList`.
+- `src/lib/workshop-catalog.ts`, `src/lib/link-utils.ts`, `src/lib/content.ts`.
 
 Acceptance checks:
-- No in-page long teaching prose or “How this teaches” sections.
-- Two card regions only.
-- One CTA per card, with workshops deep-linking to detail pages.
+- Only core workshop detail links are generated from `coreWorkshops`.
+- Non-core workshops appear under `Visual classes` and do not require `/workshops/{id}` deep links.
+- `Beautiful Code Theory: Loops, Roles, and Proof Packs` is not rendered in visual-class output.

@@ -7,6 +7,18 @@ const getEnvBool = (name, fallback = false) => {
   return ['1', 'true', 'yes', 'on'].includes(value.toLowerCase());
 };
 
+const describeError = (error) => {
+  if (error instanceof Error) {
+    if (error.cause) {
+      return `${error.message} | cause: ${String(error.cause).slice(0, 220)}`;
+    }
+
+    return error.message;
+  }
+
+  return String(error);
+};
+
 const manifestPath = process.env.ICON_SYNC_MANIFEST_PATH ?? path.resolve(process.cwd(), 'scripts/icon-sync.manifest.json');
 const isEnabled = getEnvBool('ICON_SYNC_ENABLED', false) || getEnvBool('SYNC_GITHUB_ICONS', false);
 if (!isEnabled) {
@@ -98,7 +110,7 @@ const main = async () => {
       if (required) {
         throw err;
       }
-      console.warn(`Optional icon sync failed for ${sourcePath}: ${err.message}`);
+      console.warn(`Optional icon sync failed for ${sourcePath}: ${describeError(err)}`);
     }
   }
 

@@ -1,11 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-const projectRoot = process.cwd();
-const inputJson = path.join(projectRoot, 'private', 'linkedin', 'workshops.json');
-const inputCsv = path.join(projectRoot, 'private', 'linkedin', 'workshops.csv');
-const out = path.join(projectRoot, 'src', 'content', 'data', 'workshops.json');
-
 type RawWorkshop = {
   id?: string;
   date?: string;
@@ -16,17 +11,33 @@ type RawWorkshop = {
   tags?: string | string[];
 };
 
-function splitCsv(line: string): string[] {
+const projectRoot = process.cwd();
+const inputJson = path.join(projectRoot, 'private', 'linkedin', 'workshops.json');
+const inputCsv = path.join(projectRoot, 'private', 'linkedin', 'workshops.csv');
+const out = path.join(projectRoot, 'src', 'content', 'data', 'workshops.json');
+
+const normalizeHeader = (value: string) =>
+  value
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, '')
+    .replace(/[^a-z0-9]/g, '');
+
+const normalizeLine = (value: string) => value.trim();
+
+const splitCsvLine = (line: string): string[] => {
   const out: string[] = [];
   let value = '';
   let inQuotes = false;
+
   for (let i = 0; i < line.length; i++) {
     const ch = line[i];
     const next = line[i + 1];
+
     if (ch === '"') {
       if (inQuotes && next === '"') {
         value += '"';
-        i++;
+        i += 1;
       } else {
         inQuotes = !inQuotes;
       }
@@ -37,27 +48,79 @@ function splitCsv(line: string): string[] {
       value += ch;
     }
   }
-  out.push(value);
-  return out.map((item) => item.trim());
-}
 
-function normalizeList(value: string | string[] | undefined): string[] {
+  out.push(value);
+  return out.map(normalizeLine);
+};
+
+const normalizeList = (value: string | string[] | undefined): string[] => {
   if (!value) return [];
-  if (Array.isArray(value)) return value;
+  if (Array.isArray(value)) return value.map((item) => item.trim()).filter(Boolean);
+
   return value
     .split(/[;,]/)
     .map((item) => item.trim())
     .filter(Boolean);
+};
+
+const truncate = (value: string | undefined) => {
+  if (!value) {
+    return '';
+  }
+
+  return value.length > 240 ? `${value.slice(0, 237)}...` : value;
+};
+
+function stableHash(value: string): string {
+  let hash = 2166136261;
+  const text = value.trim().toLowerCase();
+
+  for (let i = 0; i < text.length; i++) {
+    hash ^= text.charCodeAt(i);
+    hash = Math.imul(hash, 16777619);
+  }
+
+  return `workshop-${(hash >>> 0).toString(16)}`;
 }
 
-function truncate(value: string | undefined) {
-  if (!value) return '';
-  return value.length > 240 ? value.slice(0, 237) + '...' : value;
-}
+const parseRows = async (file: string): Promise<RawWorkshop[]> => {
+  try {
+    const raw = await fs.readFile(file, 'utf8');
+    const lines = raw
+      .split(/\r?\n/)
+      .map((line) => normalizeLine(line))
+      .filter(Boolean);
 
-function short(s: string | undefined) {
-  return (s || '').trim().slice(0, 80) || `workshop-${Date.now()}`;
-}
+    if (!lines.length) {
+      return [];
+    }
+
+    const headers = splitCsvLine(lines[0]).map(normalizeHeader);
+    return lines
+      .slice(1)
+      .filter((line) => line.length > 0)
+      .map((line) => {
+        const values = splitCsvLine(line);
+        const row: Record<string, string> = {};
+
+        headers.forEach((header, index) => {
+          row[header] = values[index] ?? '';
+        });
+
+        return {
+          id: row.id,
+          date: row.date,
+          title: row.title,
+          description: row.description,
+          replayUrl: row.replayurl || row.replay || row.url,
+          slidesUrl: row.slidesurl || row.slides,
+          tags: row.tags,
+        } as RawWorkshop;
+      });
+  } catch {
+    return [];
+  }
+};
 
 async function readExisting(): Promise<RawWorkshop[]> {
   try {
@@ -68,37 +131,10 @@ async function readExisting(): Promise<RawWorkshop[]> {
   }
 }
 
-function hash(s: string) {
-  return s.trim().toLowerCase();
-}
-
-async function readInput(): Promise<RawWorkshop[]> {
-  try {
-    const csv = await fs.readFile(inputCsv, 'utf8');
-    const lines = csv.split(/\r?\n/).filter((line: string) => Boolean(line));
-    if (!lines.length) return [];
-    const headers = splitCsv(lines[0]).map((h: string) => h.toLowerCase());
-    return lines
-      .slice(1)
-      .filter((line: string) => Boolean(line.trim()))
-      .map((line: string) => {
-        const values = splitCsv(line);
-        const row: Record<string, string> = {};
-        headers.forEach((header, index) => {
-          row[header] = values[index] ?? '';
-        });
-        return {
-          id: row.id || row['title'] || '',
-          date: row.date || '',
-          title: row.title || '',
-          description: row.description || row.summary || '',
-          replayUrl: row.replayurl || row.replay || '',
-          slidesUrl: row.slidesurl || row.slides || '',
-          tags: row.tags || '',
-        };
-      });
-  } catch {
-    // continue
+const readInput = async (): Promise<RawWorkshop[]> => {
+  const fromCsv = await parseRows(inputCsv);
+  if (fromCsv.length) {
+    return fromCsv;
   }
 
   try {
@@ -108,27 +144,41 @@ async function readInput(): Promise<RawWorkshop[]> {
   } catch {
     return [];
   }
-}
+};
+
+const makeId = (id: string | undefined, row: RawWorkshop) => {
+  if ((id || '').trim()) {
+    return id!.trim();
+  }
+
+  const fallbackSeed = `${row.title || ''}|${row.replayUrl || ''}|${row.slidesUrl || ''}`;
+  return stableHash(fallbackSeed);
+};
 
 const incoming = await readInput();
 const existing = await readExisting();
-const seen = new Set(existing.map((item: RawWorkshop) => hash(item.replayUrl || item.slidesUrl || '')));
+const seen = new Set(existing.map((item: RawWorkshop) => (item.replayUrl || item.slidesUrl || item.id || '').trim().toLowerCase()));
 const merged = [...existing];
 
 for (const row of incoming) {
-  const replay = (row.replayUrl || '').trim();
-  const slides = (row.slidesUrl || '').trim();
-  const key = hash(replay || slides);
-  if (!key || seen.has(key)) continue;
+  const replay = normalizeLine(row.replayUrl || '');
+  const slides = normalizeLine(row.slidesUrl || '');
+  const key = (replay || slides || '').toLowerCase();
+  if (!key || seen.has(key)) {
+    continue;
+  }
+
+  const title = normalizeLine(row.title || '').trim();
   const normalized: RawWorkshop = {
-    id: short(row.id),
-    date: row.date || new Date().toISOString().slice(0, 10),
-    title: row.title || 'Untitled workshop',
-    description: truncate(row.description),
+    id: makeId(row.id, row),
+    date: row.date?.trim() || new Date().toISOString().slice(0, 10),
+    title: title || 'Untitled workshop',
+    description: truncate(normalizeLine(row.description || '')),
     replayUrl: replay,
     slidesUrl: slides,
     tags: normalizeList(row.tags),
   };
+
   merged.push(normalized);
   seen.add(key);
 }

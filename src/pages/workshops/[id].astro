@@ -2,26 +2,65 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import type { Workshop } from '../../lib/schemas';
 import { loadWorkshops } from '../../lib/content';
+import { isExternalUrl, isUnavailableLink } from '../../lib/link-utils';
+import { isCoreWorkshopId } from '../../lib/workshop-catalog';
+
+interface CtaState {
+  href: string;
+  isExternal: boolean;
+  visible: boolean;
+}
 
 export async function getStaticPaths() {
   const workshops = await loadWorkshops();
-  return workshops.map((workshop: Workshop) => ({
-    params: {
-      id: workshop.id,
-    },
-    props: {
-      workshop,
-    },
-  }));
+  return workshops
+    .filter((workshop: Workshop) => isCoreWorkshopId(workshop.id))
+    .map((workshop: Workshop) => ({
+      params: {
+        id: workshop.id,
+      },
+      props: {
+        workshop,
+      },
+    }));
 }
 
 const { workshop } = Astro.props as { workshop?: Workshop };
-const actionHref = workshop?.replayUrl || workshop?.slidesUrl;
-const actionLabel = workshop?.replayUrl ? 'Replay' : 'Slides';
+
+const isExternal = (href = '') => isExternalUrl(href);
+
+const formatFallbackText = (value: string | undefined, fallback: string) => value?.trim() || fallback;
+
+const deriveCta = (workshop?: Workshop): CtaState => {
+  const replayHref = workshop?.replayUrl?.trim() ?? '';
+  const slidesHref = workshop?.slidesUrl?.trim() ?? '';
+  const href = replayHref || slidesHref || `/workshops/${workshop?.id ?? ''}`;
+
+  if (!href || isUnavailableLink(href)) {
+    return {
+      href: '',
+      isExternal: false,
+      visible: false,
+    };
+  }
+
+  return {
+    href,
+    isExternal: isExternal(href),
+    visible: true,
+  };
+};
+
+const action = deriveCta(workshop);
 const audienceLine = workshop?.audienceLine?.trim();
-const actionIsExternal = actionHref ? /^https?:\/\//i.test(actionHref) : false;
 const hasProofLine = Boolean(workshop?.proofLine?.trim());
 const hasTeachingBullets = Boolean(workshop?.teachingBullets?.length);
+const actionLabel = workshop?.replayUrl
+  ? 'Replay'
+  : workshop?.slidesUrl
+    ? 'Slides'
+    : 'Open details';
+const ctaCopy = formatFallbackText(workshop?.replayUrl || workshop?.slidesUrl, 'Proof or workshop content is coming soon.');
 ---
 <BaseLayout title={workshop ? `${workshop.title} | Oscar Sanchez` : 'Workshop not found'} description={workshop ? workshop.description : 'Workshop details'}>
   {workshop ? (
@@ -62,19 +101,24 @@ const hasTeachingBullets = Boolean(workshop?.teachingBullets?.length);
         )}
       </section>
 
-      {actionHref ? (
+      {action.visible ? (
         <section class="panel-shell">
           <h2>Play</h2>
           <a
             class="button button--primary"
-            href={actionHref}
-            target={actionIsExternal ? '_blank' : undefined}
-            rel={actionIsExternal ? 'noopener noreferrer' : undefined}
+            href={action.href}
+            target={action.isExternal ? '_blank' : undefined}
+            rel={action.isExternal ? 'noopener noreferrer' : undefined}
           >
             {actionLabel}
           </a>
         </section>
-      ) : null}
+      ) : (
+        <section class="panel-shell">
+          <h2>Play</h2>
+          <p class="text-small">{ctaCopy}</p>
+        </section>
+      )}
 
       <section class="panel-shell">
         <a class="button" href="/workshops">Back to Learn</a>

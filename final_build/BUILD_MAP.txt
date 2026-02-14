@@ -6,6 +6,7 @@
 - `src/pages/index.astro`: homepage router shell (hero + 3 route cards).
 - `src/pages/workshops.astro`: workshop listing page with visual classes and workshop cards.
 - `src/pages/workshops/[id].astro`: workshop detail page with proof line and teaching details.
+- `src/lib/workshop-catalog.ts`: canonical workshop taxonomy helpers (`CORE_WORKSHOP_IDS`, split + classification helpers).
 - `scripts/generate-sitemap.mjs` + `public/sitemap.xml`: build-time sitemap generation.
 - `src/lib/content.ts` + `src/lib/schemas.ts`: content loading, validation, and typing.
 - `src/layouts/BaseLayout.astro`: layout shell and host page chrome, now includes service worker registration component.

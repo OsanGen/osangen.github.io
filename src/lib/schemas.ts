@@ -1,5 +1,47 @@
 import { z } from 'zod';
 
+const trimOptionalString = z
+  .string()
+  .optional()
+  .transform((value) => {
+    if (value == null) {
+      return undefined;
+    }
+
+    const trimmed = value.trim();
+    return trimmed === '' ? undefined : trimmed;
+  });
+
+const normalizeProofLinks = (value: unknown): string[] | undefined => {
+  if (value == null) {
+    return undefined;
+  }
+
+  const splitIntoParts = (text: string) =>
+    text
+      .split(/[;,]/g)
+      .map((item) => item.trim())
+      .filter((item) => item.length > 0);
+
+  if (Array.isArray(value)) {
+    return value
+      .flatMap((entry) => (typeof entry === 'string' ? [entry] : []))
+      .map((entry) => entry.trim())
+      .filter((entry) => entry.length > 0);
+  }
+
+  if (typeof value === 'string') {
+    return splitIntoParts(value);
+  }
+
+  return undefined;
+};
+
+const proofLinksSchema = z.preprocess(
+  (value: unknown): string[] | undefined => normalizeProofLinks(value),
+  z.array(z.string()).optional(),
+) as z.ZodType<string[] | undefined>;
+
 export const ProofPackSchema = z.object({
   label: z.string(),
   proof: z.array(z.string()),
@@ -52,7 +94,7 @@ export const GameSchema = z.object({
   concepts: z.array(z.string()),
   learn: z.array(z.string()),
   deployUrl: z.string(),
-  repoUrl: z.string(),
+  repoUrl: trimOptionalString,
   embed: GameEmbedSchema,
 });
 export type Game = z.infer<typeof GameSchema>;
@@ -146,7 +188,7 @@ export const PostSchema = z.object({
   summary: z.string().max(240),
   url: z.string(),
   tags: z.array(z.string()),
-  proofLinks: z.array(z.string()).optional(),
+  proofLinks: proofLinksSchema,
 });
 
 export const GPTProofImageSchema = z

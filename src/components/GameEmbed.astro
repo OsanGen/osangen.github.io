@@ -1,4 +1,9 @@
 ---
+import {
+  isSafeHttpUrl,
+  sanitizeLink,
+} from '../lib/link-utils';
+
 interface Props {
   url: string;
   title: string;
@@ -7,20 +12,64 @@ interface Props {
 }
 
 const { url, title, preferred = 'iframe', aspectRatio = '16/9' } = Astro.props;
-const safeUrl = encodeURI(url);
+
+interface EmbedRenderState {
+  href: string;
+  showPrimaryLink: boolean;
+  showIframe: boolean;
+  shouldRender: boolean;
+}
+
+const resolveEmbedState = (rawUrl: string, renderMode: 'iframe' | 'link'): EmbedRenderState => {
+  const href = sanitizeLink(rawUrl);
+
+  if (!href) {
+    return {
+      href: '',
+      showPrimaryLink: false,
+      showIframe: false,
+      shouldRender: false,
+    };
+  }
+
+  if (renderMode === 'link') {
+    return {
+      href,
+      showPrimaryLink: true,
+      showIframe: false,
+      shouldRender: true,
+    };
+  }
+
+  if (!isSafeHttpUrl(href)) {
+    return {
+      href,
+      showPrimaryLink: true,
+      showIframe: false,
+      shouldRender: true,
+    };
+  }
+
+  return {
+    href,
+    showPrimaryLink: true,
+    showIframe: true,
+    shouldRender: true,
+  };
+};
+
+const state = resolveEmbedState(url, preferred);
 const ratio = aspectRatio === '16/9' ? '56.25%' : '75%';
 const frameId = `game-frame-${Math.random().toString(36).slice(2, 8)}`;
 ---
 <div class="card">
-  {preferred === 'link' ? (
-    <a class="button button--primary" href={safeUrl} target="_blank" rel="noopener noreferrer">
-      Open in new tab
-    </a>
-  ) : (
+  {!state.shouldRender ? (
+    <p class="text-small">Game URL is unavailable.</p>
+  ) : state.showIframe ? (
     <div
       style={`position:relative; width:100%; padding-top:${ratio}; background:var(--panel); border:1px solid var(--border); overflow:hidden; border-radius:1rem;`}
       data-game-embed
-      data-url={safeUrl}
+      data-url={state.href}
     >
       <button
         class="button button--primary"
@@ -45,7 +94,7 @@ const frameId = `game-frame-${Math.random().toString(36).slice(2, 8)}`;
       >
         <div>
           <p>The embed is blocked in this browser.</p>
-          <p><a href={safeUrl} target="_blank" rel="noopener noreferrer">Open in new tab</a></p>
+          <p><a href={state.href} data-game-embed-open target="_blank" rel="noopener noreferrer">Open in new tab</a></p>
           <p>If embed is blocked, use the new-tab link.</p>
         </div>
       </div>
@@ -58,62 +107,116 @@ const frameId = `game-frame-${Math.random().toString(36).slice(2, 8)}`;
         data-game-embed-frame
         style="border:0; position:absolute; inset:0; width:100%; height:100%; display:none;"
       ></iframe>
+      <p class="text-small" style="position:absolute; left:1rem; right:1rem; bottom:-1.9rem; margin:0; text-align:center;">
+        <a href={state.href} data-game-embed-open target="_blank" rel="noopener noreferrer">Open in new tab</a>
+      </p>
     </div>
+  ) : (
+    <a
+      class="button button--primary"
+      href={state.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      data-game-embed-open
+    >
+      Open in new tab
+    </a>
   )}
-  {preferred === 'iframe' ? <p class="text-small" style="margin-top:0.5rem;"><a href={safeUrl} target="_blank" rel="noopener noreferrer">Open in new tab</a></p> : null}
 </div>
-  {preferred === 'iframe' ? (
-  <script is:inline>
-    const roots = document.querySelectorAll('[data-game-embed]');
-    roots.forEach((node) => {
-      const frame = node.querySelector('[data-game-embed-frame]');
-      const launchButton = node.querySelector('[data-game-embed-launch]');
-      const fallback = node.querySelector('[data-game-embed-fallback]');
-      if (!frame || !fallback) return;
-      const url = node.getAttribute('data-url') || '';
-      if (!url) return;
+  {state.showIframe ? (
+    <script is:inline>
+      const LOAD_TIMEOUT_MS = 5000;
+      const embedNodes = document.querySelectorAll('[data-game-embed]');
 
-      const showFallback = () => {
-        fallback.style.display = 'flex';
+      const getNodeHref = (node) => node?.getAttribute('data-url')?.trim() || '';
+
+      const createState = () => ({
+        started: false,
+        loading: false,
+        timerId: null,
+      });
+
+      const showFallback = (frame, launchButton, fallback) => {
         frame.style.display = 'none';
-        if (launchButton) launchButton.style.display = 'none';
+        frame.dataset.loaded = 'false';
+        fallback.style.display = 'flex';
         fallback.hidden = false;
+        if (launchButton) {
+          launchButton.hidden = true;
+        }
       };
 
-      const loadFrame = () => {
-        if (frame.dataset.loaded === 'true') return;
-        frame.dataset.loaded = 'true';
-        frame.setAttribute('src', url);
+      const hideFallback = (fallback, launchButton, frame) => {
+        fallback.style.display = 'none';
+        fallback.hidden = true;
         frame.style.display = 'block';
-        if (launchButton) launchButton.hidden = true;
-
-        let settled = false;
-        const timer = window.setTimeout(() => {
-          if (!settled) showFallback();
-        }, 5000);
-
-        frame.addEventListener('error', () => {
-          settled = true;
-          window.clearTimeout(timer);
-          showFallback();
-        }, { once: true });
-
-        frame.addEventListener('load', () => {
-          settled = true;
-          window.clearTimeout(timer);
-          frame.style.opacity = '1';
-          frame.style.transition = 'opacity 180ms ease';
-          if (fallback) fallback.hidden = true;
-          if (launchButton) launchButton.hidden = true;
-        }, { once: true });
+        if (launchButton) {
+          launchButton.hidden = true;
+        }
       };
 
-      if (launchButton) {
-        launchButton.addEventListener('click', loadFrame, { once: true });
-      }
+      const clearLoadTimer = (state) => {
+        if (state.timerId !== null) {
+          window.clearTimeout(state.timerId);
+          state.timerId = null;
+        }
+      };
 
-      const openLink = node.closest('.card')?.querySelector('a[href]');
-      if (openLink) openLink.setAttribute('href', url);
-    });
-  </script>
-) : null}
+      embedNodes.forEach((node) => {
+        const frame = node.querySelector('[data-game-embed-frame]');
+        const launchButton = node.querySelector('[data-game-embed-launch]');
+        const fallback = node.querySelector('[data-game-embed-fallback]');
+        const href = getNodeHref(node);
+
+        if (!frame || !launchButton || !fallback || !href) {
+          return;
+        }
+
+        const state = createState();
+
+        const loadFrame = () => {
+          if (state.loading || state.started) {
+            return;
+          }
+
+          state.started = true;
+          state.loading = true;
+          launchButton.hidden = true;
+          frame.dataset.loaded = 'false';
+          frame.setAttribute('src', href);
+
+          state.timerId = window.setTimeout(() => {
+            if (!state.loading || frame.dataset.loaded === 'true' || !state.started) {
+              return;
+            }
+            showFallback(frame, launchButton, fallback);
+          }, LOAD_TIMEOUT_MS);
+        };
+
+        frame.addEventListener(
+          'load',
+          () => {
+            state.loading = false;
+            clearLoadTimer(state);
+            frame.style.opacity = '1';
+            frame.style.transition = 'opacity 180ms ease';
+            hideFallback(fallback, launchButton, frame);
+            frame.dataset.loaded = 'true';
+          },
+          { once: true },
+        );
+
+        frame.addEventListener(
+          'error',
+          () => {
+            state.loading = false;
+            clearLoadTimer(state);
+            showFallback(frame, launchButton, fallback);
+          },
+          { once: true },
+        );
+
+        launchButton.addEventListener('click', loadFrame, { once: true });
+      });
+    </script>
+  ) : null}

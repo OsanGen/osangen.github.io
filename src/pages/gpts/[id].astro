@@ -2,7 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProofIOBlock from '../../components/ProofIOBlock.astro';
 import TagList from '../../components/TagList.astro';
-import { loadGPTs, isUnavailableLink } from '../../lib/content';
+import { loadGPTs } from '../../lib/content';
+import { isExternalUrl, isUnavailableLink } from '../../lib/link-utils';
 import type { GPT } from '../../lib/schemas';
 
 export async function getStaticPaths() {
@@ -18,15 +19,38 @@ export async function getStaticPaths() {
 }
 
 const { gpt } = Astro.props as { gpt?: GPT };
-const useHref = gpt ? gpt.links.use.trim() : '';
-const hasUseLink = gpt ? !isUnavailableLink(useHref) : false;
-const useIsExternal = hasUseLink && /^https?:\/\//.test(useHref);
-const promptPackHref = gpt ? gpt.links.promptPack.trim() : '';
-const demoHref = gpt ? gpt.links.demo.trim() : '';
-const hasPromptPack = gpt ? !isUnavailableLink(promptPackHref) : false;
-const hasDemo = gpt ? !isUnavailableLink(demoHref) : false;
-const promptPackExternal = hasPromptPack && /^https?:\/\//.test(promptPackHref);
-const demoExternal = hasDemo && /^https?:\/\//.test(demoHref);
+
+interface CtaState {
+  href: string;
+  isExternal: boolean;
+  visible: boolean;
+}
+
+const isExternal = (href = '') => isExternalUrl(href);
+
+const deriveCta = (rawHref: string | undefined): CtaState => {
+  const href = rawHref?.trim() ?? '';
+
+  if (isUnavailableLink(href)) {
+    return { href: '', isExternal: false, visible: false };
+  }
+
+  return {
+    href,
+    isExternal: isExternal(href),
+    visible: true,
+  };
+};
+
+const formatFallbackText = (raw: string | undefined, fallback: string) =>
+  raw?.trim() ? raw : fallback;
+
+const useCta = deriveCta(gpt?.links?.use);
+const promptPackCta = deriveCta(gpt?.links?.promptPack);
+const demoCta = deriveCta(gpt?.links?.demo);
+const useCopy = formatFallbackText(gpt?.links.use, 'Public agent link coming soon.');
+const promptCopy = formatFallbackText(gpt?.links.promptPack, 'Prompt pack pending.');
+const demoCopy = formatFallbackText(gpt?.links.demo, 'Demo pending.');
 ---
 <BaseLayout title={gpt ? `${gpt.name} | Lean Agents` : 'Agent not found'} description="Lean agent detail with usage, proof, and limits.">
   {gpt ? (
@@ -39,17 +63,17 @@ const demoExternal = hasDemo && /^https?:\/\//.test(demoHref);
         <p class="muted"><strong>Audience:</strong> {gpt.audience.join(' / ')}</p>
         <TagList tags={gpt.tags} compact maxItems={3} />
         <div class="cta-stack">
-          {hasUseLink ? (
+          {useCta.visible ? (
             <a
-              href={useHref}
+              href={useCta.href}
               class="button button--primary"
-              target={useIsExternal ? '_blank' : undefined}
-              rel={useIsExternal ? 'noopener noreferrer' : undefined}
+              target={useCta.isExternal ? '_blank' : undefined}
+              rel={useCta.isExternal ? 'noopener noreferrer' : undefined}
             >
               Open agent
             </a>
           ) : (
-            <span class="text-small">Public agent link coming soon.</span>
+            <span class="text-small">{useCopy}</span>
           )}
           <a href="/gpts" class="button">Back to directory</a>
         </div>
@@ -77,29 +101,29 @@ const demoExternal = hasDemo && /^https?:\/\//.test(demoHref);
       <section class="panel-shell">
         <h2>Additional resources</h2>
         <div class="cta-stack">
-          {hasPromptPack ? (
+          {promptPackCta.visible ? (
             <a
               class="button"
-              href={promptPackHref}
-              target={promptPackExternal ? '_blank' : undefined}
-              rel={promptPackExternal ? 'noopener noreferrer' : undefined}
+              href={promptPackCta.href}
+              target={promptPackCta.isExternal ? '_blank' : undefined}
+              rel={promptPackCta.isExternal ? 'noopener noreferrer' : undefined}
             >
               Prompt pack
             </a>
           ) : (
-            <span class="text-small">Prompt pack pending</span>
+            <span class="text-small">{promptCopy}</span>
           )}
-          {hasDemo ? (
+          {demoCta.visible ? (
             <a
               class="button"
-              href={demoHref}
-              target={demoExternal ? '_blank' : undefined}
-              rel={demoExternal ? 'noopener noreferrer' : undefined}
+              href={demoCta.href}
+              target={demoCta.isExternal ? '_blank' : undefined}
+              rel={demoCta.isExternal ? 'noopener noreferrer' : undefined}
             >
               Open demo
             </a>
           ) : (
-            <span class="text-small">Demo pending</span>
+            <span class="text-small">{demoCopy}</span>
           )}
         </div>
       </section>
