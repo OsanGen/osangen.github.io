@@ -2,73 +2,81 @@
 interface Props {
   url: string;
   title: string;
+  preferred?: 'iframe' | 'link';
   aspectRatio?: '16/9' | '4/3';
 }
 
-const { url, title, aspectRatio = '16/9' } = Astro.props;
+const { url, title, preferred = 'iframe', aspectRatio = '16/9' } = Astro.props;
 const safeUrl = encodeURI(url);
 const ratio = aspectRatio === '16/9' ? '56.25%' : '75%';
 ---
 <div class="card">
-  <div
-    style={`position:relative; width:100%; padding-top:${ratio}; background:var(--panel); border:1px solid var(--border); overflow:hidden; border-radius:1rem;`}
-    data-game-embed
-    data-url={safeUrl}
-  >
-    <iframe
-      title={title}
-      src={safeUrl}
-      loading="lazy"
-      referrerpolicy="no-referrer"
-      allowfullscreen
-      style="border:0; position:absolute; inset:0; width:100%; height:100%;"
-      onload="this.dataset.loaded='1'"
-    ></iframe>
-    <div class="fallback" hidden style="display:none; position:absolute; inset:0; align-items:center; justify-content:center; padding:1rem; background:var(--panel); text-align:center;">
-      <div>
-        <p>The embed is blocked in this browser.</p>
-        <p><a href={safeUrl} target="_blank" rel="noopener noreferrer">Open in new tab</a></p>
-        <p>If embed is blocked, use the new-tab link.</p>
+  {preferred === 'link' ? (
+    <a class="button button--primary" href={safeUrl} target="_blank" rel="noopener noreferrer">
+      Open in new tab
+    </a>
+  ) : (
+    <div
+      style={`position:relative; width:100%; padding-top:${ratio}; background:var(--panel); border:1px solid var(--border); overflow:hidden; border-radius:1rem;`}
+      data-game-embed
+      data-url={safeUrl}
+    >
+      <iframe
+        title={title}
+        src={safeUrl}
+        loading="lazy"
+        referrerpolicy="no-referrer"
+        allowfullscreen
+        style="border:0; position:absolute; inset:0; width:100%; height:100%;"
+        onload="this.dataset.loaded='1'"
+      ></iframe>
+      <div class="fallback" hidden style="display:none; position:absolute; inset:0; align-items:center; justify-content:center; padding:1rem; background:var(--panel); text-align:center;">
+        <div>
+          <p>The embed is blocked in this browser.</p>
+          <p><a href={safeUrl} target="_blank" rel="noopener noreferrer">Open in new tab</a></p>
+          <p>If embed is blocked, use the new-tab link.</p>
+        </div>
       </div>
     </div>
-  </div>
-  <p class="text-small" style="margin-top:0.5rem;"><a href={safeUrl} target="_blank" rel="noopener noreferrer">Open in new tab</a></p>
+  )}
+  {preferred === 'iframe' ? <p class="text-small" style="margin-top:0.5rem;"><a href={safeUrl} target="_blank" rel="noopener noreferrer">Open in new tab</a></p> : null}
 </div>
+{preferred === 'iframe' ? (
+  <script is:inline>
+    const roots = document.querySelectorAll('[data-game-embed]');
+    roots.forEach((node) => {
+      const url = node.getAttribute('data-url') || '';
+      const frame = node.querySelector('iframe');
+      const fallback = node.querySelector('.fallback');
+      if (!frame || !fallback) return;
 
-<script is:inline>
-  const roots = document.querySelectorAll('[data-game-embed]');
-  roots.forEach((node) => {
-    const url = node.getAttribute('data-url') || '';
-    const frame = node.querySelector('iframe');
-    const fallback = node.querySelector('.fallback');
-    if (!frame || !fallback) return;
+      const showFallback = () => {
+        fallback.hidden = false;
+        frame.style.display = 'none';
+      };
 
-    const showFallback = () => {
-      fallback.hidden = false;
-      frame.style.display = 'none';
-    };
+      let settled = false;
+      const timer = window.setTimeout(() => {
+        if (!settled) showFallback();
+      }, 4500);
 
-    let settled = false;
-    const timer = window.setTimeout(() => {
-      if (!settled) showFallback();
-    }, 4500);
-
-    frame.addEventListener('error', () => {
-      settled = true;
-      window.clearTimeout(timer);
-      showFallback();
-    });
-
-    frame.addEventListener('load', () => {
-      settled = true;
-      window.clearTimeout(timer);
-      const loaded = frame.getAttribute('data-loaded');
-      if (!loaded) {
+      frame.addEventListener('error', () => {
+        settled = true;
+        window.clearTimeout(timer);
         showFallback();
-      }
-    });
+      });
 
-    const openLink = frame.closest('[data-game-embed]')?.querySelector('a[href]');
-    if (openLink) openLink.setAttribute('href', url);
-  });
-</script>
+      frame.addEventListener('load', () => {
+        settled = true;
+        window.clearTimeout(timer);
+        const loaded = frame.getAttribute('data-loaded');
+        if (!loaded) {
+          showFallback();
+        }
+      });
+
+      const openLink = node.closest('.card')?.querySelector('a[href]');
+      if (openLink) openLink.setAttribute('href', url);
+    });
+  </script>
+) : null}

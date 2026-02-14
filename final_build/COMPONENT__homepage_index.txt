@@ -1,0 +1,27 @@
+Component: `src/pages/index.astro`
+
+Purpose:
+- Turn the homepage into a compact router with minimal prose and three clear entry points.
+
+Inputs:
+- `loadGames`, `loadModules`, `loadWorkshops`, and `loadCommunities`.
+
+Outputs:
+- Hero shell with short headline, one-line lede, two top CTAs (Labs, Book).
+- Three route cards (`Labs`, `Learn`, `Join`) each with one count subtitle and one CTA.
+
+State:
+- No client state.
+
+Edge cases:
+- Pluralization for counts handles singular/plural and zero values.
+- Communities route fallback if there are no entries still renders valid subtitles (`0 communities`).
+
+Dependencies:
+- `Card` and `CardGrid` layout components.
+- Tokens and scene styles in `src/styles/global.css` (`.hero-shell`, `.route-grid`, `.route-card`).
+
+Acceptance checks:
+- Multi-section catalog/featured blocks removed from homepage.
+- Above-fold consists of hero + three route cards only.
+- H1, subtitle, and CTA count remain concise.

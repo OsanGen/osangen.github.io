@@ -36,6 +36,7 @@ const demoExternal = hasDemo && /^https?:\/\//.test(demoHref);
         <h1>{gpt.name}</h1>
         <p class="text-small deck-subtitle">{gpt.short_desc}</p>
         <p class="text-small"><strong>Outcome:</strong> {gpt.ships}</p>
+        <p class="muted"><strong>Audience:</strong> {gpt.audience.join(' / ')}</p>
         <TagList tags={gpt.tags} compact maxItems={3} />
         <div class="cta-stack">
           {hasUseLink ? (

@@ -1,13 +1,11 @@
 ---
 const navItems = [
-  { label: 'Home', href: '/' },
-  { label: 'Educational Games', href: '/labs' },
-  { label: 'Lean Agents', href: '/gpts' },
-  { label: 'Visuals & Workshops', href: '/workshops' },
+  { label: 'Labs', href: '/labs' },
+  { label: 'Learn', href: '/workshops' },
+  { label: 'Join', href: '/join' },
   { label: 'Resume', href: '/resume' },
-  { label: 'Book', href: 'https://calendly.com/abellou/30min' },
 ];
-
+const ctaHref = 'https://calendly.com/abellou/30min';
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 ---
 <header class="site-header">
@@ -24,26 +22,27 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
       />
       <span class="brand-name">Oscar Sanchez</span>
     </a>
-    <nav class="site-nav" aria-label="Primary">
-      {navItems.map((item) => {
-        const isExternal = item.href.startsWith('http://') || item.href.startsWith('https://');
-        const isCurrent = isExternal
-          ? false
-          : item.href === '/'
+    <div class="header-right">
+      <nav class="site-nav" aria-label="Primary">
+        {navItems.map((item) => {
+          const isCurrent = item.href === '/'
             ? currentPath === '/'
             : currentPath.startsWith(item.href);
-        return (
-          <a
-            href={item.href}
-            class="nav-link"
-            target={isExternal ? '_blank' : undefined}
-            rel={isExternal ? 'noopener noreferrer' : undefined}
-            aria-current={isCurrent ? 'page' : undefined}
-          >
-            {item.label}
-          </a>
-        );
-      })}
-    </nav>
+          return (
+            <a href={item.href} class="nav-link" aria-current={isCurrent ? 'page' : undefined}>
+              {item.label}
+            </a>
+          );
+        })}
+      </nav>
+      <a
+        class="button button--primary nav-cta"
+        href={ctaHref}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Book
+      </a>
+    </div>
   </div>
 </header>

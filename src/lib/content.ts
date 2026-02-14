@@ -5,6 +5,7 @@ import {
   GameSchema,
   GPTSchema,
   ModuleSchema,
+  type Workshop,
   PostSchema,
   ProfileSchema,
   BookingSchema,
@@ -53,6 +54,10 @@ export const loadCommunities = () => loadJsonCached('communities.json', z.array(
 export const loadBooking = () => loadJsonCached('booking.json', BookingSchema);
 export const loadWorkshops = () => loadJsonCached('workshops.json', z.array(WorkshopSchema));
 export const loadPosts = () => loadJsonCached('posts.json', z.array(PostSchema));
+export const getWorkshopById = async (id: string): Promise<Workshop | null> => {
+  const workshops = await loadWorkshops();
+  return workshops.find((workshop) => workshop.id === id) ?? null;
+};
 export const loadGPTs = async () => {
   const gpts = await loadJsonCached('gpts.json', z.array(GPTSchema));
   const invalidListingLinks = gpts.filter((gpt: GPT) => !isCanonicalAgentLink(gpt.link));

@@ -1,158 +1,65 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SectionHeader from '../components/SectionHeader.astro';
 import Card from '../components/Card.astro';
 import CardGrid from '../components/CardGrid.astro';
-import TagList from '../components/TagList.astro';
-import { loadGames, loadModules, loadGPTs, loadWorkshops, loadProfile } from '../lib/content';
+import { loadCommunities, loadGames, loadModules, loadWorkshops } from '../lib/content';
 
-const [profile, games, modules, gpts, workshops] = await Promise.all([
-  loadProfile(),
+const [games, modules, workshops, communities] = await Promise.all([
   loadGames(),
   loadModules(),
-  loadGPTs(),
   loadWorkshops(),
+  loadCommunities(),
 ]);
-const featuredGames = games.slice(0, 3);
-const featuredGPTs = gpts.slice(0, 3);
-const featuredWorkshops = workshops.slice(0, 3);
-const featuredVisualModules = modules
-  .filter((module) => Boolean(module.visualClass) && module.id !== 'beautiful-code-theory')
-  .slice(0, 2);
 
-const featureCards = [
+const visualClassCount = modules.filter((module) => Boolean(module.visualClass)).length;
+const routeCards = [
   {
-    title: 'Educational Games',
+    title: 'Labs',
     href: '/labs',
-    subtitle: `${games.length} open games with proof-aligned walkthroughs.`,
-    action: 'Play demos',
+    subtitle: `${games.length} game ${games.length === 1 ? 'lab' : 'labs'}`,
+    action: 'Open labs',
   },
   {
-    title: 'Lean Agents',
-    href: '/gpts',
-    subtitle: `${gpts.length} practical agents for execution, prompting, and production flow.`,
-    action: 'Open agent directory',
-  },
-  {
-    title: 'Visuals & Workshops',
+    title: 'Learn',
     href: '/workshops',
-    subtitle: `${workshops.length} workshop artifacts and visual learning pathways.`,
-    action: 'Explore visuals',
+    subtitle: `${workshops.length} workshop${workshops.length === 1 ? '' : 's'}`,
+    action: 'Open learn',
   },
   {
-    title: 'Resume',
-    href: '/resume',
-    subtitle: 'Career proof, teaching, and operational track record.',
-    action: 'View resume',
+    title: 'Join',
+    href: '/join',
+    subtitle: `${communities.length} community${communities.length === 1 ? '' : 's'}`,
+    action: 'Join community',
   },
 ];
+
+const bookHref = 'https://calendly.com/abellou/30min';
 ---
-<BaseLayout title={`Home - ${profile.name}`} description="Open-source teaching repository for practical AI governance, education, and execution workflows.">
-  <SectionHeader
-    title="Open-source teaching repository for AI builders"
-    subtitle="Everything here is reusable, proof-first content: modules, games, agents, and workshops in one place."
-  />
-  <div class="repo-shell">
-    <section class="hero-shell scene-shell scene-accent command-shell" style="--scene-accent: var(--cog-blue);">
-      <p class="hero-eyebrow">Open-source teaching repo</p>
-      <h1>Open everything, explain everything, prove everything.</h1>
-      <p class="text-small deck-subtitle">
-        This site is a living repository of open teaching artifacts: educational games, guided labs, lean agents, visuals,
-        and tools people can use immediately.
-      </p>
-      <p class="text-small">
-        Pick the route below to get started in one click.
-      </p>
-      <div class="cta-stack">
-        <a class="button button--primary" href="/workshops">Explore visuals</a>
-        <a class="button" href="/labs">Try Educational Games</a>
-      </div>
-    </section>
+<BaseLayout title="Oscar Sanchez" description="Open-source AI education, cleanly.">
+  <section class="hero-shell scene-shell scene-accent command-shell">
+    <p class="hero-eyebrow">Open-source AI education</p>
+    <h1>Choose your route. Learn fast.</h1>
+    <p class="text-small deck-subtitle">Three clean paths for shipping AI capability: play, learn, and join.</p>
+    <div class="cta-stack">
+      <a class="button button--primary" href="/labs">Open Labs</a>
+      <a class="button" href={bookHref} target="_blank" rel="noopener noreferrer">Book</a>
+    </div>
+    <p class="muted">Plus {visualClassCount} {visualClassCount === 1 ? 'visual class' : 'visual classes'} and growing public content.</p>
+  </section>
 
-    <section class="panel-shell">
-      <h2>What you can use here</h2>
-      <CardGrid gap="var(--space-3)" align="start">
-        {featureCards.map((card) => (
-          <Card>
-            <div class="resource-card-stack">
-              <p class="resource-card-kicker">Route</p>
-              <h2>{card.title}</h2>
-              <p class="text-small catalog-summary">{card.subtitle}</p>
-              <a class="button button--primary catalog-cta" href={card.href}>{card.action}</a>
-            </div>
-          </Card>
-        ))}
-      </CardGrid>
-    </section>
-
-    <section class="panel-shell">
-      <h2>Featured open resources</h2>
-      <div class="catalog-shell">
-        <h3 class="text-small">Featured open games</h3>
-        <CardGrid gap="var(--space-3)" align="start">
-          {featuredGames.map((game) => (
-            <Card>
-              <div class="catalog-card-stack">
-                <h3>{game.title}</h3>
-                <p class="catalog-summary">{game.tagline}</p>
-                <TagList tags={game.concepts} compact maxItems={3} />
-                <a class="button catalog-cta" href={`/labs/${game.id}`}>Open game</a>
-              </div>
-            </Card>
-          ))}
-        </CardGrid>
-      </div>
-
-      <div class="catalog-shell">
-        <h3 class="text-small">Featured lean agents</h3>
-        <CardGrid gap="var(--space-3)" align="start">
-          {featuredGPTs.map((gpt) => (
-            <Card>
-              <div class="catalog-card-stack">
-                <p class="text-small featured-meta"><strong>{gpt.status}</strong> · {gpt.audience[0]}</p>
-                <h3>{gpt.name}</h3>
-                <p class="catalog-summary">{gpt.short_desc}</p>
-                <a class="button catalog-cta" href={`/gpts/${gpt.id}`}>Open agent</a>
-              </div>
-            </Card>
-          ))}
-        </CardGrid>
-      </div>
-
-      <div class="catalog-shell">
-        <h3 class="text-small">Featured visuals + workshops</h3>
-        <CardGrid gap="var(--space-3)" align="start">
-          {featuredWorkshops.map((workshop) => (
-            <Card>
-              <div class="catalog-card-stack">
-                <p class="text-small featured-meta">Workshop</p>
-                <h3>{workshop.title}</h3>
-                <p class="catalog-summary">{workshop.date}</p>
-                <a class="button catalog-cta" href="/workshops">Open workshop page</a>
-              </div>
-            </Card>
-          ))}
-          {featuredVisualModules.map((module) => (
-            <Card>
-              <div class="catalog-card-stack">
-                <p class="text-small featured-meta">Visual learning</p>
-                <h3>{module.title}</h3>
-                <p class="catalog-summary">Step-by-step visual loops, proofs, and checkpoints.</p>
-                <a class="button catalog-cta" href={`/workshops#visual-module-${module.id}`}>Open visual class</a>
-              </div>
-            </Card>
-          ))}
-        </CardGrid>
-      </div>
-    </section>
-
-    <section class="panel-shell scene-accent command-shell" style="--scene-accent: var(--cog-mint);">
-      <h2>LinkedIn is the source of truth for updates and live links</h2>
-      <p class="text-small">Connect to the author network and see where teaching and workshops are discussed and released.</p>
-      <div class="cta-stack">
-        <a class="button" href={profile.links.linkedin} target="_blank" rel="noopener noreferrer">Open LinkedIn</a>
-        <a class="button" href="/workshops">Open visuals + workshops</a>
-      </div>
-    </section>
+  <div class="route-grid">
+    <CardGrid gap="var(--space-3)" align="start">
+      {routeCards.map((card, index) => (
+        <Card>
+          <article class={`route-card cog-entrance`} style={`--reveal-delay:${index * 60}ms`}>
+            <h2>{card.title}</h2>
+            <p class="text-small line-clamp-1">{card.subtitle}</p>
+            <a class="button" href={card.href}>
+              {card.action}
+            </a>
+          </article>
+        </Card>
+      ))}
+    </CardGrid>
   </div>
 </BaseLayout>

@@ -3,334 +3,80 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Card from '../components/Card.astro';
 import CardGrid from '../components/CardGrid.astro';
 import TagList from '../components/TagList.astro';
-import { loadWorkshops, loadModules, loadProfile, loadLastModifiedISO } from '../lib/content';
-import EmptyState from '../components/EmptyState.astro';
+import { loadModules, loadWorkshops, loadLastModifiedISO } from '../lib/content';
+import type { Module } from '../lib/schemas';
 
-const [profile, workshops, modules] = await Promise.all([
-  loadProfile(),
-  loadWorkshops(),
-  loadModules(),
-]);
+const [modules, workshops] = await Promise.all([loadModules(), loadWorkshops()]);
 const updated = await loadLastModifiedISO('workshops.json');
-const visualModules = modules.filter(
-  (module) => Boolean(module.visualClass) && module.id !== 'beautiful-code-theory',
-);
-const workshopGuides = {
-  'leanagents-workshop-chatgpt-apps': {
-    primaryLabel: 'Open live experience',
-    secondaryLabel: 'How this teaches',
-    secondaryHref: '/workshops#leanagents-chatgpt-apps-teaching',
-    teachingTitle: 'How this workshop teaches',
-    teachingBullets: [
-      'Watch why single-tool prompts fail for production: roles and handoffs are the control points.',
-      'Producer (ChatGPT/OSAN Brand GPT) locks brief, constraints, and disclosure before visuals are created.',
-      'Art step generates a clean, readable hero frame first, then motion is applied only after approval gates.',
-      'Post/sequence step runs through timing and release checks (legibility, safety, length, margin, consistency) for reusable rollout.',
-    ],
-    proofLine:
-      'A repeatable 3-role stack teaches decision ownership: structure first, visuals second, timing third.',
-  },
-  'manus-workshop': {
-    primaryLabel: 'Open live experience',
-    secondaryLabel: 'How this teaches',
-    secondaryHref: '/workshops#manus-workshop-teaching',
-    teachingTitle: 'How Manus teaches',
-    teachingBullets: [
-      'Set a decision rubric first so criteria, weights, and failure rules are fixed before research starts.',
-      'Pick eight candidate agents and assign neutral aliases to reduce brand bias while preserving source links.',
-      'Build a scored matrix from public evidence, with citations for each score and explicit “Unknown” where data is missing.',
-      'Run weighted ranking by scenario, then export the table, recommendations, and validation checklist for real decisions.',
-    ],
-    proofLine:
-      'A repeatable evidence workflow that turns live web research into a defensible short-list and a deploy-ready decision artifact.',
-  },
-  'ghost-machine': {
-    primaryLabel: 'Open live experience',
-    secondaryLabel: 'How this teaches',
-    secondaryHref: '/workshops#ghost-machine-teaching',
-    teachingTitle: 'How Ghost Machine teaches',
-    teachingBullets: [
-      'Start with a high-level intent and map it to the first state transition.',
-      'Advance through state-by-state snapshots so each step is complete and independently auditable.',
-      'Watch checks make tradeoffs explicit before each move is accepted or rejected.',
-      'Use the generated proof log to explain why the system moved, paused, or escalated.',
-    ],
-    proofLine:
-      'A stateless, proof-first simulator where each transition is a full, testable evidence unit with transparent logic.',
-  },
-  'vibe-to-pral': {
-    primaryLabel: 'Open live experience',
-    secondaryLabel: 'How this teaches',
-    secondaryHref: '/workshops#vibe-to-pral-teaching',
-    teachingTitle: 'How Vibe-to-PRAL teaches',
-    teachingBullets: [
-      'Start from a vague intent and define objective, policy scope, and quality threshold.',
-      'Advance step-by-step as each validation gate confirms intent before progression.',
-      'Watch the diagram map intake to transformation, routing, and handoff with explicit state transitions.',
-      'Compare speed, confidence, and risk tradeoffs before each finalized action.',
-    ],
-    proofLine:
-      'A guided workflow where uncertain input becomes an auditable PRAL sequence with transparent gates, explicit transitions, and explainable output.',
-  },
-  'vpn-cost-lab': {
-    primaryLabel: 'Open live experience',
-    secondaryLabel: 'How this teaches',
-    secondaryHref: '/workshops#vpn-cost-lab-teaching',
-    teachingTitle: 'How VPN Cost Lab teaches',
-    teachingBullets: [
-      'Start with a concrete cost scenario: users, latency targets, and safety guardrails.',
-      'Compare request, policy, and routing choices while watching spend impact appear in real time.',
-      'Review why safety or policy checks are triggered before high-cost decisions are finalized.',
-      'Approve final outputs using outcome quality, confidence, and total cost tradeoffs.',
-    ],
-    proofLine:
-      'A presenter-friendly cost simulator that makes spend logic, policy checks, and tradeoffs explicit for fast teaching adoption.',
-  },
-  'kinetic-proof': {
-    primaryLabel: 'Open live experience',
-    secondaryLabel: 'How this teaches',
-    secondaryHref: '/workshops#kinetic-proof-teaching',
-    teachingTitle: 'How Kinetic Proof teaches',
-    teachingBullets: [
-      'Input events enter a proof-first flow and stay visible through each validation stage.',
-      'Validation gates show schema and policy checks before decisions are applied.',
-      'Decision outcomes report why a state passed, warned, or was blocked.',
-      'Quality and trust improve through traceable, explicit status signals.',
-    ],
-    proofLine:
-      'A low-noise, evidence-first simulation where each stage is auditable, deterministic, and directly tied to operational AI outcomes.',
-  },
-  'neural-glass': {
-    primaryLabel: 'Open live experience',
-    secondaryLabel: 'How this teaches',
-    secondaryHref: '/workshops#neural-glass-teaching',
-    teachingTitle: 'How Neural Glass teaches',
-    teachingBullets: [
-      'Start with raw customer signals and let learners map inputs to outcomes.',
-      'Observe how adaptive weighting shifts focus between features.',
-      'Watch hidden concepts become visible as labels like Loyal, Frustrated, and Engaged.',
-      'Track how shifts in inputs affect churn prediction confidence in real time.',
-    ],
-    proofLine:
-      'A proof-first walkthrough from inputs to concepts to outcomes, designed for zero-prior-knowledge learners while preserving enough technical structure for engineers.',
-  },
-  'kinetic-kitchen-2-0': {
-    primaryLabel: 'Open live experience',
-    secondaryLabel: 'How this teaches',
-    secondaryHref: '/workshops#kinetic-kitchen-teaching',
-    teachingTitle: 'How The Kinetic Kitchen 2.0 teaches',
-    teachingBullets: [
-      'Order enters as a request and travels through stations.',
-      'Route decisions are visible and explainable.',
-      'Escalation is explicit when confidence is low.',
-      'Throughput and accuracy are tracked as behavior changes.',
-    ],
-    proofLine:
-      'A compact, visible workflow simulation that makes routing, guardrails, and outcomes explicit so learners can follow policy reasoning and spot failure modes quickly.',
-  },
-  'policy-gatekeeper': {
-    primaryLabel: 'Open live experience',
-    secondaryLabel: 'How this teaches',
-    secondaryHref: '/workshops#policy-gatekeeper-teaching',
-    teachingTitle: 'How Policy Gatekeeper teaches',
-    teachingBullets: [
-      'Tickets enter as requests and are routed by policy lanes.',
-      'Policy checks are surfaced before any move is applied.',
-      'Weak-confidence decisions are explicitly escalated for review.',
-      'Outcome status updates show why a policy route was chosen or rejected.',
-    ],
-    proofLine:
-      'A visual policy-routing environment for teaching rule design with explicit escalation, guardrails, and visible decision outcomes.',
-  },
-} as const;
-const isExternalLink = (url: string) => /^https?:\/\//i.test(url.trim());
-const getWorkshopGuide = (id: string) => workshopGuides[id as keyof typeof workshopGuides];
-const hasGuide = (id: string) => Object.prototype.hasOwnProperty.call(workshopGuides, id);
-const LEAN_WORKSHOP_ID = 'leanagents-workshop-chatgpt-apps';
-const leanWorkshop = workshops.find((w) => w.id === LEAN_WORKSHOP_ID) ?? null;
-const visualLearningWorkshops = workshops.filter((w) => w.id !== LEAN_WORKSHOP_ID);
-const guidedVisualWorkshops = visualLearningWorkshops.filter((w) => hasGuide(w.id));
-const leanWorkshopGuide = leanWorkshop ? getWorkshopGuide(leanWorkshop.id) : undefined;
+const visualClasses = modules.filter((module) => Boolean(module.visualClass));
+const workshopCards = workshops.slice(0, 12);
+
+const ctaForClass = (module: Module) => ({
+  label: module.cta.label || 'Open',
+  href: module.cta.href || '/workshops',
+  isExternal: /^https?:\/\//i.test(module.cta.href || ''),
+});
 ---
-<BaseLayout title="Workshops - Oscar Sanchez" description="Workshop archive and import flow">
-  <h1>Visuals & Workshops</h1>
-  <p class="text-small">One place for image-first teaching assets, workshop links, and reusable resources.</p>
-  <p class="text-small">Last updated: {updated ? new Date(updated).toLocaleString() : 'Not available'}</p>
+<BaseLayout title="Learn - Oscar Sanchez" description="Visual classes and workshops in one clean route.">
+  <h1>Learn</h1>
+  <p class="text-small">One clean map to classes and practical workshop sessions.</p>
+  <p class="text-small muted">Last updated: {updated ? new Date(updated).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Not available'}</p>
 
   <section class="panel-shell">
-    <h2>Workshop</h2>
-    {!leanWorkshop ? (
-      <EmptyState
-        title="Add workshops"
-        body="Lean Agents Workshop entry not found. Add it to src/content/data/workshops.json."
-        note="Run: npm run import:workshops"
-      />
+    <h2>Visual classes</h2>
+    {visualClasses.length === 0 ? (
+      <p class="text-small">No visual classes are published yet.</p>
     ) : (
       <CardGrid gap="var(--space-3)" align="start">
-        <Card>
-          <h3>{leanWorkshop.title}</h3>
-          <p class="text-small">{leanWorkshop.date}</p>
-          <p style="margin-top:0.5rem;">{leanWorkshop.description}</p>
-          <div class="cta-stack" style="margin-top:0.6rem;">
-            {leanWorkshop.replayUrl ? (
-              <a
-                class={`button ${leanWorkshopGuide ? 'button--primary' : ''}`}
-                href={leanWorkshop.replayUrl}
-                target={isExternalLink(leanWorkshop.replayUrl) ? '_blank' : undefined}
-                rel={isExternalLink(leanWorkshop.replayUrl) ? 'noopener noreferrer' : undefined}
-              >
-                {leanWorkshopGuide ? leanWorkshopGuide.primaryLabel : 'Replay'}
-              </a>
-            ) : (
-              <span class="text-small">{leanWorkshopGuide ? 'Live experience unavailable' : 'Replay missing'}</span>
-            )}
-            {leanWorkshop.slidesUrl ? (
-              <a
-                class="button"
-                href={leanWorkshopGuide ? leanWorkshopGuide.secondaryHref : leanWorkshop.slidesUrl}
-                target={leanWorkshopGuide ? undefined : isExternalLink(leanWorkshop.slidesUrl) ? '_blank' : undefined}
-                rel={leanWorkshopGuide ? undefined : isExternalLink(leanWorkshop.slidesUrl) ? 'noopener noreferrer' : undefined}
-              >
-                {leanWorkshopGuide ? leanWorkshopGuide.secondaryLabel : 'Slides'}
-              </a>
-            ) : (
-              <span class="text-small">{leanWorkshopGuide ? 'Teaching notes unavailable' : 'Slides missing'}</span>
-            )}
-          </div>
-        </Card>
-      </CardGrid>
-    )}
-  </section>
-
-  <section class="panel-shell">
-    <h2>Visual learning</h2>
-    {visualLearningWorkshops.length === 0 && visualModules.length === 0 ? (
-      <p class="text-small">No visual-learning entries yet.</p>
-    ) : (
-      <CardGrid gap="var(--space-3)" align="start">
-        {visualLearningWorkshops.map((w) => {
-          const guide = getWorkshopGuide(w.id);
+        {visualClasses.map((module) => {
+          const cta = ctaForClass(module);
           return (
             <Card>
-              <h3>{w.title}</h3>
-              <p class="text-small">{w.date}</p>
-              <p style="margin-top:0.5rem;">{w.description}</p>
-              <div class="cta-stack" style="margin-top:0.6rem;">
-                {w.replayUrl ? (
-                  <a
-                    class={`button ${guide ? 'button--primary' : ''}`}
-                    href={w.replayUrl}
-                    target={isExternalLink(w.replayUrl) ? '_blank' : undefined}
-                    rel={isExternalLink(w.replayUrl) ? 'noopener noreferrer' : undefined}
-                  >
-                    {guide ? guide.primaryLabel : 'Replay'}
-                  </a>
-                ) : (
-                  <span class="text-small">{guide ? 'Live experience unavailable' : 'Replay missing'}</span>
-                )}
-                {w.slidesUrl ? (
-                  <a
-                    class="button"
-                    href={guide ? guide.secondaryHref : w.slidesUrl}
-                    target={guide ? undefined : isExternalLink(w.slidesUrl) ? '_blank' : undefined}
-                    rel={guide ? undefined : isExternalLink(w.slidesUrl) ? 'noopener noreferrer' : undefined}
-                  >
-                    {guide ? guide.secondaryLabel : 'Slides'}
-                  </a>
-                ) : (
-                  <span class="text-small">{guide ? 'Teaching notes unavailable' : 'Slides missing'}</span>
-                )}
+              <div class="catalog-card-stack">
+                <h3>{module.title}</h3>
+                <p class="text-small catalog-meta">{module.time} · {module.level}</p>
+                <TagList tags={module.topics} compact maxItems={3} />
+                <a
+                  class="button catalog-cta"
+                  href={cta.href}
+                  target={cta.isExternal ? '_blank' : undefined}
+                  rel={cta.isExternal ? 'noopener noreferrer' : undefined}
+                >
+                  {cta.label}
+                </a>
               </div>
             </Card>
           );
         })}
-        {visualModules.map((module) => (
-          <Card>
-            <div id={`visual-module-${module.id}`}>
-              <h3>{module.title}</h3>
-              <p class="text-small">{module.time} · {module.level}</p>
-              <TagList tags={module.topics} compact maxItems={3} />
-              <p class="catalog-summary">{module.format}</p>
-              <a class="button catalog-cta" href={module.cta.href}>Open visual class</a>
-            </div>
-          </Card>
-        ))}
       </CardGrid>
     )}
   </section>
 
-  {leanWorkshop && leanWorkshopGuide ? (
-    <section class="panel-shell">
-      <h2>How this workshop teaches</h2>
-      <section id={`${leanWorkshop.id}-teaching`} class="panel-shell">
-        <h3>{leanWorkshopGuide.teachingTitle}</h3>
-        <p class="text-small">{leanWorkshopGuide.proofLine}</p>
-        <ol class="catalog-summary">
-          {leanWorkshopGuide.teachingBullets.map((step) => (
-            <li>{step}</li>
-          ))}
-        </ol>
-      </section>
-    </section>
-  ) : null}
-
-  {guidedVisualWorkshops.length > 0 ? (
-    <section class="panel-shell">
-      <h2>How visual learning teaches</h2>
+  <section class="panel-shell">
+    <h2>Workshops</h2>
+    {workshopCards.length === 0 ? (
+      <p class="text-small">No workshop entries yet.</p>
+    ) : (
       <CardGrid gap="var(--space-3)" align="start">
-        {guidedVisualWorkshops.map((w) => {
-          const guide = getWorkshopGuide(w.id);
-          if (!guide) {
-            return null;
-          }
-
+        {workshopCards.map((workshop) => {
           return (
-            <section id={`${w.id}-teaching`} class="panel-shell">
-              <h3>{guide.teachingTitle}</h3>
-              <p class="text-small">{guide.proofLine}</p>
-              <ol class="catalog-summary">
-                {guide.teachingBullets.map((step) => (
-                  <li>{step}</li>
-                ))}
-              </ol>
-            </section>
+            <Card>
+              <div class="catalog-card-stack">
+                <p class="text-small catalog-meta">Workshop</p>
+                <h3>{workshop.title}</h3>
+                <p class="text-small catalog-meta">{workshop.date}</p>
+                <TagList tags={workshop.tags} compact maxItems={3} />
+                <a
+                  class="button catalog-cta"
+                  href={`/workshops/${workshop.id}`}
+                >
+                  Open details
+                </a>
+              </div>
+            </Card>
           );
         })}
       </CardGrid>
-    </section>
-  ) : null}
-
-  <section class="panel-shell">
-    <h2>Latest tools and links</h2>
-    <p class="text-small">Primary source of open-source activity and announcements.</p>
-    <CardGrid gap="var(--space-3)" align="start">
-      <Card>
-        <h3>LinkedIn</h3>
-        <p class="text-small">Follow updates, workshops, and new teaching drops.</p>
-        <a class="button button--primary" href={profile.links.linkedin} target="_blank" rel="noopener noreferrer">
-          Open LinkedIn
-        </a>
-      </Card>
-      <Card>
-        <h3>Portfolio</h3>
-        <p class="text-small">Long-form profile, repos, and external references.</p>
-        <a class="button" href={profile.links.portfolio} target="_blank" rel="noopener noreferrer">
-          Open portfolio
-        </a>
-      </Card>
-      {profile.links.youtube ? (
-        <Card>
-          <h3>YouTube</h3>
-          <p class="text-small">Replays, walkthroughs, and public sessions.</p>
-          <a class="button" href={profile.links.youtube} target="_blank" rel="noopener noreferrer">Open channel</a>
-        </Card>
-      ) : null}
-    </CardGrid>
+    )}
   </section>
-
-  <Card>
-    <h2>How to add workshops</h2>
-    <p class="text-small">Provide a JSON or CSV file under private/linkedin/workshops.json or workshops.csv and run import:workshops.</p>
-    <p class="text-small"><a href="/docs">See docs for intake details</a></p>
-  </Card>
 </BaseLayout>

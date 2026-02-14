@@ -1,0 +1,32 @@
+Component: `src/components/GameEmbed.astro`
+
+Purpose:
+- Render either an iframe embed or a direct-link fallback/card mode for labs.
+- Keep interaction simple and resilient when iframe embed is blocked.
+
+Inputs:
+- `url: string`
+- `title: string`
+- Optional `preferred: 'iframe' | 'link'` (defaults to `'iframe'`)
+- Optional `aspectRatio: '16/9' | '4/3'` (defaults to `'16/9'`)
+
+Outputs:
+- If `preferred === 'iframe'`: framed iframe with a hidden fallback panel + fallback link and optional external link row.
+- If `preferred === 'link'`: single primary button opening the URL in a new tab.
+
+State:
+- No component state; optional inline script tracks whether iframe load/timeout should reveal fallback.
+
+Edge cases:
+- Internal `encodeURI(url)` is used for safe attribute use.
+- Timeout (4.5s) or load error displays fallback panel.
+- Duplicate new-tab link is avoided in link mode.
+
+Dependencies:
+- Caller passes game embed preferences from `src/content/data/games.json`.
+- Styles rely on tokenized colors in `src/styles/global.css`.
+
+Acceptance checks:
+- Supports both render modes without duplicated link actions.
+- Embeds do not throw runtime errors when links fail.
+- All lab card actions can still open in a new tab.

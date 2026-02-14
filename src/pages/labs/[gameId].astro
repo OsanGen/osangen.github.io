@@ -38,6 +38,7 @@ const { game } = Astro.props as { game?: Game };
       <GameEmbed
         url={game.deployUrl}
         title={game.title}
+        preferred={game.embed.preferred}
         aspectRatio={game.embed.aspectRatio as '16/9' | '4/3'}
       />
 

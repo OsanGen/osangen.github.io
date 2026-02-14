@@ -1,0 +1,32 @@
+Component: `src/lib/content.ts`
+Purpose:
+- Load and cache content JSON payloads from `src/content/data`.
+- Enforce schema validation and small data quality invariants.
+- Provide reusable typed accessors for pages and scripts.
+
+Inputs/outputs:
+- Loads `profile`, `games`, `modules`, `communities`, `booking`, `workshops`, `posts`, and `gpts`.
+- Outputs typed datasets through `load*` functions.
+- Exposes `getWorkshopById(id)` for direct workshop resolution on detail views or command-line tooling.
+
+- State:
+- Module-scoped `Map<string, Promise<unknown>>` cache keyed by filename.
+- Canonical URL check for GPT listing links executed in `loadGPTs`.
+
+Key invariants:
+- `loadJsonCached` guarantees one parse+validate pass per file per process.
+- `validate:content` currently checks GPT links and proof blocks; other datasets are structurally typed via Zod.
+
+Edge cases:
+- Duplicate parsing errors remain cached in Promise map for process lifetime.
+- Missing or placeholder links in GPT resource fields can warn without hard-failing (existing behavior).
+- `getWorkshopById` returns `null` when id is not found.
+
+Dependencies:
+- Zod schemas in `src/lib/schemas.ts`.
+- Filesystem reads from `src/content/data`.
+
+Acceptance checks:
+- All loaders parse successfully and pass schema validation.
+- `loadGPTs` rejects non-canonical listing link values.
+- Workshops now include optional `proofLine` and `teachingBullets` as supported schema fields.

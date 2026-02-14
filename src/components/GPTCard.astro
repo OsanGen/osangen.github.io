@@ -8,7 +8,6 @@ export interface Props {
 }
 
 const { gpt, revealDelayMs = 0 } = Astro.props;
-const audienceLine = gpt.audience.length > 0 ? gpt.audience.join(' / ') : 'General';
 const linkHref = gpt.link.trim();
 const isExternal = /^https?:\/\//.test(linkHref);
 
@@ -17,16 +16,13 @@ const isExternal = /^https?:\/\//.test(linkHref);
   class="panel-shell panel-shell--command agent-card agent-card--directory cog-entrance"
   style={`--reveal-delay:${revealDelayMs}ms`}
 >
-  <div class="micro-rail" aria-hidden="true"></div>
   <div class="gpt-title-row">
     {gpt.icon ? <img src={gpt.icon.src} alt={gpt.icon.alt} class="gpt-icon" loading="lazy" decoding="async" /> : null}
     <h2>{gpt.name}</h2>
   </div>
-  <p class="agent-summary line-clamp-3">
+  <p class="agent-summary line-clamp-2">
     <strong class="agent-label">Outcome:</strong> {gpt.ships}
   </p>
-  <p class="agent-summary line-clamp-3">{gpt.short_desc}</p>
-  <p class="proof-meta"><strong class="agent-label">Best for:</strong> {audienceLine}</p>
 
   <TagList tags={gpt.tags} compact maxItems={3} />
 

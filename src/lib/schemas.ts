@@ -132,7 +132,12 @@ export const WorkshopSchema = z.object({
   replayUrl: z.string(),
   slidesUrl: z.string(),
   tags: z.array(z.string()),
+  proofLine: z.string().optional(),
+  teachingBullets: z.array(z.string()).optional(),
+  audienceLine: z.string().optional(),
 });
+
+export type Workshop = z.infer<typeof WorkshopSchema>;
 
 export const PostSchema = z.object({
   id: z.string(),

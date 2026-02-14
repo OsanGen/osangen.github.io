@@ -5,13 +5,20 @@
     "title": "Lean Agents Workshop: ChatGPT Apps",
     "description": "A practical demo of a three-role AI content stack (Producer -> Art -> Post) for repeatable, reviewable 8-second intro content that scales across teams.",
     "replayUrl": "https://www.linkedin.com/events/leanagentsworkshop-chatgptapps-7421924200531111937/theater/",
-    "slidesUrl": "/workshops#leanagents-chatgpt-apps-teaching",
+    "slidesUrl": "/workshops/leanagents-workshop-chatgpt-apps",
     "tags": [
       "Visual learning",
       "ChatGPT Apps",
       "Video production workflow",
       "Role-based AI stack",
       "Reusable intro component"
+    ],
+    "proofLine": "A repeatable 3-role stack teaches decision ownership: structure first, visuals second, timing third.",
+    "teachingBullets": [
+      "Watch why single-tool prompts fail for production: roles and handoffs are the control points.",
+      "Producer (ChatGPT/OSAN Brand GPT) locks brief, constraints, and disclosure before visuals are created.",
+      "Art step generates a clean, readable hero frame first, then motion is applied only after approval gates.",
+      "Post/sequence step runs through timing and release checks (legibility, safety, length, margin, consistency) for reusable rollout."
     ]
   },
   {
@@ -20,13 +27,20 @@
     "title": "Manus Evidence-First Workshop",
     "description": "Learn how to evaluate AI agent tools with public evidence, from rubric setup to candidate ranking and a procurement-ready recommendation pack.",
     "replayUrl": "https://www.linkedin.com/events/manusworkshop7413933458843934720/theater/",
-    "slidesUrl": "/workshops#manus-workshop-teaching",
+    "slidesUrl": "/workshops/manus-workshop",
     "tags": [
       "Visual learning",
       "AI procurement",
       "Decision scoring",
       "Citations",
       "Agent evaluation"
+    ],
+    "proofLine": "A repeatable evidence workflow that turns live web research into a defensible short-list and a deploy-ready decision artifact.",
+    "teachingBullets": [
+      "Set a decision rubric first so criteria, weights, and failure rules are fixed before research starts.",
+      "Pick eight candidate agents and assign neutral aliases to reduce brand bias while preserving source links.",
+      "Build a scored matrix from public evidence, with citations for each score and explicit \"Unknown\" where data is missing.",
+      "Run weighted ranking by scenario, then export the table, recommendations, and validation checklist for real decisions."
     ]
   },
   {
@@ -35,13 +49,20 @@
     "title": "Ghost Machine",
     "description": "Learn stateless AI workflow evolution with high signal and low noise: each state is auditable, explainable, and built from visible evidence rather than hidden magic.",
     "replayUrl": "https://ghostdemo-kjctspsn.manus.space",
-    "slidesUrl": "/workshops#ghost-machine-teaching",
+    "slidesUrl": "/workshops/ghost-machine",
     "tags": [
       "Workflow evolution",
       "Stateless systems",
       "Proof-first design",
       "Decision states",
       "High data-ink"
+    ],
+    "proofLine": "A stateless, proof-first simulator where each transition is a testable evidence unit with transparent logic.",
+    "teachingBullets": [
+      "Start with a high-level intent and map it to the first state transition.",
+      "Advance through state-by-state snapshots so each step is complete and independently auditable.",
+      "Watch checks make tradeoffs explicit before each move is accepted or rejected.",
+      "Use the generated proof log to explain why the system moved, paused, or escalated."
     ]
   },
   {
@@ -50,13 +71,20 @@
     "title": "Vibe-to-PRAL",
     "description": "Turn a vague idea into a diagram-first PRAL workflow: structure appears step by step while inputs, gates, and handoffs stay visible and teachable.",
     "replayUrl": "https://vibetopal-vbc22hcv.manus.space",
-    "slidesUrl": "/workshops#vibe-to-pral-teaching",
+    "slidesUrl": "/workshops/vibe-to-pral",
     "tags": [
       "Diagram-first learning",
       "PRAL workflow",
       "Progressive disclosure",
       "Systems thinking",
       "Decision routing"
+    ],
+    "proofLine": "A guided workflow where uncertain input becomes an explainable PRAL sequence with transparent gates, explicit transitions, and understandable output.",
+    "teachingBullets": [
+      "Start with a vague intent and define objective, policy scope, and quality threshold.",
+      "Advance step-by-step as each validation gate confirms intent before progression.",
+      "Watch the diagram map intake to transformation, routing, and handoff with explicit state transitions.",
+      "Compare speed, confidence, and risk tradeoffs before each finalized action."
     ]
   },
   {
@@ -65,13 +93,20 @@
     "title": "VPN Cost Lab",
     "description": "Estimate AI deployment spend step-by-step: each request path, policy rule, and routing tradeoff stays visible so teams can reason from evidence to decision.",
     "replayUrl": "https://vpncostlab-omvhm8um.manus.space",
-    "slidesUrl": "/workshops#vpn-cost-lab-teaching",
+    "slidesUrl": "/workshops/vpn-cost-lab",
     "tags": [
       "AI cost modeling",
       "Presenter-focused",
       "Decision simulation",
       "Policy checks",
       "Cost transparency"
+    ],
+    "proofLine": "A presenter-friendly cost simulator that makes spend logic, policy checks, and tradeoffs explicit for fast teaching adoption.",
+    "teachingBullets": [
+      "Start with a concrete cost scenario: users, latency targets, and safety guardrails.",
+      "Compare request, policy, and routing choices while watching spend impact appear in real time.",
+      "Review why safety or policy checks are triggered before high-cost decisions are finalized.",
+      "Approve final outputs using outcome quality, confidence, and total cost tradeoffs."
     ]
   },
   {
@@ -80,13 +115,20 @@
     "title": "Neural Glass",
     "description": "Learn how a neural network turns raw signals into predictions in 90 seconds, with concepts, weights, and confidence made visible.",
     "replayUrl": "https://neuralglass-3cjwdrjv.manus.space",
-    "slidesUrl": "/workshops#neural-glass-teaching",
+    "slidesUrl": "/workshops/neural-glass",
     "tags": [
       "Neural Network",
       "Explainable AI",
       "Decision Logic",
       "Interactive Learning",
       "Feature Weights"
+    ],
+    "proofLine": "A proof-first walkthrough from inputs to concepts to outcomes, designed for zero-prior-knowledge learners while preserving enough technical structure for engineers.",
+    "teachingBullets": [
+      "Start with raw customer signals and let learners map inputs to outcomes.",
+      "Observe how adaptive weighting shifts focus between features.",
+      "Watch hidden concepts become visible as labels like Loyal, Frustrated, and Engaged.",
+      "Track how shifts in inputs affect churn prediction confidence in real time."
     ]
   },
   {
@@ -95,13 +137,20 @@
     "title": "Kinetic Proof",
     "description": "Learn how evidence-heavy governance flows work under pressure: validation, schema checks, and decision outcomes are visible end-to-end.",
     "replayUrl": "https://aaot8-osan.manus.space",
-    "slidesUrl": "/workshops#kinetic-proof-teaching",
+    "slidesUrl": "/workshops/kinetic-proof",
     "tags": [
       "Governance workflow",
       "Laboratory instrument",
       "Decision proof",
       "Validation",
       "Operational AI"
+    ],
+    "proofLine": "A low-noise, evidence-first simulation where each stage is auditable, deterministic, and directly tied to operational AI outcomes.",
+    "teachingBullets": [
+      "Input events enter a proof-first flow and stay visible through each validation stage.",
+      "Validation gates show schema and policy checks before any move is applied.",
+      "Decision outcomes report why a state passed, warned, or was blocked.",
+      "Quality and trust improve through traceable, explicit status signals."
     ]
   },
   {
@@ -110,13 +159,20 @@
     "title": "Policy Gatekeeper",
     "description": "Turn policy checks into a visual routing system you can teach from: policy tickets, rule evaluation, escalation, and outcome signals stay visible all the way through.",
     "replayUrl": "https://policydemo-mpnai4wm.manus.space",
-    "slidesUrl": "/workshops#policy-gatekeeper-teaching",
+    "slidesUrl": "/workshops/policy-gatekeeper",
     "tags": [
       "Policy",
       "Workflow",
       "Safety",
       "Decision routing",
       "Learning by simulation"
+    ],
+    "proofLine": "A visual policy-routing environment for teaching rule design with explicit escalation, guardrails, and visible decision outcomes.",
+    "teachingBullets": [
+      "Tickets enter as requests and are routed by policy lanes.",
+      "Policy checks are surfaced before any move is applied.",
+      "Weak-confidence decisions are explicitly escalated for review.",
+      "Outcome status updates show why a policy route was chosen or rejected."
     ]
   },
   {
@@ -125,13 +181,20 @@
     "title": "The Kinetic Kitchen 2.0",
     "description": "Watch an AI agent workflow as a restaurant order: intake, routing, escalation, and completion. No code, no jargon. Learners see decisions, guardrails, edge-case handling, and KPI behavior as the order moves.",
     "replayUrl": "https://kinetickit-acameqrq.manus.space",
-    "slidesUrl": "/workshops#kinetic-kitchen-teaching",
+    "slidesUrl": "/workshops/kinetic-kitchen-2-0",
     "tags": [
       "AI workflow",
       "Interactive visual",
       "Agent operations",
       "No-code learning",
       "Guardrails"
+    ],
+    "proofLine": "A compact, visible workflow simulation that makes routing, guardrails, and outcomes explicit so learners can follow policy reasoning and spot failure modes quickly.",
+    "teachingBullets": [
+      "Order enters as a request and travels through stations.",
+      "Route decisions are visible and explainable.",
+      "Escalation is explicit when confidence is low.",
+      "Throughput and accuracy are tracked as behavior changes."
     ]
   }
 ]

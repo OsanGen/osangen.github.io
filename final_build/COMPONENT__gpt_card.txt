@@ -1,0 +1,28 @@
+Component: `src/components/GPTCard.astro`
+
+Purpose:
+- Render a calmer GPT directory card with reduced visual noise.
+- Preserve name, outcome, concise tag preview, and one primary CTA.
+
+Inputs:
+- `gpt: GPT` from `src/lib/schemas.ts`.
+- Optional `revealDelayMs` for list entry animation timing.
+
+Outputs:
+- Card with title, single-line outcome (`line-clamp-2`), compact tag list (max 3), and a primary action button.
+
+State:
+- No client-side state.
+
+Edge cases:
+- Icon is optional and rendered only when available.
+- Tags can be empty; empty arrays render compactly.
+- Link is opened in a new tab only when URL is external (`https://` or `http://`).
+
+Dependencies:
+- `TagList`, `proof` sections, and directory styles in `src/styles/global.css` (`agent-card*`, `.line-clamp-2`, `.panel-shell`).
+
+Acceptance checks:
+- No micro rail block exists in card.
+- Outcome text is constrained to two lines max.
+- CTA exists and points to `gpt.link`.

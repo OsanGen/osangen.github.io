@@ -3,11 +3,20 @@ import { loadSiteContent } from '../src/lib/content';
 const LINK_PLACEHOLDER_PATTERN = /\b(?:placeholder|todo|xxxxx|temp)\b/i;
 
 const isInvalidLinkUrl = (value: string) => {
+  const normalized = value.trim();
+  if (!normalized) {
+    return false;
+  }
+
+  if (normalized.startsWith('/')) {
+    return false;
+  }
+
   try {
     const parsed = new URL(value);
     return !['http:', 'https:'].includes(parsed.protocol);
   } catch {
-    return false;
+    return true;
   }
 };
 

@@ -1,0 +1,33 @@
+Component: Visual token system (`src/styles/tokens.css`) + global style layer (`src/styles/global.css`)
+
+Purpose:
+- Define the canonical design tokens for CogSec Pastel (fields, ink, fog, and the four accents) and expose them as CSS variables.
+- Apply those tokens consistently across global component styles so page chrome is low-noise, monochrome-field with accent as secondary treatment.
+
+Inputs:
+- Runtime CSS variable values declared in `:root`.
+- Theme usage from page-level `.scene-accent` overrides and global consumers in `src/styles/global.css`.
+
+Outputs:
+- Stable, deterministic visual tokens for all components.
+- Global component styles that rely on tokenized values for backgrounds, borders, shadows, and typography states.
+
+State:
+- CSS custom properties stored on `:root` in `src/styles/tokens.css`.
+- Derived property: `--accent` defaults to `var(--cog-blue)` unless a scene-level override sets `--scene-accent`.
+- Active design-surface vocabulary: `--surface`, `--panel`, `--stroke`, `--shadow`.
+
+Edge cases:
+- Legacy surface variants (`surface-panel`, `surface-soft`, `surface-dim`, `panel-strong`, `fog-subtle`) are intentionally removed from active usage.
+- Non-essential decorative gradients and non-token hardcoded colors in global stylesheet are replaced by panel/surface token usage.
+- Any future page-specific accent override should still use one of the four canonical accents.
+
+Dependencies:
+- Tokens consumed by all pages through global imports in base layout.
+- Page-level accent intent controlled by `--scene-accent` declarations on scene containers.
+
+Acceptance checks:
+- `src/styles/tokens.css` has only one active accent set for each required tone and `--accent: var(--cog-blue)`.
+- `src/styles/global.css` contains no hardcoded accent-color hex literals except token definitions.
+- Legacy extra surface variants are absent from active style usage.
+- Decorative gradients are limited to non-essential utility; no mandatory brand-mark hardcoded yellow shadow or non-token panel tinting remains.

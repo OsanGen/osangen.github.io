@@ -1,0 +1,27 @@
+Component: `src/components/Header.astro`
+
+Purpose:
+- Keep top-level navigation minimal and one-line on common widths.
+- Surface the external `Book` action as a primary-style CTA rather than a nav link.
+
+Inputs:
+- Runtime `Astro.url.pathname` for active link state.
+
+Outputs:
+- Header markup with brand lockup, four short nav labels, and a right-side CTA button to Calendly.
+
+State:
+- No mutable state; purely render-time nav map and current path detection.
+
+Edge cases:
+- Active-state logic treats `/` as exact match and route prefixes for other sections.
+- External CTA opens in a new tab and preserves `rel="noopener noreferrer"`.
+
+Dependencies:
+- `src/styles/global.css` classes: `.site-header`, `.site-nav`, `.header-right`, `.nav-link`, `.nav-cta`.
+- Shared route table (`/labs`, `/workshops`, `/join`, `/resume`).
+
+Acceptance checks:
+- Primary nav shows only: Labs, Learn, Join, Resume.
+- Book appears as a button on the right side.
+- Page path `/` and section routes highlight expected nav item.
