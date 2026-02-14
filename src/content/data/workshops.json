@@ -1,5 +1,20 @@
 [
   {
+    "id": "leanagents-workshop-chatgpt-apps",
+    "date": "2026-02-14",
+    "title": "Lean Agents Workshop: ChatGPT Apps",
+    "description": "A practical demo of a three-role AI content stack (Producer -> Art -> Post) for repeatable, reviewable 8-second intro content that scales across teams.",
+    "replayUrl": "https://www.linkedin.com/events/leanagentsworkshop-chatgptapps-7421924200531111937/theater/",
+    "slidesUrl": "/workshops#leanagents-chatgpt-apps-teaching",
+    "tags": [
+      "Visual learning",
+      "ChatGPT Apps",
+      "Video production workflow",
+      "Role-based AI stack",
+      "Reusable intro component"
+    ]
+  },
+  {
     "id": "ghost-machine",
     "date": "2026-02-14",
     "title": "Ghost Machine",

@@ -14,6 +14,20 @@ const [profile, workshops, modules] = await Promise.all([
 const updated = await loadLastModifiedISO('workshops.json');
 const visualModules = modules.filter((module) => Boolean(module.visualClass));
 const workshopGuides = {
+  'leanagents-workshop-chatgpt-apps': {
+    primaryLabel: 'Open live experience',
+    secondaryLabel: 'How this teaches',
+    secondaryHref: '/workshops#leanagents-chatgpt-apps-teaching',
+    teachingTitle: 'How this workshop teaches',
+    teachingBullets: [
+      'Watch why single-tool prompts fail for production: roles and handoffs are the control points.',
+      'Producer (ChatGPT/OSAN Brand GPT) locks brief, constraints, and disclosure before visuals are created.',
+      'Art step generates a clean, readable hero frame first, then motion is applied only after approval gates.',
+      'Post/sequence step runs through timing and release checks (legibility, safety, length, margin, consistency) for reusable rollout.',
+    ],
+    proofLine:
+      'A repeatable 3-role stack teaches decision ownership: structure first, visuals second, timing third.',
+  },
   'ghost-machine': {
     primaryLabel: 'Open live experience',
     secondaryLabel: 'How this teaches',
