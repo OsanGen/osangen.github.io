@@ -1,5 +1,20 @@
 [
   {
+    "id": "neural-glass",
+    "date": "2026-02-14",
+    "title": "Neural Glass",
+    "description": "Learn how a neural network turns raw signals into predictions in 90 seconds, with concepts, weights, and confidence made visible.",
+    "replayUrl": "https://neuralglass-3cjwdrjv.manus.space",
+    "slidesUrl": "/workshops#neural-glass-teaching",
+    "tags": [
+      "Neural Network",
+      "Explainable AI",
+      "Decision Logic",
+      "Interactive Learning",
+      "Feature Weights"
+    ]
+  },
+  {
     "id": "policy-gatekeeper",
     "date": "2026-02-14",
     "title": "Policy Gatekeeper",

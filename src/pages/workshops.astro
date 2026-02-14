@@ -14,6 +14,20 @@ const [profile, workshops, modules] = await Promise.all([
 const updated = await loadLastModifiedISO('workshops.json');
 const visualModules = modules.filter((module) => Boolean(module.visualClass));
 const workshopGuides = {
+  'neural-glass': {
+    primaryLabel: 'Open live experience',
+    secondaryLabel: 'How this teaches',
+    secondaryHref: '/workshops#neural-glass-teaching',
+    teachingTitle: 'How Neural Glass teaches',
+    teachingBullets: [
+      'Start with raw customer signals and let learners map inputs to outcomes.',
+      'Observe how adaptive weighting shifts focus between features.',
+      'Watch hidden concepts become visible as labels like Loyal, Frustrated, and Engaged.',
+      'Track how shifts in inputs affect churn prediction confidence in real time.',
+    ],
+    proofLine:
+      'A proof-first walkthrough from inputs to concepts to outcomes, designed for zero-prior-knowledge learners while preserving enough technical structure for engineers.',
+  },
   'kinetic-kitchen-2-0': {
     primaryLabel: 'Open live experience',
     secondaryLabel: 'How this teaches',
