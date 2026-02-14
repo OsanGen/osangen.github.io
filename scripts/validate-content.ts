@@ -1,79 +1,303 @@
-import { loadSiteContent } from '../src/lib/content';
+import {
+  loadBooking,
+  loadCommunities,
+  loadGames,
+  loadGPTs,
+  loadModules,
+  loadPosts,
+  loadProfile,
+  loadWorkshops,
+} from '../src/lib/content';
 
 const LINK_PLACEHOLDER_PATTERN = /\b(?:placeholder|todo|xxxxx|temp)\b/i;
+const LINK_SCHEMES = /^https?:\/\//i;
 
-const isInvalidLinkUrl = (value: string) => {
-  const normalized = value.trim();
-  if (!normalized) {
-    return false;
+const isPlaceholder = (value: string) => LINK_PLACEHOLDER_PATTERN.test(value.trim().toLowerCase());
+
+const isExternalLink = (value: string) => LINK_SCHEMES.test(value);
+
+const checkLinkField = ({
+  label,
+  value,
+  required,
+  allowInternal = true,
+  allowExternal = true,
+  messages,
+}: {
+  label: string;
+  value: string;
+  required: boolean;
+  allowInternal?: boolean;
+  allowExternal?: boolean;
+  messages: string[];
+}) => {
+  const trimmed = value.trim();
+
+  if (!trimmed) {
+    if (required) {
+      messages.push(`${label}: missing required value`);
+    }
+    return;
   }
 
-  if (normalized.startsWith('/')) {
-    return false;
+  if (isPlaceholder(trimmed)) {
+    messages.push(`${label}: contains placeholder token`);
+    return;
   }
 
-  try {
-    const parsed = new URL(value);
-    return !['http:', 'https:'].includes(parsed.protocol);
-  } catch {
-    return true;
+  const isInternal = trimmed.startsWith('/');
+  const isExternal = isExternalLink(trimmed);
+
+  if (!isInternal && !isExternal) {
+    messages.push(`${label}: must be an https(s) URL or app path`);
+    return;
+  }
+
+  if (isInternal && !allowInternal) {
+    messages.push(`${label}: internal link not allowed for this field`);
+  }
+
+  if (isExternal && !allowExternal) {
+    messages.push(`${label}: external link not allowed for this field`);
   }
 };
 
-const isSuspiciousLink = (value: string) => {
-  const normalized = value.trim().toLowerCase();
-  return normalized.length > 0 && LINK_PLACEHOLDER_PATTERN.test(normalized);
+const checkDuplicateIds = <T extends { id: string }>(items: T[], scope: string, messages: string[]) => {
+  const seen = new Set<string>();
+  const duplicates = new Set<string>();
+
+  items.forEach((item) => {
+    const id = item.id.trim();
+    if (!id) {
+      messages.push(`${scope}: empty id detected`);
+      return;
+    }
+
+    const key = id.toLowerCase();
+    if (seen.has(key)) {
+      duplicates.add(key);
+      return;
+    }
+
+    seen.add(key);
+  });
+
+  duplicates.forEach((id) => messages.push(`${scope}: duplicate id ${id}`));
 };
 
 const main = async () => {
-  const { gpts } = await loadSiteContent();
-  const violations: string[] = [];
-  const badLinks: string[] = [];
+  const messages: string[] = [];
+  const [gpts, games, modules, workshops, posts, profile, communities, booking] = await Promise.all([
+    loadGPTs(),
+    loadGames(),
+    loadModules(),
+    loadWorkshops(),
+    loadPosts(),
+    loadProfile(),
+    loadCommunities(),
+    loadBooking(),
+  ]);
+
+  checkDuplicateIds(gpts, 'gpts', messages);
+  checkDuplicateIds(games, 'games', messages);
+  checkDuplicateIds(modules, 'modules', messages);
+  checkDuplicateIds(workshops, 'workshops', messages);
+  checkDuplicateIds(posts, 'posts', messages);
+  checkDuplicateIds(communities, 'communities', messages);
 
   gpts.forEach((gpt) => {
-    const links = [
-      { key: 'use', value: gpt.links.use },
-      { key: 'promptPack', value: gpt.links.promptPack },
-      { key: 'demo', value: gpt.links.demo },
-    ];
-
-    links.forEach(({ key, value }) => {
-      if (isSuspiciousLink(value)) {
-        badLinks.push(`${gpt.id}: link "${key}" uses placeholder token`);
-      }
-
-      if (value.trim() && isInvalidLinkUrl(value)) {
-        badLinks.push(`${gpt.id}: link "${key}" is not an http(s) URL`);
-      }
+    checkLinkField({
+      label: `${gpt.id}: listing link`,
+      value: gpt.link,
+      required: true,
+      allowInternal: true,
+      messages,
     });
 
-    if (gpt.proof.type === 'image') {
-      if (!gpt.proof.imageUrl.trim() || !gpt.proof.imageAlt.trim()) {
-        violations.push(`${gpt.id}: image proof requires non-empty imageUrl and imageAlt`);
-      }
-    } else if (gpt.proof.type === 'sample_io') {
-      if (!gpt.proof.input.trim() || !gpt.proof.output.trim()) {
-        violations.push(`${gpt.id}: sample_io proof requires non-empty input and output`);
-      }
-    } else {
-      violations.push(`${gpt.id}: unknown proof type`);
+    checkLinkField({
+      label: `${gpt.id}: links.use`,
+      value: gpt.links.use,
+      required: false,
+      allowInternal: true,
+      messages,
+    });
+
+    if (gpt.links.promptPack) {
+      checkLinkField({
+        label: `${gpt.id}: links.promptPack`,
+        value: gpt.links.promptPack,
+        required: false,
+        allowInternal: true,
+        messages,
+      });
+    }
+
+    if (gpt.links.demo) {
+      checkLinkField({
+        label: `${gpt.id}: links.demo`,
+        value: gpt.links.demo,
+        required: false,
+        allowInternal: true,
+        messages,
+      });
     }
   });
 
-  if (badLinks.length > 0 || violations.length > 0) {
-    if (badLinks.length > 0) {
-      console.error('Invalid GPT link fields detected:');
-      badLinks.forEach((item) => console.error(` - ${item}`));
+  games.forEach((game) => {
+    checkLinkField({
+      label: `${game.id}: deployUrl`,
+      value: game.deployUrl,
+      required: true,
+      allowInternal: false,
+      messages,
+    });
+
+    if (game.repoUrl) {
+      checkLinkField({
+        label: `${game.id}: repoUrl`,
+        value: game.repoUrl,
+        required: false,
+        allowInternal: false,
+        messages,
+      });
     }
-    if (violations.length > 0) {
-      console.error('Proof content issues detected:');
-      violations.forEach((item) => console.error(` - ${item}`));
+  });
+
+  modules.forEach((module) => {
+    checkLinkField({
+      label: `${module.id}: cta.href`,
+      value: module.cta.href,
+      required: true,
+      allowInternal: true,
+      messages,
+    });
+
+    Object.entries(module.links).forEach(([key, value]) => {
+      if (!value) return;
+      checkLinkField({
+        label: `${module.id}: links.${key}`,
+        value,
+        required: false,
+        allowInternal: true,
+        messages,
+      });
+    });
+  });
+
+  workshops.forEach((workshop) => {
+    checkLinkField({
+      label: `${workshop.id}: replayUrl`,
+      value: workshop.replayUrl,
+      required: true,
+      allowInternal: false,
+      messages,
+    });
+
+    if (workshop.slidesUrl) {
+      checkLinkField({
+        label: `${workshop.id}: slidesUrl`,
+        value: workshop.slidesUrl,
+        required: false,
+        allowInternal: true,
+        messages,
+      });
     }
-    process.exit(1);
+  });
+
+  posts.forEach((post) => {
+    checkLinkField({
+      label: `${post.id}: url`,
+      value: post.url,
+      required: true,
+      allowInternal: false,
+      messages,
+    });
+
+    post.proofLinks?.forEach((proofLink, index) => {
+      checkLinkField({
+        label: `${post.id}: proofLinks[${index}]`,
+        value: proofLink,
+        required: false,
+        allowInternal: false,
+        messages,
+      });
+    });
+  });
+
+  checkLinkField({
+    label: 'profile.links.linkedin',
+    value: profile.links.linkedin,
+    required: true,
+    allowInternal: false,
+    messages,
+  });
+  checkLinkField({
+    label: 'profile.links.portfolio',
+    value: profile.links.portfolio,
+    required: true,
+    allowInternal: false,
+    messages,
+  });
+  checkLinkField({
+    label: 'profile.links.youtube',
+    value: profile.links.youtube,
+    required: true,
+    allowInternal: false,
+    messages,
+  });
+
+  communities.forEach((community) => {
+    if (!community.join.url) {
+      return;
+    }
+
+    checkLinkField({
+      label: `${community.id}: join.url`,
+      value: community.join.url,
+      required: false,
+      allowInternal: false,
+      messages,
+    });
+  });
+
+  if (booking.calendly.one_on_one.url) {
+    checkLinkField({
+      label: 'booking.one_on_one.url',
+      value: booking.calendly.one_on_one.url,
+      required: false,
+      allowInternal: false,
+      messages,
+    });
+  }
+
+  if (booking.calendly.teach_private.url) {
+    checkLinkField({
+      label: 'booking.teach_private.url',
+      value: booking.calendly.teach_private.url,
+      required: false,
+      allowInternal: false,
+      messages,
+    });
+  }
+
+  if (booking.calendly.teach_class.url) {
+    checkLinkField({
+      label: 'booking.teach_class.url',
+      value: booking.calendly.teach_class.url,
+      required: false,
+      allowInternal: false,
+      messages,
+    });
   }
 
   if (gpts.length < 3) {
-    console.warn(`Expected at least 3 GPTs for launch, found ${gpts.length}.`);
+    messages.push(`gpts: expected at least 3 items, found ${gpts.length}`);
+  }
+
+  if (messages.length > 0) {
+    console.error('Content validation issues:');
+    messages.forEach((message) => console.error(` - ${message}`));
+    process.exit(1);
   }
 
   console.log('Content validation passed.');

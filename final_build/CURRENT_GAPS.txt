@@ -2,7 +2,7 @@
 - (workshops-slides-anchors | completed | `slidesUrl` now points to `/workshops/{id}` as the detail fallback CTA where needed.)
 - (sitemap-dynamic-coverage | open | Generate or update `public/sitemap.xml` to include `/gpts/{id}` and `/labs/{gameId}` routes for SEO and CI parity.)
 - (gameembed-preferred-mode | completed | Added `preferred` prop support and wired it through `/labs/[gameId].astro` + `GameEmbed` to avoid iframe-only rendering.)
-- (validation-coverage | open | Extend `scripts/validate-content.ts` beyond GPT links/fields to validate URLs and placeholders in all content datasets.)
+- (validation-coverage | completed | Extended `scripts/validate-content.ts` to validate IDs, link formats, and placeholders across GPTs, games, modules, workshops, posts, profile, communities, and booking datasets.)
 - (component-debt | open | Either remove or wire unused components (`Button`, `FiltersChips`, `ProofBlock`, `TwoColumn`, `VisualClassStepper`) to avoid dead surface.)
 - (module-cta-beautiful-code | completed | Fixed workshop hash CTA in `src/content/data/modules.json` to `/workshops`.)
 - (design-token-cleanup | completed | Run build and manual QA for `/src/styles/tokens.css` + `/src/styles/global.css` visual token consistency and confirm no legacy surface variants remain in active CSS.)
