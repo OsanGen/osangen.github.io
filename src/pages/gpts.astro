@@ -4,7 +4,6 @@ import { loadGPTs } from '../lib/content';
 import GPTCard from '../components/GPTCard.astro';
 
 const gpts = await loadGPTs();
-const gptAccents = ['var(--cog-blue)', 'var(--cog-mint)', 'var(--cog-pink)', 'var(--cog-yellow)'];
 ---
 <BaseLayout title="Lean Agents | Oscar Sanchez" description="Lean agents directory for practical AI workflows and execution support.">
   <section class="hero-shell scene-shell scene-accent command-shell gpts-hero" style="--scene-accent: var(--cog-blue);">
@@ -23,7 +22,7 @@ const gptAccents = ['var(--cog-blue)', 'var(--cog-mint)', 'var(--cog-pink)', 'va
     <h2 id="gpts-grid-heading" class="text-small">Available Lean Agents</h2>
     <div id="gpt-grid" class="gpts-grid">
       {gpts.map((gpt, idx) => (
-        <GPTCard gpt={gpt} sceneAccent={gptAccents[idx % gptAccents.length]} revealDelayMs={idx * 58} />
+        <GPTCard gpt={gpt} revealDelayMs={idx * 58} />
       ))}
     </div>
   </section>
