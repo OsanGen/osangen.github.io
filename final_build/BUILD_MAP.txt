@@ -4,6 +4,7 @@
 - `src/components/Header.astro` + header styles in global.css: controls global shell navigation and Book CTA.
 - `src/components/GPTCard.astro`: card row for each GPT directory entry (name, one-line outcome, tags, Open button).
 - `src/pages/index.astro`: homepage router shell (hero + 3 route cards).
+- `src/pages/join.astro`: GENMRKT quarter landing page driven by `src/content/data/join_project.json`.
 - `src/pages/workshops.astro`: workshop listing page with visual classes and workshop cards.
 - `src/pages/workshops/[id].astro`: workshop detail page with proof line and teaching details.
 - `src/lib/workshop-catalog.ts`: canonical workshop taxonomy helpers (`CORE_WORKSHOP_IDS`, split + classification helpers).

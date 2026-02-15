@@ -165,6 +165,11 @@ declare module 'astro:content' {
   collection: "data";
   data: any
 };
+"join_project": {
+	id: "join_project";
+  collection: "data";
+  data: any
+};
 "modules": {
 	id: "modules";
   collection: "data";

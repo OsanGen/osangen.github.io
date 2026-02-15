@@ -1,52 +1,106 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Card from '../components/Card.astro';
-import CardGrid from '../components/CardGrid.astro';
-import { loadCommunities } from '../lib/content';
-import TwoOptionCTA from '../components/TwoOptionCTA.astro';
+import { isUnavailableLink, sanitizeLink } from '../lib/link-utils';
+import joinProject from '../content/data/join_project.json';
 
-const communities = await loadCommunities();
+const {
+  eyebrow,
+  title,
+  lede,
+  highLevelScopeTitle,
+  scopeChips,
+  impactTitle,
+  impactOneLiner,
+  ctaLabel,
+  ctaHref,
+  secondaryLinkLabel,
+  secondaryLinkHref,
+  finePrint,
+} = joinProject;
+
+const resolvedCtaHref = sanitizeLink(ctaHref || '');
+const isApplyPlaceholder = resolvedCtaHref === 'INTERNSHIP_APPLY_URL';
+const resolvedSecondaryHref = sanitizeLink(secondaryLinkHref || '');
+const hasPrimaryCta = resolvedCtaHref && !isUnavailableLink(resolvedCtaHref) && !isApplyPlaceholder;
+const hasSecondaryLink = resolvedSecondaryHref && !isUnavailableLink(resolvedSecondaryHref);
+
+const visibleChips = scopeChips?.slice(0, 6) ?? [];
 ---
-<BaseLayout title="Join - Oscar Sanchez" description="Join open source AI communities and governance routes">
-  <h1>Join</h1>
-  <p class="text-small">Pick a route and move with evidence.</p>
+<BaseLayout title="Apply - Oscar Sanchez" description="Apply to the GENMRKT internship project. Learn by shipping public good tooling.">
+  <div class="join-landing scene-shell">
+    <section class="hero-shell scene-accent" style="--scene-accent: var(--cog-blue);">
+      <p class="hero-eyebrow">{eyebrow}</p>
+      <h1>{title}</h1>
+      <p class="text-small deck-subtitle line-clamp-2">{lede}</p>
+      <div class="join-cta-row">
+        {hasPrimaryCta ? (
+          <a
+            class="button button--primary join-cta"
+            href={resolvedCtaHref}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {ctaLabel}
+          </a>
+        ) : (
+          <p class="text-small muted">Set INTERNSHIP_APPLY_URL in join_project.json to publish the application CTA.</p>
+        )}
 
-  <TwoOptionCTA
-    title="Choose your path"
-      options={[
-      { title: 'Ship a small win', body: 'Start with a short build.', href: '/workshops' },
-      { title: 'Contribute governance', body: 'Review a safer workflow standard.', href: '/workshops' },
-    ]}
-  />
+        {hasSecondaryLink ? <a href={resolvedSecondaryHref}>{secondaryLinkLabel}</a> : null}
+      </div>
+      <p class="text-small muted">{finePrint}</p>
+    </section>
 
-  <div class="catalog-shell">
-    <CardGrid gap="var(--space-3)" align="start">
-      {communities.map((c) => (
-        <Card>
-          <div class="catalog-card-stack">
-            <h2>{c.name}</h2>
-            <p class="text-small catalog-meta">{c.type}</p>
-            <p class="catalog-summary"><strong>Who it fits:</strong> {c.fit.join(', ')}</p>
-            <p><strong>Why join:</strong></p>
-            <ul>
-              {c.why.slice(0, 3).map((w) => <li>{w}</li>)}
-            </ul>
-            {c.join.url ? (
-              <a class="button button--primary catalog-cta" href={c.join.url} target="_blank" rel="noopener noreferrer">{c.join.label}</a>
-            ) : (
-              <p class="text-small">Add your Calendly URL in communities.json.</p>
-            )}
-          </div>
-        </Card>
-      ))}
-    </CardGrid>
+    <section class="panel-shell">
+      <h2>{highLevelScopeTitle}</h2>
+      <div class="join-scope-grid" aria-label="Scope chips">
+        {visibleChips.map((chip) => (
+          <span class="proof-chip">{chip}</span>
+        ))}
+      </div>
+      <p class="text-small muted">{impactTitle}</p>
+      <p class="text-small line-clamp-2">{impactOneLiner}</p>
+    </section>
   </div>
-
-  <Card>
-    <h2>Contribution path</h2>
-    <p class="text-small">Start with a GitHub issue, then solve one beginner task.</p>
-    <p class="text-small">Use a short proof note before opening a PR.</p>
-  </Card>
-
-  <p><a href="/code-of-conduct">Code of conduct</a></p>
 </BaseLayout>
+
+<style>
+  .join-landing {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.85fr);
+    gap: var(--space-4);
+    align-items: start;
+    max-width: min(1100px, calc(100vw - 2rem));
+    margin: 0 auto;
+  }
+
+  .join-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .join-cta {
+    min-height: 44px;
+    min-width: 11.5rem;
+  }
+
+  .join-scope-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.45rem;
+  }
+
+  @media (max-width: 920px) {
+    .join-landing {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .join-scope-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

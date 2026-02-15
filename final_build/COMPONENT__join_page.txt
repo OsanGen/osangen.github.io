@@ -1,0 +1,35 @@
+# Component/page: `src/pages/join.astro`
+
+Purpose:
+- Render the GENMRKT internship landing as a minimal, two-column page focused on one project scope.
+- Replace legacy community catalog content with a compact, single-purpose recruiting surface.
+
+Inputs:
+- `../content/data/join_project.json` for all visible copy and link strings.
+- `src/lib/link-utils.ts` helpers for link sanitization and placeholder detection.
+
+Outputs:
+- Primary CTA row with an external application button.
+- One focused scope panel containing one-line chips and one-line impact statement.
+- Fine-print summary line from content data.
+
+State:
+- No client-side state.
+- All derivation is build-time/templating only (`hasPrimaryCta`, `hasSecondaryLink`, `visibleChips`).
+
+Edge cases:
+- Placeholder application URL disables primary CTA action and shows explicit setup text.
+- Optional secondary link can be hidden when empty/placeholder.
+- Scope chips are capped by display logic to six entries.
+
+Dependencies:
+- `src/layouts/BaseLayout.astro`
+- `src/lib/link-utils.ts`
+- `src/content/data/join_project.json`
+- Site-level shell/bubble styles from `src/styles/global.css`.
+
+Acceptance checks:
+- Route `/join` must render the quarter landing layout (two columns on desktop, stacked on mobile).
+- Primary CTA uses `target="_blank" rel="noopener noreferrer"`.
+- Primary CTA is not rendered when `ctaHref` is missing/invalid.
+- No community catalog dependency (`loadCommunities`) remains in this page.

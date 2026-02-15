@@ -1,0 +1,19 @@
+{
+  "eyebrow": "Open source project this quarter",
+  "title": "GENMRKT internship",
+  "lede": "Join the open project that ships public good software.",
+  "highLevelScopeTitle": "This quarter you can help with",
+  "scopeChips": [
+    "Open-source agent workflows",
+    "Governance-first scaffolds",
+    "Community ops automation",
+    "Docs + demos that teach"
+  ],
+  "impactTitle": "Why it matters",
+  "impactOneLiner": "You ship tools that help people learn and build safely.",
+  "ctaLabel": "Apply to GENMRKT internship",
+  "ctaHref": "INTERNSHIP_APPLY_URL",
+  "secondaryLinkLabel": "See current project repo",
+  "secondaryLinkHref": "",
+  "finePrint": "AI-assisted; reviewed by humans; results vary."
+}

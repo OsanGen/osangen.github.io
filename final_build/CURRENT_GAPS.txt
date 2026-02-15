@@ -6,3 +6,4 @@
 - manual runtime smoke pass | pending | Run local preview and load /, /gpts, /gpts/{id}, /workshops, /workshops/{id}, /labs, /labs/{id}; confirm external/inactive links and GameEmbed fallback behavior.
 - workshop route policy smoke | completed | Verified by build output: only `/workshops/leanagents-workshop-chatgpt-apps` and `/workshops/manus-workshop` are generated; `/workshops/ghost-machine` is not generated.
 - production deploy | completed | Pushed commit `738e7380b35db8123b8e67b2f4ace2ad1c109c6a` to `main`; GitHub Pages workflow `Deploy Astro site to GitHub Pages` completed with run `22025373232`.
+- /join landing refactor | completed | Replaced legacy community catalog /join implementation with the quarter internship landing and added `src/content/data/join_project.json`.
