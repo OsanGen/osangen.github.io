@@ -1,0 +1,22 @@
+# Component Spec: `src/components/Footer.astro`
+
+## Purpose
+Provide consistent secondary navigation and trust/disclosure text across all routes.
+
+## Inputs / Outputs
+- Inputs: none (static nav links and footer copy).
+- Output: global footer link set and disclosure text.
+
+## State
+- Stateless.
+
+## Edge Cases
+- Footer naming must remain aligned with primary navigation semantics.
+- Contribution route keeps `/join` href for compatibility while using contribution-forward label text.
+
+## Dependencies
+- Global typography/spacing styles in `src/styles/global.css`.
+
+## Acceptance Checks
+- Footer includes a contribution entry with text `Contribute` and href `/join`.
+- Footer does not reintroduce outdated `Join` wording where the funnel is contribution-focused.

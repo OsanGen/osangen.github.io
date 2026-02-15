@@ -1,38 +1,35 @@
 # Component/page: `src/pages/join.astro`
 
 Purpose:
-- Render the GENMRKT internship landing as a minimal, two-column page focused on one project scope.
-- Replace legacy community catalog content with a compact, single-purpose recruiting surface.
+- Render `/join` as a focused open-source contribution landing for GENMRKT.
+- Keep one clear external application path with compact scope and impact context.
 
 Inputs:
-- `../content/data/join_project.json` for all visible copy and link strings.
-- `src/lib/link-utils.ts` helpers for link sanitization and placeholder detection.
+- `../content/data/join_project.json` for all user-facing copy and CTA values.
+- `src/lib/link-utils.ts` for link sanitization and placeholder/unavailable detection.
 
 Outputs:
-- Primary CTA stack with:
-  - one external application button only (`Sign up`)
-- One focused scope panel containing one-line chips and one-line impact statement.
-- No in-hero fine-print copy.
+- Hero with contribution-focused eyebrow, title, and lede from content JSON.
+- One external CTA button only (`Apply to contribute`) when link is valid.
+- One scope panel with up to six contribution chips and one-line impact statement.
 
 State:
 - No client-side state.
-- All derivation is build-time/templating only (`hasPrimaryCta`, `visibleChips`).
+- Build-time derivations only: `hasPrimaryCta`, `visibleChips`.
 
 Edge cases:
-- Placeholder application URL disables primary CTA action and shows explicit setup text.
-- Primary CTA preserves 44px+ click target minimum.
-- Scope chips are capped by display logic to six entries.
+- Missing/placeholder CTA URL suppresses button rendering and shows fallback text.
+- CTA keeps external-link safety attributes and explicit new-tab aria label.
+- Scope chips are capped to six entries for stable panel density.
 
 Dependencies:
 - `src/layouts/BaseLayout.astro`
 - `src/lib/link-utils.ts`
 - `src/content/data/join_project.json`
-- Site-level shell/bubble styles from `src/styles/global.css`.
+- Shared shell styles in `src/styles/global.css`
 
 Acceptance checks:
-- Route `/join` must render the quarter landing layout (two columns on desktop, stacked on mobile).
-- Primary CTA uses `target="_blank" rel="noopener noreferrer"`.
-- Primary CTA has explicit accessibility label indicating new-tab behavior.
-- Primary CTA is not rendered when `ctaHref` is missing/invalid.
-- In-hero line `AI-assisted; reviewed by humans; results vary.` is not rendered on `/join`.
-- No community catalog dependency (`loadCommunities`) remains in this page.
+- `/join` renders two-column desktop and stacked mobile layout.
+- Route copy frames this as an open-source contribution opportunity, not a community directory.
+- CTA uses `target="_blank"` and `rel="noopener noreferrer"`.
+- CTA is hidden for invalid/unavailable/placeholder links.

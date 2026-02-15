@@ -1,10 +1,17 @@
 # CURRENT_GAPS
+- runtime HTTP route smoke automation | completed | Added `scripts/runtime-http-smoke.mjs` plus `npm run verify:runtime` to enforce 200 responses for core static and representative dynamic routes via local `astro preview`.
+- gpt placeholder warning dedupe | completed | `loadGPTs()` now logs placeholder CTA warning once per process to reduce duplicate build/check log noise.
+- footer/nav join-language parity | completed | Updated footer link label from `Join` to `Contribute` to match header/home contribution terminology.
+- workshop detail CTA precedence hardening | completed | Unified `/workshops/[id]` CTA selection so label/href stay in sync (`Replay` -> `Slides` -> `Open details`) and placeholder links cannot produce incorrect labels.
+- game embed duplicate listener guard | completed | Added per-node initialization guard in `GameEmbed` inline script and removed unused randomized iframe id to reduce redundant DOM listeners on repeated embeds.
+- join funnel contribution reframing | completed | Updated `/join`, homepage route card, header nav, and related route copy to use contribution language while keeping `/join` path compatibility.
+- homepage route-card visual simplification | completed | Removed decorative route-grid/route-card rail and dot motifs and switched homepage route CTAs to `button--ghost` for cleaner proof-first cards.
 - astro5 migration completion | completed | Upgraded `astro` to `5.17.2`, upgraded `@astrojs/check` to `0.9.6`, added explicit `src/content.config.ts`, and verified `npm audit --omit=dev` reports 0 vulnerabilities.
 - visual-pass for global shell effects | pending | Validate accent and motion behavior at /, /labs, /workshops, /gpts, and /resume on desktop/mobile, including new bubble motif visibility.
 - global bubble motif rollout | completed | Added centralized route-tinted bubble system across hero shells, first major non-hero content surfaces, and subtle page-frame fallback.
 - service-worker deployment verification | pending | Deploy build and run a smoke check on a throttled/offline path.
 - lab embed performance optimization | pending | Verify GameEmbed click-to-load behavior and fallback on a real iframe URL.
-- manual runtime smoke pass | pending | HTTP smoke checks for /, /join, /workshops, /workshops/{core-id}, /labs, /labs/{id}, /gpts, and /gpts/{id} all return 200; remaining interactive browser checks are external/inactive link click paths and GameEmbed fallback behavior.
+- manual runtime smoke pass | pending | Automated HTTP 200 checks now run via `npm run verify:runtime`; remaining interactive browser checks are external/inactive link click paths, GameEmbed blocked-iframe fallback, and service worker offline behavior.
 - line-review ledger initialization | completed | Added `final_build/LINE_REVIEW_LEDGER.txt` with reviewed status for every file in `src`, `scripts`, `public`, and `docs`, plus explicit dead-code removal entry for `src/components/TwoOptionCTA.astro`.
 - release-B dead component cleanup | completed | Removed unreferenced `src/components/TwoOptionCTA.astro` after repository-wide reference check.
 - dist integrity automation | completed | Added `scripts/check-dist-integrity.mjs` and npm script `verify:dist` for sitemap parity, internal link integrity, and dynamic route output checks.
@@ -12,4 +19,4 @@
 - production deploy | completed | Pushed commit `738e7380b35db8123b8e67b2f4ace2ad1c109c6a` to `main`; GitHub Pages workflow `Deploy Astro site to GitHub Pages` completed with run `22025373232`.
 - /join landing refactor | completed | Replaced legacy community catalog /join implementation with the quarter internship landing and added `src/content/data/join_project.json`.
 - /join signup CTA activation | completed | Added live signup URL (`https://genmrkt.lovable.app/`) with a primary CTA button and explicit new-tab behavior.
-- /join single-cta visual cleanup | completed | Simplified /join hero actions to a single `Sign up` button, removed in-hero `AI-assisted; reviewed by humans; results vary.` copy, and tightened spacing/typography for a cleaner layout.
+- /join single-cta visual cleanup | completed | Simplified /join hero actions to a single application CTA, removed in-hero `AI-assisted; reviewed by humans; results vary.` copy, and tightened spacing/typography for a cleaner layout.

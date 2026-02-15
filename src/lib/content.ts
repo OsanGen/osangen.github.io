@@ -20,6 +20,7 @@ import { z } from 'zod';
 
 const contentRoot = path.join(process.cwd(), 'src', 'content', 'data');
 const cache = new Map<string, Promise<unknown>>();
+let hasLoggedGptPlaceholderWarning = false;
 
 function loadJsonCached<T>(filename: string, schema: z.ZodSchema<T>): Promise<T> {
   const existing = cache.get(filename);
@@ -64,7 +65,8 @@ export const loadGPTs = async () => {
     return allLinks.some((value) => isUnavailableLink(value));
   });
 
-  if (hasPlaceholderLink) {
+  if (hasPlaceholderLink && !hasLoggedGptPlaceholderWarning) {
+    hasLoggedGptPlaceholderWarning = true;
     console.warn('GPT links contain placeholders; unavailable CTAs will be shown.');
   }
 

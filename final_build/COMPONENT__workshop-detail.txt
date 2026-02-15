@@ -18,6 +18,8 @@ Edge cases:
 - Non-core workshop IDs are excluded from static path list.
 - Missing proof bullets/lines render muted fallback content.
 - Missing action links render fallback copy instead of broken anchors.
+- CTA precedence is deterministic and placeholder-safe: use valid `replayUrl` first, then valid `slidesUrl`, else local detail route.
+- CTA label always matches resolved href source (`Replay`, `Slides`, or `Open details`).
 
 Dependencies:
 - `BaseLayout`, `loadWorkshops`, `Workshop` schema, `isCoreWorkshopId`.
@@ -25,3 +27,4 @@ Dependencies:
 Acceptance checks:
 - Only two canonical workshop detail routes are built.
 - Non-core routes (e.g. `ghost-machine`) do not have generated detail pages.
+- CTA label cannot report `Replay` when replay URL is unavailable/placeholder.

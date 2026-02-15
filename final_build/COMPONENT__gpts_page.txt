@@ -13,7 +13,7 @@ Outputs:
 - `gpts-grid` card set where each `GPTCard` receives:
   - `sceneAccent` token
   - `revealDelayMs` for staggered entrance.
-- CTA strip for navigation to related routes.
+- CTA strip for navigation to related routes, including contribution opportunities.
 
 State:
 - No interactive state; render-time list mapping.

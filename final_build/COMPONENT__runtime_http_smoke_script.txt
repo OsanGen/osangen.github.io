@@ -1,0 +1,33 @@
+# Component/script: `scripts/runtime-http-smoke.mjs`
+
+Purpose:
+- Run deterministic route-level HTTP smoke checks against a locally served production build.
+- Catch runtime regressions that static dist checks cannot surface (unexpected non-200 responses at preview runtime).
+
+Inputs:
+- Built output served through `astro preview`.
+- Route list derived from:
+  - static core routes (`/`, `/join`, `/workshops`, `/labs`, `/gpts`)
+  - canonical core workshop IDs from `workshops.json`
+  - first GPT and first game dynamic IDs from content JSON.
+
+Outputs:
+- Exit code `0` when all route checks return HTTP 200.
+- Exit code `1` with failure lines for status/timeout/startup errors.
+
+State:
+- Spawns and tears down a temporary `astro preview` process.
+- No repo file writes.
+
+Edge cases:
+- Startup wait has timeout guard and prints preview stderr on failure.
+- Per-request timeout prevents hanging smoke checks.
+- Route derivation is resilient to missing/empty datasets.
+
+Dependencies:
+- Node core modules (`fs/promises`, `path`, `child_process`).
+- npm script wiring in `package.json`: `verify:runtime`.
+
+Acceptance checks:
+- `npm run verify:runtime` passes after `npm run build`.
+- Fails fast when preview cannot start or any critical route returns non-200.

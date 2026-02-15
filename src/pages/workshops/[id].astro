@@ -9,6 +9,7 @@ interface CtaState {
   href: string;
   isExternal: boolean;
   visible: boolean;
+  label: string;
 }
 
 export async function getStaticPaths() {
@@ -34,20 +35,40 @@ const formatFallbackText = (value: string | undefined, fallback: string) => valu
 const deriveCta = (workshop?: Workshop): CtaState => {
   const replayHref = workshop?.replayUrl?.trim() ?? '';
   const slidesHref = workshop?.slidesUrl?.trim() ?? '';
-  const href = replayHref || slidesHref || `/workshops/${workshop?.id ?? ''}`;
+  const detailHref = workshop?.id?.trim() ? `/workshops/${workshop.id.trim()}` : '';
 
-  if (!href || isUnavailableLink(href)) {
+  if (replayHref && !isUnavailableLink(replayHref)) {
+    return {
+      href: replayHref,
+      isExternal: isExternal(replayHref),
+      visible: true,
+      label: 'Replay',
+    };
+  }
+
+  if (slidesHref && !isUnavailableLink(slidesHref)) {
+    return {
+      href: slidesHref,
+      isExternal: isExternal(slidesHref),
+      visible: true,
+      label: 'Slides',
+    };
+  }
+
+  if (!detailHref || isUnavailableLink(detailHref)) {
     return {
       href: '',
       isExternal: false,
       visible: false,
+      label: 'Open details',
     };
   }
 
   return {
-    href,
-    isExternal: isExternal(href),
+    href: detailHref,
+    isExternal: false,
     visible: true,
+    label: 'Open details',
   };
 };
 
@@ -55,11 +76,6 @@ const action = deriveCta(workshop);
 const audienceLine = workshop?.audienceLine?.trim();
 const hasProofLine = Boolean(workshop?.proofLine?.trim());
 const hasTeachingBullets = Boolean(workshop?.teachingBullets?.length);
-const actionLabel = workshop?.replayUrl
-  ? 'Replay'
-  : workshop?.slidesUrl
-    ? 'Slides'
-    : 'Open details';
 const ctaCopy = formatFallbackText(workshop?.replayUrl || workshop?.slidesUrl, 'Proof or workshop content is coming soon.');
 ---
 <BaseLayout title={workshop ? `${workshop.title} | Oscar Sanchez` : 'Workshop not found'} description={workshop ? workshop.description : 'Workshop details'}>
@@ -110,7 +126,7 @@ const ctaCopy = formatFallbackText(workshop?.replayUrl || workshop?.slidesUrl, '
             target={action.isExternal ? '_blank' : undefined}
             rel={action.isExternal ? 'noopener noreferrer' : undefined}
           >
-            {actionLabel}
+            {action.label}
           </a>
         </section>
       ) : (

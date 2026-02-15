@@ -9,7 +9,7 @@ const updated = await loadLastModifiedISO('posts.json');
 ---
 <BaseLayout title="Posts - Oscar Sanchez" description="Curated posts feed and LinkedIn import note">
   <h1>Posts</h1>
-  <p class="text-small">Proof-first posts for community learning, not hype.</p>
+  <p class="text-small">Proof-first posts for project learning, not hype.</p>
   <p class="text-small">Last updated: {updated ? new Date(updated).toLocaleString() : 'Not available'}</p>
 
   {posts.length === 0 ? (

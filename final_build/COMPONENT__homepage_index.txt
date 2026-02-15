@@ -1,14 +1,14 @@
 Component: `src/pages/index.astro`
 
 Purpose:
-- Render the homepage route chips and summary stats.
+- Render the homepage as a three-route decision surface with concise proof-first framing.
 
 Inputs:
-- `loadGames()`, `loadModules()`, `loadWorkshops()`, `loadCommunities()`.
+- `loadGames()`, `loadModules()`, `loadWorkshops()`.
 - `splitWorkshops()` and `isDisplayableVisualClassModule()` for workshop taxonomy-aware counts.
 
 Outputs:
-- Route cards (`Labs`, `Learn`, `Join`) with updated counts.
+- Route cards (`Labs`, `Learn`, `Contribute`) with concise labels and direct actions.
 - Hero summary line showing visual-class count derived from module classes + visual-class workshops.
 
 State:
@@ -17,10 +17,13 @@ State:
 Edge cases:
 - `learn` card now reflects only canonical workshops (`splitWorkshops` output).
 - Visual-class summary includes both module visual classes and visual-class workshop-derived items.
+- Contribution route card remains stable even when communities dataset changes (no card coupling to `communities.length`).
 
 Dependencies:
 - `Card`, `CardGrid`, `sanitizeLink`, `src/lib/workshop-catalog.ts`.
 
 Acceptance checks:
-- `Learn` subtitle equals count of canonical workshop routes (2).
+- `Learn` subtitle equals count of canonical workshop routes.
+- `Contribute` card subtitle is static contribution framing (`Open-source contribution`).
+- Route-card CTA styling uses `button--ghost` for lower visual noise.
 - Visual class summary remains in sync with taxonomy split used on `/workshops`.

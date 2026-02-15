@@ -4,18 +4,18 @@ Purpose:
 - Turn the homepage into a compact router with minimal prose and three clear entry points.
 
 Inputs:
-- `loadGames`, `loadModules`, `loadWorkshops`, and `loadCommunities` from content loader.
+- `loadGames`, `loadModules`, and `loadWorkshops` from content loader.
 
 Outputs:
 - Hero shell with short headline, one-line lede, two top CTAs (Labs, Book).
-- Three route cards (`Labs`, `Learn`, `Join`) each with one count subtitle and one CTA.
+- Three route cards (`Labs`, `Learn`, `Contribute`) with concise subtitle + CTA.
 
 State:
 - Stateless render.
 
 Edge cases:
 - Pluralization handles singular/plural and zero values.
-- Communities route fallback if there are no entries still renders valid subtitles (`0 communities`).
+- Contribution card copy remains stable because it is no longer coupled to communities counts.
 
 Dependencies:
 - `Card` and `CardGrid` layout components.
@@ -24,4 +24,5 @@ Dependencies:
 Acceptance checks:
 - Multi-section catalog blocks are not used on homepage.
 - Above-fold consists of hero + three route cards only.
-- H1, subtitle, and CTA count remain concise.
+- H1, subtitle, and CTA copy remain concise.
+- Route cards use cleaner visual treatment without decorative route rails/dots.

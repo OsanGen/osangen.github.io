@@ -18,6 +18,7 @@ Outputs:
 
 State:
 - No component state; optional inline script tracks whether iframe load/timeout should reveal fallback.
+- The inline script marks each embed node with `data-game-embed-init` before wiring listeners so repeated component scripts do not bind duplicate handlers.
 - Edge cases:
 - URL values are sanitized with shared link helper.
 - `timeout/load` is gated by explicit load-start state to avoid repeated triggers.
@@ -31,3 +32,4 @@ Acceptance checks:
 - Supports both render modes without duplicated link actions.
 - Embeds do not throw runtime errors when links fail.
 - All lab card actions can still open in a new tab.
+- Multiple embed instances on a page do not attach duplicate listeners to the same DOM node.

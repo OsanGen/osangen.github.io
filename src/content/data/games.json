@@ -1,21 +1,21 @@
 [
   {
     "id": "ai-power-users-codex53-demo",
-    "title": "AI Power Users - Codex 5.3 Tech Demo",
-    "tagline": "Top-down corridor survival shooter. Move: WASD. Shoot: Arrow Keys.",
+    "title": "Neural Nets: Learn the Loop",
+    "tagline": "Educational top-down survival game that teaches neural-net concepts through play. Move: WASD. Shoot: Arrow Keys.",
     "concepts": [
-      "AI power users",
-      "interactive demo",
+      "educational game",
       "neural-net lessons",
-      "open source learning"
+      "interactive learning",
+      "AI power users"
     ],
     "learn": [
-      "Ship a playable demo as a teaching artifact.",
-      "Pair a game loop with a lesson loop (prompt -> test -> measure).",
-      "Use shareable run summaries as proof objects."
+      "Learn the prompt -> test -> measure loop through moment-to-moment play.",
+      "Use floor upgrades to understand tradeoffs in speed, safety, and iteration.",
+      "Capture and share run summaries as proof of learning."
     ],
     "deployUrl": "https://osangen.github.io/ai-power-users-codex53-demo/",
-    "repoUrl": "",
+    "repoUrl": "https://github.com/OsanGen/ai-power-users-codex53-demo",
     "embed": {
       "preferred": "iframe",
       "aspectRatio": "16/9",

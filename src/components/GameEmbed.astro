@@ -60,7 +60,6 @@ const resolveEmbedState = (rawUrl: string, renderMode: 'iframe' | 'link'): Embed
 
 const state = resolveEmbedState(url, preferred);
 const ratio = aspectRatio === '16/9' ? '56.25%' : '75%';
-const frameId = `game-frame-${Math.random().toString(36).slice(2, 8)}`;
 ---
 <div class="card">
   {!state.shouldRender ? (
@@ -103,7 +102,6 @@ const frameId = `game-frame-${Math.random().toString(36).slice(2, 8)}`;
         loading="lazy"
         referrerpolicy="no-referrer"
         allowfullscreen
-        id={frameId}
         data-game-embed-frame
         style="border:0; position:absolute; inset:0; width:100%; height:100%; display:none;"
       ></iframe>
@@ -126,7 +124,7 @@ const frameId = `game-frame-${Math.random().toString(36).slice(2, 8)}`;
   {state.showIframe ? (
     <script is:inline>
       const LOAD_TIMEOUT_MS = 5000;
-      const embedNodes = document.querySelectorAll('[data-game-embed]');
+      const embedNodes = document.querySelectorAll('[data-game-embed]:not([data-game-embed-init])');
 
       const getNodeHref = (node) => node?.getAttribute('data-url')?.trim() || '';
 
@@ -163,6 +161,8 @@ const frameId = `game-frame-${Math.random().toString(36).slice(2, 8)}`;
       };
 
       embedNodes.forEach((node) => {
+        node.setAttribute('data-game-embed-init', 'true');
+
         const frame = node.querySelector('[data-game-embed-frame]');
         const launchButton = node.querySelector('[data-game-embed-launch]');
         const fallback = node.querySelector('[data-game-embed-fallback]');

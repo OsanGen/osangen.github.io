@@ -12,10 +12,12 @@ Inputs/outputs:
 - State:
 - Module-scoped `Map<string, Promise<unknown>>` cache keyed by filename.
 - Canonical URL check for GPT listing links executed in `loadGPTs`.
+- Module-scoped one-time warning guard prevents duplicate placeholder-link warnings in long multi-page build/check runs.
 
 Key invariants:
 - `loadJsonCached` guarantees one parse+validate pass per file per process.
 - `validate:content` currently checks GPT links and proof blocks; other datasets are structurally typed via Zod.
+- GPT placeholder CTA warnings are emitted at most once per process to keep CI/build logs high signal.
 
 - Duplicate parsing failures are removed from cache on reject so retries can recover.
 - Missing or placeholder links in GPT resource fields can warn without hard-failing (existing behavior).
@@ -29,4 +31,5 @@ Dependencies:
 Acceptance checks:
 - All loaders parse successfully and pass schema validation.
 - `loadGPTs` rejects non-canonical listing link values.
+- `loadGPTs` emits placeholder CTA warning once when placeholders exist, even if called repeatedly.
 - Workshops now include optional `proofLine` and `teachingBullets` as supported schema fields.

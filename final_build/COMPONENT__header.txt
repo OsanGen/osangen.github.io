@@ -18,5 +18,5 @@ Primary site nav with reduced items and a prominent Book CTA as a button.
 - `header` styles in `src/styles/global.css`.
 
 ## Acceptance Checks
-- Four concise nav labels: Labs, Learn, Join, Resume.
+- Four concise nav labels: Labs, Learn, Contribute, Resume.
 - Book action is button-like on the right and not a nav link.

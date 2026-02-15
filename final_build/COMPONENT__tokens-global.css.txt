@@ -36,4 +36,6 @@ Define and apply CogSec pastel token system with minimal, proof-first surface/st
   - first non-hero top-level surface bubble
   - low-opacity `.site-page` fallback bubble layer
 - Route accent tint drives motif color on each page (no fixed global red override).
+- Homepage route cards use minimal proof styling: no route-grid vertical rail, no per-card accent rail, and no floating accent dot on `.route-card`.
+- Unused keyframes are removed from global CSS to keep runtime style payload lean and maintainable.
 - Mobile breakpoints (`<=900px`, `<=560px`) scale bubble size/offset/dot to avoid overflow.

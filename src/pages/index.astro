@@ -1,16 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { loadGames, loadModules, loadWorkshops, loadCommunities } from '../lib/content';
+import { loadGames, loadModules, loadWorkshops } from '../lib/content';
 import Card from '../components/Card.astro';
 import CardGrid from '../components/CardGrid.astro';
 import { sanitizeLink } from '../lib/link-utils';
 import { isDisplayableVisualClassModule, splitWorkshops } from '../lib/workshop-catalog';
 
-const [games, modules, workshops, communities] = await Promise.all([
+const [games, modules, workshops] = await Promise.all([
   loadGames(),
   loadModules(),
   loadWorkshops(),
-  loadCommunities(),
 ]);
 
 const { coreWorkshops, visualClassWorkshops } = splitWorkshops(workshops);
@@ -34,10 +33,10 @@ const routeCards = [
     action: 'Open learn',
   },
   {
-    title: 'Join',
+    title: 'Contribute',
     href: '/join',
-    subtitle: pluralize(communities.length, 'community', 'communities'),
-    action: 'Join community',
+    subtitle: 'Open-source contribution',
+    action: 'View opportunity',
   },
 ];
 
@@ -49,7 +48,7 @@ const visualClassSummary =
   <section class="hero-shell scene-shell scene-accent command-shell">
     <p class="hero-eyebrow">Open-source AI education</p>
     <h1>Choose your route. Learn fast.</h1>
-    <p class="text-small deck-subtitle">Three clean paths for shipping AI capability: play, learn, and join.</p>
+    <p class="text-small deck-subtitle">Three clean paths for shipping AI capability: play, learn, and contribute.</p>
     <div class="cta-stack">
       <a class="button button--primary" href="/labs">Open Labs</a>
       <a class="button" href={bookHref} target="_blank" rel="noopener noreferrer">Book</a>
@@ -66,8 +65,8 @@ const visualClassSummary =
             style={`--reveal-delay:${index * 60}ms;`}
           >
             <h2>{card.title}</h2>
-            <p class="text-small line-clamp-1">{card.subtitle}</p>
-            <a class="button" href={card.href}>
+            <p class="text-small">{card.subtitle}</p>
+            <a class="button button--ghost" href={card.href}>
               {card.action}
             </a>
           </article>
