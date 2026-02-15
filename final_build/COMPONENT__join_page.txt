@@ -9,7 +9,10 @@ Inputs:
 - `src/lib/link-utils.ts` helpers for link sanitization and placeholder detection.
 
 Outputs:
-- Primary CTA row with an external application button.
+- Primary CTA stack with:
+  - external application button
+  - compact external URL chip
+  - helper note that signup opens in a new tab
 - One focused scope panel containing one-line chips and one-line impact statement.
 - Fine-print summary line from content data.
 
@@ -20,6 +23,7 @@ State:
 Edge cases:
 - Placeholder application URL disables primary CTA action and shows explicit setup text.
 - Optional secondary link can be hidden when empty/placeholder.
+- Primary CTA and URL chip each preserve 44px click target minimum.
 - Scope chips are capped by display logic to six entries.
 
 Dependencies:
@@ -31,5 +35,7 @@ Dependencies:
 Acceptance checks:
 - Route `/join` must render the quarter landing layout (two columns on desktop, stacked on mobile).
 - Primary CTA uses `target="_blank" rel="noopener noreferrer"`.
+- Primary CTA has explicit accessibility label indicating new-tab behavior.
+- Secondary URL chip links to the signup URL when provided.
 - Primary CTA is not rendered when `ctaHref` is missing/invalid.
 - No community catalog dependency (`loadCommunities`) remains in this page.
