@@ -4,7 +4,7 @@
 - global bubble motif rollout | completed | Added centralized route-tinted bubble system across hero shells, first major non-hero content surfaces, and subtle page-frame fallback.
 - service-worker deployment verification | pending | Deploy build and run a smoke check on a throttled/offline path.
 - lab embed performance optimization | pending | Verify GameEmbed click-to-load behavior and fallback on a real iframe URL.
-- manual runtime smoke pass | pending | Run local preview and load /, /gpts, /gpts/{id}, /workshops, /workshops/{id}, /labs, /labs/{id}; confirm external/inactive links and GameEmbed fallback behavior.
+- manual runtime smoke pass | pending | HTTP smoke checks for /, /join, /workshops, /workshops/{core-id}, /labs, /labs/{id}, /gpts, and /gpts/{id} all return 200; remaining interactive browser checks are external/inactive link click paths and GameEmbed fallback behavior.
 - line-review ledger initialization | completed | Added `final_build/LINE_REVIEW_LEDGER.txt` with reviewed status for every file in `src`, `scripts`, `public`, and `docs`, plus explicit dead-code removal entry for `src/components/TwoOptionCTA.astro`.
 - release-B dead component cleanup | completed | Removed unreferenced `src/components/TwoOptionCTA.astro` after repository-wide reference check.
 - dist integrity automation | completed | Added `scripts/check-dist-integrity.mjs` and npm script `verify:dist` for sitemap parity, internal link integrity, and dynamic route output checks.
