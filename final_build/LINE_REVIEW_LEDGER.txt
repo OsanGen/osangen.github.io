@@ -1,0 +1,66 @@
+# LINE_REVIEW_LEDGER
+docs/content-model.md | reviewed | keep | low | reviewed; no change required under conservative policy
+docs/decision-log.md | reviewed | keep | low | reviewed; no change required under conservative policy
+docs/decision-method.md | reviewed | keep | low | reviewed; no change required under conservative policy
+docs/github-icon-sync.md | reviewed | keep | low | reviewed; no change required under conservative policy
+docs/qc.md | reviewed | keep | low | reviewed; no change required under conservative policy
+docs/visual-tokens.md | reviewed | keep | low | reviewed; no change required under conservative policy
+public/icons/brandbookgen.svg | reviewed | keep | low | reviewed; no change required under conservative policy
+public/icons/oscar-cog-brain.svg | reviewed | keep | low | reviewed; no change required under conservative policy
+public/icons/sora-prompt-coach.svg | reviewed | keep | low | reviewed; no change required under conservative policy
+public/manifest.webmanifest | reviewed | keep | low | reviewed; no change required under conservative policy
+public/robots.txt | reviewed | keep | low | reviewed; no change required under conservative policy
+public/sitemap.xml | reviewed | keep | low | reviewed; no change required under conservative policy
+public/sw.js | reviewed | keep | high | high-impact runtime/build surface reviewed with automated gates
+scripts/check-dist-integrity.mjs | reviewed | refactor | low | new deterministic dist integrity gate (sitemap, links, dynamic routes)
+scripts/generate-sitemap.mjs | reviewed | keep | high | high-impact runtime/build surface reviewed with automated gates
+scripts/icon-sync.manifest.json | reviewed | keep | low | reviewed; no change required under conservative policy
+scripts/import_linkedin_posts.ts | reviewed | keep | med | reviewed for link/render stability and conservative behavior
+scripts/import_linkedin_workshops.ts | reviewed | keep | med | reviewed for link/render stability and conservative behavior
+scripts/sync-github-icons.mjs | reviewed | keep | med | reviewed for link/render stability and conservative behavior
+scripts/validate-content.ts | reviewed | refactor | high | deduped calendly URL validation loop; behavior preserved
+src/components/Badge.astro | reviewed | keep | low | reviewed; no change required under conservative policy
+src/components/Card.astro | reviewed | keep | low | reviewed; no change required under conservative policy
+src/components/CardGrid.astro | reviewed | keep | low | reviewed; no change required under conservative policy
+src/components/EmptyState.astro | reviewed | keep | low | reviewed; no change required under conservative policy
+src/components/Footer.astro | reviewed | keep | low | reviewed; no change required under conservative policy
+src/components/GPTCard.astro | reviewed | keep | low | reviewed; no change required under conservative policy
+src/components/GameEmbed.astro | reviewed | keep | high | high-impact runtime/build surface reviewed with automated gates
+src/components/Header.astro | reviewed | keep | low | reviewed; no change required under conservative policy
+src/components/ProofIOBlock.astro | reviewed | keep | low | reviewed; no change required under conservative policy
+src/components/ServiceWorkerRegister.astro | reviewed | keep | low | reviewed; no change required under conservative policy
+src/components/TagList.astro | reviewed | keep | low | reviewed; no change required under conservative policy
+src/content.config.ts | reviewed | refactor | low | explicit Astro data collection to prevent implicit/deprecated collection behavior
+src/content/data/booking.json | reviewed | keep | low | reviewed; no change required under conservative policy
+src/content/data/communities.json | reviewed | keep | low | reviewed; no change required under conservative policy
+src/content/data/games.json | reviewed | keep | low | reviewed; no change required under conservative policy
+src/content/data/gpts.json | reviewed | keep | low | reviewed; no change required under conservative policy
+src/content/data/join_project.json | reviewed | keep | low | reviewed; no change required under conservative policy
+src/content/data/modules.json | reviewed | keep | low | reviewed; no change required under conservative policy
+src/content/data/posts.json | reviewed | keep | low | reviewed; no change required under conservative policy
+src/content/data/profile.json | reviewed | keep | low | reviewed; no change required under conservative policy
+src/content/data/workshops.json | reviewed | keep | low | reviewed; no change required under conservative policy
+src/env.d.ts | reviewed | keep | low | reviewed; no change required under conservative policy
+src/layouts/BaseLayout.astro | reviewed | keep | low | reviewed; no change required under conservative policy
+src/lib/content.ts | reviewed | keep | high | high-impact runtime/build surface reviewed with automated gates
+src/lib/link-utils.ts | reviewed | keep | med | reviewed for link/render stability and conservative behavior
+src/lib/schemas.ts | reviewed | keep | high | high-impact runtime/build surface reviewed with automated gates
+src/lib/workshop-catalog.ts | reviewed | keep | med | reviewed for link/render stability and conservative behavior
+src/pages/about.astro | reviewed | keep | med | reviewed for link/render stability and conservative behavior
+src/pages/book.astro | reviewed | keep | med | reviewed for link/render stability and conservative behavior
+src/pages/code-of-conduct.astro | reviewed | keep | med | reviewed for link/render stability and conservative behavior
+src/pages/docs.astro | reviewed | keep | med | reviewed for link/render stability and conservative behavior
+src/pages/gpts.astro | reviewed | keep | med | reviewed for link/render stability and conservative behavior
+src/pages/gpts/[id].astro | reviewed | keep | med | reviewed for link/render stability and conservative behavior
+src/pages/index.astro | reviewed | keep | med | reviewed for link/render stability and conservative behavior
+src/pages/join.astro | reviewed | refactor | med | CTA and link flow hardened with verified external signup path
+src/pages/labs.astro | reviewed | keep | med | reviewed for link/render stability and conservative behavior
+src/pages/labs/[gameId].astro | reviewed | keep | med | reviewed for link/render stability and conservative behavior
+src/pages/more.astro | reviewed | keep | med | reviewed for link/render stability and conservative behavior
+src/pages/posts.astro | reviewed | keep | med | reviewed for link/render stability and conservative behavior
+src/pages/resume.astro | reviewed | keep | med | reviewed for link/render stability and conservative behavior
+src/pages/workshops.astro | reviewed | keep | med | reviewed for link/render stability and conservative behavior
+src/pages/workshops/[id].astro | reviewed | keep | med | reviewed for link/render stability and conservative behavior
+src/styles/global.css | reviewed | keep | high | large styling surface; validated via lint/build and visual smoke pending
+src/styles/tokens.css | reviewed | keep | low | reviewed; no change required under conservative policy
+src/components/TwoOptionCTA.astro | reviewed | remove | low | removed as dead code after zero references in src/docs/final_build search

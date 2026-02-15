@@ -1,0 +1,35 @@
+# Component/script: `scripts/check-dist-integrity.mjs`
+
+Purpose:
+- Validate built static output consistency after `astro build`.
+- Catch regressions that lint/typecheck do not catch (broken routes, broken links, missing dynamic pages).
+
+Inputs:
+- `public/sitemap.xml`
+- `dist/**` static output
+- `src/content/data/gpts.json`
+- `src/content/data/games.json`
+- `src/content/data/workshops.json`
+
+Outputs:
+- Exit code `0` when all checks pass.
+- Exit code `1` with deterministic failure lines when issues are found.
+
+State:
+- No mutable runtime state outside process memory.
+- No file writes.
+
+Edge cases:
+- Supports both `/path` and `/path/index.html` route materialization.
+- Treats links as valid when they exist in either `dist` output or `public` static assets.
+- Limits workshop dynamic checks to canonical workshop IDs.
+
+Dependencies:
+- Node core modules (`fs/promises`, `path`).
+- npm script wiring: `verify:dist` in `package.json`.
+
+Acceptance checks:
+- Fails when any sitemap path is missing in output.
+- Fails on broken internal `href` links in built HTML.
+- Fails when expected dynamic routes for gpts/labs/core-workshops are missing.
+- Passes cleanly for current build output.

@@ -9,6 +9,7 @@
 - `src/pages/workshops/[id].astro`: workshop detail page with proof line and teaching details.
 - `src/lib/workshop-catalog.ts`: canonical workshop taxonomy helpers (`CORE_WORKSHOP_IDS`, split + classification helpers).
 - `scripts/generate-sitemap.mjs` + `public/sitemap.xml`: build-time sitemap generation.
+- `scripts/check-dist-integrity.mjs`: static-output verification for sitemap route parity, internal href integrity, and dynamic route existence checks.
 - `src/lib/content.ts` + `src/lib/schemas.ts`: content loading, validation, and typing.
 - `src/content.config.ts`: explicit Astro content collection definition to avoid implicit collection generation and Astro 5 deprecation drift.
 - `src/layouts/BaseLayout.astro`: layout shell and host page chrome, now includes service worker registration component.

@@ -5,7 +5,9 @@
 - service-worker deployment verification | pending | Deploy build and run a smoke check on a throttled/offline path.
 - lab embed performance optimization | pending | Verify GameEmbed click-to-load behavior and fallback on a real iframe URL.
 - manual runtime smoke pass | pending | Run local preview and load /, /gpts, /gpts/{id}, /workshops, /workshops/{id}, /labs, /labs/{id}; confirm external/inactive links and GameEmbed fallback behavior.
-- line-review ledger initialization | pending | Create `final_build/LINE_REVIEW_LEDGER.txt` for all files in `src`, `scripts`, `public`, and `docs`, then mark each entry reviewed with keep/refactor/remove disposition.
+- line-review ledger initialization | completed | Added `final_build/LINE_REVIEW_LEDGER.txt` with reviewed status for every file in `src`, `scripts`, `public`, and `docs`, plus explicit dead-code removal entry for `src/components/TwoOptionCTA.astro`.
+- release-B dead component cleanup | completed | Removed unreferenced `src/components/TwoOptionCTA.astro` after repository-wide reference check.
+- dist integrity automation | completed | Added `scripts/check-dist-integrity.mjs` and npm script `verify:dist` for sitemap parity, internal link integrity, and dynamic route output checks.
 - workshop route policy smoke | completed | Verified by build output: only `/workshops/leanagents-workshop-chatgpt-apps` and `/workshops/manus-workshop` are generated; `/workshops/ghost-machine` is not generated.
 - production deploy | completed | Pushed commit `738e7380b35db8123b8e67b2f4ace2ad1c109c6a` to `main`; GitHub Pages workflow `Deploy Astro site to GitHub Pages` completed with run `22025373232`.
 - /join landing refactor | completed | Replaced legacy community catalog /join implementation with the quarter internship landing and added `src/content/data/join_project.json`.

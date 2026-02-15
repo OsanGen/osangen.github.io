@@ -11,6 +11,7 @@
     "check": "astro check",
     "lint": "astro check",
     "validate:content": "tsx scripts/validate-content.ts",
+    "verify:dist": "node scripts/check-dist-integrity.mjs",
     "typecheck": "astro check",
     "icons:sync": "ICON_SYNC_ENABLED=true node scripts/sync-github-icons.mjs",
     "import:posts": "tsx scripts/import_linkedin_posts.ts",
