@@ -261,35 +261,25 @@ const main = async () => {
     });
   });
 
-  if (booking.calendly.one_on_one.url) {
-    checkLinkField({
-      label: 'booking.one_on_one.url',
-      value: booking.calendly.one_on_one.url,
-      required: false,
-      allowInternal: false,
-      messages,
-    });
-  }
+  const calendlyLinkEntries = [
+    ['booking.one_on_one.url', booking.calendly.one_on_one.url],
+    ['booking.teach_private.url', booking.calendly.teach_private.url],
+    ['booking.teach_class.url', booking.calendly.teach_class.url],
+  ] as const;
 
-  if (booking.calendly.teach_private.url) {
-    checkLinkField({
-      label: 'booking.teach_private.url',
-      value: booking.calendly.teach_private.url,
-      required: false,
-      allowInternal: false,
-      messages,
-    });
-  }
+  calendlyLinkEntries.forEach(([label, value]) => {
+    if (!value) {
+      return;
+    }
 
-  if (booking.calendly.teach_class.url) {
     checkLinkField({
-      label: 'booking.teach_class.url',
-      value: booking.calendly.teach_class.url,
+      label,
+      value,
       required: false,
       allowInternal: false,
       messages,
     });
-  }
+  });
 
   if (gpts.length < 3) {
     messages.push(`gpts: expected at least 3 items, found ${gpts.length}`);

@@ -1,0 +1,32 @@
+# Component/script: `scripts/validate-content.ts`
+
+Purpose:
+- Enforce data integrity and link hygiene across all JSON-backed content collections.
+
+Inputs:
+- Content loaders from `src/lib/content.ts`:
+  - GPTs, games, modules, workshops, posts, profile, communities, booking
+- Shared link helpers from `src/lib/link-utils.ts`.
+
+Outputs:
+- Exit code `0` with `Content validation passed.` when no violations exist.
+- Exit code `1` with explicit issue list when violations are found.
+
+State:
+- No persisted state.
+- Validation-only execution path.
+
+Edge cases:
+- Placeholder links are rejected where links are provided.
+- Duplicate IDs are flagged case-insensitively.
+- Optional booking links are validated only when present.
+
+Dependencies:
+- `tsx` runtime via npm script.
+- Runtime schemas/loaders in `src/lib/content.ts`.
+
+Acceptance checks:
+- All required link fields are canonical and non-placeholder.
+- All collection IDs are unique.
+- Minimum GPT inventory threshold remains enforced.
+- Calendly URL checks are handled by a deduplicated entry loop.
