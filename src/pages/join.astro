@@ -13,16 +13,11 @@ const {
   impactOneLiner,
   ctaLabel,
   ctaHref,
-  secondaryLinkLabel,
-  secondaryLinkHref,
-  finePrint,
 } = joinProject;
 
 const resolvedCtaHref = sanitizeLink(ctaHref || '');
 const isApplyPlaceholder = resolvedCtaHref === 'INTERNSHIP_APPLY_URL';
-const resolvedSecondaryHref = sanitizeLink(secondaryLinkHref || '');
 const hasPrimaryCta = resolvedCtaHref && !isUnavailableLink(resolvedCtaHref) && !isApplyPlaceholder;
-const hasSecondaryLink = resolvedSecondaryHref && !isUnavailableLink(resolvedSecondaryHref);
 
 const visibleChips = scopeChips?.slice(0, 6) ?? [];
 ---
@@ -31,7 +26,7 @@ const visibleChips = scopeChips?.slice(0, 6) ?? [];
     <section class="hero-shell scene-accent" style="--scene-accent: var(--cog-blue);">
       <p class="hero-eyebrow">{eyebrow}</p>
       <h1>{title}</h1>
-      <p class="text-small deck-subtitle line-clamp-2">{lede}</p>
+      <p class="join-lede line-clamp-2">{lede}</p>
       <div class="join-cta-stack">
         <div class="join-cta-row">
           {hasPrimaryCta ? (
@@ -40,41 +35,26 @@ const visibleChips = scopeChips?.slice(0, 6) ?? [];
               href={resolvedCtaHref}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Sign up on GENMRKT (opens in new tab)"
+              aria-label="Sign up (opens in new tab)"
             >
               {ctaLabel}
             </a>
-          ) : null}
-          {hasSecondaryLink ? (
-            <a
-              class="join-url-chip"
-              href={resolvedSecondaryHref}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {secondaryLinkLabel}
-            </a>
-          ) : null}
-          {!hasPrimaryCta && !hasSecondaryLink ? (
-            <p class="text-small muted">Set INTERNSHIP_APPLY_URL in join_project.json to publish the application CTA.</p>
-          ) : null}
+          ) : (
+            <p class="text-small muted join-cta-fallback">Application link unavailable. Check back soon.</p>
+          )}
         </div>
-        {hasPrimaryCta || hasSecondaryLink ? (
-          <p class="text-small muted join-cta-note">Open signup page in new tab.</p>
-        ) : null}
       </div>
-      <p class="text-small muted">{finePrint}</p>
     </section>
 
     <section class="panel-shell">
-      <h2>{highLevelScopeTitle}</h2>
+      <h2 class="join-panel-title">{highLevelScopeTitle}</h2>
       <div class="join-scope-grid" aria-label="Scope chips">
         {visibleChips.map((chip) => (
           <span class="proof-chip">{chip}</span>
         ))}
       </div>
-      <p class="text-small muted">{impactTitle}</p>
-      <p class="text-small line-clamp-2">{impactOneLiner}</p>
+      <p class="join-impact-label">{impactTitle}</p>
+      <p class="join-impact line-clamp-2">{impactOneLiner}</p>
     </section>
   </div>
 </BaseLayout>
@@ -82,11 +62,56 @@ const visibleChips = scopeChips?.slice(0, 6) ?? [];
 <style>
   .join-landing {
     display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.85fr);
-    gap: var(--space-4);
-    align-items: start;
-    max-width: min(1100px, calc(100vw - 2rem));
+    grid-template-columns: minmax(0, 1.16fr) minmax(320px, 0.84fr);
+    gap: clamp(0.9rem, 2vw, 1.45rem);
+    align-items: stretch;
+    max-width: min(1120px, calc(100vw - 2rem));
     margin: 0 auto;
+  }
+
+  .join-landing .hero-shell {
+    padding: clamp(1.45rem, 2.8vw, 2.4rem);
+    display: grid;
+    align-content: start;
+    gap: clamp(0.52rem, 1.2vw, 0.9rem);
+    min-height: 100%;
+  }
+
+  .join-landing .hero-shell::before {
+    top: clamp(-5.4rem, -8vw, -3.8rem);
+    right: clamp(-6.6rem, -10vw, -4.8rem);
+    opacity: 0.42;
+  }
+
+  .join-landing .hero-shell::after {
+    right: 1rem;
+    bottom: 1rem;
+  }
+
+  .join-landing .hero-eyebrow {
+    margin: 0;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--ink-soft);
+  }
+
+  .join-landing h1 {
+    margin: 0;
+    font-size: clamp(2.15rem, 5vw, 4rem);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    max-width: 14ch;
+    text-wrap: balance;
+  }
+
+  .join-lede {
+    margin: 0;
+    max-width: 40ch;
+    font-size: clamp(1.08rem, 1.45vw, 1.35rem);
+    line-height: 1.32;
+    color: var(--ink);
   }
 
   .join-cta-row {
@@ -99,73 +124,108 @@ const visibleChips = scopeChips?.slice(0, 6) ?? [];
   .join-cta-stack {
     display: grid;
     gap: 0.4rem;
+    margin-top: 0.35rem;
   }
 
   .join-cta {
-    min-height: 44px;
-    min-width: 11.5rem;
-  }
-
-  .join-url-chip {
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    border-radius: var(--radius-pill);
-    border: 1px solid color-mix(in srgb, var(--scene-accent, var(--accent)) 34%, var(--stroke));
-    background: color-mix(in srgb, var(--surface) 85%, var(--panel));
-    padding: 0.62rem 0.95rem;
-    font-size: 0.86rem;
-    text-decoration: none;
-    line-height: 1.15;
-    color: var(--ink-soft);
-    transition: transform var(--motion-entrance) ease, border-color 160ms ease, color 160ms ease;
-  }
-
-  .join-url-chip::after {
-    content: '->';
-    font-size: 0.78rem;
-    opacity: 0.72;
-  }
-
-  .join-url-chip:hover,
-  .join-url-chip:focus-visible {
-    transform: translateY(-1px);
-    color: var(--ink);
-    border-color: color-mix(in srgb, var(--scene-accent, var(--accent)) 68%, var(--ink));
-  }
-
-  .join-cta-note {
+    min-height: 3.2rem;
+    min-width: 12rem;
+    padding-inline: 1.35rem;
+    font-size: clamp(1.05rem, 1.4vw, 1.22rem);
+    font-weight: 700;
     letter-spacing: 0.01em;
+  }
+
+  .join-cta-fallback {
+    margin: 0;
+  }
+
+  .join-landing .panel-shell {
+    padding: clamp(1.1rem, 2vw, 1.55rem);
+    display: grid;
+    gap: 0.62rem;
+    align-content: start;
+  }
+
+  .join-panel-title {
+    margin: 0;
+    font-size: clamp(1.45rem, 2.2vw, 2.2rem);
+    line-height: 1.08;
+    text-wrap: balance;
   }
 
   .join-scope-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.45rem;
+    gap: 0.42rem;
+  }
+
+  .join-scope-grid .proof-chip {
+    justify-content: flex-start;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0.28rem 0.62rem;
+    font-size: 0.88rem;
+    line-height: 1.18;
+  }
+
+  .join-impact-label {
+    margin-top: 0.25rem;
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+
+  .join-impact {
+    margin: 0;
+    font-size: clamp(1.04rem, 1.2vw, 1.2rem);
+    line-height: 1.35;
+    max-width: 46ch;
   }
 
   @media (max-width: 920px) {
     .join-landing {
       grid-template-columns: 1fr;
+      max-width: min(780px, calc(100vw - 1.2rem));
+    }
+
+    .join-landing .hero-shell::before {
+      top: -3.5rem;
+      right: -4rem;
+      opacity: 0.36;
+    }
+
+    .join-landing .panel-shell {
+      padding: 1.15rem;
     }
   }
 
   @media (max-width: 560px) {
-    .join-cta-row {
-      width: 100%;
-      flex-direction: column;
-      align-items: stretch;
+    .join-landing {
+      max-width: calc(100vw - 1rem);
     }
 
-    .join-cta,
-    .join-url-chip {
+    .join-landing .hero-shell {
+      padding: 1.18rem;
+    }
+
+    .join-cta-row {
+      width: 100%;
+    }
+
+    .join-cta {
       width: 100%;
       justify-content: center;
     }
 
     .join-scope-grid {
       grid-template-columns: 1fr;
+    }
+
+    .join-scope-grid .proof-chip {
+      white-space: normal;
     }
   }
 </style>

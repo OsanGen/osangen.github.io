@@ -10,20 +10,17 @@ Inputs:
 
 Outputs:
 - Primary CTA stack with:
-  - external application button
-  - compact external URL chip
-  - helper note that signup opens in a new tab
+  - one external application button only (`Sign up`)
 - One focused scope panel containing one-line chips and one-line impact statement.
-- Fine-print summary line from content data.
+- No in-hero fine-print copy.
 
 State:
 - No client-side state.
-- All derivation is build-time/templating only (`hasPrimaryCta`, `hasSecondaryLink`, `visibleChips`).
+- All derivation is build-time/templating only (`hasPrimaryCta`, `visibleChips`).
 
 Edge cases:
 - Placeholder application URL disables primary CTA action and shows explicit setup text.
-- Optional secondary link can be hidden when empty/placeholder.
-- Primary CTA and URL chip each preserve 44px click target minimum.
+- Primary CTA preserves 44px+ click target minimum.
 - Scope chips are capped by display logic to six entries.
 
 Dependencies:
@@ -36,6 +33,6 @@ Acceptance checks:
 - Route `/join` must render the quarter landing layout (two columns on desktop, stacked on mobile).
 - Primary CTA uses `target="_blank" rel="noopener noreferrer"`.
 - Primary CTA has explicit accessibility label indicating new-tab behavior.
-- Secondary URL chip links to the signup URL when provided.
 - Primary CTA is not rendered when `ctaHref` is missing/invalid.
+- In-hero line `AI-assisted; reviewed by humans; results vary.` is not rendered on `/join`.
 - No community catalog dependency (`loadCommunities`) remains in this page.
