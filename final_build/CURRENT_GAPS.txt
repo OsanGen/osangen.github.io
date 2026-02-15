@@ -1,9 +1,11 @@
 # CURRENT_GAPS
+- astro5 migration completion | completed | Upgraded `astro` to `5.17.2`, upgraded `@astrojs/check` to `0.9.6`, added explicit `src/content.config.ts`, and verified `npm audit --omit=dev` reports 0 vulnerabilities.
 - visual-pass for global shell effects | pending | Validate accent and motion behavior at /, /labs, /workshops, /gpts, and /resume on desktop/mobile, including new bubble motif visibility.
 - global bubble motif rollout | completed | Added centralized route-tinted bubble system across hero shells, first major non-hero content surfaces, and subtle page-frame fallback.
 - service-worker deployment verification | pending | Deploy build and run a smoke check on a throttled/offline path.
 - lab embed performance optimization | pending | Verify GameEmbed click-to-load behavior and fallback on a real iframe URL.
 - manual runtime smoke pass | pending | Run local preview and load /, /gpts, /gpts/{id}, /workshops, /workshops/{id}, /labs, /labs/{id}; confirm external/inactive links and GameEmbed fallback behavior.
+- line-review ledger initialization | pending | Create `final_build/LINE_REVIEW_LEDGER.txt` for all files in `src`, `scripts`, `public`, and `docs`, then mark each entry reviewed with keep/refactor/remove disposition.
 - workshop route policy smoke | completed | Verified by build output: only `/workshops/leanagents-workshop-chatgpt-apps` and `/workshops/manus-workshop` are generated; `/workshops/ghost-machine` is not generated.
 - production deploy | completed | Pushed commit `738e7380b35db8123b8e67b2f4ace2ad1c109c6a` to `main`; GitHub Pages workflow `Deploy Astro site to GitHub Pages` completed with run `22025373232`.
 - /join landing refactor | completed | Replaced legacy community catalog /join implementation with the quarter internship landing and added `src/content/data/join_project.json`.

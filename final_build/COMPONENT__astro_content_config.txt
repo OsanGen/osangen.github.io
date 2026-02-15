@@ -1,0 +1,27 @@
+# Component: `src/content.config.ts`
+
+Purpose:
+- Define explicit Astro content collection metadata for `src/content/data`.
+- Prevent implicit collection auto-generation warnings and keep Astro 5 behavior deterministic.
+
+Inputs:
+- JSON data files under `src/content/data`.
+
+Outputs:
+- Collection registration exported as `collections = { data }`.
+- A permissive `z.any()` schema to preserve backward compatibility with existing data loading approach.
+
+State:
+- No runtime state.
+- Build-time content metadata only.
+
+Edge cases:
+- Non-JSON files are ignored by existing project usage.
+- Strict schema validation is intentionally deferred because runtime validation already happens in `src/lib/schemas.ts`.
+
+Dependencies:
+- `astro:content` (`defineCollection`, `z`).
+
+Acceptance checks:
+- `astro check` and `astro build` run with no implicit collection deprecation warnings.
+- Existing content loader behavior in `src/lib/content.ts` remains unchanged.

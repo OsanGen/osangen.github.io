@@ -3,3 +3,7 @@ dist/
 .DS_Store
 .env
 .env.local
+.astro/content-assets.mjs
+.astro/content-modules.mjs
+.astro/content.d.ts
+.astro/collections/
