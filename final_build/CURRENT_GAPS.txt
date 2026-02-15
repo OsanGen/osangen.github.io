@@ -16,7 +16,7 @@
 - release-B dead component cleanup | completed | Removed unreferenced `src/components/TwoOptionCTA.astro` after repository-wide reference check.
 - dist integrity automation | completed | Added `scripts/check-dist-integrity.mjs` and npm script `verify:dist` for sitemap parity, internal link integrity, and dynamic route output checks.
 - workshop route policy smoke | completed | Verified by build output: only `/workshops/leanagents-workshop-chatgpt-apps` and `/workshops/manus-workshop` are generated; `/workshops/ghost-machine` is not generated.
-- production deploy | completed | Pushed commit `738e7380b35db8123b8e67b2f4ace2ad1c109c6a` to `main`; GitHub Pages workflow `Deploy Astro site to GitHub Pages` completed with run `22025373232`.
+- production deploy | completed | Pushed commit `0d74eef853a8246af510f87155c556e01a41f5a8` to `main`; workflows `CI` (`22042398300`) and `Deploy Astro site to GitHub Pages` (`22042398323`) completed successfully.
 - /join landing refactor | completed | Replaced legacy community catalog /join implementation with the quarter internship landing and added `src/content/data/join_project.json`.
 - /join signup CTA activation | completed | Added live signup URL (`https://genmrkt.lovable.app/`) with a primary CTA button and explicit new-tab behavior.
 - /join single-cta visual cleanup | completed | Simplified /join hero actions to a single application CTA, removed in-hero `AI-assisted; reviewed by humans; results vary.` copy, and tightened spacing/typography for a cleaner layout.
