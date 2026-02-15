@@ -4,17 +4,20 @@ Purpose:
 - Compose global page skeleton with shared metadata, nav/footer shell, and root container.
 - Provide a single shared insertion point for global runtime side effects (service worker registration).
 - Compute and apply a route-scoped accent token at the page shell level.
+- Mount shared visual-motion enhancer shell for OSAN-safe runtime animation effects.
 
 Inputs:
 - `Props`: `title` (required), `description` (optional)
 - Child slot content for page-specific rendering.
 - `ServiceWorkerRegister` component import and mount point in the `<body>`.
+- `MotionEnhance` component import and mount point in the `<body>`.
 - URL path (from `Astro.url.pathname`) to determine route-level accent and `data-page`.
 
 Outputs:
 - Fully formed HTML document scaffold (`<!doctype html>`), global metadata tags, and consistent main/layout structure.
 - Root `<body>` with `--page-accent` token and `data-page` attribute.
 - Main content wrapped in `.site-page` class for global page-level motion shell.
+- Global top progress rail host and motion bootstrap script through `MotionEnhance`.
 
 State:
 - No internal business logic state.
@@ -29,9 +32,11 @@ Dependencies:
 - `src/styles/global.css` (global tokenized style layer)
 - `src/components/Header.astro`, `src/components/Footer.astro`
 - `src/components/ServiceWorkerRegister.astro` (performance layer mount).
+- `src/components/MotionEnhance.astro` (visual enhancement mount).
 
 Acceptance checks:
 - Pages render with consistent container and skip link semantics.
 - Manifest link and service worker mount are present in all layout-rendered routes.
+- Motion enhancer mount is present in all layout-rendered routes; runtime gates activation by page id and reduced-motion preference.
 - Route-scoped accent updates every page using one canonical CogSec accent token.
 - One page-shell animation + border accent layer is present on every layout-rendered route.

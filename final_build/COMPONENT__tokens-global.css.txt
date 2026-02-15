@@ -8,7 +8,7 @@ Define and apply CogSec pastel token system with minimal, proof-first surface/st
 - Outputs:
   - `tokens.css`: canonical variables for WHITE/INK/FOG and 4 Cog accents.
   - `tokens.css`: bubble motif variables (`--bubble-size-*`, offsets, opacities).
-  - `global.css`: tokenized component styling, subtle motion, deck/card patterns, and centralized bubble motif rendering.
+  - `global.css`: tokenized component styling, subtle motion, deck/card patterns, centralized bubble motif rendering, and motion-enhancement rail/reveal tokens.
 
 ## State
 - Static CSS variable tokens and class-based style definitions.
@@ -16,6 +16,9 @@ Define and apply CogSec pastel token system with minimal, proof-first surface/st
 - Bubble motif rendering state is declarative through CSS selectors:
   - shared motif surfaces: `.hero-shell`, `.bubble-surface`
   - automatic non-hero target: first top-level `.card`/`.panel-shell`/`.surface-shell`/`.visual-shell` in `.site-page`
+- Motion enhancement state is class-gated by `html.motion-enhanced`:
+  - progress rail visibility (`.site-progress-rail`)
+  - performance hinting for in-view reveal targets (`.cog-entrance`, `[data-motion-enter]`).
 
 ## Edge Cases
 - Missing accent overrides should default to `var(--accent)` (COG_BLUE).
@@ -23,6 +26,7 @@ Define and apply CogSec pastel token system with minimal, proof-first surface/st
 - Decorative effects should remain subtle and non-heavy.
 - In browsers without `:has`, hero pages may still render motif on first top-level content surface as graceful fallback.
 - Reduced-motion mode must disable bubble motif animations.
+- Reduced-motion mode also disables progress rail transitions/animations.
 
 ## Dependencies
 - Font imports from `@fontsource`, token references from `tokens.css`.
@@ -38,4 +42,10 @@ Define and apply CogSec pastel token system with minimal, proof-first surface/st
 - Route accent tint drives motif color on each page (no fixed global red override).
 - Homepage route cards use minimal proof styling: no route-grid vertical rail, no per-card accent rail, and no floating accent dot on `.route-card`.
 - Unused keyframes are removed from global CSS to keep runtime style payload lean and maintainable.
+- `global.css` defines motion enhancement vars:
+  - `--motion-enter-distance`
+  - `--motion-enter-duration`
+  - `--motion-progress-height`
+  - `--motion-progress-opacity`
+- Progress rail color derives from route accent + stroke mix (no glow, no heavy gradient).
 - Mobile breakpoints (`<=900px`, `<=560px`) scale bubble size/offset/dot to avoid overflow.

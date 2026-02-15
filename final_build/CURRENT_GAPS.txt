@@ -1,4 +1,7 @@
 # CURRENT_GAPS
+- executive evidence motion layer | completed | Added `motion`-powered OSAN-safe reveal + progress-rail system via `MotionEnhance` + `osan-motion.ts`, gated to `/`, `/workshops*`, and `/gpts*` by `data-page`.
+- motion runtime verification | completed | Ran `npm run check`, `npm run validate:content`, `npm run build`, `npm run verify:dist`, and `npm run verify:runtime` after motion integration.
+- motion visual QA pass | pending | Run manual browser pass on desktop/mobile for `/`, `/workshops`, `/gpts`, and verify reduced-motion behavior disables enhancement.
 - runtime HTTP route smoke automation | completed | Added `scripts/runtime-http-smoke.mjs` plus `npm run verify:runtime` to enforce 200 responses for core static and representative dynamic routes via local `astro preview`.
 - gpt placeholder warning dedupe | completed | `loadGPTs()` now logs placeholder CTA warning once per process to reduce duplicate build/check log noise.
 - footer/nav join-language parity | completed | Updated footer link label from `Join` to `Contribute` to match header/home contribution terminology.

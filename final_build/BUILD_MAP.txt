@@ -3,6 +3,7 @@
 - `src/styles/global.css`: global utility classes and component styles for layout, motion, nav, cards, and proof-first patterns using token palette.
 - `src/components/Header.astro` + header styles in global.css: controls global shell navigation and Book CTA.
 - `src/components/Footer.astro` + footer styles in global.css: controls global secondary navigation and trust/disclosure copy.
+- `src/components/MotionEnhance.astro`: mounts top progress rail shell and bootstraps the motion runtime.
 - `src/components/GPTCard.astro`: card row for each GPT directory entry (name, one-line outcome, tags, Open button).
 - `src/pages/index.astro`: homepage router shell (hero + 3 route cards).
 - `src/pages/join.astro`: GENMRKT quarter landing page driven by `src/content/data/join_project.json`.
@@ -12,6 +13,7 @@
 - `scripts/generate-sitemap.mjs` + `public/sitemap.xml`: build-time sitemap generation.
 - `scripts/check-dist-integrity.mjs`: static-output verification for sitemap route parity, internal href integrity, and dynamic route existence checks.
 - `scripts/runtime-http-smoke.mjs`: local preview HTTP smoke verification for core static and representative dynamic routes (`npm run verify:runtime`).
+- `src/scripts/osan-motion.ts`: route-gated in-view reveal + scroll progress enhancements powered by `motion`.
 - `src/lib/content.ts` + `src/lib/schemas.ts`: content loading, validation, and typing.
 - `src/content.config.ts`: explicit Astro content collection definition to avoid implicit collection generation and Astro 5 deprecation drift.
 - `src/layouts/BaseLayout.astro`: layout shell and host page chrome, now includes service worker registration component.

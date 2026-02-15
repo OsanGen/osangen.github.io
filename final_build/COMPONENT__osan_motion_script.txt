@@ -1,0 +1,43 @@
+# Component/script: `src/scripts/osan-motion.ts`
+
+Purpose:
+- Provide a single OSAN-safe motion runtime using `motiondivision/motion`.
+- Apply in-view reveal effects and scroll-linked progress rail behavior on selected routes only.
+
+Inputs:
+- DOM selectors:
+  - `.cog-entrance`
+  - `[data-motion-enter]`
+  - `[data-motion-group]`
+  - `[data-motion-ignore]`
+- Layout page id from `body[data-page]`.
+- Global CSS motion tokens from `src/styles/global.css`.
+- User accessibility preference (`prefers-reduced-motion`).
+
+Outputs:
+- Adds `html.motion-enhanced` only for allowed routes (`home`, `workshops`, `gpts`) and non-reduced-motion users.
+- Registers in-view observers via `inView()` and scroll progress binding via `scroll()`.
+- Produces one cleanup function and binds it to `pagehide`.
+
+State:
+- Keeps runtime cleanup pointer on `window.__osanMotionCleanup`.
+- Tracks per-element preparation and completion using data attributes:
+  - `data-motion-prepared`
+  - `data-motion-done`
+  - `data-motion-group-member`
+
+Edge cases:
+- Reduced-motion users: runtime exits without enabling enhancements.
+- Unsupported routes: runtime exits quietly and removes enhancement class.
+- Re-initialization/HMR safety: previous cleanup runs before new observers are attached.
+- Elements within `[data-motion-ignore]` are excluded from enhancement.
+
+Dependencies:
+- npm package `motion` (`animate`, `inView`, `scroll` APIs).
+- `src/components/MotionEnhance.astro` bootstrap mount.
+
+Acceptance checks:
+- Runtime adds no glow/heavy-gradient effects and preserves content-first readability.
+- Progress rail updates with page scroll progress and remains subtle.
+- Reveal effects trigger once per target/group and clean up observers after first entry.
+- Cleanup runs on `pagehide` and removes enhancement class.

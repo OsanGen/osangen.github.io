@@ -1,0 +1,28 @@
+# Component Spec: `src/components/MotionEnhance.astro`
+
+## Purpose
+Mount the global, OSAN-compliant animation runtime and expose a thin top progress rail shell.
+
+## Inputs / Outputs
+- Inputs: none (static component).
+- Output:
+  - progress rail container (`data-motion-progress`)
+  - progress rail bar (`data-motion-progress-bar`)
+  - one bundled script import that executes `initOsanMotion()`.
+
+## State
+- Stateless Astro component.
+- Client behavior/state is delegated to `src/scripts/osan-motion.ts`.
+
+## Edge Cases
+- If JS is unavailable or disabled, rail remains hidden and no motion runtime executes.
+- If runtime gates fail (unsupported page or reduced motion), component remains visually quiet.
+
+## Dependencies
+- `src/scripts/osan-motion.ts`
+- rail styling in `src/styles/global.css`
+
+## Acceptance Checks
+- Component renders in `BaseLayout` for all routes.
+- Motion runtime runs once per page lifecycle and does not throw on unsupported routes.
+- Progress rail is only visible when `html.motion-enhanced` is present.

@@ -4,6 +4,13 @@
 @import '@fontsource/inter/400.css';
 @import '@fontsource/inter/500.css';
 
+:root {
+  --motion-enter-distance: 8px;
+  --motion-enter-duration: 320ms;
+  --motion-progress-height: 2px;
+  --motion-progress-opacity: 0.52;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -61,6 +68,29 @@ body::after {
 .site-header {
   position: relative;
   z-index: 1;
+}
+
+.site-progress-rail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--motion-progress-height);
+  pointer-events: none;
+  z-index: 40;
+  opacity: 0;
+}
+
+.site-progress-rail__bar {
+  width: 100%;
+  height: 100%;
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  background: color-mix(in srgb, var(--page-accent, var(--accent)) 32%, var(--stroke));
+}
+
+html.motion-enhanced .site-progress-rail {
+  opacity: var(--motion-progress-opacity);
 }
 
 .site-page {
@@ -1216,6 +1246,16 @@ footer {
   animation-delay: var(--reveal-delay);
 }
 
+html.motion-enhanced .cog-entrance,
+html.motion-enhanced [data-motion-enter] {
+  will-change: opacity, transform;
+}
+
+html.motion-enhanced .cog-entrance[data-motion-done='true'],
+html.motion-enhanced [data-motion-enter][data-motion-done='true'] {
+  will-change: auto;
+}
+
 .cog-entrance--long {
   animation-timing-function: cubic-bezier(0.18, 0.84, 0.25, 1);
   animation-duration: calc(var(--motion-entrance) * 1.6);
@@ -1245,7 +1285,9 @@ footer {
   .site-page::before,
   .site-page::after,
   body::before,
-  body::after {
+  body::after,
+  .site-progress-rail,
+  .site-progress-rail__bar {
     transition: none !important;
     animation: none !important;
     transform: none !important;
