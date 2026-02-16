@@ -1,0 +1,503 @@
+.resume-shell {
+  --resume-panel-radius: var(--radius-lg);
+  --resume-item-radius: var(--radius-sm);
+  --resume-shadow-rest: var(--shadow);
+  --resume-shadow-hover: 0 12px 20px color-mix(in srgb, var(--ink) 9%, transparent);
+  display: grid;
+  grid-template-columns: minmax(13.5rem, 16rem) minmax(0, 1fr);
+  gap: var(--space-4);
+  align-items: start;
+}
+
+.resume-layout {
+  display: contents;
+}
+
+.resume-hero {
+  grid-column: 1 / -1;
+  background: var(--fog);
+  border-radius: var(--resume-panel-radius);
+  box-shadow: var(--resume-shadow-rest);
+  padding: var(--space-5);
+  display: grid;
+  gap: var(--space-2);
+}
+
+.resume-hero h1 {
+  font-size: clamp(1.8rem, 4vw, 2.35rem);
+  line-height: 1.08;
+}
+
+.resume-hero__name {
+  font-family: 'Sora', system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.resume-hero__headline {
+  color: var(--ink-soft);
+  max-width: 74ch;
+}
+
+.resume-hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--ink-subtle);
+}
+
+.resume-hero__links {
+  gap: 0.35rem;
+}
+
+.resume-hero__links .button,
+.resume-hero__download {
+  background: var(--surface);
+  border-color: color-mix(in srgb, var(--stroke) 82%, transparent);
+  border-radius: var(--radius-pill);
+  padding: 0.5rem var(--space-2);
+  min-height: 2.75rem;
+  font-size: 0.8rem;
+}
+
+.resume-hero__links .button:hover,
+.resume-hero__links .button:focus-visible,
+.resume-hero__download:hover,
+.resume-hero__download:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+  text-decoration-thickness: 0.08em;
+}
+
+.resume-layout__toc {
+  align-self: start;
+}
+
+.resume-toc {
+  background: var(--fog);
+  border-radius: var(--resume-panel-radius);
+  box-shadow: var(--resume-shadow-rest);
+  display: grid;
+  gap: var(--space-2);
+}
+
+.resume-toc--sticky {
+  position: sticky;
+  top: calc(var(--space-6) + 0.25rem);
+}
+
+.resume-toc__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.3rem;
+}
+
+.resume-toc__link {
+  text-decoration: none;
+  color: var(--ink-soft);
+  border: 1px solid color-mix(in srgb, var(--stroke) 85%, transparent);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  min-height: 2.75rem;
+  padding: 0.5rem var(--space-2);
+  font-size: 0.82rem;
+  line-height: 1.25;
+  display: inline-flex;
+  align-items: center;
+}
+
+.resume-toc__link:hover,
+.resume-toc__link:focus-visible {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+.resume-toc__link[aria-current='true'] {
+  border-color: color-mix(in srgb, var(--page-accent) 42%, var(--stroke));
+  color: var(--ink);
+  background: var(--fog);
+  font-weight: 600;
+}
+
+.resume-toc__link[aria-current='true']::before {
+  content: '';
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--page-accent) 55%, transparent);
+  margin-right: 0.45rem;
+}
+
+.resume-layout__content {
+  max-width: 58rem;
+}
+
+.resume-section .card {
+  position: relative;
+  overflow: hidden;
+  background: var(--fog);
+  border-radius: var(--resume-panel-radius);
+  box-shadow: var(--resume-shadow-rest);
+  padding: var(--space-4);
+  display: grid;
+  gap: var(--space-3);
+}
+
+.resume-section .card::before {
+  content: '';
+  position: absolute;
+  top: 1rem;
+  bottom: 1rem;
+  left: 0;
+  width: 0.25rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--page-accent) 35%, transparent);
+}
+
+.resume-list {
+  margin: 0;
+  padding-left: 1.05rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.resume-method-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.resume-method-card {
+  border: 1px solid color-mix(in srgb, var(--stroke) 84%, transparent);
+  border-radius: var(--resume-item-radius);
+  background: var(--surface);
+  padding: var(--space-3);
+  display: grid;
+  gap: 0.5rem;
+}
+
+.resume-method-card h3 {
+  font-size: 1rem;
+}
+
+.resume-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 1.4rem;
+  position: relative;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.resume-timeline::before {
+  content: '';
+  position: absolute;
+  left: 0.42rem;
+  top: 0.3rem;
+  bottom: 0.3rem;
+  width: 1px;
+  background: var(--stroke);
+}
+
+.resume-timeline__item {
+  position: relative;
+  border: 1px solid color-mix(in srgb, var(--stroke) 85%, transparent);
+  border-radius: var(--resume-item-radius);
+  background: var(--surface);
+  padding: var(--space-3);
+  display: grid;
+  gap: 0.5rem;
+}
+
+.resume-timeline__item::before {
+  content: '';
+  position: absolute;
+  left: -1.14rem;
+  top: 1rem;
+  width: 0.66rem;
+  height: 0.66rem;
+  border-radius: 999px;
+  border: 1px solid var(--ink);
+  background: color-mix(in srgb, var(--page-accent) 45%, var(--fog));
+}
+
+.resume-timeline__role {
+  margin: 0;
+}
+
+.resume-timeline__meta {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  border: 1px solid color-mix(in srgb, var(--stroke) 82%, transparent);
+  border-radius: var(--radius-pill);
+  background: var(--fog);
+  padding: 0.25rem 0.5rem;
+  color: var(--ink-soft);
+}
+
+.resume-timeline__highlights {
+  margin: 0;
+  padding-left: 1rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.resume-proof-grid {
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: var(--space-3);
+}
+
+.resume-proof-card {
+  border: 1px solid color-mix(in srgb, var(--stroke) 85%, transparent);
+  border-radius: var(--resume-item-radius);
+  background: var(--surface);
+  padding: var(--space-3);
+  display: grid;
+  gap: 0.5rem;
+}
+
+.resume-proof-card h3 {
+  margin: 0;
+  font-size: 0.96rem;
+  color: var(--ink-soft);
+}
+
+.resume-education-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.resume-education-item {
+  border: 1px solid color-mix(in srgb, var(--stroke) 85%, transparent);
+  border-radius: var(--resume-item-radius);
+  background: var(--surface);
+  padding: var(--space-2);
+  display: grid;
+  gap: 0.5rem;
+}
+
+.resume-skills {
+  gap: 0.5rem;
+}
+
+.resume-skills .badge {
+  border-color: color-mix(in srgb, var(--stroke) 72%, transparent);
+  color: var(--ink-soft);
+  background: var(--surface);
+  text-transform: none;
+  letter-spacing: 0.01em;
+}
+
+.resume-skills .badge::before {
+  background: color-mix(in srgb, var(--page-accent) 36%, transparent);
+}
+
+.resume-shell :where(a, button, [role='button']):focus-visible {
+  outline: 2px solid var(--page-accent);
+  outline-offset: 2px;
+}
+
+.resume-shell :where(.resume-toc__link, .button):focus-visible {
+  border-color: color-mix(in srgb, var(--page-accent) 42%, var(--stroke));
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+@media (hover: hover) {
+  .resume-hero,
+  .resume-toc,
+  .resume-section .card,
+  .resume-method-card,
+  .resume-timeline__item,
+  .resume-proof-card,
+  .resume-education-item {
+    transition: transform 160ms ease, box-shadow 160ms ease;
+  }
+
+  .resume-toc__link,
+  .resume-hero__links .button,
+  .resume-hero__download {
+    transition: border-color 140ms ease, background-color 140ms ease, transform 140ms ease;
+  }
+
+  .resume-section .card:hover,
+  .resume-method-card:hover,
+  .resume-timeline__item:hover,
+  .resume-proof-card:hover,
+  .resume-education-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--resume-shadow-hover);
+  }
+
+  .resume-toc__link:hover,
+  .resume-hero__links .button:hover,
+  .resume-hero__download:hover {
+    transform: translateY(-1px);
+  }
+}
+
+@media (max-width: 900px) {
+  .resume-shell {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-3);
+  }
+
+  .resume-toc--sticky {
+    position: static;
+    top: auto;
+  }
+
+  .resume-toc__list {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 0.4rem;
+    padding-bottom: 0.2rem;
+    scrollbar-width: thin;
+  }
+
+  .resume-toc__list li {
+    flex: 0 0 auto;
+  }
+
+  .resume-method-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .resume-shell :is(.resume-hero h1, .resume-section h2, .resume-method-card h3, .resume-proof-card h3) {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+
+  .resume-timeline {
+    padding-left: 1.15rem;
+  }
+
+  .resume-timeline__item::before {
+    left: -0.92rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .resume-hero,
+  .resume-toc,
+  .resume-section .card,
+  .resume-method-card,
+  .resume-timeline__item,
+  .resume-proof-card,
+  .resume-education-item,
+  .resume-shell :where(a, button, [role='button']) {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+@media print {
+  @page {
+    margin: 0.5in;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    color: var(--ink) !important;
+  }
+
+  body::before,
+  body::after,
+  .site-page::before,
+  .site-page::after,
+  .site-progress-rail,
+  .resume-section .card::before,
+  .resume-timeline::before,
+  .resume-timeline__item::before {
+    display: none !important;
+  }
+
+  .resume-shell {
+    display: block;
+    gap: 0;
+  }
+
+  .resume-layout,
+  .resume-layout__content {
+    display: block;
+    max-width: 100%;
+  }
+
+  .resume-layout__toc {
+    display: none !important;
+  }
+
+  .resume-hero,
+  .resume-section .card,
+  .resume-method-card,
+  .resume-timeline__item,
+  .resume-proof-card,
+  .resume-education-item {
+    background: #fff !important;
+    box-shadow: none !important;
+    border: 1px solid var(--stroke) !important;
+    color: var(--ink) !important;
+    transform: none !important;
+  }
+
+  .resume-section .card {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .resume-method-grid,
+  .resume-proof-grid {
+    display: block;
+  }
+
+  .resume-method-card,
+  .resume-proof-card,
+  .resume-education-item,
+  .resume-timeline__item {
+    margin-top: 0.4rem;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .resume-timeline {
+    padding: 0;
+    margin: 0;
+  }
+
+  .resume-timeline__meta {
+    border-color: var(--stroke) !important;
+    background: #fff !important;
+    color: var(--ink-soft) !important;
+  }
+
+  .resume-shell h1,
+  .resume-shell h2,
+  .resume-shell h3 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  .resume-shell a {
+    color: var(--ink) !important;
+    text-decoration: underline;
+  }
+
+  .resume-shell a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.82em;
+    word-break: break-all;
+  }
+}

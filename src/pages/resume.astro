@@ -2,54 +2,221 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Card from '../components/Card.astro';
 import { loadProfile } from '../lib/content';
+import '../styles/resume.css';
 
 const profile = await loadProfile();
+const sectionLinks = [
+  { href: '#snapshot', label: 'Snapshot' },
+  { href: '#what-i-do', label: 'What I do' },
+  { href: '#experience', label: 'Experience' },
+  { href: '#proof', label: 'Proof' },
+  { href: '#education', label: 'Education' },
+  { href: '#skills', label: 'Skills' },
+];
 ---
 <BaseLayout title="Resume - Oscar Sanchez" description="Professional experience, education, and selected proof highlights.">
-  <h1>Resume</h1>
-  <p class="text-small">Long-form work history and selected outcomes.</p>
+  <div class="page-shell resume-shell">
+    <section class="card resume-hero" data-motion-enter>
+      <h1>Resume</h1>
+      <p class="resume-hero__name">{profile.name}</p>
+      <p class="text-small resume-hero__headline">{profile.headline}</p>
+      <p class="text-small">Long-form work history and selected outcomes.</p>
+      <div class="resume-hero__meta" aria-label="Location and profile links">
+        <p class="meta">{profile.location}</p>
+        <div class="resume-hero__links tag-list" role="list" aria-label="Profile links">
+          <a href={profile.links.linkedin} class="button button--ghost" target="_blank" rel="noreferrer noopener">LinkedIn</a>
+          <a href={profile.links.portfolio} class="button button--ghost" target="_blank" rel="noreferrer noopener">Portfolio</a>
+          <a href={profile.links.youtube} class="button button--ghost" target="_blank" rel="noreferrer noopener">YouTube</a>
+        </div>
+        <a
+          href="/oscar-sanchez-resume.pdf"
+          class="button resume-hero__download"
+          download
+          aria-label="Download resume PDF"
+        >
+          Download PDF
+        </a>
+      </div>
+    </section>
 
-  <div class="page-shell">
-    <Card>
-      <h2>Summary</h2>
-      <p class="text-small">{profile.headline}</p>
-      {profile.summary.map((item) => <p class="catalog-summary">{item}</p>)}
-      <p class="text-small" style="margin-top:0.6rem;">Download PDF coming soon.</p>
-    </Card>
-
-    <Card>
-      <h2>Experience</h2>
-      {profile.experience.map((entry) => (
-        <div class="resume-item">
-          <p><strong>{entry.role}</strong> - {entry.org}</p>
-          <p class="text-small">{entry.start} to {entry.end ?? 'present'}{entry.location ? ` - ${entry.location}` : ''}</p>
-          <ul>
-            {entry.highlights.map((highlight) => <li>{highlight}</li>)}
+    <div class="resume-layout">
+      <aside class="resume-layout__toc" data-motion-enter>
+        <nav class="card resume-toc resume-toc--sticky" aria-label="Resume section navigation">
+          <h2 class="h3">On this page</h2>
+          <ul class="resume-toc__list">
+            {sectionLinks.map((section) => (
+              <li>
+                <a href={section.href} class="resume-toc__link">{section.label}</a>
+              </li>
+            ))}
           </ul>
-        </div>
-      ))}
-    </Card>
+        </nav>
+      </aside>
 
-    <Card>
-      <h2>Education</h2>
-      {profile.education.map((entry) => (
-        <div class="resume-item">
-          <p><strong>{entry.program}</strong> - {entry.org}</p>
-          <p class="text-small">{entry.start ?? 'start TBD'} to {entry.end ?? 'end TBD'}</p>
-        </div>
-      ))}
-    </Card>
+      <div class="resume-layout__content page-shell">
+        <section id="snapshot" class="resume-section" data-motion-enter>
+          <Card>
+            <h2>Snapshot</h2>
+            <ul class="resume-list">
+              {profile.summary.map((item) => <li>{item}</li>)}
+            </ul>
+          </Card>
+        </section>
 
-    <Card>
-      <h2>Selected proof</h2>
-      {profile.proof_selected.map((entry) => (
-        <div class="resume-item">
-          <p><strong>{entry.label}</strong></p>
-          <ul>
-            {entry.proof.map((item) => <li>{item}</li>)}
-          </ul>
-        </div>
-      ))}
-    </Card>
+        <section id="what-i-do" class="resume-section" data-motion-enter>
+          <Card>
+            <h2>What I do + How I work</h2>
+            <div class="resume-method-grid" data-motion-group>
+              <article class="resume-method-card resume-item" data-motion-enter>
+                <h3>What I do</h3>
+                <ul class="resume-list">
+                  {profile.what_i_do.map((item) => <li>{item}</li>)}
+                </ul>
+              </article>
+
+              <article class="resume-method-card resume-item" data-motion-enter>
+                <h3>How I work</h3>
+                <ul class="resume-list">
+                  {profile.how_i_work.map((item) => <li>{item}</li>)}
+                </ul>
+              </article>
+            </div>
+          </Card>
+        </section>
+
+        <section id="experience" class="resume-section" data-motion-enter>
+          <Card>
+            <h2>Experience</h2>
+            <ol class="resume-timeline" data-motion-group>
+              {profile.experience.map((entry) => (
+                <li class="resume-timeline__item resume-item" data-motion-enter>
+                  <p class="resume-timeline__role"><strong>{entry.role}</strong> - {entry.org}</p>
+                  <p class="resume-timeline__meta text-small">{entry.start} to {entry.end ?? 'present'}{entry.location ? ` - ${entry.location}` : ''}</p>
+                  <ul class="resume-timeline__highlights">
+                    {entry.highlights.map((highlight) => <li>{highlight}</li>)}
+                  </ul>
+                </li>
+              ))}
+            </ol>
+          </Card>
+        </section>
+
+        <section id="proof" class="resume-section" data-motion-enter>
+          <Card>
+            <h2>Selected proof</h2>
+            <div class="resume-proof-grid grid" data-motion-group>
+              {profile.proof_selected.map((entry) => (
+                <article class="resume-proof-card resume-item" data-motion-enter>
+                  <h3>{entry.label}</h3>
+                  <ul class="resume-list">
+                    {entry.proof.map((item) => <li>{item}</li>)}
+                  </ul>
+                </article>
+              ))}
+            </div>
+          </Card>
+        </section>
+
+        <section id="education" class="resume-section" data-motion-enter>
+          <Card>
+            <h2>Education</h2>
+            <ul class="resume-education-list">
+              {profile.education.map((entry) => (
+                <li class="resume-education-item resume-item" data-motion-enter>
+                  <p><strong>{entry.program}</strong> - {entry.org}</p>
+                  <p class="text-small">{entry.start ?? 'start TBD'} to {entry.end ?? 'end TBD'}</p>
+                </li>
+              ))}
+            </ul>
+          </Card>
+        </section>
+
+        <section id="skills" class="resume-section" data-motion-enter>
+          <Card>
+            <h2>Skills</h2>
+            {profile.skills.length > 0 ? (
+              <div class="tag-list tag-list--compact resume-skills" data-motion-group>
+                {profile.skills.map((skill) => <span class="badge" data-motion-enter>{skill}</span>)}
+              </div>
+            ) : (
+              <p class="text-small">Skills list coming soon.</p>
+            )}
+          </Card>
+        </section>
+      </div>
+    </div>
   </div>
+
+  <script is:inline>
+    (() => {
+      if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
+        return;
+      }
+
+      const links = Array.from(document.querySelectorAll('.resume-toc__link'));
+      if (links.length === 0) {
+        return;
+      }
+
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const sections = links
+        .map((link) => {
+          const hash = link.getAttribute('href');
+          if (!hash || !hash.startsWith('#')) {
+            return null;
+          }
+
+          const section = document.querySelector(hash);
+          if (!section) {
+            return null;
+          }
+
+          return {
+            id: hash.slice(1),
+            section,
+          };
+        })
+        .filter((entry) => entry !== null);
+
+      if (sections.length === 0) {
+        return;
+      }
+
+      const setCurrent = (id) => {
+        links.forEach((link) => {
+          if (link.getAttribute('href') === `#${id}`) {
+            link.setAttribute('aria-current', 'true');
+          } else {
+            link.removeAttribute('aria-current');
+          }
+        });
+      };
+
+      setCurrent(sections[0].id);
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+          if (visible.length === 0) {
+            return;
+          }
+
+          const id = visible[0].target.getAttribute('id');
+          if (id) {
+            setCurrent(id);
+          }
+        },
+        {
+          threshold: [0.2, 0.45, 0.7],
+          rootMargin: reduceMotion ? '-20% 0px -60% 0px' : '-25% 0px -55% 0px',
+        },
+      );
+
+      sections.forEach((entry) => observer.observe(entry.section));
+      window.addEventListener('pagehide', () => observer.disconnect(), { once: true });
+    })();
+  </script>
 </BaseLayout>

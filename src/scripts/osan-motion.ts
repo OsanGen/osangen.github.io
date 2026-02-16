@@ -1,6 +1,8 @@
 import { animate, inView, scroll } from 'motion';
 
-const ENABLED_PAGES = new Set(['home', 'workshops', 'gpts']);
+// QA note: Motion is enabled only on pages with sparse, card-first layouts where subtle reveal improves scan flow.
+// Enabled pages: home, workshops, gpts, resume. Reduced-motion users are always opted out below.
+const ENABLED_PAGES = new Set(['home', 'workshops', 'gpts', 'resume']);
 const DEFAULT_ENTER_DISTANCE_PX = 8;
 const DEFAULT_ENTER_DURATION_MS = 320;
 const CALM_EASING = 'easeOut';
@@ -106,6 +108,7 @@ const createGroupObservers = (enterDistancePx: number, enterDurationSec: number)
             { opacity: [0, 1], y: [enterDistancePx, 0] } as any,
             {
               duration: enterDurationSec,
+              // Default stagger (0.05s) is reused for grouped resume timeline items.
               delay: index * 0.05,
               ease: CALM_EASING,
             },
