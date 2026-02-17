@@ -843,7 +843,7 @@ main {
 
 .button:focus-visible,
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--scene-accent, var(--accent));
   outline-offset: 2px;
 }
 
@@ -1407,6 +1407,315 @@ html.motion-enhanced [data-motion-enter][data-motion-done='true'] {
   :where(.hero-shell, .bubble-surface, .site-page > :is(.card, .panel-shell, .surface-shell, .visual-shell):first-of-type)::after {
     right: 0.72rem;
     bottom: 0.72rem;
+  }
+}
+
+/* Learn hero: fast-scan claim/proof/next-step layout */
+body[data-page='workshops'] .page-shell {
+  --learn-structural-border: color-mix(in srgb, var(--ink-subtle) 60%, var(--stroke));
+  --learn-border-hover: color-mix(in srgb, var(--scene-accent) 22%, var(--learn-structural-border));
+}
+
+body[data-page='workshops'] .learn-hero {
+  padding: var(--space-6);
+  gap: var(--space-3);
+  background: var(--fog);
+}
+
+body[data-page='workshops'] .learn-hero::before {
+  content: none;
+}
+
+body[data-page='workshops'] .learn-hero > :where(h1, .learn-hero__subtitle, .learn-hero__proof, .learn-hero__actions) {
+  max-width: 75ch;
+}
+
+body[data-page='workshops'] .learn-hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: fit-content;
+}
+
+body[data-page='workshops'] .learn-hero__dot {
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--scene-accent, var(--accent)) 66%, transparent);
+}
+
+body[data-page='workshops'] .learn-hero__subtitle {
+  margin: 0;
+  max-width: 75ch;
+  color: var(--ink-soft);
+}
+
+body[data-page='workshops'] .learn-hero__proof {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+body[data-page='workshops'] .learn-hero__chip {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--learn-structural-border);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  color: var(--ink-soft);
+  padding: 0.22rem 0.6rem;
+  font-size: 0.76rem;
+  line-height: 1.2;
+}
+
+body[data-page='workshops'] .learn-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+body[data-page='workshops'] .learn-hero__actions .button {
+  background: var(--surface);
+  border-color: var(--learn-structural-border);
+  min-height: 2.75rem;
+  padding: 0.48rem 0.82rem;
+  font-size: 0.82rem;
+}
+
+body[data-page='workshops'] .learn-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+body[data-page='workshops'] .learn-filter-row .chip {
+  text-decoration: none;
+  min-height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+  background: var(--surface);
+  border-color: var(--learn-structural-border);
+}
+
+body[data-page='workshops'] .page-shell > .panel-shell {
+  display: grid;
+  gap: var(--space-2);
+  border-color: var(--learn-structural-border);
+}
+
+body[data-page='workshops'] .page-shell > .panel-shell > :is(h1, h2) {
+  line-height: 1.2;
+}
+
+body[data-page='workshops'] .page-shell > .panel-shell > :is(p, .learn-hero__subtitle) {
+  max-width: 75ch;
+}
+
+body[data-page='workshops'] .learn-detail-hero {
+  padding: var(--space-5) var(--space-6);
+}
+
+body[data-page='workshops'] .learn-detail-hero__top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: var(--space-3);
+}
+
+body[data-page='workshops'] .learn-detail-hero__content {
+  display: grid;
+  gap: var(--space-2);
+}
+
+body[data-page='workshops'] .learn-detail-hero__cta {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+body[data-page='workshops'] .learn-detail-hero__cta .button {
+  min-height: 2.75rem;
+}
+
+body[data-page='workshops'] .learn-detail-hero .tag-list {
+  margin-top: 0.1rem;
+}
+
+body[data-page='workshops'] .learn-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  min-height: 100%;
+  border: 1px solid var(--learn-structural-border);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+body[data-page='workshops'] .learn-card h3 {
+  margin: 0;
+  line-height: 1.24;
+}
+
+body[data-page='workshops'] .learn-card__meta {
+  margin: 0;
+  color: var(--ink-subtle);
+}
+
+body[data-page='workshops'] .learn-card__proof-label {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.34rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.01em;
+  color: var(--ink-subtle);
+}
+
+body[data-page='workshops'] .learn-card__proof-dot {
+  width: 0.34rem;
+  height: 0.34rem;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--scene-accent, var(--accent)) 62%, transparent);
+}
+
+body[data-page='workshops'] .learn-card__proof {
+  margin: 0;
+  color: var(--ink-soft);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  line-clamp: 2;
+  min-height: calc(1.5em * 2);
+}
+
+body[data-page='workshops'] .learn-card .tag-list {
+  margin-top: 0.05rem;
+}
+
+body[data-page='workshops'] .learn-card__actions {
+  margin-top: auto;
+  padding-top: 0.18rem;
+}
+
+body[data-page='workshops'] .learn-card__actions .button {
+  min-height: 2.75rem;
+}
+
+body[data-page='workshops'] .learn-filter-section {
+  gap: var(--space-3);
+}
+
+body[data-page='workshops'] .learn-filter-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+body[data-page='workshops'] .learn-filter-link {
+  display: grid;
+  gap: 0.14rem;
+  text-decoration: none;
+  border: 1px solid var(--learn-structural-border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  padding: 0.55rem 0.75rem;
+  min-height: 2.75rem;
+}
+
+body[data-page='workshops'] .learn-filter-link:hover,
+body[data-page='workshops'] .learn-filter-link:focus-visible {
+  border-color: var(--learn-border-hover);
+}
+
+body[data-page='workshops'] .tag-list .badge {
+  text-transform: none;
+  letter-spacing: 0.01em;
+}
+
+body[data-page='workshops'] :focus-visible {
+  outline-color: var(--scene-accent, var(--accent));
+}
+
+body[data-page='workshops'] .agent-details {
+  border-top-style: solid;
+}
+
+body[data-page='workshops'] .agent-details > summary {
+  width: fit-content;
+  border: 1px solid var(--learn-structural-border);
+  border-radius: var(--radius-pill);
+  background: var(--fog);
+  color: var(--ink-soft);
+  padding: 0.3rem 0.62rem;
+}
+
+body[data-page='workshops'] .agent-details > summary::before {
+  border-color: var(--learn-structural-border);
+  background: var(--surface);
+}
+
+/* Learn: quiet background (no looping decor) */
+body[data-page='workshops']::before,
+body[data-page='workshops']::after {
+  content: none;
+}
+
+body[data-page='workshops'] .site-page {
+  background-image: none;
+}
+
+body[data-page='workshops'] .site-page::before,
+body[data-page='workshops'] .site-page::after {
+  animation: none;
+}
+
+/* Optional: keep a static, subtle border */
+body[data-page='workshops'] .site-page::before {
+  opacity: 0.14;
+}
+
+body[data-page='workshops'] .site-page::after {
+  opacity: 0.12;
+}
+
+body[data-page='workshops'] :where(
+    .hero-shell,
+    .bubble-surface,
+    .site-page > :is(.card, .panel-shell, .surface-shell, .visual-shell):first-of-type
+  )::before,
+body[data-page='workshops'] :where(
+    .hero-shell,
+    .bubble-surface,
+    .site-page > :is(.card, .panel-shell, .surface-shell, .visual-shell):first-of-type
+  )::after {
+  content: none;
+  animation: none;
+}
+
+@media (max-width: 900px) {
+  body[data-page='workshops'] .learn-detail-hero {
+    padding: var(--space-4);
+  }
+
+  body[data-page='workshops'] .learn-detail-hero__top {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (hover: hover) {
+  body[data-page='workshops'] .learn-card {
+    transition: border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+  }
+
+  body[data-page='workshops'] .learn-card:hover,
+  body[data-page='workshops'] .learn-card:focus-within {
+    transform: translateY(-1px);
+    border-color: var(--learn-border-hover);
   }
 }
 

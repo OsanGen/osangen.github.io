@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-label="Replay and slides icon">
+  <rect width="64" height="64" fill="#FFFFFF" />
+  <path d="M18 10H38L48 20V50C48 52.2 46.2 54 44 54H18C15.8 54 14 52.2 14 50V14C14 11.8 15.8 10 18 10Z" stroke="#10121A" stroke-width="2" />
+  <path d="M38 10V20H48" stroke="#10121A" stroke-width="2" stroke-linejoin="round" />
+  <circle cx="42" cy="40" r="11" stroke="#10121A" stroke-width="2" />
+  <path d="M39 34L48 40L39 46V34Z" fill="#27B3B3" stroke="#10121A" stroke-width="2" stroke-linejoin="round" />
+</svg>

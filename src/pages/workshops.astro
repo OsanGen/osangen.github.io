@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Card from '../components/Card.astro';
 import CardGrid from '../components/CardGrid.astro';
 import TagList from '../components/TagList.astro';
 import { loadModules, loadWorkshops, loadLastModifiedISO } from '../lib/content';
@@ -23,9 +22,16 @@ interface CtaState {
   label: string;
 }
 
+interface WorkshopQuickLink {
+  title: string;
+  date: string;
+  href: string;
+}
+
 type VisualClassCard = {
   title: string;
   meta: string;
+  proof: string;
   tags: string[];
   cta: CtaState;
 };
@@ -33,6 +39,25 @@ type VisualClassCard = {
 const sanitize = (value = '') => sanitizeLink(value);
 
 const isExternal = (href = '') => isExternalUrl(href);
+const MAX_PROOF_CHARS = 120;
+
+const normalizeText = (value = '') => value.replace(/\s+/g, ' ').trim();
+
+const clampProof = (value = '', max = MAX_PROOF_CHARS) => {
+  const normalized = normalizeText(value);
+  if (!normalized) {
+    return 'Proof details are available in session materials.';
+  }
+
+  if (normalized.length <= max) {
+    return normalized;
+  }
+
+  const slice = normalized.slice(0, max - 1);
+  const breakAt = slice.lastIndexOf(' ');
+  const cut = breakAt > Math.floor(max * 0.55) ? slice.slice(0, breakAt) : slice;
+  return `${cut.trim()}...`;
+};
 
 const isValidReplayOrSlides = (href = '') => {
   const normalized = sanitize(href);
@@ -74,45 +99,108 @@ const buildWorkshopCta = (workshop: Workshop, fallbackToIndex = false): CtaState
   };
 };
 
+const buildModuleProofSnippet = (module: Module): string => {
+  const first = normalizeText(module.proof?.[0] ?? '');
+  const second = normalizeText(module.proof?.[1] ?? '');
+  const combined = second ? `${first} ${second}` : first;
+  return clampProof(combined || module.title);
+};
+
+const buildWorkshopProofSnippet = (workshop: Workshop): string => {
+  const proofLine = normalizeText(workshop.proofLine ?? '');
+  if (proofLine) {
+    return clampProof(proofLine);
+  }
+
+  return clampProof(workshop.description || workshop.title);
+};
+
 const visualClassCards: VisualClassCard[] = [
   ...visualClassModules.map((module) => ({
     title: module.title,
     meta: `${module.time} · ${module.level}`,
+    proof: buildModuleProofSnippet(module),
     tags: module.topics,
     cta: buildModuleCta(module),
   })),
   ...visualClassWorkshops.map((workshop) => ({
     title: workshop.title,
     meta: workshop.date,
+    proof: buildWorkshopProofSnippet(workshop),
     tags: workshop.tags,
     cta: buildWorkshopCta(workshop, true),
   })),
 ];
 
-const workshopsWithCta = coreWorkshops.map((workshop: Workshop) => ({
+const sortWorkshopsNewestFirst = (left: Workshop, right: Workshop) =>
+  right.date.localeCompare(left.date, undefined, { numeric: true, sensitivity: 'base' });
+
+const coreWorkshopsSorted = [...coreWorkshops].sort(sortWorkshopsNewestFirst);
+
+const workshopsWithCta = coreWorkshopsSorted.map((workshop: Workshop) => ({
   workshop,
   cta: buildWorkshopCta(workshop),
+  proof: buildWorkshopProofSnippet(workshop),
 }));
+
+const replayReadyWorkshops: WorkshopQuickLink[] = coreWorkshopsSorted
+  .filter((workshop) => isValidReplayOrSlides(workshop.replayUrl))
+  .map((workshop) => ({
+    title: workshop.title,
+    date: workshop.date,
+    href: sanitize(workshop.replayUrl || ''),
+  }));
+
+const slidesReadyWorkshops: WorkshopQuickLink[] = coreWorkshopsSorted
+  .filter((workshop) => isValidReplayOrSlides(workshop.slidesUrl))
+  .map((workshop) => ({
+    title: workshop.title,
+    date: workshop.date,
+    href: sanitize(workshop.slidesUrl || ''),
+  }));
 ---
 <BaseLayout title="Learn - Oscar Sanchez" description="Visual classes and workshops in one clean map.">
-  <div class="page-shell" style="--scene-accent: var(--cog-blue);">
-    <h1>Learn</h1>
-    <p class="text-small">One clean map to classes and practical workshop sessions.</p>
-    <p class="text-small muted">Last updated: {updatedLabel}</p>
+  <div class="page-shell">
+    <section class="panel-shell learn-hero" data-motion-enter>
+      <p class="eyebrow learn-hero__eyebrow">
+        <span class="learn-hero__dot" aria-hidden="true"></span>
+        Learn
+      </p>
+      <h1>Learn</h1>
+      <p class="learn-hero__subtitle">Classes + workshops. Proof first. Low noise.</p>
+      <div class="learn-hero__proof">
+        <span class="learn-hero__chip" aria-label={`Last updated ${updatedLabel}`}>Last updated: {updatedLabel}</span>
+      </div>
+      <nav class="learn-hero__actions" aria-label="Jump to learn sections">
+        <a class="button" href="#visual-classes">Visual classes</a>
+        <a class="button" href="#workshops">Workshops</a>
+      </nav>
+    </section>
 
-    <section class="panel-shell">
+    <nav class="learn-filter-row" aria-label="Quick workshop views" data-motion-enter>
+      <a class="chip" href="#workshops">Newest first</a>
+      <a class="chip" href="#workshops-replays">Replays available</a>
+      <a class="chip" href="#workshops-slides">Slides</a>
+    </nav>
+
+    <section id="visual-classes" class="panel-shell">
       <h2>Visual classes</h2>
       {visualClassCards.length === 0 ? (
         <p class="text-small">No visual classes are published yet.</p>
       ) : (
         <CardGrid gap="var(--space-3)" align="start">
-          {visualClassCards.map(({ cta, title, meta, tags }, index) => {
+          {visualClassCards.map(({ cta, title, meta, proof, tags }, index) => {
             return (
-              <Card>
-                <article class="catalog-card-stack catalog-item cog-entrance" style={`--reveal-delay:${index * 45}ms;`}>
-                  <h3>{title}</h3>
-                  <p class="text-small catalog-meta">{meta}</p>
-                  <TagList tags={tags} compact maxItems={3} />
+              <article class="card learn-card cog-entrance" style={`--reveal-delay:${index * 45}ms;`}>
+                <p class="text-small learn-card__meta">{meta}</p>
+                <h3>{title}</h3>
+                <p class="learn-card__proof-label">
+                  <span class="learn-card__proof-dot" aria-hidden="true"></span>
+                  Proof
+                </p>
+                <p class="text-small learn-card__proof">{proof}</p>
+                <TagList tags={tags} compact maxItems={3} />
+                <div class="learn-card__actions">
                   <a
                     class="button catalog-cta"
                     href={cta.href}
@@ -121,27 +209,32 @@ const workshopsWithCta = coreWorkshops.map((workshop: Workshop) => ({
                   >
                     {cta.label}
                   </a>
-                </article>
-              </Card>
+                </div>
+              </article>
             );
           })}
         </CardGrid>
       )}
     </section>
 
-    <section class="panel-shell">
+    <section id="workshops" class="panel-shell">
       <h2>Workshops</h2>
       {workshopsWithCta.length === 0 ? (
         <p class="text-small">No workshop entries yet.</p>
       ) : (
         <CardGrid gap="var(--space-3)" align="start">
-          {workshopsWithCta.map(({ workshop, cta }, index) => {
+          {workshopsWithCta.map(({ workshop, cta, proof }, index) => {
             return (
-              <Card>
-                <article class="catalog-card-stack catalog-item cog-entrance" style={`--reveal-delay:${index * 45}ms;`}>
-                  <p class="text-small catalog-meta">{workshop.date}</p>
-                  <h3>{workshop.title}</h3>
-                  <TagList tags={workshop.tags} compact maxItems={3} />
+              <article class="card learn-card cog-entrance" style={`--reveal-delay:${index * 45}ms;`}>
+                <p class="text-small learn-card__meta">{workshop.date}</p>
+                <h3>{workshop.title}</h3>
+                <p class="learn-card__proof-label">
+                  <span class="learn-card__proof-dot" aria-hidden="true"></span>
+                  Proof
+                </p>
+                <p class="text-small learn-card__proof">{proof}</p>
+                <TagList tags={workshop.tags} compact maxItems={3} />
+                <div class="learn-card__actions">
                   <a
                     class="button catalog-cta"
                     href={cta.href}
@@ -150,11 +243,47 @@ const workshopsWithCta = coreWorkshops.map((workshop: Workshop) => ({
                   >
                     {cta.label}
                   </a>
-                </article>
-              </Card>
+                </div>
+              </article>
             );
           })}
         </CardGrid>
+      )}
+    </section>
+
+    <section id="workshops-replays" class="panel-shell learn-filter-section" data-motion-enter>
+      <h2>Replays available</h2>
+      {replayReadyWorkshops.length === 0 ? (
+        <p class="text-small muted">No replay links published yet.</p>
+      ) : (
+        <ul class="learn-filter-list">
+          {replayReadyWorkshops.map((item) => (
+            <li>
+              <a class="learn-filter-link" href={item.href} target="_blank" rel="noopener noreferrer">
+                <span class="text-small muted">{item.date}</span>
+                <span>{item.title}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+
+    <section id="workshops-slides" class="panel-shell learn-filter-section" data-motion-enter>
+      <h2>Slides</h2>
+      {slidesReadyWorkshops.length === 0 ? (
+        <p class="text-small muted">No slides links published yet.</p>
+      ) : (
+        <ul class="learn-filter-list">
+          {slidesReadyWorkshops.map((item) => (
+            <li>
+              <a class="learn-filter-link" href={item.href} target="_blank" rel="noopener noreferrer">
+                <span class="text-small muted">{item.date}</span>
+                <span>{item.title}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
       )}
     </section>
   </div>

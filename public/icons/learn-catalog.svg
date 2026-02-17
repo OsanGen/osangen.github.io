@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-label="Learning catalog icon">
+  <rect width="64" height="64" fill="#FFFFFF" />
+  <rect x="8" y="10" width="22" height="18" rx="3" stroke="#10121A" stroke-width="2" />
+  <rect x="34" y="10" width="22" height="18" rx="3" stroke="#10121A" stroke-width="2" />
+  <rect x="8" y="34" width="22" height="18" rx="3" stroke="#10121A" stroke-width="2" />
+  <rect x="34" y="34" width="22" height="18" rx="3" stroke="#10121A" stroke-width="2" />
+  <rect x="12" y="14" width="8" height="4" rx="2" fill="#27B3B3" />
+  <rect x="38" y="14" width="8" height="4" rx="2" fill="#27B3B3" />
+  <rect x="12" y="38" width="8" height="4" rx="2" fill="#27B3B3" />
+  <rect x="38" y="38" width="8" height="4" rx="2" fill="#27B3B3" />
+</svg>

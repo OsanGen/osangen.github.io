@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import TagList from '../../components/TagList.astro';
 import type { Workshop } from '../../lib/schemas';
 import { loadWorkshops } from '../../lib/content';
 import { isExternalUrl, isUnavailableLink } from '../../lib/link-utils';
@@ -76,19 +77,45 @@ const action = deriveCta(workshop);
 const audienceLine = workshop?.audienceLine?.trim();
 const hasProofLine = Boolean(workshop?.proofLine?.trim());
 const hasTeachingBullets = Boolean(workshop?.teachingBullets?.length);
-const ctaCopy = formatFallbackText(workshop?.replayUrl || workshop?.slidesUrl, 'Proof or workshop content is coming soon.');
+const proofSubtitle = workshop?.proofLine?.trim() || '';
+const hasPlayCta = action.visible && action.label !== 'Open details';
+const ctaCopy = formatFallbackText(workshop?.replayUrl || workshop?.slidesUrl, 'Proof is coming soon.');
 ---
 <BaseLayout title={workshop ? `${workshop.title} | Oscar Sanchez` : 'Workshop not found'} description={workshop ? workshop.description : 'Workshop details'}>
   {workshop ? (
     <div class="page-shell">
-      <section class="hero-shell scene-shell command-shell scene-accent" style="--scene-accent: var(--cog-blue);">
-        <p class="hero-eyebrow">Workshop detail</p>
-        <h1>{workshop.title}</h1>
-        <p class="text-small deck-subtitle">{workshop.date}</p>
+      <section class="panel-shell learn-hero learn-detail-hero">
+        <div class="learn-detail-hero__top">
+          <div class="learn-detail-hero__content">
+            <p class="eyebrow learn-hero__eyebrow">
+              <span class="learn-hero__dot" aria-hidden="true"></span>
+              Workshop
+            </p>
+            <h1>{workshop.title}</h1>
+            <p class="text-small muted">{workshop.date}</p>
+            {proofSubtitle ? <p class="learn-hero__subtitle">{proofSubtitle}</p> : null}
+            {workshop.tags.length > 0 ? <TagList tags={workshop.tags} compact maxItems={4} /> : null}
+          </div>
+
+          <div class="learn-detail-hero__cta">
+            {hasPlayCta ? (
+              <a
+                class="button button--primary"
+                href={action.href}
+                target={action.isExternal ? '_blank' : undefined}
+                rel={action.isExternal ? 'noopener noreferrer' : undefined}
+              >
+                {action.label}
+              </a>
+            ) : (
+              <p class="text-small muted">{ctaCopy}</p>
+            )}
+          </div>
+        </div>
       </section>
 
       <section class="panel-shell">
-        <h2>Description</h2>
+        <h2>Summary</h2>
         <p class="text-small">{workshop.description}</p>
         {audienceLine ? <p class="text-small muted">Audience: {audienceLine}</p> : null}
       </section>
@@ -116,25 +143,6 @@ const ctaCopy = formatFallbackText(workshop?.replayUrl || workshop?.slidesUrl, '
           <p class="text-small muted">No teaching bullets published yet.</p>
         )}
       </section>
-
-      {action.visible ? (
-        <section class="panel-shell">
-          <h2>Play</h2>
-          <a
-            class="button button--primary"
-            href={action.href}
-            target={action.isExternal ? '_blank' : undefined}
-            rel={action.isExternal ? 'noopener noreferrer' : undefined}
-          >
-            {action.label}
-          </a>
-        </section>
-      ) : (
-        <section class="panel-shell">
-          <h2>Play</h2>
-          <p class="text-small">{ctaCopy}</p>
-        </section>
-      )}
 
       <section class="panel-shell">
         <a class="button" href="/workshops">Back to Learn</a>
