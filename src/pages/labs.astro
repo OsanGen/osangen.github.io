@@ -68,7 +68,6 @@ const gameCards = games.map((game, index) => {
             <p class="catalog-summary">{item.game.tagline}</p>
             <TagList tags={item.game.concepts} compact maxItems={3} />
             <div class="catalog-actions">
-              <a class="button" href={`/labs/${item.game.id}`}>Details</a>
               <a
                 class="button button--primary"
                 href={item.deployHref}
@@ -77,9 +76,10 @@ const gameCards = games.map((game, index) => {
               >
                 Play
               </a>
+              <a class="button button--ghost" href={`/labs/${item.game.id}`}>Details</a>
               {item.repo.visible ? (
                 <a
-                  class="button"
+                  class="button button--ghost"
                   href={item.repo.href}
                   target={item.repo.isExternal ? '_blank' : undefined}
                   rel={item.repo.isExternal ? 'noopener noreferrer' : undefined}

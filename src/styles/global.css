@@ -3,6 +3,7 @@
 @import '@fontsource/sora/600.css';
 @import '@fontsource/inter/400.css';
 @import '@fontsource/inter/500.css';
+@import './pages/labs.css';
 
 :root {
   --motion-enter-distance: 8px;
