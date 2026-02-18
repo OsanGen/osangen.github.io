@@ -11,13 +11,13 @@ body[data-page='labs'] .catalog-card-stack .badge::before {
 }
 
 body[data-page='labs'] .catalog-item::before {
-  left: 0.5rem;
-  width: 0.14rem;
-  top: 0.4rem;
-  bottom: 0.4rem;
+  left: -0.32rem;
+  width: 0.12rem;
+  top: var(--space-2);
+  bottom: var(--space-2);
   height: auto;
-  opacity: 0.86;
-  background: color-mix(in srgb, var(--catalog-accent) 34%, var(--stroke));
+  opacity: 0.7;
+  background: color-mix(in srgb, var(--catalog-accent) 24%, var(--stroke));
 }
 
 body[data-page='labs'] .catalog-actions .button {
@@ -28,4 +28,28 @@ body[data-page='labs'] .catalog-actions .button {
 body[data-page='labs'] .catalog-actions .button--ghost {
   background: var(--surface);
   border-color: var(--stroke);
+}
+
+body[data-page='labs'] .hero-shell::before {
+  animation: none;
+  opacity: 0.22;
+  background: color-mix(in srgb, var(--scene-accent, var(--accent)) 52%, transparent);
+}
+
+body[data-page='labs'] .hero-shell::after {
+  animation: none;
+  opacity: 0.48;
+}
+
+body[data-page='labs'] .site-page::before,
+body[data-page='labs'] .site-page::after {
+  animation: none;
+}
+
+body[data-page='labs'] .site-page::before {
+  opacity: 0.16;
+}
+
+body[data-page='labs'] .site-page::after {
+  opacity: 0.14;
 }
