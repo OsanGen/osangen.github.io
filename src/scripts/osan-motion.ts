@@ -1,8 +1,8 @@
 import { animate, inView, scroll } from 'motion';
 
-// QA note: Motion is enabled only on pages with sparse, card-first layouts where subtle reveal improves scan flow.
-// Enabled pages: home, workshops, gpts, resume. Reduced-motion users are always opted out below.
-const ENABLED_PAGES = new Set(['home', 'workshops', 'gpts', 'resume']);
+// QA note: Motion is enabled on card-first, proof-first routes where subtle reveal improves scan flow.
+// Enabled pages: home, workshops, gpts, labs, join, resume. Reduced-motion users are always opted out below.
+const ENABLED_PAGES = new Set(['home', 'workshops', 'gpts', 'labs', 'join', 'resume']);
 const DEFAULT_ENTER_DISTANCE_PX = 8;
 const DEFAULT_ENTER_DURATION_MS = 320;
 const CALM_EASING = 'easeOut';

@@ -49,7 +49,7 @@ const gameCards = games.map((game, index) => {
 });
 ---
 <BaseLayout title="OSAN GAMES - Oscar Sanchez" description="Playable demos and game-based AI workshops">
-  <section class="hero-shell scene-shell scene-accent command-shell" style="--scene-accent: var(--cog-pink);">
+  <section class="hero-shell scene-shell command-shell">
     <p class="hero-eyebrow">Playable AI artifacts</p>
     <h1>OSAN GAMES</h1>
     <p class="text-small deck-subtitle">Playable demos for fast execution and teaching loops.</p>
@@ -60,7 +60,7 @@ const gameCards = games.map((game, index) => {
       <Card>
         <article
           class="catalog-item cog-entrance"
-          style={`--reveal-delay:${item.index * 45}ms; --catalog-accent: var(--cog-pink);`}
+          style={`--reveal-delay:${item.index * 45}ms;`}
         >
           <div class="catalog-card-stack">
             {item.index === 0 ? <Badge label="Playable" /> : null}

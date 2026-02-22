@@ -12,7 +12,7 @@ export interface Props {
 const { gpt, revealDelayMs = 0, sceneAccent } = Astro.props;
 const linkHref = gpt.link.trim();
 const isExternal = isExternalUrl(linkHref);
-const accentToken = sceneAccent || 'var(--accent)';
+const accentToken = sceneAccent || 'var(--scene-accent, var(--page-accent, var(--accent))';
 ---
 <article
   class="panel-shell panel-shell--command agent-card agent-card--directory cog-entrance"

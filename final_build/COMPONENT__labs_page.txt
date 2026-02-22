@@ -8,7 +8,7 @@ Inputs:
 - `loadGames()` from `src/lib/content.ts`.
 
 Outputs:
-- Hero block in pink-accent scene.
+- Hero block in route-driven accent scene.
 - Card grid of games, each with title, tagline, compact concept tags, and actions:
   - Details, Play, optional Repo.
 
@@ -29,3 +29,4 @@ Acceptance checks:
 - Cards maintain readable spacing and subtle accent side bar.
 - Page title and hero headline use `OSAN GAMES` branding while route remains `/labs`.
 - Repo action does not error when URL missing from content.
+- Hero accent and card rail accents inherit `--page-accent` (OSAN GAMES pink) without inline scene overrides.

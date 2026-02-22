@@ -6,13 +6,12 @@ Purpose:
 
 Inputs:
 - `loadGPTs()` from `src/lib/content.ts`.
-- Internal list of accent tokens used to vary `GPTCard` scene color.
 
 Outputs:
 - Hero with concise title and deck.
 - `gpts-grid` card set where each `GPTCard` receives:
-  - `sceneAccent` token
   - `revealDelayMs` for staggered entrance.
+- No custom scene accent overrides; cards inherit `--scene-accent` from `/gpts` route token for one-accent consistency.
 - CTA strip for navigation to related routes, including contribution opportunities.
 
 State:
@@ -23,9 +22,9 @@ Edge cases:
 - External links in CTA remain unchanged from existing token semantics.
 
 Dependencies:
-- `GPTCard.astro` and `src/styles/global.css` (`.gpts-grid`, `.cog-entrance`, `.scene-accent`).
+- `GPTCard.astro` and `src/styles/global.css` (`.gpts-grid`, `.cog-entrance`).
 
 Acceptance checks:
 - One card row has minimal metadata with one primary “Open” style CTA per item.
 - No busy micro rails or decorative rails remain in cards.
-- Accent token used through CSS variables instead of hardcoded colors.
+- Accent follows route token from `BaseLayout` without hardcoded overrides.

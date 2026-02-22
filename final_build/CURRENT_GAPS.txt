@@ -8,6 +8,7 @@
 - workshop detail CTA precedence hardening | completed | Unified `/workshops/[id]` CTA selection so label/href stay in sync (`Replay` -> `Slides` -> `Open details`) and placeholder links cannot produce incorrect labels.
 - game embed duplicate listener guard | completed | Added per-node initialization guard in `GameEmbed` inline script and removed unused randomized iframe id to reduce redundant DOM listeners on repeated embeds.
 - join funnel contribution reframing | completed | Updated `/join`, homepage route card, header nav, and related route copy to use contribution language while keeping `/join` path compatibility.
+- route accent consistency cleanup | completed | Removed hardcoded inline `--scene-accent`/`scene-accent` overrides from index, /gpts, /gpts/[id], /join, and /labs; GPTCard now defaults to route-scoped `var(--scene-accent)` for route-consistent accents.
 - homepage route-card visual simplification | completed | Removed decorative route-grid/route-card rail and dot motifs and switched homepage route CTAs to `button--ghost` for cleaner proof-first cards.
 - astro5 migration completion | completed | Upgraded `astro` to `5.17.2`, upgraded `@astrojs/check` to `0.9.6`, added explicit `src/content.config.ts`, and verified `npm audit --omit=dev` reports 0 vulnerabilities.
 - visual-pass for global shell effects | pending | Validate accent and motion behavior at /, /labs, /workshops, /gpts, and /resume on desktop/mobile, including new bubble motif visibility.

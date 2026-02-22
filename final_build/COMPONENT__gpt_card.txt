@@ -7,7 +7,7 @@ Purpose:
 Inputs:
 - `gpt: GPT` from `src/lib/schemas.ts`.
 - Optional `revealDelayMs?: number` for animation timing.
-- Optional `sceneAccent?: string` to override scene/route accent for this card.
+- Optional `sceneAccent?: string` to optionally override scene/route accent for this card.
 
 Outputs:
 - Root `<article>` using `cog-entrance` with CSS vars:
@@ -23,7 +23,7 @@ Edge cases:
 - Optional GPT icon is omitted when missing.
 - External links open in a new tab with rel protections.
 - Long outcomes remain constrained by `line-clamp-2`.
-- `sceneAccent` defaults to `var(--accent)` when absent.
+- `sceneAccent` defaults to `var(--scene-accent, var(--page-accent, var(--accent)))` when absent so cards follow route-level accent.
 
 Dependencies:
 - `TagList` for compact tags.
@@ -33,4 +33,4 @@ Acceptance checks:
 - No micro rail element is rendered.
 - Outcome does not become a paragraph due line clamping.
 - Card shows only the required minimal fields and one open CTA.
-- Per-item accent can be passed from `src/pages/gpts.astro` and is visible via `--route-accent`.
+- Route-level accent is used by default; explicit overrides are optional via `sceneAccent`.

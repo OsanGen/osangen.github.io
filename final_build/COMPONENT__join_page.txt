@@ -12,6 +12,7 @@ Outputs:
 - Hero with contribution-focused eyebrow, title, and lede from content JSON.
 - One external CTA button only (`Apply to contribute`) when link is valid.
 - One scope panel with up to six contribution chips and one-line impact statement.
+- Hero and decorative accents follow route-level `--page-accent` so `/join` does not carry inline overrides.
 
 State:
 - No client-side state.
