@@ -7,8 +7,8 @@ Inputs:
 - `loadGames`, `loadModules`, and `loadWorkshops` from content loader.
 
 Outputs:
-- Hero shell with short headline, one-line lede, two top CTAs (Labs, Book).
-- Three route cards (`Labs`, `Learn`, `Contribute`) with concise subtitle + CTA.
+- Hero shell with short headline, one-line lede, two top CTAs (OSAN Games, Book).
+- Three route cards (`OSAN GAMES`, `Learn`, `Contribute`) with concise subtitle + CTA.
 
 State:
 - Stateless render.

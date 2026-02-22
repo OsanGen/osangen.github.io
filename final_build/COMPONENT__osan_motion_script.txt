@@ -15,12 +15,13 @@ Inputs:
 - User accessibility preference (`prefers-reduced-motion`).
 
 Outputs:
-- Adds `html.motion-enhanced` only for allowed routes (`home`, `workshops`, `gpts`) and non-reduced-motion users.
+- Adds `html.motion-enhanced` only for allowed routes (`home`, `workshops`, `gpts`, `resume`) and non-reduced-motion users.
 - Registers in-view observers via `inView()` and scroll progress binding via `scroll()`.
 - Produces one cleanup function and binds it to `pagehide`.
 
 State:
 - Keeps runtime cleanup pointer on `window.__osanMotionCleanup`.
+- Uses `parseNumeric()` to normalize CSS motion token values safely.
 - Tracks per-element preparation and completion using data attributes:
   - `data-motion-prepared`
   - `data-motion-done`

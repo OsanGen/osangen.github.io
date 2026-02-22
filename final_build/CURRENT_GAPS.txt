@@ -11,6 +11,7 @@
 - homepage route-card visual simplification | completed | Removed decorative route-grid/route-card rail and dot motifs and switched homepage route CTAs to `button--ghost` for cleaner proof-first cards.
 - astro5 migration completion | completed | Upgraded `astro` to `5.17.2`, upgraded `@astrojs/check` to `0.9.6`, added explicit `src/content.config.ts`, and verified `npm audit --omit=dev` reports 0 vulnerabilities.
 - visual-pass for global shell effects | pending | Validate accent and motion behavior at /, /labs, /workshops, /gpts, and /resume on desktop/mobile, including new bubble motif visibility.
+- motion parser hardening | completed | Replaced fragile numeric parsing in `src/scripts/osan-motion.ts` with null-safe token parsing and removed `as any` casts while preserving reveal timing behavior.
 - global bubble motif rollout | completed | Added centralized route-tinted bubble system across hero shells, first major non-hero content surfaces, and subtle page-frame fallback.
 - service-worker deployment verification | pending | Deploy build and run a smoke check on a throttled/offline path.
 - lab embed performance optimization | pending | Verify GameEmbed click-to-load behavior and fallback on a real iframe URL.
@@ -23,3 +24,7 @@
 - /join landing refactor | completed | Replaced legacy community catalog /join implementation with the quarter internship landing and added `src/content/data/join_project.json`.
 - /join signup CTA activation | completed | Added live signup URL (`https://genmrkt.lovable.app/`) with a primary CTA button and explicit new-tab behavior.
 - /join single-cta visual cleanup | completed | Simplified /join hero actions to a single application CTA, removed in-hero `AI-assisted; reviewed by humans; results vary.` copy, and tightened spacing/typography for a cleaner layout.
+- labs nav tab label update | completed | Renamed Labs tab label in header to “OSAN GAMES”.
+- homepage lab card rename | completed | Reworded homepage labs route card and hero CTA to “OSAN GAMES”.
+- footer secondary nav rename | completed | Updated footer /labs label from “Educational Games” to “OSAN GAMES”.
+- labs page hero heading rename | completed | Updated `/labs` page title and hero heading to `OSAN GAMES`.

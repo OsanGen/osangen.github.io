@@ -16,20 +16,25 @@ declare global {
   }
 }
 
+const parseNumeric = (raw: string): number | null => {
+  const value = Number.parseFloat(raw);
+  return Number.isFinite(value) ? value : null;
+};
+
 const parseMs = (raw: string, fallback: number): number => {
   const value = raw.trim();
   if (!value) return fallback;
-  if (value.endsWith('ms')) return Number.parseFloat(value) || fallback;
-  if (value.endsWith('s')) return (Number.parseFloat(value) || fallback / 1000) * 1000;
-  return Number.parseFloat(value) || fallback;
+  if (value.endsWith('ms')) return parseNumeric(value) ?? fallback;
+  if (value.endsWith('s')) return (parseNumeric(value) ?? fallback / 1000) * 1000;
+  return parseNumeric(value) ?? fallback;
 };
 
 const parseDelayMs = (raw: string): number => {
   const value = raw.trim();
   if (!value) return 0;
-  if (value.endsWith('ms')) return Number.parseFloat(value) || 0;
-  if (value.endsWith('s')) return (Number.parseFloat(value) || 0) * 1000;
-  return Number.parseFloat(value) || 0;
+  if (value.endsWith('ms')) return parseNumeric(value) ?? 0;
+  if (value.endsWith('s')) return (parseNumeric(value) ?? 0) * 1000;
+  return parseNumeric(value) ?? 0;
 };
 
 const clamp = (value: number, min = 0, max = 1) => Math.min(max, Math.max(min, value));
@@ -61,8 +66,7 @@ const markDone = (element: HTMLElement) => {
 
 const getComputedMotionConfig = () => {
   const rootStyles = getComputedStyle(document.documentElement);
-  const enterDistancePx =
-    Number.parseFloat(rootStyles.getPropertyValue('--motion-enter-distance')) || DEFAULT_ENTER_DISTANCE_PX;
+  const enterDistancePx = parseNumeric(rootStyles.getPropertyValue('--motion-enter-distance')) ?? DEFAULT_ENTER_DISTANCE_PX;
   const enterDurationMs = parseMs(
     rootStyles.getPropertyValue('--motion-enter-duration'),
     DEFAULT_ENTER_DURATION_MS,
@@ -105,7 +109,7 @@ const createGroupObservers = (enterDistancePx: number, enterDurationSec: number)
         targets.forEach((target, index) => {
           animate(
             target,
-            { opacity: [0, 1], y: [enterDistancePx, 0] } as any,
+            { opacity: [0, 1], y: [enterDistancePx, 0] },
             {
               duration: enterDurationSec,
               // Default stagger (0.05s) is reused for grouped resume timeline items.
@@ -144,7 +148,7 @@ const createTargetObservers = (enterDistancePx: number, enterDurationSec: number
 
         animate(
           target,
-          { opacity: [0, 1], y: [enterDistancePx, 0] } as any,
+          { opacity: [0, 1], y: [enterDistancePx, 0] },
           {
             duration: enterDurationSec,
             delay: targetDelayMs / 1000,

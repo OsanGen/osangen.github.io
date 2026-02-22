@@ -27,4 +27,5 @@ Dependencies:
 Acceptance checks:
 - No additional long descriptions on index.
 - Cards maintain readable spacing and subtle accent side bar.
+- Page title and hero headline use `OSAN GAMES` branding while route remains `/labs`.
 - Repo action does not error when URL missing from content.
