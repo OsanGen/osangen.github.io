@@ -23,12 +23,13 @@ Edge cases:
 Dependencies:
 - `Card`, `CardGrid`.
 - `src/styles/global.css` classes: `.catalog-item`, `.catalog-card-stack`, `.cog-entrance`.
-- Labs-only card spacing and action polish in `src/styles/pages/labs.css`.
+- Labs-only card spacing and action polish in `src/styles/pages/labs.css`, including `.labs-hero + .labs-catalog-grid` separation.
 
 Acceptance checks:
 - No additional long descriptions on index.
 - Cards maintain readable spacing and subtle accent side bar.
 - Labs listing cards do not render concept tag chips or the `PLAYABLE` badge.
+- Hero and first game card block are separated by `var(--space-5)` for cleaner scan rhythm.
 - Page title and hero headline use `OSAN GAMES` branding while route remains `/labs`.
 - Repo action does not error when URL missing from content.
 - Hero accent and card rail accents inherit `--page-accent` (OSAN GAMES pink) without inline scene overrides.

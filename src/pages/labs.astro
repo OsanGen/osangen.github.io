@@ -47,48 +47,50 @@ const gameCards = games.map((game, index) => {
 });
 ---
 <BaseLayout title="OSAN GAMES - Oscar Sanchez" description="Playable demos and game-based AI workshops">
-  <section class="hero-shell scene-shell command-shell">
+  <section class="hero-shell scene-shell command-shell labs-hero">
     <p class="hero-eyebrow">Playable AI artifacts</p>
     <h1>OSAN GAMES</h1>
     <p class="text-small deck-subtitle">Playable demos for fast execution and teaching loops.</p>
   </section>
 
-  <CardGrid gap="var(--space-3)" align="start">
-    {gameCards.map((item) => (
-      <Card>
-        <article
-          class="catalog-item cog-entrance"
-          style={`--reveal-delay:${item.index * 45}ms;`}
-        >
-          <div class="catalog-card-stack">
-            <h2>{item.game.title}</h2>
-            <p class="catalog-summary">{item.game.tagline}</p>
-            <div class="catalog-actions">
-              <a
-                class="button button--primary"
-                href={item.deployHref}
-                target={item.deployIsExternal ? '_blank' : undefined}
-                rel={item.deployIsExternal ? 'noopener noreferrer' : undefined}
-              >
-                Play
-              </a>
-              <a class="button button--ghost" href={`/labs/${item.game.id}`}>Details</a>
-              {item.repo.visible ? (
+  <div class="labs-catalog-grid">
+    <CardGrid gap="var(--space-3)" align="start">
+      {gameCards.map((item) => (
+        <Card>
+          <article
+            class="catalog-item cog-entrance"
+            style={`--reveal-delay:${item.index * 45}ms;`}
+          >
+            <div class="catalog-card-stack">
+              <h2>{item.game.title}</h2>
+              <p class="catalog-summary">{item.game.tagline}</p>
+              <div class="catalog-actions">
                 <a
-                  class="button button--ghost"
-                  href={item.repo.href}
-                  target={item.repo.isExternal ? '_blank' : undefined}
-                  rel={item.repo.isExternal ? 'noopener noreferrer' : undefined}
+                  class="button button--primary"
+                  href={item.deployHref}
+                  target={item.deployIsExternal ? '_blank' : undefined}
+                  rel={item.deployIsExternal ? 'noopener noreferrer' : undefined}
                 >
-                  Repo
+                  Play
                 </a>
-              ) : (
-                <span class="text-small">Repo not yet added</span>
-              )}
+                <a class="button button--ghost" href={`/labs/${item.game.id}`}>Details</a>
+                {item.repo.visible ? (
+                  <a
+                    class="button button--ghost"
+                    href={item.repo.href}
+                    target={item.repo.isExternal ? '_blank' : undefined}
+                    rel={item.repo.isExternal ? 'noopener noreferrer' : undefined}
+                  >
+                    Repo
+                  </a>
+                ) : (
+                  <span class="text-small">Repo not yet added</span>
+                )}
+              </div>
             </div>
-          </div>
-        </article>
-      </Card>
-    ))}
-  </CardGrid>
+          </article>
+        </Card>
+      ))}
+    </CardGrid>
+  </div>
 </BaseLayout>

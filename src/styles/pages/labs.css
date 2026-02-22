@@ -1,4 +1,8 @@
 /* ===== Labs page: catalog card polish (OSAN v2) ===== */
+body[data-page='labs'] .labs-hero + .labs-catalog-grid {
+  margin-top: var(--space-5);
+}
+
 body[data-page='labs'] .catalog-card-stack {
   gap: 0.4rem;
 }

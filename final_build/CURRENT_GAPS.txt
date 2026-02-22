@@ -30,3 +30,4 @@
 - footer secondary nav rename | completed | Updated footer /labs label from “Educational Games” to “OSAN GAMES”.
 - labs page hero heading rename | completed | Updated `/labs` page title and hero heading to `OSAN GAMES`.
 - labs card pill cleanup | completed | Removed Labs listing concept tags and `PLAYABLE` badge in `/labs` cards and tightened Labs-only card rhythm via `src/styles/pages/labs.css`.
+- labs hero-card spacing separation | completed | Added Labs-only `32px` (`var(--space-5)`) spacing between `.labs-hero` and first catalog grid block via `.labs-hero + .labs-catalog-grid`.
