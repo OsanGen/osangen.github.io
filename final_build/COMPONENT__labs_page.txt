@@ -9,7 +9,7 @@ Inputs:
 
 Outputs:
 - Hero block in route-driven accent scene.
-- Card grid of games, each with title, tagline, compact concept tags, and actions:
+- Card grid of games, each with title, tagline, and actions:
   - Details, Play, optional Repo.
 
 State:
@@ -21,12 +21,14 @@ Edge cases:
 - Index-based reveal offsets scale with item order.
 
 Dependencies:
-- `Card`, `CardGrid`, `TagList`, `Badge`.
+- `Card`, `CardGrid`.
 - `src/styles/global.css` classes: `.catalog-item`, `.catalog-card-stack`, `.cog-entrance`.
+- Labs-only card spacing and action polish in `src/styles/pages/labs.css`.
 
 Acceptance checks:
 - No additional long descriptions on index.
 - Cards maintain readable spacing and subtle accent side bar.
+- Labs listing cards do not render concept tag chips or the `PLAYABLE` badge.
 - Page title and hero headline use `OSAN GAMES` branding while route remains `/labs`.
 - Repo action does not error when URL missing from content.
 - Hero accent and card rail accents inherit `--page-accent` (OSAN GAMES pink) without inline scene overrides.

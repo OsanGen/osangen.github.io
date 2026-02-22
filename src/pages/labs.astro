@@ -3,8 +3,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { loadGames } from '../lib/content';
 import Card from '../components/Card.astro';
 import CardGrid from '../components/CardGrid.astro';
-import TagList from '../components/TagList.astro';
-import Badge from '../components/Badge.astro';
 import { isExternalUrl, isUnavailableLink, sanitizeLink } from '../lib/link-utils';
 
 const games = await loadGames();
@@ -63,10 +61,8 @@ const gameCards = games.map((game, index) => {
           style={`--reveal-delay:${item.index * 45}ms;`}
         >
           <div class="catalog-card-stack">
-            {item.index === 0 ? <Badge label="Playable" /> : null}
             <h2>{item.game.title}</h2>
             <p class="catalog-summary">{item.game.tagline}</p>
-            <TagList tags={item.game.concepts} compact maxItems={3} />
             <div class="catalog-actions">
               <a
                 class="button button--primary"

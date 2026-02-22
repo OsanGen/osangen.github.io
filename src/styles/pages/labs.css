@@ -1,13 +1,6 @@
 /* ===== Labs page: catalog card polish (OSAN v2) ===== */
-body[data-page='labs'] .catalog-card-stack .badge {
-  align-self: flex-start;
-  width: fit-content;
-  border-color: color-mix(in srgb, var(--stroke) 72%, var(--ink) 28%);
-  background: var(--surface);
-}
-
-body[data-page='labs'] .catalog-card-stack .badge::before {
-  background: var(--catalog-accent);
+body[data-page='labs'] .catalog-card-stack {
+  gap: 0.4rem;
 }
 
 body[data-page='labs'] .catalog-item::before {
@@ -23,6 +16,10 @@ body[data-page='labs'] .catalog-item::before {
 body[data-page='labs'] .catalog-actions .button {
   border-radius: 0.75rem;
   min-height: 2.75rem;
+}
+
+body[data-page='labs'] .catalog-actions {
+  margin-top: 0.2rem;
 }
 
 body[data-page='labs'] .catalog-actions .button--ghost {
