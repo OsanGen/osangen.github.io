@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CardGrid from '../components/CardGrid.astro';
-import TagList from '../components/TagList.astro';
 import { loadLastModifiedISO, loadModules, loadWorkshops } from '../lib/content';
 import { getVisualClassCatalog, LEARN_VISUAL_ROUTE_LABEL, type LearnCard } from '../lib/learn-pages';
 
@@ -16,7 +15,7 @@ const updatedLabel = updated
 ---
 <BaseLayout title={`${LEARN_VISUAL_ROUTE_LABEL} - Oscar Sanchez`} description="Structured visual classes and practical proofs.">
   <div class="page-shell">
-    <section class="panel-shell learn-hero" data-motion-enter>
+    <section class="panel-shell learn-hero cog-proof-stack" data-motion-enter>
       <p class="eyebrow learn-hero__eyebrow">
         <span class="learn-hero__dot" aria-hidden="true"></span>
         Learn
@@ -32,22 +31,21 @@ const updatedLabel = updated
       </nav>
     </section>
 
-    <section id="visual-class-catalog" class="panel-shell">
+    <section id="visual-class-catalog" class="panel-shell" data-motion-enter>
       <h2>Catalog</h2>
       {visualClassCards.length === 0 ? (
         <p class="text-small">No {LEARN_VISUAL_ROUTE_LABEL.toLowerCase()} are published yet.</p>
       ) : (
-        <CardGrid gap="var(--space-3)" align="start">
-          {visualClassCards.map(({ cta, title, meta, proof, tags }, index) => (
-            <article class="card learn-card cog-entrance" style={`--reveal-delay:${index * 45}ms;`}>
+        <CardGrid gap="var(--space-3)" align="start" motionGroup>
+          {visualClassCards.map(({ cta, title, meta, proof }, index) => (
+            <article class="card learn-card cog-entrance cog-accent-rail" style={`--reveal-delay:${index * 45}ms;`}>
               <p class="text-small learn-card__meta">{meta}</p>
               <h3>{title}</h3>
-              <p class="learn-card__proof-label">
+              <p class="learn-card__proof-label cog-proof-chip">
                 <span class="learn-card__proof-dot" aria-hidden="true"></span>
                 Proof
               </p>
               <p class="text-small learn-card__proof">{proof}</p>
-              <TagList tags={tags} compact maxItems={3} />
               <div class="learn-card__actions">
                 <a
                   class="button catalog-cta"

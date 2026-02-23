@@ -1,4 +1,7 @@
 # CURRENT_GAPS
+- osan header brand icon refresh | completed | Replaced `/icons/oscar-cog-brain.svg` with a flat 2D yellow brain SVG and removed header square/chassis chrome via `.brand-mark` styling.
+- osan header brand icon polish | completed | Completed brand-lockup clean-up for OSAN 2D appearance: removed mark rounding and added block-level lockup rendering plus neutral highlight tint on the brain proof line.
+- live deploy trigger | blocked | CI is push-only (`Deploy Astro site to GitHub Pages` workflow has no `workflow_dispatch`); next action is commit/push to `main` from your Git client or repo environment.
 - executive evidence motion layer | completed | Added `motion`-powered OSAN-safe reveal + progress-rail system via `MotionEnhance` + `osan-motion.ts`, gated to `/`, `/workshops*`, and `/gpts*` by `data-page`.
 - motion runtime verification | completed | Ran `npm run check`, `npm run validate:content`, `npm run build`, `npm run verify:dist`, and `npm run verify:runtime` after motion integration.
 - motion visual QA pass | pending | Run manual browser pass on desktop/mobile for `/`, `/workshops`, `/gpts`, and verify reduced-motion behavior disables enhancement.
@@ -10,6 +13,7 @@
 - join funnel contribution reframing | completed | Updated `/join`, homepage route card, header nav, and related route copy to use contribution language while keeping `/join` path compatibility.
 - route accent consistency cleanup | completed | Removed hardcoded inline `--scene-accent`/`scene-accent` overrides from index, /gpts, /gpts/[id], /join, and /labs; GPTCard now defaults to route-scoped `var(--scene-accent)` for route-consistent accents.
 - homepage route-card visual simplification | completed | Removed decorative route-grid/route-card rail and dot motifs and switched homepage route CTAs to `button--ghost` for cleaner proof-first cards.
+- osan premium-quiet upgrade | completed | Added scene depth tokens + proof stack utilities across `/`, `/workshops`, `/visual-classes`, `/gpts`, `/resume`, `/join`, `/labs`, and shared motion pages; resumed motion hooks now include grouped stagger behavior and per-page motion entry controls.
 - learn route split | completed | Added dedicated `/visual-classes` page, extracted shared `src/lib/learn-pages.ts`, and made `/workshops` workshops-only.
 - astro5 migration completion | completed | Upgraded `astro` to `5.17.2`, upgraded `@astrojs/check` to `0.9.6`, added explicit `src/content.config.ts`, and verified `npm audit --omit=dev` reports 0 vulnerabilities.
 - visual-pass for global shell effects | pending | Validate accent and motion behavior at /, /labs, /workshops, /gpts, and /resume on desktop/mobile, including new bubble motif visibility.
@@ -35,3 +39,4 @@
 - labs hero-card spacing separation | completed | Added Labs-only `32px` (`var(--space-5)`) spacing between `.labs-hero` and first catalog grid block via `.labs-hero + .labs-catalog-grid`.
 - learn split QA pass | pending | Run manual browser smoke on `/workshops` and `/visual-classes`, and verify route links from header/footer/index/more/home are all discoverable and one-accent safe.
 - learn route tab rename | completed | Renamed the learn destination UI label from "Visual Classes" to "Modules" across header, footer, homepage card, workshops CTA, visual-classes page, and `/more` while keeping `/visual-classes` URL unchanged.
+- modules setup hardening | completed | Reworked `/visual-classes` catalog ordering to follow a learning progression and added proof snippets that explain each card’s continuity from the previous lesson.

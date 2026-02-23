@@ -20,6 +20,7 @@ Outputs:
   - `buildWorkshopProofSnippet`
   - `buildModuleCta`
   - `buildWorkshopCta`
+  - Sequenced proof narration for `/visual-classes` that shows learning progression.
 
 State:
 - No persisted state; deterministic array transforms for each call.
@@ -28,6 +29,7 @@ Edge cases:
 - Non-displayable visual-class modules are excluded.
 - Invalid placeholder links are filtered from replay/slides lists.
 - Empty proof content falls back to sensible defaults.
+- Visual-class catalog entries are sorted by explicit learning sequence keys (with stable id fallback) and stitched into a dependency-aware proof chain.
 
 Dependencies:
 - `src/lib/workshop-catalog.ts`

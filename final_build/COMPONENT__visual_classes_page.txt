@@ -15,6 +15,8 @@ Outputs:
 - One catalog section (`#visual-class-catalog`) with discoverable proof cards.
 - Action buttons to jump within the page and cross to `/workshops`.
 - UI label is `Modules` and route remains `/visual-classes`.
+- Route now participates in shared motion hooks and premium proof-first visual utilities (`cog-proof-stack`, `cog-accent-rail`, `cog-proof-chip`) to keep rhythm with workshop/listing pages.
+- Card rows now omit topic chips on modules route; proof text carries learning sequence context.
 
 State:
 - No client-side state.
@@ -26,7 +28,7 @@ Edge cases:
 - Fallback CTAs and proof snippets preserve stable card affordances.
 
 Dependencies:
-- `CardGrid` and `TagList`.
+- `CardGrid`.
 - `src/lib/content.ts`.
 - `src/lib/learn-pages.ts`.
 
@@ -34,3 +36,4 @@ Acceptance checks:
 - Page contains only visual-class content (no core workshop detail cards).
 - `/visual-classes` is discoverable from primary site navigation.
 - Empty state is readable and keeps spacing rhythm consistent with learn surfaces.
+- Module cards no longer render tag pills; card hierarchy remains proof-first and sequence-oriented.

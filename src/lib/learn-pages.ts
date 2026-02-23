@@ -16,6 +16,7 @@ export interface LearnCard {
   meta: string;
   proof: string;
   tags: string[];
+  id?: string;
   cta: CtaState;
 }
 
@@ -25,7 +26,7 @@ export interface LearnQuickLink {
   href: string;
 }
 
-const MAX_PROOF_CHARS = 120;
+const MAX_PROOF_CHARS = 140;
 
 const normalizeText = (value = '') => value.replace(/\s+/g, ' ').trim();
 
@@ -50,8 +51,65 @@ const isValidReplayOrSlides = (href = '') => {
   return Boolean(normalized) && !isUnavailableLink(normalized) && isExternalUrl(normalized);
 };
 
+const compactPreviousTitle = (title = '') => {
+  const normalized = normalizeText(title);
+  const maxLength = 28;
+  if (normalized.length <= maxLength) {
+    return normalized;
+  }
+
+  return `${normalized.slice(0, maxLength - 1)}…`;
+};
+
+const withLearningProgress = (proof = '', previousTitle?: string) => {
+  if (!previousTitle) {
+    return proof;
+  }
+
+  return clampProof(`Builds on ${compactPreviousTitle(previousTitle)}. ${proof}`);
+};
+
 const sortWorkshopsNewestFirst = (left: Workshop, right: Workshop) =>
   right.date.localeCompare(left.date, undefined, { numeric: true, sensitivity: 'base' });
+
+const moduleSequencePriority: Record<string, number> = {
+  'adl-browser-only': 10,
+  'governed-genai-rollout': 20,
+  'cogsec-playbooks': 30,
+};
+
+const workshopSequencePriority: Record<string, number> = {
+  'neural-glass': 40,
+  'vibe-to-pral': 50,
+  'policy-gatekeeper': 60,
+  'kinetic-proof': 70,
+  'kinetic-kitchen-2-0': 80,
+  'vpn-cost-lab': 90,
+  'ghost-machine': 100,
+};
+
+const getVisualClassPriority = (entry: { id: string }): number =>
+  moduleSequencePriority[entry.id] ??
+  workshopSequencePriority[entry.id] ??
+  200;
+
+const sortVisualClassCatalog = <T extends { id: string }>(
+  items: Array<T>,
+) =>
+  [...items].sort((left, right) => {
+    const leftPriority = getVisualClassPriority(left);
+    const rightPriority = getVisualClassPriority(right);
+    if (leftPriority !== rightPriority) {
+      return leftPriority - rightPriority;
+    }
+
+    return left.id.localeCompare(right.id);
+  });
+
+type VisualClassCardRecord = LearnCard & {
+  id: string;
+  kind: 'module' | 'workshop';
+};
 
 export const buildModuleProofSnippet = (module: Module): string => {
   const first = normalizeText(module.proof?.[0] ?? '');
@@ -109,23 +167,39 @@ export const getVisualClassCatalog = (
   workshops: Workshop[],
 ): LearnCard[] => {
   const { visualClassWorkshops } = splitWorkshops(workshops);
-
-  return [
-    ...modules.filter(isDisplayableVisualClassModule).map((module) => ({
+  const modulesCards: VisualClassCardRecord[] = modules
+    .filter(isDisplayableVisualClassModule)
+    .map((module) => ({
+      id: module.id,
+      kind: 'module' as const,
       title: module.title,
       meta: `${module.time} · ${module.level}`,
       proof: buildModuleProofSnippet(module),
       tags: module.topics,
       cta: buildModuleCta(module),
-    })),
-    ...visualClassWorkshops.map((workshop) => ({
-      title: workshop.title,
-      meta: workshop.date,
-      proof: buildWorkshopProofSnippet(workshop),
-      tags: workshop.tags,
-      cta: buildWorkshopCta(workshop, true),
-    })),
-  ];
+    }));
+
+  const workshopCards: VisualClassCardRecord[] = visualClassWorkshops.map((workshop) => ({
+    id: workshop.id,
+    kind: 'workshop' as const,
+    title: workshop.title,
+    meta: workshop.date,
+    proof: buildWorkshopProofSnippet(workshop),
+    tags: workshop.tags,
+    cta: buildWorkshopCta(workshop, true),
+  }));
+
+  const orderedCards = sortVisualClassCatalog([...modulesCards, ...workshopCards]).map(
+    ({ ...card }, index, allCards) => {
+      const previousCard = index > 0 ? allCards[index - 1] : null;
+      return {
+        ...card,
+        proof: withLearningProgress(card.proof, previousCard?.title),
+      };
+    },
+  );
+
+  return orderedCards;
 };
 
 export const getCoreWorkshopCatalog = (workshops: Workshop[]): LearnCard[] => {
