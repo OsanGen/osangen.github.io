@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import CardGrid from '../components/CardGrid.astro';
 import { loadLastModifiedISO, loadModules, loadWorkshops } from '../lib/content';
 import { getVisualClassCatalog, getVisualClassSlides, LEARN_VISUAL_ROUTE_LABEL, type LearnCard } from '../lib/learn-pages';
 
@@ -33,14 +32,19 @@ const updatedLabel = updated
       </nav>
     </section>
 
-    <section id="visual-class-catalog" class="panel-shell" data-motion-enter>
-      <h2>Catalog</h2>
+    <section id="visual-class-catalog" class="panel-shell learn-module-shell" data-motion-enter>
+      <h2>Lessons</h2>
+      <p class="text-small learn-module-shell__subtitle">Evidence-first sequence from foundational simulation to operational controls.</p>
       {visualClassCards.length === 0 ? (
         <p class="text-small">No {LEARN_VISUAL_ROUTE_LABEL.toLowerCase()} are published yet.</p>
       ) : (
-        <CardGrid gap="var(--space-3)" align="start" motionGroup>
+        <div class="learn-module-deck" data-motion-group>
           {visualClassCards.map(({ cta, title, meta, proof, lessonLabel }, index) => (
-            <article class="card learn-card cog-entrance cog-accent-rail" style={`--reveal-delay:${index * 45}ms;`}>
+            <article
+              class="card learn-card learn-card--module cog-entrance cog-accent-rail"
+              style={`--reveal-delay:${index * 55}ms;`}
+              aria-label={`Lesson ${index + 1}: ${title}`}
+            >
               <p class="text-small learn-card__meta">{meta}</p>
               <p class="text-small learn-card__lesson" aria-label={`Sequence ${index + 1}`}>{lessonLabel ?? `Lesson ${index + 1}`}</p>
               <h3>{title}</h3>
@@ -61,7 +65,7 @@ const updatedLabel = updated
               </div>
             </article>
           ))}
-        </CardGrid>
+        </div>
       )}
     </section>
 

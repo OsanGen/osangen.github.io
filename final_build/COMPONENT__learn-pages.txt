@@ -22,10 +22,13 @@ Outputs:
   - `buildModuleCta`
   - `buildWorkshopCta`
   - Sequenced proof narration for `/visual-classes` that shows learning progression.
+- Visual-class sequencing now uses an explicit curriculum map:
+  `VISUAL_CLASS_DECK_SEQUENCE` in `src/lib/learn-pages.ts`.
 - Extended `LearnCard` with lesson metadata and optional slide metadata:
   - `lessonIndex`, `lessonLabel`, `slidesHref`, `slidesLabel`
 - `getVisualClassCatalog()` now assigns deterministic lesson numbering (Lesson 1, Lesson 2, …) to rendered cards so the curriculum progression is explicit.
-- Internal workshop/detail-style routes such as `/workshops/<id>` are accepted in slide-resolution flows and preserved as secondary links where available.
+- Slide links for visual-class cards now prefer `slidesUrl` and fall back to `replayUrl` so external lesson links can be surfaced in the slides section.
+- Visual-class cards are filtered to curated deck IDs first; if no curated IDs are present, behavior falls back to the previous global visual-class ordering.
 
 State:
 - No persisted state; deterministic array transforms for each call.

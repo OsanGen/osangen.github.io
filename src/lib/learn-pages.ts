@@ -94,17 +94,36 @@ const moduleSequencePriority: Record<string, number> = {
   'cogsec-playbooks': 30,
 };
 
+const VISUAL_CLASS_DECK_SEQUENCE: string[] = [
+  'kinetic-proof',
+  'vpn-cost-lab',
+  'vibe-to-pral',
+  'kinetic-kitchen-2-0',
+  'kitchen-x-ray',
+  'ghost-machine',
+  'neural-glass',
+  'policy-gatekeeper',
+  'ai-kitchen',
+];
+
 const workshopSequencePriority: Record<string, number> = {
-  'neural-glass': 40,
-  'vibe-to-pral': 50,
+  'neural-glass': 80,
+  'vibe-to-pral': 30,
   'policy-gatekeeper': 60,
-  'kinetic-proof': 70,
-  'kinetic-kitchen-2-0': 80,
-  'vpn-cost-lab': 90,
-  'ghost-machine': 100,
+  'kinetic-proof': 10,
+  'kinetic-kitchen-2-0': 40,
+  'vpn-cost-lab': 20,
+  'ghost-machine': 70,
+  'kitchen-x-ray': 50,
+  'ai-kitchen': 90,
 };
 
+const visualClassDeckPriority: Record<string, number> = Object.fromEntries(
+  VISUAL_CLASS_DECK_SEQUENCE.map((id, index) => [id, index]),
+);
+
 const getVisualClassPriority = (entry: { id: string }): number =>
+  visualClassDeckPriority[entry.id] ??
   moduleSequencePriority[entry.id] ??
   workshopSequencePriority[entry.id] ??
   200;
@@ -159,6 +178,15 @@ const resolveSlideHref = (value = '') => {
   return isValidReplayOrSlides(href) ? href : '';
 };
 
+const resolveVisualClassSlideHref = (workshop: Workshop) =>
+  resolveSlideHref(workshop.slidesUrl) || resolveSlideHref(workshop.replayUrl);
+
+const resolveVisualClassLessonLabel = (entryId: string) =>
+  `Lesson ${VISUAL_CLASS_DECK_SEQUENCE.indexOf(entryId) + 1}`;
+
+const isVisualClassDeckCard = (entry: { id: string }) =>
+  visualClassDeckPriority[entry.id] != null;
+
 export const buildWorkshopCta = (workshop: Workshop, fallbackToIndex = false): CtaState => {
   if (isValidReplayOrSlides(workshop.replayUrl)) {
     return {
@@ -210,25 +238,33 @@ export const getVisualClassCatalog = (
     meta: workshop.date,
     proof: buildWorkshopProofSnippet(workshop),
     tags: workshop.tags,
-    slidesHref: resolveSlideHref(workshop.slidesUrl),
-    slidesLabel: isValidReplayOrSlides(workshop.slidesUrl) ? 'Slides' : undefined,
+    slidesHref: resolveVisualClassSlideHref(workshop),
+    slidesLabel: isValidReplayOrSlides(workshop.slidesUrl)
+      ? 'Slides'
+      : isValidReplayOrSlides(workshop.replayUrl)
+        ? 'Replay'
+        : undefined,
     cta: buildWorkshopCta(workshop, true),
   }));
 
-  const orderedCards = sortVisualClassCatalog([...modulesCards, ...workshopCards]).map(
-    ({ ...card }, index, allCards) => {
-      const previousCard = index > 0 ? allCards[index - 1] : null;
-      const lessonIndex = index + 1;
-      return {
-        ...card,
-        lessonIndex,
-        lessonLabel: `Lesson ${lessonIndex}`,
-        proof: withLearningProgress(card.proof, previousCard?.title),
-      };
-    },
-  );
+  const rawCards = [...modulesCards, ...workshopCards];
+  const orderedCards = sortVisualClassCatalog(rawCards).filter(isVisualClassDeckCard);
+  const resolvedCards = orderedCards.length > 0 ? orderedCards : sortVisualClassCatalog(rawCards);
 
-  return orderedCards;
+  const visualClassDeck = resolvedCards.map(({ ...card }, index, allCards) => {
+    const previousCard = index > 0 ? allCards[index - 1] : null;
+    const lessonIndex = index + 1;
+    return {
+      ...card,
+      lessonIndex,
+      lessonLabel: isVisualClassDeckCard(card)
+        ? resolveVisualClassLessonLabel(card.id)
+        : `Lesson ${lessonIndex}`,
+      proof: withLearningProgress(card.proof, previousCard?.title),
+    };
+  });
+
+  return visualClassDeck;
 };
 
 export const getCoreWorkshopCatalog = (workshops: Workshop[]): LearnCard[] => {

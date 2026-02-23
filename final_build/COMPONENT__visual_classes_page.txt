@@ -14,10 +14,12 @@ Outputs:
 - Hero block with learn label, heading, subtitle, and last-updated marker.
 - One catalog section (`#visual-class-catalog`) with discoverable proof cards.
 - Hero actions include jump-to-catalog and jump-to-slides quick links.
+- Lesson deck is rendered as a horizontal, snap-aligned `.learn-module-deck` strip on `/visual-classes`.
 - A dedicated `#visual-class-slides` section with clean links to resolved slide/deep links.
 - UI label is `Modules` and route remains `/visual-classes`.
 - Route now participates in shared motion hooks and premium proof-first visual utilities (`cog-proof-stack`, `cog-accent-rail`, `cog-proof-chip`) to keep rhythm with workshop/listing pages.
 - Card rows now omit topic chips; each card includes explicit lesson sequence metadata (`Lesson N`) and proof continuity context.
+- Deck cards use explicit `cog-entrance` and grouped motion timing for calm reveal sequencing.
 
 State:
 - No client-side state.
@@ -30,7 +32,6 @@ Edge cases:
 - `#visual-class-slides` can render empty when no resolved slide links exist.
 
 Dependencies:
-- `CardGrid`.
 - `src/lib/content.ts`.
 - `src/lib/learn-pages.ts`.
 

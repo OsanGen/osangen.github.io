@@ -196,5 +196,49 @@
       "Escalation is explicit when confidence is low.",
       "Throughput and accuracy are tracked as behavior changes."
     ]
+  },
+  {
+    "id": "kitchen-x-ray",
+    "date": "2026-02-14",
+    "title": "Kitchen X-Ray",
+    "description": "A visual AI safety simulator that makes restaurant-style controls explicit before every routing decision.",
+    "replayUrl": "https://kitchenai-aujw29zx.manus.space",
+    "slidesUrl": "https://kitchenai-aujw29zx.manus.space",
+    "tags": [
+      "AI security",
+      "risk simulation",
+      "operations",
+      "guardrails",
+      "trust-first design"
+    ],
+    "proofLine": "Expose risk hotspots and policy controls in a visual flow so safety decisions are visible before action.",
+    "teachingBullets": [
+      "Start with a scenario and define scope, ownership, and failure boundaries.",
+      "Step through role-level controls that gate each routing choice.",
+      "Review warnings as first-class signals before state transitions are accepted.",
+      "Close with readiness checks so the model behavior is auditable and coachable."
+    ]
+  },
+  {
+    "id": "ai-kitchen",
+    "date": "2026-02-14",
+    "title": "The AI Kitchen",
+    "description": "A practical readiness sequence where AI workflows are checked, controlled, and approved before deployment.",
+    "replayUrl": "https://aikitch-hlmpwpfj.manus.space",
+    "slidesUrl": "https://aikitch-hlmpwpfj.manus.space",
+    "tags": [
+      "AI safety",
+      "readiness",
+      "controls",
+      "operations",
+      "decision framework"
+    ],
+    "proofLine": "Validate ideas through risk checkpoints and readiness gates so leadership can trust the launch path.",
+    "teachingBullets": [
+      "Capture initiative context and define the business guardrails before runtime.",
+      "Select controls and owners, then watch risk handling evolve through explicit checkpoints.",
+      "Track confidence, risk, and compliance signals as deployment readiness changes.",
+      "Finalize with one-page outcomes that map choices to outcomes and next actions."
+    ]
   }
 ]

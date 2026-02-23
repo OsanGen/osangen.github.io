@@ -1681,6 +1681,66 @@ html.motion-enhanced [data-motion-enter][data-motion-done='true'] {
   gap: var(--space-3);
 }
 
+:is(body[data-page='visual-classes']) .learn-module-shell__subtitle {
+  margin: 0;
+  color: var(--ink-soft);
+  max-width: 75ch;
+}
+
+:is(body[data-page='visual-classes']) .learn-module-deck {
+  margin-top: 0.1rem;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(17rem, 1fr);
+  gap: var(--space-3);
+  overflow-x: auto;
+  overflow-y: visible;
+  padding-bottom: 0.25rem;
+  scrollbar-width: thin;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 0.15rem;
+}
+
+:is(body[data-page='visual-classes']) .learn-module-deck::-webkit-scrollbar {
+  height: 0.5rem;
+}
+
+:is(body[data-page='visual-classes']) .learn-module-deck::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--scene-accent, var(--accent)) 22%, var(--stroke));
+}
+
+:is(body[data-page='visual-classes']) .learn-module-deck .learn-card--module {
+  scroll-snap-align: start;
+  min-width: 17rem;
+  min-height: 16.8rem;
+  position: relative;
+  border-left: 3px solid var(--scene-accent-marker);
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--scene-accent-marker) 10%, transparent),
+      transparent 18%
+    ),
+    var(--panel);
+  box-shadow: var(--shadow);
+}
+
+:is(body[data-page='visual-classes']) .learn-module-deck .learn-card--module::before {
+  content: '';
+  position: absolute;
+  inset: 0.55rem 0.64rem auto auto;
+  width: 0.36rem;
+  height: 0.36rem;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--scene-accent, var(--accent)) 68%, transparent);
+}
+
+:is(body[data-page='visual-classes']) .learn-module-deck .learn-card--module .learn-card__meta {
+  color: var(--ink-subtle);
+  letter-spacing: 0.01em;
+}
+
 :is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-filter-list {
   list-style: none;
   margin: 0;
