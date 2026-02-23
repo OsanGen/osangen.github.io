@@ -21,3 +21,4 @@ Provide consistent secondary navigation and trust/disclosure text across all rou
 - Footer includes a contribution entry with text `Contribute` and href `/join`.
 - Footer secondary nav includes `OSAN GAMES` link text for `/labs`.
 - Footer does not reintroduce outdated `Join` wording where the funnel is contribution-focused.
+- Footer includes explicit links for both `/visual-classes` and `/workshops`.

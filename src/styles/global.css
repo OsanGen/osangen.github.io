@@ -1412,53 +1412,53 @@ html.motion-enhanced [data-motion-enter][data-motion-done='true'] {
 }
 
 /* Learn hero: fast-scan claim/proof/next-step layout */
-body[data-page='workshops'] .page-shell {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .page-shell {
   --learn-structural-border: color-mix(in srgb, var(--ink-subtle) 60%, var(--stroke));
   --learn-border-hover: color-mix(in srgb, var(--scene-accent) 22%, var(--learn-structural-border));
 }
 
-body[data-page='workshops'] .learn-hero {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-hero {
   padding: var(--space-6);
   gap: var(--space-3);
   background: var(--fog);
 }
 
-body[data-page='workshops'] .learn-hero::before {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-hero::before {
   content: none;
 }
 
-body[data-page='workshops'] .learn-hero > :where(h1, .learn-hero__subtitle, .learn-hero__proof, .learn-hero__actions) {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-hero > :where(h1, .learn-hero__subtitle, .learn-hero__proof, .learn-hero__actions) {
   max-width: 75ch;
 }
 
-body[data-page='workshops'] .learn-hero__eyebrow {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-hero__eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
   width: fit-content;
 }
 
-body[data-page='workshops'] .learn-hero__dot {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-hero__dot {
   width: 0.42rem;
   height: 0.42rem;
   border-radius: 50%;
   background: color-mix(in srgb, var(--scene-accent, var(--accent)) 66%, transparent);
 }
 
-body[data-page='workshops'] .learn-hero__subtitle {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-hero__subtitle {
   margin: 0;
   max-width: 75ch;
   color: var(--ink-soft);
 }
 
-body[data-page='workshops'] .learn-hero__proof {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-hero__proof {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   flex-wrap: wrap;
 }
 
-body[data-page='workshops'] .learn-hero__chip {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-hero__chip {
   display: inline-flex;
   align-items: center;
   border: 1px solid var(--learn-structural-border);
@@ -1470,13 +1470,13 @@ body[data-page='workshops'] .learn-hero__chip {
   line-height: 1.2;
 }
 
-body[data-page='workshops'] .learn-hero__actions {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-hero__actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
 }
 
-body[data-page='workshops'] .learn-hero__actions .button {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-hero__actions .button {
   background: var(--surface);
   border-color: var(--learn-structural-border);
   min-height: 2.75rem;
@@ -1484,14 +1484,14 @@ body[data-page='workshops'] .learn-hero__actions .button {
   font-size: 0.82rem;
 }
 
-body[data-page='workshops'] .learn-filter-row {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-filter-row {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
   align-items: center;
 }
 
-body[data-page='workshops'] .learn-filter-row .chip {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-filter-row .chip {
   text-decoration: none;
   min-height: 2.75rem;
   display: inline-flex;
@@ -1500,51 +1500,51 @@ body[data-page='workshops'] .learn-filter-row .chip {
   border-color: var(--learn-structural-border);
 }
 
-body[data-page='workshops'] .page-shell > .panel-shell {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .page-shell > .panel-shell {
   display: grid;
   gap: var(--space-2);
   border-color: var(--learn-structural-border);
 }
 
-body[data-page='workshops'] .page-shell > .panel-shell > :is(h1, h2) {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .page-shell > .panel-shell > :is(h1, h2) {
   line-height: 1.2;
 }
 
-body[data-page='workshops'] .page-shell > .panel-shell > :is(p, .learn-hero__subtitle) {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .page-shell > .panel-shell > :is(p, .learn-hero__subtitle) {
   max-width: 75ch;
 }
 
-body[data-page='workshops'] .learn-detail-hero {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-detail-hero {
   padding: var(--space-5) var(--space-6);
 }
 
-body[data-page='workshops'] .learn-detail-hero__top {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-detail-hero__top {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: start;
   gap: var(--space-3);
 }
 
-body[data-page='workshops'] .learn-detail-hero__content {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-detail-hero__content {
   display: grid;
   gap: var(--space-2);
 }
 
-body[data-page='workshops'] .learn-detail-hero__cta {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-detail-hero__cta {
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
 }
 
-body[data-page='workshops'] .learn-detail-hero__cta .button {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-detail-hero__cta .button {
   min-height: 2.75rem;
 }
 
-body[data-page='workshops'] .learn-detail-hero .tag-list {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-detail-hero .tag-list {
   margin-top: 0.1rem;
 }
 
-body[data-page='workshops'] .learn-card {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-card {
   display: flex;
   flex-direction: column;
   gap: 0.55rem;
@@ -1554,17 +1554,17 @@ body[data-page='workshops'] .learn-card {
   box-shadow: var(--shadow);
 }
 
-body[data-page='workshops'] .learn-card h3 {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-card h3 {
   margin: 0;
   line-height: 1.24;
 }
 
-body[data-page='workshops'] .learn-card__meta {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-card__meta {
   margin: 0;
   color: var(--ink-subtle);
 }
 
-body[data-page='workshops'] .learn-card__proof-label {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-card__proof-label {
   margin: 0;
   display: inline-flex;
   align-items: center;
@@ -1574,14 +1574,14 @@ body[data-page='workshops'] .learn-card__proof-label {
   color: var(--ink-subtle);
 }
 
-body[data-page='workshops'] .learn-card__proof-dot {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-card__proof-dot {
   width: 0.34rem;
   height: 0.34rem;
   border-radius: 50%;
   background: color-mix(in srgb, var(--scene-accent, var(--accent)) 62%, transparent);
 }
 
-body[data-page='workshops'] .learn-card__proof {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-card__proof {
   margin: 0;
   color: var(--ink-soft);
   display: -webkit-box;
@@ -1592,24 +1592,24 @@ body[data-page='workshops'] .learn-card__proof {
   min-height: calc(1.5em * 2);
 }
 
-body[data-page='workshops'] .learn-card .tag-list {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-card .tag-list {
   margin-top: 0.05rem;
 }
 
-body[data-page='workshops'] .learn-card__actions {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-card__actions {
   margin-top: auto;
   padding-top: 0.18rem;
 }
 
-body[data-page='workshops'] .learn-card__actions .button {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-card__actions .button {
   min-height: 2.75rem;
 }
 
-body[data-page='workshops'] .learn-filter-section {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-filter-section {
   gap: var(--space-3);
 }
 
-body[data-page='workshops'] .learn-filter-list {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-filter-list {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -1617,7 +1617,7 @@ body[data-page='workshops'] .learn-filter-list {
   gap: 0.5rem;
 }
 
-body[data-page='workshops'] .learn-filter-link {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-filter-link {
   display: grid;
   gap: 0.14rem;
   text-decoration: none;
@@ -1628,17 +1628,17 @@ body[data-page='workshops'] .learn-filter-link {
   min-height: 2.75rem;
 }
 
-body[data-page='workshops'] .learn-filter-link:hover,
-body[data-page='workshops'] .learn-filter-link:focus-visible {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-filter-link:hover,
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-filter-link:focus-visible {
   border-color: var(--learn-border-hover);
 }
 
-body[data-page='workshops'] .tag-list .badge {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) .tag-list .badge {
   text-transform: none;
   letter-spacing: 0.01em;
 }
 
-body[data-page='workshops'] :focus-visible {
+:is(body[data-page='workshops'], body[data-page='visual-classes']) :focus-visible {
   outline-color: var(--scene-accent, var(--accent));
 }
 
@@ -1662,25 +1662,32 @@ body[data-page='workshops'] .agent-details > summary::before {
 
 /* Learn: quiet background (no looping decor) */
 body[data-page='workshops']::before,
-body[data-page='workshops']::after {
+body[data-page='workshops']::after,
+body[data-page='visual-classes']::before,
+body[data-page='visual-classes']::after {
   content: none;
 }
 
-body[data-page='workshops'] .site-page {
+body[data-page='workshops'] .site-page,
+body[data-page='visual-classes'] .site-page {
   background-image: none;
 }
 
 body[data-page='workshops'] .site-page::before,
-body[data-page='workshops'] .site-page::after {
+body[data-page='workshops'] .site-page::after,
+body[data-page='visual-classes'] .site-page::before,
+body[data-page='visual-classes'] .site-page::after {
   animation: none;
 }
 
 /* Optional: keep a static, subtle border */
-body[data-page='workshops'] .site-page::before {
+body[data-page='workshops'] .site-page::before,
+body[data-page='visual-classes'] .site-page::before {
   opacity: 0.14;
 }
 
-body[data-page='workshops'] .site-page::after {
+body[data-page='workshops'] .site-page::after,
+body[data-page='visual-classes'] .site-page::after {
   opacity: 0.12;
 }
 
@@ -1698,23 +1705,39 @@ body[data-page='workshops'] :where(
   animation: none;
 }
 
-@media (max-width: 900px) {
-  body[data-page='workshops'] .learn-detail-hero {
-    padding: var(--space-4);
-  }
+body[data-page='visual-classes'] :where(
+    .hero-shell,
+    .bubble-surface,
+    .site-page > :is(.card, .panel-shell, .surface-shell, .visual-shell):first-of-type
+  )::before,
+body[data-page='visual-classes'] :where(
+    .hero-shell,
+    .bubble-surface,
+    .site-page > :is(.card, .panel-shell, .surface-shell, .visual-shell):first-of-type
+  )::after {
+  content: none;
+  animation: none;
+}
 
-  body[data-page='workshops'] .learn-detail-hero__top {
-    grid-template-columns: minmax(0, 1fr);
-  }
+@media (max-width: 900px) {
+  body[data-page='workshops'] .learn-detail-hero,
+  body[data-page='visual-classes'] .learn-detail-hero {
+  padding: var(--space-4);
+}
+
+body[data-page='workshops'] .learn-detail-hero__top,
+body[data-page='visual-classes'] .learn-detail-hero__top {
+  grid-template-columns: minmax(0, 1fr);
+}
 }
 
 @media (hover: hover) {
-  body[data-page='workshops'] .learn-card {
+  :is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-card {
     transition: border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
   }
 
-  body[data-page='workshops'] .learn-card:hover,
-  body[data-page='workshops'] .learn-card:focus-within {
+  :is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-card:hover,
+  :is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-card:focus-within {
     transform: translateY(-1px);
     border-color: var(--learn-border-hover);
   }

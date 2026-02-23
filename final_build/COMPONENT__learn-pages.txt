@@ -1,0 +1,39 @@
+# Component: `src/lib/learn-pages.ts`
+
+Purpose:
+- Centralize shared learn-catalog derivations and CTA/proof helpers for learn-style pages.
+- Provide reusable, low-risk helpers so `/workshops` and `/visual-classes` keep identical behavior where intended.
+
+Inputs:
+- `Module[]` from `src/lib/schemas.ts`.
+- `Workshop[]` from `src/lib/schemas.ts`.
+- Helpers from `src/lib/workshop-catalog.ts`, `src/lib/link-utils.ts`.
+
+Outputs:
+- Normalized card models for:
+  - Visual class catalog (`getVisualClassCatalog`)
+  - Core workshop catalog (`getCoreWorkshopCatalog`)
+  - Replay quick links (`getWorkshopReplayLinks`)
+  - Slides quick links (`getWorkshopSlideLinks`)
+- Shared proof snippets and CTA logic:
+  - `buildModuleProofSnippet`
+  - `buildWorkshopProofSnippet`
+  - `buildModuleCta`
+  - `buildWorkshopCta`
+
+State:
+- No persisted state; deterministic array transforms for each call.
+
+Edge cases:
+- Non-displayable visual-class modules are excluded.
+- Invalid placeholder links are filtered from replay/slides lists.
+- Empty proof content falls back to sensible defaults.
+
+Dependencies:
+- `src/lib/workshop-catalog.ts`
+- `src/lib/link-utils.ts`
+- `src/lib/schemas.ts`
+
+Acceptance checks:
+- Core/visual workshop classification remains aligned with `splitWorkshops`.
+- CTAs and proof snippets are rendered with the same precedence on both learn routes.

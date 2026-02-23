@@ -1,0 +1,35 @@
+# Component: `src/pages/visual-classes.astro`
+
+Purpose:
+- Render a dedicated visual-learning catalog composed only of visual-class catalog items:
+  - Module-driven visual classes.
+  - Non-core workshop-derived visual-class workshops.
+
+Inputs:
+- `loadModules()` and `loadWorkshops()` from `src/lib/content.ts`.
+- `loadLastModifiedISO('workshops.json')` for last-updated chip text.
+- Shared catalog helpers from `src/lib/learn-pages.ts`.
+
+Outputs:
+- Hero block with learn label, heading, subtitle, and last-updated marker.
+- One catalog section (`#visual-class-catalog`) with discoverable proof cards.
+- Action buttons to jump within the page and cross to `/workshops`.
+
+State:
+- No client-side state.
+- Build-time card derivation and deterministic sorting/filtering.
+
+Edge cases:
+- Empty module/workshop inputs render a safe empty-state message.
+- Non-displayable visual classes are filtered through `isDisplayableVisualClassModule`.
+- Fallback CTAs and proof snippets preserve stable card affordances.
+
+Dependencies:
+- `CardGrid` and `TagList`.
+- `src/lib/content.ts`.
+- `src/lib/learn-pages.ts`.
+
+Acceptance checks:
+- Page contains only visual-class content (no core workshop detail cards).
+- `/visual-classes` is discoverable from primary site navigation.
+- Empty state is readable and keeps spacing rhythm consistent with learn surfaces.

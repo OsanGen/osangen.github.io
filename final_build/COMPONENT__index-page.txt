@@ -1,14 +1,14 @@
 # Component: `src/pages/index.astro`
 
 Purpose:
-- Turn the homepage into a compact router with minimal prose and three clear entry points.
+- Turn the homepage into a compact router with minimal prose and four clear entry points.
 
 Inputs:
 - `loadGames`, `loadModules`, and `loadWorkshops` from content loader.
 
 Outputs:
 - Hero shell with short headline, one-line lede, two top CTAs (OSAN Games, Book).
-- Three route cards (`OSAN GAMES`, `Learn`, `Contribute`) with concise subtitle + CTA.
+- Four route cards (`OSAN GAMES`, `Workshops`, `Visual Classes`, `Contribute`) with concise subtitle + CTA.
 - Page and hero accents follow `/` route token from `BaseLayout` instead of inline overrides.
 
 State:
@@ -24,6 +24,6 @@ Dependencies:
 
 Acceptance checks:
 - Multi-section catalog blocks are not used on homepage.
-- Above-fold consists of hero + three route cards only.
+- Above-fold consists of hero + four route cards only.
 - H1, subtitle, and CTA copy remain concise.
 - Route cards use cleaner visual treatment without decorative route rails/dots.

@@ -10,6 +10,7 @@
 - join funnel contribution reframing | completed | Updated `/join`, homepage route card, header nav, and related route copy to use contribution language while keeping `/join` path compatibility.
 - route accent consistency cleanup | completed | Removed hardcoded inline `--scene-accent`/`scene-accent` overrides from index, /gpts, /gpts/[id], /join, and /labs; GPTCard now defaults to route-scoped `var(--scene-accent)` for route-consistent accents.
 - homepage route-card visual simplification | completed | Removed decorative route-grid/route-card rail and dot motifs and switched homepage route CTAs to `button--ghost` for cleaner proof-first cards.
+- learn route split | completed | Added dedicated `/visual-classes` page, extracted shared `src/lib/learn-pages.ts`, and made `/workshops` workshops-only.
 - astro5 migration completion | completed | Upgraded `astro` to `5.17.2`, upgraded `@astrojs/check` to `0.9.6`, added explicit `src/content.config.ts`, and verified `npm audit --omit=dev` reports 0 vulnerabilities.
 - visual-pass for global shell effects | pending | Validate accent and motion behavior at /, /labs, /workshops, /gpts, and /resume on desktop/mobile, including new bubble motif visibility.
 - motion parser hardening | completed | Replaced fragile numeric parsing in `src/scripts/osan-motion.ts` with null-safe token parsing and removed `as any` casts while preserving reveal timing behavior.
@@ -32,3 +33,4 @@
 - labs page hero heading rename | completed | Updated `/labs` page title and hero heading to `OSAN GAMES`.
 - labs card pill cleanup | completed | Removed Labs listing concept tags and `PLAYABLE` badge in `/labs` cards and tightened Labs-only card rhythm via `src/styles/pages/labs.css`.
 - labs hero-card spacing separation | completed | Added Labs-only `32px` (`var(--space-5)`) spacing between `.labs-hero` and first catalog grid block via `.labs-hero + .labs-catalog-grid`.
+- learn split QA pass | pending | Run manual browser smoke on `/workshops` and `/visual-classes`, and verify route links from header/footer/index/more/home are all discoverable and one-accent safe.

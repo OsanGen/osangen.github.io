@@ -1,29 +1,31 @@
 # Component: `src/pages/workshops.astro` (visual taxonomy surface)
 
 Purpose:
-- Provide a single Learn catalog route split into two deterministic blocks:
-  - Core workshops (with canonical detail pages).
-  - Visual classes (module cards plus non-core workshop cards).
+- Provide the workshops-only Learn catalog route:
+  - Core workshop cards (with canonical detail pages).
+  - Replay + slide quick-link sections for proof-first entry.
 
 Inputs:
-- `loadModules()`, `loadWorkshops()`, `loadLastModifiedISO('workshops.json')`.
-- `splitWorkshops()` and `isDisplayableVisualClassModule()` from `src/lib/workshop-catalog.ts`.
+- `loadWorkshops()`, `loadLastModifiedISO('workshops.json')`.
+- `getCoreWorkshopCatalog`, `getWorkshopReplayLinks`, `getWorkshopSlideLinks` from `src/lib/learn-pages.ts`.
 
 Outputs:
-- Visual class list and workshop list sections with one action button per card.
+- Hero + workshop section with one action button per card.
 - Last-updated timestamp for `workshops.json`.
+- Replays and slides list sections sourced from core workshop links.
 
 State:
 - No client-side state.
 - All routing groups are computed at build time in page frontmatter.
 
 Edge cases:
-- Workshop entries with missing replay/slides render internal fallback CTA.
-- Non-core workshops never render direct `/workshops/{id}` detail CTA in visual class section.
+- Workshop entries with missing replay/slides render non-proof route fallback (`/workshops`) or `/workshops/{id}` CTA.
+- Replay/slide lists include only valid external links.
 
 Dependencies:
-- `Card`, `CardGrid`, `TagList`, `src/lib/link-utils.ts`.
+- `CardGrid`, `TagList`.
+- `src/lib/learn-pages.ts`.
 
 Acceptance checks:
-- Visual classes section includes non-core workshop-backed cards.
-- Core workshop section contains only canonical IDs: `leanagents-workshop-chatgpt-apps`, `manus-workshop`.
+- Only canonical workshops render in this page’s card section (`leanagents-workshop-chatgpt-apps`, `manus-workshop`).
+- Replay and slides quick links stay current and open externally.

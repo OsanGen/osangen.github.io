@@ -5,11 +5,13 @@
 - `src/components/Footer.astro` + footer styles in global.css: controls global secondary navigation and trust/disclosure copy.
 - `src/components/MotionEnhance.astro`: mounts top progress rail shell and bootstraps the motion runtime.
 - `src/components/GPTCard.astro`: card row for each GPT directory entry (name, one-line outcome, tags, Open button).
-- `src/pages/index.astro`: homepage router shell (hero + 3 route cards).
+- `src/pages/index.astro`: homepage router shell (hero + 4 route cards).
+- `src/pages/visual-classes.astro`: dedicated visual-class catalog page sourced from `src/lib/learn-pages.ts`.
 - `src/pages/join.astro`: GENMRKT quarter landing page driven by `src/content/data/join_project.json`.
-- `src/pages/workshops.astro`: workshop listing page with visual classes and workshop cards.
+- `src/pages/workshops.astro`: workshops-only listing page with core workshop cards, replays, and slides.
 - `src/pages/workshops/[id].astro`: workshop detail page with proof line and teaching details.
 - `src/lib/workshop-catalog.ts`: canonical workshop taxonomy helpers (`CORE_WORKSHOP_IDS`, split + classification helpers).
+- `src/lib/learn-pages.ts`: shared learn catalog data transformations and CTA helpers for `/workshops` and `/visual-classes`.
 - `scripts/generate-sitemap.mjs` + `public/sitemap.xml`: build-time sitemap generation.
 - `scripts/check-dist-integrity.mjs`: static-output verification for sitemap route parity, internal href integrity, and dynamic route existence checks.
 - `scripts/runtime-http-smoke.mjs`: local preview HTTP smoke verification for core static and representative dynamic routes (`npm run verify:runtime`).

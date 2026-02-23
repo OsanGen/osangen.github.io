@@ -27,10 +27,16 @@ const routeCards = [
     action: 'Open OSAN games',
   },
   {
-    title: 'Learn',
+    title: 'Workshops',
     href: '/workshops',
     subtitle: pluralize(coreWorkshops.length, 'workshop', 'workshops'),
-    action: 'Open learn',
+    action: 'Open workshops',
+  },
+  {
+    title: 'Visual Classes',
+    href: '/visual-classes',
+    subtitle: pluralize(visualClassCount, 'visual class', 'visual classes'),
+    action: 'Open visual classes',
   },
   {
     title: 'Contribute',
@@ -48,7 +54,7 @@ const visualClassSummary =
   <section class="hero-shell scene-shell command-shell">
     <p class="hero-eyebrow">Open-source AI education</p>
     <h1>Choose your route. Learn fast.</h1>
-    <p class="text-small deck-subtitle">Three clean paths for shipping AI capability: play, learn, and contribute.</p>
+    <p class="text-small deck-subtitle">Four clean paths for shipping AI capability: play, learn, and contribute.</p>
     <div class="cta-stack">
       <a class="button button--primary" href="/labs">Open OSAN Games</a>
       <a class="button" href={bookHref} target="_blank" rel="noopener noreferrer">Book</a>

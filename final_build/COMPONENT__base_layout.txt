@@ -39,4 +39,5 @@ Acceptance checks:
 - Manifest link and service worker mount are present in all layout-rendered routes.
 - Motion enhancer mount is present in all layout-rendered routes; runtime gates activation by page id and reduced-motion preference.
 - Route-scoped accent updates every page using one canonical CogSec accent token.
+- `/visual-classes` uses the same mint route accent as `/workshops` via route map.
 - One page-shell animation + border accent layer is present on every layout-rendered route.

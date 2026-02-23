@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CardGrid from '../components/CardGrid.astro';
+import TagList from '../components/TagList.astro';
+import { loadLastModifiedISO, loadModules, loadWorkshops } from '../lib/content';
+import { getVisualClassCatalog, type LearnCard } from '../lib/learn-pages';
+
+const [modules, workshops] = await Promise.all([loadModules(), loadWorkshops()]);
+const updated = await loadLastModifiedISO('workshops.json');
+
+const visualClassCards: LearnCard[] = getVisualClassCatalog(modules, workshops);
+
+const updatedLabel = updated
+  ? new Date(updated).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+  : 'Not available';
+---
+<BaseLayout title="Visual Classes - Oscar Sanchez" description="Structured visual classes and practical proofs.">
+  <div class="page-shell">
+    <section class="panel-shell learn-hero" data-motion-enter>
+      <p class="eyebrow learn-hero__eyebrow">
+        <span class="learn-hero__dot" aria-hidden="true"></span>
+        Learn
+      </p>
+      <h1>Visual Classes</h1>
+      <p class="learn-hero__subtitle">Structured classes with practical proof and low noise.</p>
+      <div class="learn-hero__proof">
+        <span class="learn-hero__chip" aria-label={`Last updated ${updatedLabel}`}>Last updated: {updatedLabel}</span>
+      </div>
+      <nav class="learn-hero__actions" aria-label="Jump to visual class sections">
+        <a class="button" href="#visual-class-catalog">Browse classes</a>
+        <a class="button" href="/workshops">Workshops</a>
+      </nav>
+    </section>
+
+    <section id="visual-class-catalog" class="panel-shell">
+      <h2>Catalog</h2>
+      {visualClassCards.length === 0 ? (
+        <p class="text-small">No visual classes are published yet.</p>
+      ) : (
+        <CardGrid gap="var(--space-3)" align="start">
+          {visualClassCards.map(({ cta, title, meta, proof, tags }, index) => (
+            <article class="card learn-card cog-entrance" style={`--reveal-delay:${index * 45}ms;`}>
+              <p class="text-small learn-card__meta">{meta}</p>
+              <h3>{title}</h3>
+              <p class="learn-card__proof-label">
+                <span class="learn-card__proof-dot" aria-hidden="true"></span>
+                Proof
+              </p>
+              <p class="text-small learn-card__proof">{proof}</p>
+              <TagList tags={tags} compact maxItems={3} />
+              <div class="learn-card__actions">
+                <a
+                  class="button catalog-cta"
+                  href={cta.href}
+                  target={cta.isExternal ? '_blank' : undefined}
+                  rel={cta.isExternal ? 'noopener noreferrer' : undefined}
+                >
+                  {cta.label}
+                </a>
+              </div>
+            </article>
+          ))}
+        </CardGrid>
+      )}
+    </section>
+  </div>
+</BaseLayout>

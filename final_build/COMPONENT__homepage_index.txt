@@ -1,14 +1,14 @@
 Component: `src/pages/index.astro`
 
 Purpose:
-- Render the homepage as a three-route decision surface with concise proof-first framing.
+- Render the homepage as a four-route decision surface with concise proof-first framing.
 
 Inputs:
 - `loadGames()`, `loadModules()`, `loadWorkshops()`.
 - `splitWorkshops()` and `isDisplayableVisualClassModule()` for workshop taxonomy-aware counts.
 
 Outputs:
-- Route cards (`OSAN GAMES`, `Learn`, `Contribute`) with concise labels and direct actions.
+- Route cards (`OSAN GAMES`, `Workshops`, `Visual Classes`, `Contribute`) with concise labels and direct actions.
 - Hero summary line showing visual-class count derived from module classes + visual-class workshops.
 
 State:
@@ -23,7 +23,7 @@ Dependencies:
 - `Card`, `CardGrid`, `sanitizeLink`, `src/lib/workshop-catalog.ts`.
 
 Acceptance checks:
-- `Learn` subtitle equals count of canonical workshop routes.
+- `Workshops` subtitle equals count of canonical workshop routes.
 - `Contribute` card subtitle is static contribution framing (`Open-source contribution`).
 - Route-card CTA styling uses `button--ghost` for lower visual noise.
-- Visual class summary remains in sync with taxonomy split used on `/workshops`.
+- Visual class summary remains in sync with taxonomy split used on `/visual-classes` and `/workshops`.

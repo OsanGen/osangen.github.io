@@ -1,26 +1,27 @@
 # Component/page: `src/pages/workshops.astro`
 
 Purpose:
-- Render Learn index with explicit Workshop taxonomy buckets:
-  - Core workshops section (2 canonical workshop detail routes).
-  - Visual classes section (module visual classes + non-core workshop-derived visual classes).
+- Render workshops-only listing:
+  - Hero + quick anchors for list entry points.
+  - Canonical core workshops (2 canonical workshop detail routes).
+- Keep behavior and CTAs identical to previous workshop card logic (Replay/Slides/Open details).
 - Keep output concise with stable CTA behavior and no broken detail route assumptions.
 
 Inputs:
-- `loadModules()` and `loadWorkshops()` from `src/lib/content.ts`.
+- `loadWorkshops()` from `src/lib/content.ts`.
 - `loadLastModifiedISO('workshops.json')`.
-- Helper splitting logic from `src/lib/workshop-catalog.ts`.
+- Shared learn helpers from `src/lib/learn-pages.ts`.
 
 Outputs:
 - Intro with last-updated date.
-- `Visual classes` section with module-based cards and visual-class workshop cards.
-- `Workshops` section with cards only for canonical workshop IDs.
+- `Workshops` section with core-workshop cards, sorted newest first.
+- Replays and slides quick-link sections sourced from core workshop CTAs.
 
 State:
 - No client-side state.
 - Build-time derivations:
-  - `splitWorkshops(workshops)` for canonical vs visual-class workshops.
-  - `visualClassModules` from modules with `visualClass` and not blocked by catalog policy.
+  - `splitWorkshops(workshops)` for canonical workshop filtering.
+  - Shared card/link helpers from `src/lib/learn-pages.ts`.
 
 Edge cases:
 - Missing dates/labels fall back to safe route text and/or `/workshops` cta.
@@ -28,10 +29,10 @@ Edge cases:
 - Module helper blocks display for configured non-visual-class modules.
 
 Dependencies:
-- `Card`, `CardGrid`, `TagList`.
-- `src/lib/workshop-catalog.ts`, `src/lib/link-utils.ts`, `src/lib/content.ts`.
+- `CardGrid`, `TagList`.
+- `src/lib/content.ts`, `src/lib/learn-pages.ts`.
 
 Acceptance checks:
 - Only core workshop detail links are generated from `coreWorkshops`.
-- Non-core workshops appear under `Visual classes` and do not require `/workshops/{id}` deep links.
-- `Beautiful Code Theory: Loops, Roles, and Proof Packs` is not rendered in visual-class output.
+- Replays/Slides lists include only workshops with valid external CTAs.
+- `/workshops/{id}` details route remains reachable for `coreWorkshops`.
