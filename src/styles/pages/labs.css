@@ -7,14 +7,8 @@ body[data-page='labs'] .catalog-card-stack {
   gap: 0.4rem;
 }
 
-body[data-page='labs'] .catalog-item::before {
-  left: -0.32rem;
-  width: 0.12rem;
-  top: var(--space-2);
-  bottom: var(--space-2);
-  height: auto;
-  opacity: 0.7;
-  background: color-mix(in srgb, var(--catalog-accent) 24%, var(--stroke));
+body[data-page='labs'] .labs-catalog-grid .catalog-item::before {
+  content: none;
 }
 
 body[data-page='labs'] .catalog-actions .button {

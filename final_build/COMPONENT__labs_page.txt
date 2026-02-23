@@ -30,6 +30,7 @@ Acceptance checks:
 - Cards maintain readable spacing and subtle accent side bar.
 - Labs listing cards do not render concept tag chips or the `PLAYABLE` badge.
 - Hero and first game card block are separated by `var(--space-5)` for cleaner scan rhythm.
+- Listing cards render without the left accent rail pseudo-element to keep focus on title/summary/CTAs.
 - Page title and hero headline use `OSAN GAMES` branding while route remains `/labs`.
 - Repo action does not error when URL missing from content.
 - Hero accent and card rail accents inherit `--page-accent` (OSAN GAMES pink) without inline scene overrides.

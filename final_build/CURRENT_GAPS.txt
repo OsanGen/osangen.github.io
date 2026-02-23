@@ -17,6 +17,7 @@
 - service-worker deployment verification | pending | Deploy build and run a smoke check on a throttled/offline path.
 - lab embed performance optimization | pending | Verify GameEmbed click-to-load behavior and fallback on a real iframe URL.
 - manual runtime smoke pass | pending | Automated HTTP 200 checks now run via `npm run verify:runtime`; remaining interactive browser checks are external/inactive link click paths, GameEmbed blocked-iframe fallback, and service worker offline behavior.
+- labs card accent rail removal | completed | Removed Labs listing card pseudo-element rail via `src/styles/pages/labs.css` to eliminate edge line noise and improve heading readability.
 - line-review ledger initialization | completed | Added `final_build/LINE_REVIEW_LEDGER.txt` with reviewed status for every file in `src`, `scripts`, `public`, and `docs`, plus explicit dead-code removal entry for `src/components/TwoOptionCTA.astro`.
 - release-B dead component cleanup | completed | Removed unreferenced `src/components/TwoOptionCTA.astro` after repository-wide reference check.
 - dist integrity automation | completed | Added `scripts/check-dist-integrity.mjs` and npm script `verify:dist` for sitemap parity, internal link integrity, and dynamic route output checks.
