@@ -8,7 +8,7 @@ Inputs:
 - `splitWorkshops()` and `isDisplayableVisualClassModule()` for workshop taxonomy-aware counts.
 
 Outputs:
-- Route cards (`OSAN GAMES`, `Workshops`, `Visual Classes`, `Contribute`) with concise labels and direct actions.
+- Route cards (`OSAN GAMES`, `Workshops`, `Modules`, `Contribute`) with concise labels and direct actions.
 - Hero summary line showing visual-class count derived from module classes + visual-class workshops.
 
 State:

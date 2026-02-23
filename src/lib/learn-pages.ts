@@ -2,6 +2,9 @@ import type { Module, Workshop } from './schemas';
 import { isDisplayableVisualClassModule, splitWorkshops } from './workshop-catalog';
 import { isExternalUrl, isUnavailableLink, sanitizeLink } from './link-utils';
 
+export const LEARN_VISUAL_ROUTE_LABEL = 'Modules';
+export const LEARN_VISUAL_ROUTE_NAME = 'Modules';
+
 interface CtaState {
   href: string;
   isExternal: boolean;

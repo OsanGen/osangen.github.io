@@ -7,6 +7,7 @@ import {
   getCoreWorkshopCatalog,
   getWorkshopReplayLinks,
   getWorkshopSlideLinks,
+  LEARN_VISUAL_ROUTE_LABEL,
   type LearnCard,
 } from '../lib/learn-pages';
 
@@ -34,7 +35,7 @@ const slidesReadyWorkshops = getWorkshopSlideLinks(workshops);
         <span class="learn-hero__chip" aria-label={`Last updated ${updatedLabel}`}>Last updated: {updatedLabel}</span>
       </div>
       <nav class="learn-hero__actions" aria-label="Jump to workshop sections">
-        <a class="button" href="/visual-classes">Visual classes</a>
+        <a class="button" href="/visual-classes">{LEARN_VISUAL_ROUTE_LABEL}</a>
         <a class="button" href="#workshops">Workshops</a>
       </nav>
     </section>

@@ -5,7 +5,7 @@ Primary site nav with explicit learn-surface discoverability and a prominent Boo
 
 ## Inputs / Outputs
 - Inputs: current pathname from `Astro.url.pathname`.
-- Output: Header with explicit nav links for `OSAN GAMES`, `Visual Classes`, `Workshops`, `Contribute`, and `Resume` plus a right-side `Book` button.
+- Output: Header with explicit nav links for `OSAN GAMES`, `Modules`, `Workshops`, `Contribute`, and `Resume` plus a right-side `Book` button.
 
 ## State
 - Stateless, path-based current-item highlighting.
@@ -13,12 +13,12 @@ Primary site nav with explicit learn-surface discoverability and a prominent Boo
 ## Edge Cases
 - Root path normalization (`/` vs `/foo/`).
 - External Calendly CTA always opens a new tab safely.
- - Discoverability for learn routes is explicit with separate `Visual Classes` and `Workshops` links.
+ - Discoverability for learn routes is explicit with separate `Modules` and `Workshops` links.
 
 ## Dependencies
 - `header` styles in `src/styles/global.css`.
 
 ## Acceptance Checks
-- Header includes explicit `Visual Classes` and `Workshops` links.
+- Header includes explicit `Modules` and `Workshops` links.
 - Existing active state and CTA behavior remain intact.
 - Book action is button-like on the right and not a nav link.

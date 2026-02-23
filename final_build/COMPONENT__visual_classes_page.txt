@@ -1,7 +1,7 @@
 # Component: `src/pages/visual-classes.astro`
 
 Purpose:
-- Render a dedicated visual-learning catalog composed only of visual-class catalog items:
+- Render a dedicated modules catalog composed only of visual-class catalog items:
   - Module-driven visual classes.
   - Non-core workshop-derived visual-class workshops.
 
@@ -14,6 +14,7 @@ Outputs:
 - Hero block with learn label, heading, subtitle, and last-updated marker.
 - One catalog section (`#visual-class-catalog`) with discoverable proof cards.
 - Action buttons to jump within the page and cross to `/workshops`.
+- UI label is `Modules` and route remains `/visual-classes`.
 
 State:
 - No client-side state.

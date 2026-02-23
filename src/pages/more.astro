@@ -2,9 +2,10 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Card from '../components/Card.astro';
 import CardGrid from '../components/CardGrid.astro';
+import { LEARN_VISUAL_ROUTE_LABEL } from '../lib/learn-pages';
 
 const moreLinks = [
-  { title: 'Visual Classes', body: 'Structured modules and practical classes.', href: '/visual-classes' },
+  { title: LEARN_VISUAL_ROUTE_LABEL, body: 'Structured modules and practical classes.', href: '/visual-classes' },
   { title: 'Workshops', body: 'Sessions, replays, and workshop artifacts.', href: '/workshops' },
   { title: 'Posts', body: 'Short insights and external writeups.', href: '/posts' },
   { title: 'Contribute', body: 'Open-source contribution opportunity and project collaboration.', href: '/join' },

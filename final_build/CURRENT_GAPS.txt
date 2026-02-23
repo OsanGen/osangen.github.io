@@ -34,3 +34,4 @@
 - labs card pill cleanup | completed | Removed Labs listing concept tags and `PLAYABLE` badge in `/labs` cards and tightened Labs-only card rhythm via `src/styles/pages/labs.css`.
 - labs hero-card spacing separation | completed | Added Labs-only `32px` (`var(--space-5)`) spacing between `.labs-hero` and first catalog grid block via `.labs-hero + .labs-catalog-grid`.
 - learn split QA pass | pending | Run manual browser smoke on `/workshops` and `/visual-classes`, and verify route links from header/footer/index/more/home are all discoverable and one-accent safe.
+- learn route tab rename | completed | Renamed the learn destination UI label from "Visual Classes" to "Modules" across header, footer, homepage card, workshops CTA, visual-classes page, and `/more` while keeping `/visual-classes` URL unchanged.

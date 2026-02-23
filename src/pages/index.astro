@@ -4,6 +4,7 @@ import { loadGames, loadModules, loadWorkshops } from '../lib/content';
 import Card from '../components/Card.astro';
 import CardGrid from '../components/CardGrid.astro';
 import { sanitizeLink } from '../lib/link-utils';
+import { LEARN_VISUAL_ROUTE_LABEL, LEARN_VISUAL_ROUTE_NAME } from '../lib/learn-pages';
 import { isDisplayableVisualClassModule, splitWorkshops } from '../lib/workshop-catalog';
 
 const [games, modules, workshops] = await Promise.all([
@@ -33,10 +34,10 @@ const routeCards = [
     action: 'Open workshops',
   },
   {
-    title: 'Visual Classes',
+    title: LEARN_VISUAL_ROUTE_LABEL,
     href: '/visual-classes',
     subtitle: pluralize(visualClassCount, 'visual class', 'visual classes'),
-    action: 'Open visual classes',
+    action: `Open ${LEARN_VISUAL_ROUTE_NAME.toLowerCase()}`,
   },
   {
     title: 'Contribute',
