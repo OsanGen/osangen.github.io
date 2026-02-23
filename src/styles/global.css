@@ -1183,14 +1183,16 @@ main {
 
 .brand-lockup {
   letter-spacing: -0.01em;
+  flex-shrink: 0;
 }
 
 .brand-lockup-image {
   display: block;
   width: auto;
-  height: 1.9rem;
+  height: 2rem;
   max-width: clamp(7.5rem, 18vw, 11.25rem);
   object-fit: contain;
+  flex-shrink: 0;
 }
 
 .brand-mark {
@@ -1415,7 +1417,7 @@ html.motion-enhanced [data-motion-enter][data-motion-done='true'] {
   }
 
   .brand-lockup-image {
-    height: 1.6rem;
+    height: 1.72rem;
   }
 
   .cta-stack,
