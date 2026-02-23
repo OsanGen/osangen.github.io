@@ -5,8 +5,6 @@ import TagList from '../components/TagList.astro';
 import { loadLastModifiedISO, loadWorkshops } from '../lib/content';
 import {
   getCoreWorkshopCatalog,
-  getWorkshopReplayLinks,
-  getWorkshopSlideLinks,
   LEARN_VISUAL_ROUTE_LABEL,
   type LearnCard,
 } from '../lib/learn-pages';
@@ -19,8 +17,6 @@ const updatedLabel = updated
   : 'Not available';
 
 const coreWorkshops: LearnCard[] = getCoreWorkshopCatalog(workshops);
-const replayReadyWorkshops = getWorkshopReplayLinks(workshops);
-const slidesReadyWorkshops = getWorkshopSlideLinks(workshops);
 ---
 <BaseLayout title="Workshops - Oscar Sanchez" description="Delivery workshops with proof-backed content.">
   <div class="page-shell">
@@ -36,15 +32,8 @@ const slidesReadyWorkshops = getWorkshopSlideLinks(workshops);
       </div>
       <nav class="learn-hero__actions" aria-label="Jump to workshop sections">
         <a class="button" href="/visual-classes">{LEARN_VISUAL_ROUTE_LABEL}</a>
-        <a class="button" href="#workshops">Workshops</a>
       </nav>
     </section>
-
-    <nav class="learn-filter-row" aria-label="Quick workshop views" data-motion-enter>
-      <a class="chip" href="#workshops">Newest first</a>
-      <a class="chip" href="#workshops-replays">Replays available</a>
-      <a class="chip" href="#workshops-slides">Slides</a>
-    </nav>
 
     <section id="workshops" class="panel-shell">
       <h2>Workshops</h2>
@@ -80,40 +69,5 @@ const slidesReadyWorkshops = getWorkshopSlideLinks(workshops);
       )}
     </section>
 
-    <section id="workshops-replays" class="panel-shell learn-filter-section" data-motion-enter>
-      <h2>Replays available</h2>
-      {replayReadyWorkshops.length === 0 ? (
-        <p class="text-small muted">No replay links published yet.</p>
-      ) : (
-        <ul class="learn-filter-list">
-          {replayReadyWorkshops.map((item) => (
-            <li>
-              <a class="learn-filter-link" href={item.href} target="_blank" rel="noopener noreferrer">
-                <span class="text-small muted">{item.date}</span>
-                <span>{item.title}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
-    </section>
-
-    <section id="workshops-slides" class="panel-shell learn-filter-section" data-motion-enter>
-      <h2>Slides</h2>
-      {slidesReadyWorkshops.length === 0 ? (
-        <p class="text-small muted">No slides links published yet.</p>
-      ) : (
-        <ul class="learn-filter-list">
-          {slidesReadyWorkshops.map((item) => (
-            <li>
-              <a class="learn-filter-link" href={item.href} target="_blank" rel="noopener noreferrer">
-                <span class="text-small muted">{item.date}</span>
-                <span>{item.title}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
-    </section>
   </div>
 </BaseLayout>

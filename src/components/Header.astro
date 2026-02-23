@@ -11,17 +11,17 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 ---
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand brand-lockup" href="/">
+    <a class="brand brand-lockup" href="/" aria-label="OSAN home">
       <img
-        class="brand-mark"
-        src="/icons/oscar-cog-brain.svg"
-        alt=""
+        class="brand-lockup-image"
+        src="/icons/osan-logo.png"
+        srcset="/icons/osan-logo.png 1x, /icons/osan-logo@2x.png 2x"
+        alt="OSAN"
         loading="eager"
-        width="20"
-        height="20"
+        width="126"
+        height="29"
         aria-hidden="true"
       />
-      <span class="brand-name">Oscar Sanchez</span>
     </a>
     <div class="header-right">
       <nav class="site-nav" aria-label="Primary">
