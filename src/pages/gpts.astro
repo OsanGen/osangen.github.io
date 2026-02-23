@@ -6,7 +6,7 @@ import GPTCard from '../components/GPTCard.astro';
 const gpts = await loadGPTs();
 ---
 <BaseLayout title="Lean Agents | Oscar Sanchez" description="Lean agents directory for practical AI workflows and execution support.">
-  <section class="hero-shell scene-shell command-shell gpts-hero">
+  <section class="hero-shell scene-shell command-shell gpts-hero cog-proof-stack" data-motion-enter>
     <p class="hero-eyebrow">Lean Agents directory</p>
     <h1>Find the right lean agent fast</h1>
     <p class="text-small deck-subtitle">
@@ -20,14 +20,14 @@ const gpts = await loadGPTs();
 
   <section class="scene-shell section" aria-labelledby="gpts-grid-heading">
     <h2 id="gpts-grid-heading" class="text-small">Available Lean Agents</h2>
-    <div id="gpt-grid" class="gpts-grid">
+    <div id="gpt-grid" class="gpts-grid" data-motion-group>
       {gpts.map((gpt, idx) => (
         <GPTCard gpt={gpt} revealDelayMs={idx * 58} />
       ))}
     </div>
   </section>
 
-  <section class="panel-shell section gpts-cta-strip">
+  <section class="panel-shell section gpts-cta-strip cog-proof-stack" data-motion-enter>
     <p class="text-small">Need learning paths, workshops, and contribution opportunities?</p>
     <div class="cta-stack">
       <a class="button" href="/more">Open more</a>

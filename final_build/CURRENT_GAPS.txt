@@ -26,7 +26,7 @@
 - line-review ledger initialization | completed | Added `final_build/LINE_REVIEW_LEDGER.txt` with reviewed status for every file in `src`, `scripts`, `public`, and `docs`, plus explicit dead-code removal entry for `src/components/TwoOptionCTA.astro`.
 - release-B dead component cleanup | completed | Removed unreferenced `src/components/TwoOptionCTA.astro` after repository-wide reference check.
 - dist integrity automation | completed | Added `scripts/check-dist-integrity.mjs` and npm script `verify:dist` for sitemap parity, internal link integrity, and dynamic route output checks.
-- workshop route policy smoke | completed | Verified by build output: only `/workshops/leanagents-workshop-chatgpt-apps` and `/workshops/manus-workshop` are generated; `/workshops/ghost-machine` is not generated.
+- workshop route policy smoke | completed | Verified by build output that `/workshops` detail pages are now generated for all workshop IDs needed by `/visual-classes` slide links.
 - production deploy | completed | Pushed commit `0d74eef853a8246af510f87155c556e01a41f5a8` to `main`; workflows `CI` (`22042398300`) and `Deploy Astro site to GitHub Pages` (`22042398323`) completed successfully.
 - /join landing refactor | completed | Replaced legacy community catalog /join implementation with the quarter internship landing and added `src/content/data/join_project.json`.
 - /join signup CTA activation | completed | Added live signup URL (`https://genmrkt.lovable.app/`) with a primary CTA button and explicit new-tab behavior.
@@ -37,6 +37,7 @@
 - labs page hero heading rename | completed | Updated `/labs` page title and hero heading to `OSAN GAMES`.
 - labs card pill cleanup | completed | Removed Labs listing concept tags and `PLAYABLE` badge in `/labs` cards and tightened Labs-only card rhythm via `src/styles/pages/labs.css`.
 - labs hero-card spacing separation | completed | Added Labs-only `32px` (`var(--space-5)`) spacing between `.labs-hero` and first catalog grid block via `.labs-hero + .labs-catalog-grid`.
-- learn split QA pass | pending | Run manual browser smoke on `/workshops` and `/visual-classes`, and verify route links from header/footer/index/more/home are all discoverable and one-accent safe.
+- modules lessonization pass | completed | Fixed `visualClass` gating for module visibility, added lesson labels and continuity proof chaining, and added the `/visual-classes` slides section with jump chip.
+- learn split QA pass | pending | Run manual browser smoke on `/workshops` and `/visual-classes` to validate lesson sequence readability at 10% zoom, reduced-motion state, mobile tap target spacing, and route-link discoverability across header/footer/index/more/home with one-accent consistency.
 - learn route tab rename | completed | Renamed the learn destination UI label from "Visual Classes" to "Modules" across header, footer, homepage card, workshops CTA, visual-classes page, and `/more` while keeping `/visual-classes` URL unchanged.
 - modules setup hardening | completed | Reworked `/visual-classes` catalog ordering to follow a learning progression and added proof snippets that explain each card’s continuity from the previous lesson.

@@ -16,6 +16,7 @@ Outputs:
 - Intro with last-updated date.
 - `Workshops` section with core-workshop cards, sorted newest first.
 - Replays and slides quick-link sections sourced from core workshop CTAs.
+- Motion and visual hierarchy utilities (`cog-proof-stack`, `cog-accent-rail`, `cog-proof-chip`) are applied to hero/catalog/sections to match the premium-quiet pattern.
 
 State:
 - No client-side state.

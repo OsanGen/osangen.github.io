@@ -2,9 +2,14 @@
 export interface Props {
   gap?: string;
   align?: 'start' | 'stretch';
+  motionGroup?: boolean;
 }
-const { gap = 'var(--space-4)', align = 'start' } = Astro.props;
+const { gap = 'var(--space-4)', align = 'start', motionGroup = false } = Astro.props;
 ---
-<div class="grid" style={`gap:${gap};--grid-align-items:${align};`}>
+<div
+  class="grid"
+  style={`gap:${gap};--grid-align-items:${align};`}
+  data-motion-group={motionGroup ? 'true' : undefined}
+>
   <slot />
 </div>

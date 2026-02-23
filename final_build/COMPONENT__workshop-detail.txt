@@ -1,30 +1,28 @@
 Component Spec: `src/pages/workshops/[id].astro`
 
 Purpose:
-- Render full workshop detail pages for canonical workshop sessions only.
+- Render workshop detail pages for all workshop sessions in content, including canonical and catalog-derived sessions.
 
 Inputs:
 - `loadWorkshops()` from `src/lib/content.ts`.
-- `isCoreWorkshopId()` from `src/lib/workshop-catalog.ts` in `getStaticPaths`.
 
 Outputs:
-- Detail rendering for `/workshops/leanagents-workshop-chatgpt-apps` and `/workshops/manus-workshop`.
-- Not-found fallback panel for missing or non-core IDs.
+- Pre-rendered detail pages for each `Workshop` entry under `/workshops/<id>`.
+- Not-found fallback panel for missing workshop IDs.
 
 State:
 - No client-side state; props are passed from static path generation.
 
 Edge cases:
-- Non-core workshop IDs are excluded from static path list.
 - Missing proof bullets/lines render muted fallback content.
 - Missing action links render fallback copy instead of broken anchors.
 - CTA precedence is deterministic and placeholder-safe: use valid `replayUrl` first, then valid `slidesUrl`, else local detail route.
 - CTA label always matches resolved href source (`Replay`, `Slides`, or `Open details`).
 
 Dependencies:
-- `BaseLayout`, `loadWorkshops`, `Workshop` schema, `isCoreWorkshopId`.
+- `BaseLayout`, `loadWorkshops`, `Workshop` schema.
 
 Acceptance checks:
-- Only two canonical workshop detail routes are built.
-- Non-core routes (e.g. `ghost-machine`) do not have generated detail pages.
+- A detail page is generated for each workshop entry in `workshops.json`.
+- Unknown IDs resolve to the not-found fallback panel.
 - CTA label cannot report `Replay` when replay URL is unavailable/placeholder.

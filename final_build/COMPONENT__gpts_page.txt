@@ -13,6 +13,7 @@ Outputs:
   - `revealDelayMs` for staggered entrance.
 - No custom scene accent overrides; cards inherit `--scene-accent` from `/gpts` route token for one-accent consistency.
 - CTA strip for navigation to related routes, including contribution opportunities.
+- Page now uses `[data-motion-enter]` sections and `[data-motion-group]` on list containers for synchronized reveal timing.
 
 State:
 - No interactive state; render-time list mapping.

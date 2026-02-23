@@ -20,6 +20,7 @@ State:
 
 Edge cases:
 - Workshop id normalization is case-insensitive by trimming/lowercasing incoming IDs.
+- Visual-class module selection now gates only blocklist/title exclusions and no longer requires `module.visualClass`.
 - The visual-class module blocklist prevents excluded modules from showing even if content still exists.
 
 Dependencies:

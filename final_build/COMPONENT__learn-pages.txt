@@ -15,12 +15,17 @@ Outputs:
   - Core workshop catalog (`getCoreWorkshopCatalog`)
   - Replay quick links (`getWorkshopReplayLinks`)
   - Slides quick links (`getWorkshopSlideLinks`)
+- Visual-class slide links (`getVisualClassSlides`) for deck/slide-section rendering.
 - Shared proof snippets and CTA logic:
   - `buildModuleProofSnippet`
   - `buildWorkshopProofSnippet`
   - `buildModuleCta`
   - `buildWorkshopCta`
   - Sequenced proof narration for `/visual-classes` that shows learning progression.
+- Extended `LearnCard` with lesson metadata and optional slide metadata:
+  - `lessonIndex`, `lessonLabel`, `slidesHref`, `slidesLabel`
+- `getVisualClassCatalog()` now assigns deterministic lesson numbering (Lesson 1, Lesson 2, …) to rendered cards so the curriculum progression is explicit.
+- Internal workshop/detail-style routes such as `/workshops/<id>` are accepted in slide-resolution flows and preserved as secondary links where available.
 
 State:
 - No persisted state; deterministic array transforms for each call.
@@ -30,6 +35,7 @@ Edge cases:
 - Invalid placeholder links are filtered from replay/slides lists.
 - Empty proof content falls back to sensible defaults.
 - Visual-class catalog entries are sorted by explicit learning sequence keys (with stable id fallback) and stitched into a dependency-aware proof chain.
+- Lesson labels are emitted even when card proof chaining is not meaningful (fallback preserves card count visibility).
 
 Dependencies:
 - `src/lib/workshop-catalog.ts`

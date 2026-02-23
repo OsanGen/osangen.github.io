@@ -23,7 +23,7 @@ const visibleChips = scopeChips?.slice(0, 6) ?? [];
 ---
 <BaseLayout title="Contribute - Oscar Sanchez" description="Open-source contribution opportunity in the GENMRKT project. Learn by shipping public-good tooling.">
   <div class="join-landing scene-shell">
-    <section class="hero-shell">
+    <section class="hero-shell cog-proof-stack" data-motion-enter>
       <p class="hero-eyebrow">{eyebrow}</p>
       <h1>{title}</h1>
       <p class="join-lede line-clamp-2">{lede}</p>
@@ -46,7 +46,7 @@ const visibleChips = scopeChips?.slice(0, 6) ?? [];
       </div>
     </section>
 
-    <section class="panel-shell">
+    <section class="panel-shell" data-motion-enter>
       <h2 class="join-panel-title">{highLevelScopeTitle}</h2>
       <div class="join-scope-grid" aria-label="Scope chips">
         {visibleChips.map((chip) => (

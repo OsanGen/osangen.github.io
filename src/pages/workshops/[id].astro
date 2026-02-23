@@ -4,7 +4,6 @@ import TagList from '../../components/TagList.astro';
 import type { Workshop } from '../../lib/schemas';
 import { loadWorkshops } from '../../lib/content';
 import { isExternalUrl, isUnavailableLink } from '../../lib/link-utils';
-import { isCoreWorkshopId } from '../../lib/workshop-catalog';
 
 interface CtaState {
   href: string;
@@ -15,16 +14,14 @@ interface CtaState {
 
 export async function getStaticPaths() {
   const workshops = await loadWorkshops();
-  return workshops
-    .filter((workshop: Workshop) => isCoreWorkshopId(workshop.id))
-    .map((workshop: Workshop) => ({
-      params: {
-        id: workshop.id,
-      },
-      props: {
-        workshop,
-      },
-    }));
+  return workshops.map((workshop: Workshop) => ({
+    params: {
+      id: workshop.id,
+    },
+    props: {
+      workshop,
+    },
+  }));
 }
 
 const { workshop } = Astro.props as { workshop?: Workshop };

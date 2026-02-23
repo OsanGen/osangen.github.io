@@ -5,7 +5,7 @@ Primary site nav with explicit learn-surface discoverability and a prominent Boo
 
 ## Inputs / Outputs
 - Inputs: current pathname from `Astro.url.pathname`.
-- Output: Header with explicit nav links for `OSAN GAMES`, `Modules`, `Workshops`, `Contribute`, and `Resume` plus a right-side `Book` button.
+- Output: Header with explicit nav links for `OSAN GAMES`, `Modules`, `Workshops`, `Contribute`, and `Resume` plus a right-side `Book` button, and a branded lockup (`/icons/oscar-cog-brain.svg`) rendered beside “Oscar Sanchez”.
 
 ## State
 - Stateless, path-based current-item highlighting.
@@ -13,7 +13,8 @@ Primary site nav with explicit learn-surface discoverability and a prominent Boo
 ## Edge Cases
 - Root path normalization (`/` vs `/foo/`).
 - External Calendly CTA always opens a new tab safely.
- - Discoverability for learn routes is explicit with separate `Modules` and `Workshops` links.
+- Discoverability for learn routes is explicit with separate `Modules` and `Workshops` links.
+- Header brand mark should remain lightweight: no decorative square border/background to preserve 2D, low-noise OSAN lockup appearance.
 
 ## Dependencies
 - `header` styles in `src/styles/global.css`.
@@ -22,3 +23,5 @@ Primary site nav with explicit learn-surface discoverability and a prominent Boo
 - Header includes explicit `Modules` and `Workshops` links.
 - Existing active state and CTA behavior remain intact.
 - Book action is button-like on the right and not a nav link.
+- `src/components/Header.astro` renders a flat OSAN-compliant brain mark directly adjacent to the brand name.
+- Brand mark lockup uses no rounded square/frame treatment; visual appears as a small 2D accent marker only.

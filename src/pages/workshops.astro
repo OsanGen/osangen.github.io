@@ -24,7 +24,7 @@ const slidesReadyWorkshops = getWorkshopSlideLinks(workshops);
 ---
 <BaseLayout title="Workshops - Oscar Sanchez" description="Delivery workshops with proof-backed content.">
   <div class="page-shell">
-    <section class="panel-shell learn-hero" data-motion-enter>
+    <section class="panel-shell learn-hero cog-proof-stack" data-motion-enter>
       <p class="eyebrow learn-hero__eyebrow">
         <span class="learn-hero__dot" aria-hidden="true"></span>
         Learn
@@ -51,13 +51,13 @@ const slidesReadyWorkshops = getWorkshopSlideLinks(workshops);
       {coreWorkshops.length === 0 ? (
         <p class="text-small">No workshop entries yet.</p>
       ) : (
-        <CardGrid gap="var(--space-3)" align="start">
+        <CardGrid gap="var(--space-3)" align="start" motionGroup>
           {coreWorkshops.map(({ cta, title, meta, proof, tags }, index) => {
             return (
-              <article class="card learn-card cog-entrance" style={`--reveal-delay:${index * 45}ms;`}>
+              <article class="card learn-card cog-entrance cog-accent-rail" style={`--reveal-delay:${index * 45}ms;`}>
                 <p class="text-small learn-card__meta">{meta}</p>
                 <h3>{title}</h3>
-                <p class="learn-card__proof-label">
+                <p class="learn-card__proof-label cog-proof-chip">
                   <span class="learn-card__proof-dot" aria-hidden="true"></span>
                   Proof
                 </p>

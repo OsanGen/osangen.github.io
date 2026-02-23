@@ -33,6 +33,7 @@ Dependencies:
 - Bubble motif recipe applied globally via selectors in `src/styles/global.css`:
   - `:where(.hero-shell, .bubble-surface, .site-page > :is(.card, .panel-shell, .surface-shell, .visual-shell):first-of-type)`
   - plus `@supports selector(.site-page:has(> .hero-shell))` guard to suppress duplicate first-surface motif when hero exists.
+- Header brand lockup styling is defined via `.brand` and `.brand-mark` in `src/styles/global.css` and uses no bordered square chrome for the mark.
 
 Acceptance checks:
 - `src/styles/tokens.css` has only one active accent set for each required tone and `--accent: var(--cog-blue)`.
@@ -54,3 +55,7 @@ Acceptance checks:
   - `--cog-pink-soft`
 - Added `--motion-float` duration token and route-reference animation keyframe usage in `src/styles/global.css` for subtle hero motion.
 - Added global bubble motif system with `@keyframes cog-bubble-drift` and responsive bubble token overrides at `<=900px` and `<=560px`.
+- Added scene accent micro tokens in `src/styles/tokens.css` and `src/styles/global.css`:
+  - `--scene-accent-soft`
+  - `--scene-accent-rail`
+  - `--scene-accent-marker`

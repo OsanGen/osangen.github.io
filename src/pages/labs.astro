@@ -47,18 +47,18 @@ const gameCards = games.map((game, index) => {
 });
 ---
 <BaseLayout title="OSAN GAMES - Oscar Sanchez" description="Playable demos and game-based AI workshops">
-  <section class="hero-shell scene-shell command-shell labs-hero">
+  <section class="hero-shell scene-shell command-shell labs-hero cog-proof-stack" data-motion-enter>
     <p class="hero-eyebrow">Playable AI artifacts</p>
     <h1>OSAN GAMES</h1>
     <p class="text-small deck-subtitle">Playable demos for fast execution and teaching loops.</p>
   </section>
 
   <div class="labs-catalog-grid">
-    <CardGrid gap="var(--space-3)" align="start">
+    <CardGrid gap="var(--space-3)" align="start" motionGroup>
       {gameCards.map((item) => (
         <Card>
           <article
-            class="catalog-item cog-entrance"
+            class="catalog-item cog-entrance cog-accent-rail"
             style={`--reveal-delay:${item.index * 45}ms;`}
           >
             <div class="catalog-card-stack">

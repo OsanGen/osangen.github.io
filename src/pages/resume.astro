@@ -16,7 +16,7 @@ const sectionLinks = [
 ---
 <BaseLayout title="Resume - Oscar Sanchez" description="Professional experience, education, and selected proof highlights.">
   <div class="page-shell resume-shell">
-    <section class="card resume-hero" data-motion-enter>
+    <section class="card resume-hero cog-proof-stack" data-motion-enter>
       <h1>Resume</h1>
       <p class="resume-hero__name">{profile.name}</p>
       <p class="text-small resume-hero__headline">{profile.headline}</p>
@@ -41,7 +41,7 @@ const sectionLinks = [
 
     <div class="resume-layout">
       <aside class="resume-layout__toc" data-motion-enter>
-        <nav class="card resume-toc resume-toc--sticky" aria-label="Resume section navigation">
+        <nav class="card resume-toc resume-toc--sticky cog-accent-rail" aria-label="Resume section navigation">
           <h2 class="h3">On this page</h2>
           <ul class="resume-toc__list">
             {sectionLinks.map((section) => (
@@ -54,7 +54,7 @@ const sectionLinks = [
       </aside>
 
       <div class="resume-layout__content page-shell">
-        <section id="snapshot" class="resume-section" data-motion-enter>
+        <section id="snapshot" class="resume-section cog-proof-stack" data-motion-enter>
           <Card>
             <h2>Snapshot</h2>
             <ul class="resume-list">
@@ -63,7 +63,7 @@ const sectionLinks = [
           </Card>
         </section>
 
-        <section id="what-i-do" class="resume-section" data-motion-enter>
+        <section id="what-i-do" class="resume-section cog-proof-stack" data-motion-enter>
           <Card>
             <h2>What I do + How I work</h2>
             <div class="resume-method-grid" data-motion-group>
@@ -84,7 +84,7 @@ const sectionLinks = [
           </Card>
         </section>
 
-        <section id="experience" class="resume-section" data-motion-enter>
+        <section id="experience" class="resume-section cog-proof-stack" data-motion-enter>
           <Card>
             <h2>Experience</h2>
             <ol class="resume-timeline" data-motion-group>
@@ -101,7 +101,7 @@ const sectionLinks = [
           </Card>
         </section>
 
-        <section id="proof" class="resume-section" data-motion-enter>
+        <section id="proof" class="resume-section cog-proof-stack" data-motion-enter>
           <Card>
             <h2>Selected proof</h2>
             <div class="resume-proof-grid grid" data-motion-group>
@@ -117,7 +117,7 @@ const sectionLinks = [
           </Card>
         </section>
 
-        <section id="education" class="resume-section" data-motion-enter>
+        <section id="education" class="resume-section cog-proof-stack" data-motion-enter>
           <Card>
             <h2>Education</h2>
             <ul class="resume-education-list">
@@ -131,7 +131,7 @@ const sectionLinks = [
           </Card>
         </section>
 
-        <section id="skills" class="resume-section" data-motion-enter>
+        <section id="skills" class="resume-section cog-proof-stack" data-motion-enter>
           <Card>
             <h2>Skills</h2>
             {profile.skills.length > 0 ? (

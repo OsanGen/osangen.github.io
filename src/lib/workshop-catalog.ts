@@ -22,7 +22,6 @@ const isBlockedVisualClassWorkshop = (workshop: Workshop): boolean =>
   VISUAL_CLASS_WORKSHOP_TITLE_BLOCKLIST.has(normalizeText(workshop.title));
 
 export const isDisplayableVisualClassModule = (module: Module): boolean =>
-  Boolean(module.visualClass) &&
   !VISUAL_CLASS_MODULE_BLOCKLIST.has(module.id) &&
   !VISUAL_CLASS_MODULE_TITLE_BLOCKLIST.has(normalizeText(module.title));
 

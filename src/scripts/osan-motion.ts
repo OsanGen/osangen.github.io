@@ -1,8 +1,8 @@
 import { animate, inView, scroll } from 'motion';
 
 // QA note: Motion is enabled on card-first, proof-first routes where subtle reveal improves scan flow.
-// Enabled pages: home, workshops, gpts, labs, join, resume. Reduced-motion users are always opted out below.
-const ENABLED_PAGES = new Set(['home', 'workshops', 'gpts', 'labs', 'join', 'resume']);
+// Enabled pages: home, workshops, visual-classes, gpts, labs, join, resume. Reduced-motion users are always opted out below.
+const ENABLED_PAGES = new Set(['home', 'workshops', 'visual-classes', 'gpts', 'labs', 'join', 'resume']);
 const DEFAULT_ENTER_DISTANCE_PX = 8;
 const DEFAULT_ENTER_DURATION_MS = 320;
 const CALM_EASING = 'easeOut';
@@ -107,13 +107,15 @@ const createGroupObservers = (enterDistancePx: number, enterDurationSec: number)
       group,
       () => {
         targets.forEach((target, index) => {
+          const targetDelayMs = parseDelayMs(getComputedStyle(target).getPropertyValue('--reveal-delay'));
+
           animate(
             target,
             { opacity: [0, 1], y: [enterDistancePx, 0] },
             {
               duration: enterDurationSec,
               // Default stagger (0.05s) is reused for grouped resume timeline items.
-              delay: index * 0.05,
+              delay: targetDelayMs / 1000 + index * 0.05,
               ease: CALM_EASING,
             },
           );

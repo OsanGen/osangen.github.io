@@ -15,7 +15,7 @@ Inputs:
 - User accessibility preference (`prefers-reduced-motion`).
 
 Outputs:
-- Adds `html.motion-enhanced` only for allowed routes (`home`, `workshops`, `gpts`, `resume`) and non-reduced-motion users.
+- Adds `html.motion-enhanced` only for allowed routes (`home`, `workshops`, `visual-classes`, `gpts`, `labs`, `join`, `resume`) and non-reduced-motion users.
 - Registers in-view observers via `inView()` and scroll progress binding via `scroll()`.
 - Produces one cleanup function and binds it to `pagehide`.
 
@@ -41,4 +41,5 @@ Acceptance checks:
 - Runtime adds no glow/heavy-gradient effects and preserves content-first readability.
 - Progress rail updates with page scroll progress and remains subtle.
 - Reveal effects trigger once per target/group and clean up observers after first entry.
+- Group observers honor `data-motion-group` order with a small default stagger (`0.05s`) and `--reveal-delay` per item.
 - Cleanup runs on `pagehide` and removes enhancement class.

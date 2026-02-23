@@ -1,6 +1,6 @@
 import type { Module, Workshop } from './schemas';
 import { isDisplayableVisualClassModule, splitWorkshops } from './workshop-catalog';
-import { isExternalUrl, isUnavailableLink, sanitizeLink } from './link-utils';
+import { isExternalUrl, isInternalPath, isUnavailableLink, sanitizeLink } from './link-utils';
 
 export const LEARN_VISUAL_ROUTE_LABEL = 'Modules';
 export const LEARN_VISUAL_ROUTE_NAME = 'Modules';
@@ -17,6 +17,11 @@ export interface LearnCard {
   proof: string;
   tags: string[];
   id?: string;
+  lessonIndex?: number;
+  lessonLabel?: string;
+  slidesHref?: string;
+  slidesLabel?: string;
+  kind?: 'module' | 'workshop';
   cta: CtaState;
 }
 
@@ -24,6 +29,13 @@ export interface LearnQuickLink {
   title: string;
   date: string;
   href: string;
+}
+
+export interface LearnSlideLink {
+  title: string;
+  date: string;
+  href: string;
+  isExternal: boolean;
 }
 
 const MAX_PROOF_CHARS = 140;
@@ -48,7 +60,11 @@ const clampProof = (value = '', max = MAX_PROOF_CHARS, fallback = 'Proof details
 
 const isValidReplayOrSlides = (href = '') => {
   const normalized = sanitizeLink(href);
-  return Boolean(normalized) && !isUnavailableLink(normalized) && isExternalUrl(normalized);
+  return (
+    Boolean(normalized) &&
+    !isUnavailableLink(normalized) &&
+    (isExternalUrl(normalized) || isInternalPath(normalized))
+  );
 };
 
 const compactPreviousTitle = (title = '') => {
@@ -138,6 +154,11 @@ export const buildModuleCta = (module: Module): CtaState => {
   };
 };
 
+const resolveSlideHref = (value = '') => {
+  const href = sanitizeLink(value);
+  return isValidReplayOrSlides(href) ? href : '';
+};
+
 export const buildWorkshopCta = (workshop: Workshop, fallbackToIndex = false): CtaState => {
   if (isValidReplayOrSlides(workshop.replayUrl)) {
     return {
@@ -148,9 +169,10 @@ export const buildWorkshopCta = (workshop: Workshop, fallbackToIndex = false): C
   }
 
   if (isValidReplayOrSlides(workshop.slidesUrl)) {
+    const href = sanitizeLink(workshop.slidesUrl || '');
     return {
-      href: sanitizeLink(workshop.slidesUrl || ''),
-      isExternal: true,
+      href,
+      isExternal: isExternalUrl(href),
       label: 'Slides',
     };
   }
@@ -176,6 +198,8 @@ export const getVisualClassCatalog = (
       meta: `${module.time} · ${module.level}`,
       proof: buildModuleProofSnippet(module),
       tags: module.topics,
+      slidesHref: resolveSlideHref(module.links?.slides),
+      slidesLabel: resolveSlideHref(module.links?.slides) ? 'Slides' : undefined,
       cta: buildModuleCta(module),
     }));
 
@@ -186,14 +210,19 @@ export const getVisualClassCatalog = (
     meta: workshop.date,
     proof: buildWorkshopProofSnippet(workshop),
     tags: workshop.tags,
+    slidesHref: resolveSlideHref(workshop.slidesUrl),
+    slidesLabel: isValidReplayOrSlides(workshop.slidesUrl) ? 'Slides' : undefined,
     cta: buildWorkshopCta(workshop, true),
   }));
 
   const orderedCards = sortVisualClassCatalog([...modulesCards, ...workshopCards]).map(
     ({ ...card }, index, allCards) => {
       const previousCard = index > 0 ? allCards[index - 1] : null;
+      const lessonIndex = index + 1;
       return {
         ...card,
+        lessonIndex,
+        lessonLabel: `Lesson ${lessonIndex}`,
         proof: withLearningProgress(card.proof, previousCard?.title),
       };
     },
@@ -211,10 +240,22 @@ export const getCoreWorkshopCatalog = (workshops: Workshop[]): LearnCard[] => {
       title: workshop.title,
       meta: workshop.date,
       proof: buildWorkshopProofSnippet(workshop),
+      slidesHref: resolveSlideHref(workshop.slidesUrl),
+      slidesLabel: isValidReplayOrSlides(workshop.slidesUrl) ? 'Slides' : undefined,
       tags: workshop.tags,
       cta: buildWorkshopCta(workshop),
     }));
 };
+
+export const getVisualClassSlides = (cards: LearnCard[]): LearnSlideLink[] =>
+  cards
+    .filter((card) => Boolean(card.slidesHref))
+    .map((card) => ({
+      title: card.title,
+      date: card.meta,
+      href: card.slidesHref || '',
+      isExternal: isExternalUrl(card.slidesHref || ''),
+    }));
 
 export const getWorkshopReplayLinks = (workshops: Workshop[]): LearnQuickLink[] =>
   [...splitWorkshops(workshops).coreWorkshops]

@@ -55,7 +55,7 @@ const demoCopy = formatFallbackText(gpt?.links.demo, 'Demo pending.');
 <BaseLayout title={gpt ? `${gpt.name} | Lean Agents` : 'Agent not found'} description="Lean agent detail with usage, proof, and limits.">
   {gpt ? (
     <div class="page-shell">
-      <section class="hero-shell scene-shell">
+      <section class="hero-shell scene-shell cog-proof-stack" data-motion-enter>
         <p class="hero-eyebrow">Lean Agent detail</p>
         <h1>{gpt.name}</h1>
         <p class="text-small deck-subtitle">{gpt.short_desc}</p>
@@ -79,26 +79,26 @@ const demoCopy = formatFallbackText(gpt?.links.demo, 'Demo pending.');
         </div>
       </section>
 
-      <section class="panel-shell">
+      <section class="panel-shell cog-proof-stack" data-motion-enter>
         <h2>Proof</h2>
         <ProofIOBlock proof={gpt.proof} mode="full" />
       </section>
 
-      <section class="panel-shell">
+      <section class="panel-shell cog-proof-stack" data-motion-enter>
         <h2>How to use</h2>
-        <ol class="gpt-steps">
+        <ol class="gpt-steps" data-motion-group>
           {gpt.how_to_use.map((step) => <li>{step}</li>)}
         </ol>
       </section>
 
-      <section class="panel-shell">
+      <section class="panel-shell cog-proof-stack" data-motion-enter>
         <h2>Limits</h2>
-        <ul class="gpt-limits">
+        <ul class="gpt-limits" data-motion-group>
           {gpt.limits.map((limit) => <li>{limit}</li>)}
         </ul>
       </section>
 
-      <section class="panel-shell">
+      <section class="panel-shell cog-proof-stack" data-motion-enter>
         <h2>Additional resources</h2>
         <div class="cta-stack">
           {promptPackCta.visible ? (
