@@ -1765,30 +1765,6 @@ html.motion-enhanced [data-motion-enter][data-motion-done='true'] {
   border-color: var(--learn-border-hover);
 }
 
-:is(body[data-page='visual-classes']) .learn-slide-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 0.5rem;
-}
-
-:is(body[data-page='visual-classes']) .learn-slide-link {
-  display: grid;
-  gap: 0.18rem;
-  text-decoration: none;
-  border: 1px solid var(--learn-structural-border);
-  border-radius: var(--radius-sm);
-  background: var(--surface);
-  padding: 0.56rem 0.76rem;
-  min-height: 2.75rem;
-}
-
-:is(body[data-page='visual-classes']) .learn-slide-link:hover,
-:is(body[data-page='visual-classes']) .learn-slide-link:focus-visible {
-  border-color: var(--learn-border-hover);
-}
-
 :is(body[data-page='workshops'], body[data-page='visual-classes']) .tag-list .badge {
   text-transform: none;
   letter-spacing: 0.01em;

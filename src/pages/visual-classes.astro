@@ -1,13 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { loadLastModifiedISO, loadModules, loadWorkshops } from '../lib/content';
-import { getVisualClassCatalog, getVisualClassSlides, LEARN_VISUAL_ROUTE_LABEL, type LearnCard } from '../lib/learn-pages';
+import { getVisualClassCatalog, LEARN_VISUAL_ROUTE_LABEL, type LearnCard } from '../lib/learn-pages';
 
 const [modules, workshops] = await Promise.all([loadModules(), loadWorkshops()]);
 const updated = await loadLastModifiedISO('workshops.json');
 
 const visualClassCards: LearnCard[] = getVisualClassCatalog(modules, workshops);
-const visualClassSlides = getVisualClassSlides(visualClassCards);
 
 const updatedLabel = updated
   ? new Date(updated).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
@@ -27,7 +26,6 @@ const updatedLabel = updated
       </div>
       <nav class="learn-hero__actions" aria-label="Jump to visual class sections">
         <a class="button" href="#visual-class-catalog">Browse lessons</a>
-        {visualClassSlides.length > 0 ? <a class="button" href="#visual-class-slides">Slides</a> : null}
         <a class="button" href="/workshops">Workshops</a>
       </nav>
     </section>
@@ -69,27 +67,5 @@ const updatedLabel = updated
       )}
     </section>
 
-    <section id="visual-class-slides" class="panel-shell learn-filter-section" data-motion-enter>
-      <h2>Slides</h2>
-      {visualClassSlides.length === 0 ? (
-        <p class="text-small muted">No slide links are published yet.</p>
-      ) : (
-        <ul class="learn-slide-list">
-          {visualClassSlides.map((item) => (
-            <li>
-              <a
-                class="learn-slide-link"
-                href={item.href}
-                target={item.isExternal ? '_blank' : undefined}
-                rel={item.isExternal ? 'noopener noreferrer' : undefined}
-              >
-                <span class="text-small muted">{item.date}</span>
-                <span>{item.title}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
-    </section>
   </div>
 </BaseLayout>

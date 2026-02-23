@@ -31,13 +31,6 @@ export interface LearnQuickLink {
   href: string;
 }
 
-export interface LearnSlideLink {
-  title: string;
-  date: string;
-  href: string;
-  isExternal: boolean;
-}
-
 const MAX_PROOF_CHARS = 140;
 
 const normalizeText = (value = '') => value.replace(/\s+/g, ' ').trim();
@@ -282,16 +275,6 @@ export const getCoreWorkshopCatalog = (workshops: Workshop[]): LearnCard[] => {
       cta: buildWorkshopCta(workshop),
     }));
 };
-
-export const getVisualClassSlides = (cards: LearnCard[]): LearnSlideLink[] =>
-  cards
-    .filter((card) => Boolean(card.slidesHref))
-    .map((card) => ({
-      title: card.title,
-      date: card.meta,
-      href: card.slidesHref || '',
-      isExternal: isExternalUrl(card.slidesHref || ''),
-    }));
 
 export const getWorkshopReplayLinks = (workshops: Workshop[]): LearnQuickLink[] =>
   [...splitWorkshops(workshops).coreWorkshops]

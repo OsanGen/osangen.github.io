@@ -37,7 +37,8 @@
 - labs page hero heading rename | completed | Updated `/labs` page title and hero heading to `OSAN GAMES`.
 - labs card pill cleanup | completed | Removed Labs listing concept tags and `PLAYABLE` badge in `/labs` cards and tightened Labs-only card rhythm via `src/styles/pages/labs.css`.
 - labs hero-card spacing separation | completed | Added Labs-only `32px` (`var(--space-5)`) spacing between `.labs-hero` and first catalog grid block via `.labs-hero + .labs-catalog-grid`.
-- modules lessonization pass | completed | Fixed `visualClass` gating for module visibility, added lesson labels and continuity proof chaining, and added the `/visual-classes` slides section with jump chip.
+- modules lessonization pass | completed | Fixed `visualClass` gating for module visibility, added lesson labels and continuity proof chaining, with the `/visual-classes` deck focused on lesson cards only.
+- modules slide section removal | completed | Removed the detached `/visual-classes` slide rail/list section and jump chip so Modules displays a single lesson deck focused on proof-first card sequencing.
 - learn split QA pass | blocked | Manual browser smoke is pending on `/workshops` and `/visual-classes` for lesson sequence readability at 10% zoom, reduced-motion state, mobile tap target spacing, and route-link discoverability across header/footer/index/more/home with one-accent consistency.
 - learn route tab rename | completed | Renamed the learn destination UI label from "Visual Classes" to "Modules" across header, footer, homepage card, workshops CTA, visual-classes page, and `/more` while keeping `/visual-classes` URL unchanged.
 - modules setup hardening | completed | Reworked `/visual-classes` catalog ordering to follow a learning progression and added proof snippets that explain each card’s continuity from the previous lesson.
