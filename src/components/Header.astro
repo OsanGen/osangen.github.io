@@ -14,13 +14,14 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
     <a class="brand brand-lockup" href="/" aria-label="OSAN home">
       <img
         class="brand-lockup-image"
-        src="/icons/osan-logo.png"
-        srcset="/icons/osan-logo.png 1x, /icons/osan-logo@2x.png 2x"
-        alt="OSAN"
+        src="/icons/osan-logo-v2.png"
+        srcset="/icons/osan-logo-v2.png 1x, /icons/osan-logo-v2@2x.png 2x"
+        alt=""
         loading="eager"
         width="126"
         height="29"
-        aria-hidden="true"
+        decoding="async"
+        onerror="this.onerror=null;this.src='/icons/oscar-cog-brain.svg';"
       />
     </a>
     <div class="header-right">
