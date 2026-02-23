@@ -5,7 +5,7 @@ Primary site nav with explicit learn-surface discoverability and a prominent Boo
 
 ## Inputs / Outputs
 - Inputs: current pathname from `Astro.url.pathname`.
-- Output: Header with explicit nav links for `OSAN GAMES`, `Modules`, `Workshops`, `Contribute`, and `Resume` plus a right-side `Book` button, and a branded lockup (`/icons/oscar-cog-brain.svg`) rendered beside “Oscar Sanchez”.
+- Output: Header with explicit nav links for `OSAN GAMES`, `Modules`, `Workshops`, `Contribute`, and `Resume` plus a right-side `Book` button, and a single logo lockup image sourced from `/icons/osan-logo.png` (with 2x variant in `srcset`) in the brand link.
 
 ## State
 - Stateless, path-based current-item highlighting.
@@ -23,5 +23,5 @@ Primary site nav with explicit learn-surface discoverability and a prominent Boo
 - Header includes explicit `Modules` and `Workshops` links.
 - Existing active state and CTA behavior remain intact.
 - Book action is button-like on the right and not a nav link.
-- `src/components/Header.astro` renders a flat OSAN-compliant brain mark directly adjacent to the brand name.
-- Brand mark lockup uses no rounded square/frame treatment; visual appears as a small 2D accent marker only.
+- `src/components/Header.astro` renders a single image lockup in the brand link (no side-by-side text mark + wordmark).
+- Logo lockup uses no rounded square/frame treatment; visual appears as a low-noise 2D image asset only.

@@ -43,3 +43,4 @@
 - learn route tab rename | completed | Renamed the learn destination UI label from "Visual Classes" to "Modules" across header, footer, homepage card, workshops CTA, visual-classes page, and `/more` while keeping `/visual-classes` URL unchanged.
 - modules setup hardening | completed | Reworked `/visual-classes` catalog ordering to follow a learning progression and added proof snippets that explain each card’s continuity from the previous lesson.
 - visual modules deck refresh | completed | Added missing linked modules (`kitchen-x-ray`, `ai-kitchen`) to source catalog and moved `/visual-classes` to a lesson-strip render style for clearer sequence and cleaner scan rhythm.
+- header logo asset sync | completed | Replaced `/public/icons/osan-logo.png` and `/public/icons/osan-logo@2x.png` with the provided PNG lockup so header now renders the intended raster brand mark from the new asset.
