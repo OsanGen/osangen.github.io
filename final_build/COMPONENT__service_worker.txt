@@ -9,14 +9,16 @@ Implement a lightweight runtime performance layer with service worker caching to
   - `BaseLayout.astro` mounting point (`ServiceWorkerRegister` component).
 - Output:
   - Registered service worker lifecycle (`install`, `activate`, `fetch`) orchestration.
-  - Cache-first asset responses and network-first documents with cache fallback.
+  - Cache-first asset responses (with critical brand logo network-first refresh) and network-first documents with cache fallback.
 
 ## State
 - Three named caches:
-  - `osan-core-<version>`
-  - `osan-assets-<version>`
-  - `osan-documents-<version>`
+- `osan-core-<version>`
+- `osan-assets-<version>`
+- `osan-documents-<version>`
 - In-memory state handled by the browser cache API and client-controlled update flow.
+- `VERSION` increments force cache namespace refresh for logo/style invalidation.
+- `ServiceWorkerRegister` now triggers `update()` after registration to reduce stale worker runtime.
 
 ## Edge cases
 - Pre-cache failures for unavailable routes are tolerated and ignored.
@@ -31,6 +33,6 @@ Implement a lightweight runtime performance layer with service worker caching to
 
 ## Acceptance checks
 - Service worker is registered exactly once from shared layout.
-- Static script/style/font/image/font/svg/json/text/xml/txt requests use cache-first strategy.
+- Static script/style/font/image/font/svg/json/text/xml/txt requests use cache-first strategy, with `/icons/osan-logo*.png` explicitly routed through network-first for faster brand-propagation and brand-change visibility.
 - Document requests use network-first with stale fallback.
 - New routes remain accessible under normal connectivity and degrade gracefully offline.

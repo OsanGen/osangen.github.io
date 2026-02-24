@@ -1,4 +1,4 @@
-const VERSION = 'v1-2026-02-14';
+const VERSION = 'v1-2026-02-24';
 const CORE_CACHE = `osan-core-${VERSION}`;
 const ASSET_CACHE = `osan-assets-${VERSION}`;
 const DOC_CACHE = `osan-documents-${VERSION}`;
@@ -40,6 +40,14 @@ const isStaticAsset = (request) => {
     /\.(css|js|svg|png|jpg|jpeg|gif|webp|avif|ico|woff2?|ttf|otf|json|xml|txt)$/.test(path) ||
     path.startsWith('/_astro/') ||
     path.startsWith('/icons/')
+  );
+};
+
+const isCriticalLogoRequest = (requestUrl) => {
+  const path = requestUrl.pathname;
+  return (
+    path.startsWith('/icons/osan-logo-v2') ||
+    path.startsWith('/icons/osan-logo')
   );
 };
 
@@ -156,7 +164,11 @@ self.addEventListener('fetch', (event) => {
   }
 
   if (isStaticAsset(request)) {
-    event.respondWith(cacheFirst(request, ASSET_CACHE));
+    if (isCriticalLogoRequest(requestUrl)) {
+      event.respondWith(networkFirst(request, ASSET_CACHE));
+    } else {
+      event.respondWith(cacheFirst(request, ASSET_CACHE));
+    }
     return;
   }
 });
