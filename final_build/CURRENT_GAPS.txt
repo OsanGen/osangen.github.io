@@ -13,6 +13,7 @@
 - join funnel contribution reframing | completed | Updated `/join`, homepage route card, header nav, and related route copy to use contribution language while keeping `/join` path compatibility.
 - route accent consistency cleanup | completed | Removed hardcoded inline `--scene-accent`/`scene-accent` overrides from index, /gpts, /gpts/[id], /join, and /labs; GPTCard now defaults to route-scoped `var(--scene-accent)` for route-consistent accents.
 - homepage route-card visual simplification | completed | Removed decorative route-grid/route-card rail and dot motifs and switched homepage route CTAs to `button--ghost` for cleaner proof-first cards.
+- homepage route-card blue-rail removal | completed | Removed `cog-accent-rail` from homepage route cards and added a home-scoped CSS rail kill-switch so the first-page route tiles cannot render the vertical blue line.
 - osan premium-quiet upgrade | completed | Added scene depth tokens + proof stack utilities across `/`, `/workshops`, `/visual-classes`, `/gpts`, `/resume`, `/join`, `/labs`, and shared motion pages; resumed motion hooks now include grouped stagger behavior and per-page motion entry controls.
 - learn route split | completed | Added dedicated `/visual-classes` page, extracted shared `src/lib/learn-pages.ts`, and made `/workshops` workshops-only.
 - astro5 migration completion | completed | Upgraded `astro` to `5.17.2`, upgraded `@astrojs/check` to `0.9.6`, added explicit `src/content.config.ts`, and verified `npm audit --omit=dev` reports 0 vulnerabilities.

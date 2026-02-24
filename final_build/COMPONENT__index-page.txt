@@ -10,7 +10,7 @@ Outputs:
 - Hero shell with short headline, one-line lede, two top CTAs (OSAN Games, Book).
 - Four route cards (`OSAN GAMES`, `Workshops`, `Modules`, `Contribute`) with concise subtitle + CTA.
 - Page and hero accents follow `/` route token from `BaseLayout` instead of inline overrides.
-- Motion choreography hooks (`data-motion-enter`, `[data-motion-group]`) and proof-first utility classes (`cog-proof-stack`, `cog-accent-rail`, `cog-proof-chip`) are applied to route tiles.
+- Motion choreography hooks (`data-motion-enter`, `[data-motion-group]`) and proof-first utility classes (`cog-proof-stack`) are applied to route tiles without left accent rail decoration.
 
 State:
 - Stateless render.
@@ -28,3 +28,4 @@ Acceptance checks:
 - Above-fold consists of hero + four route cards only.
 - H1, subtitle, and CTA copy remain concise.
 - Route cards use cleaner visual treatment without decorative route rails/dots.
+- Home route cards remain rail-free even if generic accent-rail classes are introduced elsewhere (home-scoped CSS kill-switch).

@@ -568,6 +568,11 @@ main {
   width: fit-content;
 }
 
+body[data-page='home'] .route-grid .route-card::before,
+body[data-page='home'] .route-grid .route-card.cog-accent-rail::before {
+  content: none;
+}
+
 .inspiration-card {
   --route-accent: var(--cog-mint);
   display: grid;
