@@ -10,6 +10,9 @@ const CORE_WORKSHOP_IDS = new Set([
   'leanagents-workshop-chatgpt-apps',
   'manus-workshop',
 ]);
+const FOOTER_PRIMARY_LINKS = ['/labs', '/visual-classes', '/workshops', '/join', '/resume'];
+const FOOTER_STATEMENT = 'One domain per quarter. Open research. Ethical AI. Free skills, donor-sustained.';
+const LEGACY_FOOTER_STATEMENT = 'AI-assisted; reviewed by humans; results vary.';
 
 const normalizePathname = (pathname) => {
   if (!pathname) {
@@ -164,11 +167,53 @@ const checkDynamicRoutes = async () => {
   return issues;
 };
 
+const checkFooterConsistency = async () => {
+  const issues = [];
+  const expectedLinks = uniqueSorted(FOOTER_PRIMARY_LINKS);
+  const htmlFiles = await collectHtmlFiles(DIST_ROOT);
+
+  for (const htmlFile of htmlFiles) {
+    const html = await fs.readFile(htmlFile, 'utf8');
+    const source = `/${path.relative(DIST_ROOT, htmlFile).replace(/\\/g, '/')}`;
+    const footerNav = html.match(/<nav class="footer-links" aria-label="Footer primary">([\s\S]*?)<\/nav>/);
+
+    if (!footerNav?.[1]) {
+      issues.push(`missing footer primary nav in ${source}`);
+      continue;
+    }
+
+    const footerLinks = uniqueSorted(
+      [...footerNav[1].matchAll(/href="([^"]+)"/g)]
+        .map((match) => match[1] || '')
+        .map((href) => href.split('#')[0]?.split('?')[0] || '')
+        .filter(Boolean)
+        .map((href) => normalizePathname(href)),
+    );
+
+    if (footerLinks.length !== expectedLinks.length || footerLinks.some((href, index) => href !== expectedLinks[index])) {
+      issues.push(
+        `unexpected footer nav links in ${source}: got [${footerLinks.join(', ')}], expected [${expectedLinks.join(', ')}]`,
+      );
+    }
+
+    if (!html.includes(FOOTER_STATEMENT)) {
+      issues.push(`missing canonical footer statement in ${source}`);
+    }
+
+    if (html.includes(LEGACY_FOOTER_STATEMENT)) {
+      issues.push(`legacy footer statement found in ${source}`);
+    }
+  }
+
+  return issues;
+};
+
 const main = async () => {
   const checks = await Promise.all([
     checkSitemapRoutes(),
     checkInternalLinks(),
     checkDynamicRoutes(),
+    checkFooterConsistency(),
   ]);
 
   const issues = checks.flat();

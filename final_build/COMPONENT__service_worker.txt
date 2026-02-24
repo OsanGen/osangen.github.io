@@ -7,9 +7,11 @@ Implement a lightweight runtime performance layer with service worker caching to
 - Input:
   - Browser requests for navigations and same-origin static assets.
   - `BaseLayout.astro` mounting point (`ServiceWorkerRegister` component).
+  - Build-time `PUBLIC_SW_VERSION` propagated into service worker registration URL query.
 - Output:
   - Registered service worker lifecycle (`install`, `activate`, `fetch`) orchestration.
   - Cache-first asset responses (with critical brand logo network-first refresh) and network-first documents with cache fallback.
+  - Deploy-driven cache namespace rotation keyed by SW query-version.
 
 ## State
 - Three named caches:
@@ -17,7 +19,7 @@ Implement a lightweight runtime performance layer with service worker caching to
 - `osan-assets-<version>`
 - `osan-documents-<version>`
 - In-memory state handled by the browser cache API and client-controlled update flow.
-- `VERSION` increments force cache namespace refresh for logo/style invalidation.
+- `VERSION` is derived at runtime from `self.location.href` query param (`?v=`) and normalized for cache key safety.
 - `ServiceWorkerRegister` now triggers `update()` after registration to reduce stale worker runtime.
 
 ## Edge cases
@@ -25,6 +27,8 @@ Implement a lightweight runtime performance layer with service worker caching to
 - Network failures for navigations/pages fall back to cached document for last known availability.
 - Off-origin requests are ignored by the worker so CDN/API calls are unaffected.
 - Registration failures are caught and intentionally non-fatal in constrained browsers.
+- Navigation fetches use `cache: 'no-store'` before fallback to reduce stale HTML under transient cache states.
+- Missing `PUBLIC_SW_VERSION` in local/dev falls back to `local` so registration remains deterministic.
 
 ## Dependencies
 - `src/layouts/BaseLayout.astro` (for injection in every shell page).
@@ -33,6 +37,7 @@ Implement a lightweight runtime performance layer with service worker caching to
 
 ## Acceptance checks
 - Service worker is registered exactly once from shared layout.
+- Registration URL includes `?v=<PUBLIC_SW_VERSION>` in CI/deploy builds and `?v=local` in local/dev fallback.
 - Static script/style/font/image/font/svg/json/text/xml/txt requests use cache-first strategy, with canonical lockup assets (`/icons/osan-logo-v2*.png`) explicitly routed through network-first for faster brand-propagation and brand-change visibility.
 - Document requests use network-first with stale fallback.
 - New routes remain accessible under normal connectivity and degrade gracefully offline.

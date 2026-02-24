@@ -1,0 +1,29 @@
+# Component Spec: `src/components/ServiceWorkerRegister.astro`
+
+## Purpose
+Register the service worker from shared layout with a deploy-versioned script URL so cache namespaces rotate automatically after each release.
+
+## Inputs / Outputs
+- Inputs:
+  - `import.meta.env.PUBLIC_SW_VERSION` (build/runtime-injected string).
+- Output:
+  - `navigator.serviceWorker.register('/sw.js?v=<version>', { scope: '/' })` on window load.
+  - Immediate `registration.update()` call to accelerate worker refresh.
+
+## State
+- Stateless component.
+- Uses deterministic fallback version `local` when `PUBLIC_SW_VERSION` is missing.
+
+## Edge Cases
+- Registration is skipped in browsers without SW support.
+- Registration failures are caught and intentionally ignored.
+- Version string is URL-encoded before interpolation into script URL.
+
+## Dependencies
+- Mounted via `src/layouts/BaseLayout.astro`.
+- Runtime behavior defined in `public/sw.js`.
+
+## Acceptance Checks
+- Generated HTML includes versioned SW URL (`/sw.js?v=...`).
+- Local/dev builds still register successfully (`/sw.js?v=local` fallback).
+- No route-specific registration differences; behavior is identical across all pages that use `BaseLayout`.

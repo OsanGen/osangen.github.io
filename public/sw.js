@@ -1,4 +1,5 @@
-const VERSION = 'v1-2026-02-24-b';
+const VERSION = (new URL(self.location.href).searchParams.get('v') || 'local')
+  .replace(/[^a-zA-Z0-9._-]/g, '_');
 const CORE_CACHE = `osan-core-${VERSION}`;
 const ASSET_CACHE = `osan-assets-${VERSION}`;
 const DOC_CACHE = `osan-documents-${VERSION}`;
@@ -64,11 +65,11 @@ const cacheFirst = async (request, cacheName) => {
   return response;
 };
 
-const networkFirst = async (request, cacheName) => {
+const networkFirst = async (request, cacheName, requestInit = undefined) => {
   const cache = await caches.open(cacheName);
 
   try {
-    const response = await fetch(request);
+    const response = await fetch(request, requestInit);
     if (response && response.ok) {
       await cache.put(request, response.clone());
     }
@@ -143,7 +144,7 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
       (async () => {
         try {
-          return await networkFirst(request, DOC_CACHE);
+          return await networkFirst(request, DOC_CACHE, { cache: 'no-store' });
         } catch (error) {
           const fallback = await buildFallbackDocument(DOC_CACHE);
           if (fallback) {

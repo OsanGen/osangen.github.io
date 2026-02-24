@@ -1,10 +1,12 @@
 ---
+const swVersion = (import.meta.env.PUBLIC_SW_VERSION ?? 'local').trim() || 'local';
+const swScriptUrl = `/sw.js?v=${encodeURIComponent(swVersion)}`;
 ---
-<script is:inline>
+<script is:inline define:vars={{ swScriptUrl }}>
   if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker
-        .register('/sw.js', {
+        .register(swScriptUrl, {
           scope: '/'
         })
         .then((registration) => registration.update())
