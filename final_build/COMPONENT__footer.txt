@@ -1,24 +1,23 @@
 # Component Spec: `src/components/Footer.astro`
 
 ## Purpose
-Provide consistent secondary navigation and trust/disclosure text across all routes.
+Provide a clean footer that mirrors the top primary tabs and shows one compact OSAN mission statement.
 
 ## Inputs / Outputs
-- Inputs: none (static nav links and footer copy).
-- Output: global footer link set and disclosure text.
+- Inputs: current pathname from `Astro.url.pathname` for active-item highlighting.
+- Output: footer nav links mirroring header tabs (`OSAN GAMES`, `Modules`, `Workshops`, `Contribute`, `Resume`) plus a single statement line.
 
 ## State
 - Stateless.
 
 ## Edge Cases
-- Footer naming must remain aligned with primary navigation semantics.
-- Contribution route keeps `/join` href for compatibility while using contribution-forward label text.
+- Footer links must stay aligned with header primary-nav labels/hrefs.
+- Current route should render `aria-current="page"` in footer without breaking non-footer routes.
 
 ## Dependencies
 - Global typography/spacing styles in `src/styles/global.css`.
 
 ## Acceptance Checks
-- Footer includes a contribution entry with text `Contribute` and href `/join`.
-- Footer secondary nav includes `OSAN GAMES` link text for `/labs`.
-- Footer does not reintroduce outdated `Join` wording where the funnel is contribution-focused.
-- Footer includes explicit links for both `/visual-classes` (Modules) and `/workshops`.
+- Footer nav only includes top-tab routes: `/labs`, `/visual-classes`, `/workshops`, `/join`, `/resume`.
+- Footer statement text is exactly: `One domain per quarter. Open research. Ethical AI. Free skills, donor-sustained.`
+- Footer does not include legacy secondary link groups (`More`, `Home`, `Book`, `Docs`, etc.).
