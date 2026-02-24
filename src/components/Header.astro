@@ -1,13 +1,8 @@
 ---
-const navItems = [
-  { label: 'OSAN GAMES', href: '/labs' },
-  { label: 'Modules', href: '/visual-classes' },
-  { label: 'Workshops', href: '/workshops' },
-  { label: 'Contribute', href: '/join' },
-  { label: 'Resume', href: '/resume' },
-];
+import { PRIMARY_NAV_ITEMS, isNavItemCurrent } from '../lib/site-nav';
+
 const ctaHref = 'https://calendly.com/abellou/30min';
-const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+const currentPath = Astro.url.pathname;
 ---
 <header class="site-header">
   <div class="container header-inner">
@@ -28,10 +23,8 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
     </a>
     <div class="header-right">
       <nav class="site-nav" aria-label="Primary">
-        {navItems.map((item) => {
-          const isCurrent = item.href === '/'
-            ? currentPath === '/'
-            : currentPath.startsWith(item.href);
+        {PRIMARY_NAV_ITEMS.map((item) => {
+          const isCurrent = isNavItemCurrent(currentPath, item.href);
           return (
             <a href={item.href} class="nav-link" aria-current={isCurrent ? 'page' : undefined}>
               {item.label}

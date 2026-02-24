@@ -17,9 +17,11 @@ Provide a clean footer that mirrors the top primary tabs and shows one compact O
 ## Dependencies
 - Global typography/spacing styles in `src/styles/global.css`.
 - Dist integrity guardrails in `scripts/check-dist-integrity.mjs` enforce canonical footer nav/statement.
+- `src/lib/site-nav.ts` (`PRIMARY_NAV_ITEMS`, `isNavItemCurrent`) so footer and header cannot drift and active matching stays consistent.
 
 ## Acceptance Checks
 - Footer nav only includes top-tab routes: `/labs`, `/visual-classes`, `/workshops`, `/join`, `/resume`.
 - Footer statement text is exactly: `One domain per quarter. Open research. Ethical AI. Free skills, donor-sustained.`
 - Footer does not include legacy secondary link groups (`More`, `Home`, `Book`, `Docs`, etc.).
+- Footer active state uses shared exact-or-subpath route matching with no inline duplication.
 - Built HTML validation fails if footer statement regresses to `AI-assisted; reviewed by humans; results vary.` on any route.

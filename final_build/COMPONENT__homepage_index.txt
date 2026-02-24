@@ -10,6 +10,7 @@ Inputs:
 Outputs:
 - Route cards (`OSAN GAMES`, `Workshops`, `Modules`, `Contribute`) with concise labels and direct actions.
 - Hero summary line showing modules lesson count derived from displayable module entries only.
+- Contribute route card copy reflects teaching-path positioning (`Upskill to teach AI in communities`).
 
 State:
 - No client-side state.
@@ -24,6 +25,6 @@ Dependencies:
 
 Acceptance checks:
 - `Workshops` subtitle equals count of canonical workshop routes.
-- `Contribute` card subtitle is static contribution framing (`Open-source contribution`).
+- `Contribute` card subtitle is teaching-path framing (`Upskill to teach AI in communities`).
 - Route-card CTA styling uses `button--ghost` for lower visual noise.
 - Modules summary remains in sync with `/visual-classes` modules-only curriculum.

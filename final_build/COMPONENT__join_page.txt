@@ -1,7 +1,7 @@
 # Component/page: `src/pages/join.astro`
 
 Purpose:
-- Render `/join` as a focused open-source contribution landing for GENMRKT.
+- Render `/join` as a focused beginner-to-teacher contribution landing for GENMRKT.
 - Keep one clear external application path with compact scope and impact context.
 
 Inputs:
@@ -10,7 +10,7 @@ Inputs:
 
 Outputs:
 - Hero with contribution-focused eyebrow, title, and lede from content JSON.
-- One external CTA button only (`Apply to contribute`) when link is valid.
+- One external CTA button only (`Apply to join the teaching cohort`) when link is valid.
 - One scope panel with up to six contribution chips and one-line impact statement.
 - Hero and decorative accents follow route-level `--page-accent` so `/join` does not carry inline overrides.
 
@@ -31,6 +31,7 @@ Dependencies:
 
 Acceptance checks:
 - `/join` renders two-column desktop and stacked mobile layout.
-- Route copy frames this as an open-source contribution opportunity, not a community directory.
+- Route copy frames this as a beginner-friendly upskill path to teach agentic AI classes in underserved communities.
+- Hero lede and impact copy render fully (no line clamp truncation).
 - CTA uses `target="_blank"` and `rel="noopener noreferrer"`.
 - CTA is hidden for invalid/unavailable/placeholder links.

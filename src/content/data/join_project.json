@@ -1,17 +1,17 @@
 {
-  "eyebrow": "Open-source contribution opportunity",
+  "eyebrow": "Teaching contribution opportunity",
   "title": "Contribute to GENMRKT",
-  "lede": "Contribute to an open-source project that ships public-good software.",
-  "highLevelScopeTitle": "Where you can contribute this quarter",
+  "lede": "Help teach agentic AI classes in underserved communities. Start at any level, get upskilled, then teach with confidence.",
+  "highLevelScopeTitle": "How this contribution path works",
   "scopeChips": [
-    "Open-source agent workflows",
-    "Governance-first scaffolds",
-    "Project ops automation",
-    "Docs + demos that teach"
+    "No technical background required",
+    "Learn AI literacy fundamentals",
+    "Learn GenAI marketing fundamentals",
+    "Teach students with guided lesson kits"
   ],
-  "impactTitle": "Contribution impact",
-  "impactOneLiner": "You ship tools that help people learn and build safely.",
-  "ctaLabel": "Apply to contribute",
+  "impactTitle": "Community teaching impact",
+  "impactOneLiner": "You build your own AI skills first, then help students gain practical, ethical AI capability they can use right away.",
+  "ctaLabel": "Apply to join the teaching cohort",
   "ctaHref": "https://genmrkt.lovable.app/",
   "secondaryLinkLabel": "",
   "secondaryLinkHref": "",

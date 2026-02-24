@@ -3,6 +3,7 @@
 - `src/styles/global.css`: global utility classes and component styles for layout, motion, nav, cards, and proof-first patterns using token palette.
 - `src/components/Header.astro` + header styles in global.css: controls global shell navigation and Book CTA.
 - `src/components/Footer.astro` + footer styles in global.css: controls global secondary navigation and trust/disclosure copy.
+- `src/lib/site-nav.ts`: shared top-tab navigation config used by both header and footer to keep route labels/hrefs synchronized.
 - `src/components/MotionEnhance.astro`: mounts top progress rail shell and bootstraps the motion runtime.
 - `src/components/GPTCard.astro`: card row for each GPT directory entry (name, one-line outcome, tags, Open button).
 - `src/pages/index.astro`: homepage router shell (hero + 4 route cards).

@@ -21,12 +21,12 @@ const hasPrimaryCta = resolvedCtaHref && !isUnavailableLink(resolvedCtaHref) && 
 
 const visibleChips = scopeChips?.slice(0, 6) ?? [];
 ---
-<BaseLayout title="Contribute - Oscar Sanchez" description="Open-source contribution opportunity in the GENMRKT project. Learn by shipping public-good tooling.">
+<BaseLayout title="Contribute - Oscar Sanchez" description="Beginner-friendly contribution path to upskill in AI literacy and GenAI marketing, then teach underserved communities.">
   <div class="join-landing scene-shell">
     <section class="hero-shell cog-proof-stack" data-motion-enter>
       <p class="hero-eyebrow">{eyebrow}</p>
       <h1>{title}</h1>
-      <p class="join-lede line-clamp-2">{lede}</p>
+      <p class="join-lede">{lede}</p>
       <div class="join-cta-stack">
         <div class="join-cta-row">
           {hasPrimaryCta ? (
@@ -54,7 +54,7 @@ const visibleChips = scopeChips?.slice(0, 6) ?? [];
         ))}
       </div>
       <p class="join-impact-label">{impactTitle}</p>
-      <p class="join-impact line-clamp-2">{impactOneLiner}</p>
+      <p class="join-impact">{impactOneLiner}</p>
     </section>
   </div>
 </BaseLayout>

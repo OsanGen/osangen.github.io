@@ -1,21 +1,13 @@
 ---
-const navItems = [
-  { label: 'OSAN GAMES', href: '/labs' },
-  { label: 'Modules', href: '/visual-classes' },
-  { label: 'Workshops', href: '/workshops' },
-  { label: 'Contribute', href: '/join' },
-  { label: 'Resume', href: '/resume' },
-];
+import { PRIMARY_NAV_ITEMS, isNavItemCurrent } from '../lib/site-nav';
 
-const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+const currentPath = Astro.url.pathname;
 ---
 <footer>
   <div class="container footer-shell">
     <nav class="footer-links" aria-label="Footer primary">
-      {navItems.map((item) => {
-        const isCurrent = item.href === '/'
-          ? currentPath === '/'
-          : currentPath.startsWith(item.href);
+      {PRIMARY_NAV_ITEMS.map((item) => {
+        const isCurrent = isNavItemCurrent(currentPath, item.href);
         return (
           <a href={item.href} aria-current={isCurrent ? 'page' : undefined}>
             {item.label}

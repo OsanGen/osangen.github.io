@@ -1,0 +1,29 @@
+# Component Spec: `src/lib/site-nav.ts`
+
+## Purpose
+Provide a single source of truth for primary site navigation labels and hrefs used by shared shell components.
+
+## Inputs / Outputs
+- Inputs: none (static configuration).
+- Outputs:
+  - `PRIMARY_NAV_ITEMS`: ordered array of `{ label, href }` entries for top navigation.
+  - `normalizePath(pathname)`: canonical route normalization (`/foo/` -> `/foo`, empty -> `/`).
+  - `isNavItemCurrent(pathname, href)`: shared active-state matcher using exact-or-subpath semantics.
+  - `SiteNavItem` type for config shape safety.
+
+## State
+- Stateless static module.
+
+## Edge Cases
+- Prevent header/footer nav drift by importing this module instead of duplicating inline arrays.
+- Nav order must remain stable for keyboard/tab predictability and consistent IA.
+- Active matching must not false-positive on prefix-like routes (for example `/workshopsx` should not activate `/workshops`).
+
+## Dependencies
+- Consumed by `src/components/Header.astro`.
+- Consumed by `src/components/Footer.astro`.
+
+## Acceptance Checks
+- Header and footer render the same five items in the same order: `OSAN GAMES`, `Modules`, `Workshops`, `Contribute`, `Resume`.
+- Changing nav labels/hrefs requires a single edit in this module.
+- Shared active matcher marks a link current only when path is an exact match or nested subpath of that route.

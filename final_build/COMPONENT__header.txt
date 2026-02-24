@@ -18,10 +18,12 @@ Primary site nav with explicit learn-surface discoverability and a prominent Boo
 
 ## Dependencies
 - `header` styles in `src/styles/global.css`.
+- `src/lib/site-nav.ts` (`PRIMARY_NAV_ITEMS`, `isNavItemCurrent`) as the single source for top-tab nav entries and active-route matching.
 
 ## Acceptance Checks
 - Header includes explicit `Modules` and `Workshops` links.
 - Existing active state and CTA behavior remain intact.
+- Header active state relies on shared exact-or-subpath matching, not inline prefix checks.
 - Book action is button-like on the right and not a nav link.
 - `src/components/Header.astro` renders a single image lockup in the brand link (no side-by-side text mark + wordmark), with `alt="OSAN"`, explicit intrinsic dimensions (`width="176"` and `height="41"`), and versioned logo URLs for cache freshness.
 - Logo fallback handling is bound via inline script event listener (`error`) instead of attribute-string `onerror`, preserving behavior while removing static-analysis noise from template attributes.
