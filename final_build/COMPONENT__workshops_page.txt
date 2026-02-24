@@ -16,6 +16,7 @@ Outputs:
 - `Workshops` section with core-workshop cards, sorted newest first.
 - Replays and slides quick-link sections sourced from core workshop CTAs.
 - Motion and visual hierarchy utilities (`cog-proof-stack`, `cog-accent-rail`, `cog-proof-chip`) are applied to hero/catalog/sections to match the premium-quiet pattern.
+- Workshop cards render a reduced schema: title, proof snippet, and one CTA only.
 
 State:
 - No client-side state.
@@ -29,10 +30,11 @@ Edge cases:
 - Module helper blocks display for configured non-visual-class modules.
 
 Dependencies:
-- `CardGrid`, `TagList`.
+- `CardGrid`.
 - `src/lib/content.ts`, `src/lib/learn-pages.ts`.
 
 Acceptance checks:
 - Only core workshop detail links are generated from `coreWorkshops`.
 - Replays/Slides lists include only workshops with valid external CTAs.
 - `/workshops/{id}` details route remains reachable for `coreWorkshops`.
+- Workshop cards do not render date text, proof-label pill, or tag-chip rows.

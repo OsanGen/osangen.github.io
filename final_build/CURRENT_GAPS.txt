@@ -62,3 +62,4 @@
 - visual-classes hero action cleanup | completed | Removed the two Modules hero action buttons (`Browse lessons`, `Workshops`) from `src/pages/visual-classes.astro` while preserving shared learn hero styles used by `/workshops`.
 - visual-classes hero chip cleanup | completed | Removed the `Last updated` hero chip and supporting date-loading logic from `src/pages/visual-classes.astro` so the modules hero remains minimal.
 - workshops hero chrome cleanup | completed | Removed the workshops hero `Last updated` chip and `Modules` shortcut button from `src/pages/workshops.astro` while preserving core workshop cards and CTA behavior.
+- workshops card noise cleanup | completed | Removed workshop-card date line, proof label bar, and tag chips from `src/pages/workshops.astro` so new workshop entries render only title + proof snippet + CTA.

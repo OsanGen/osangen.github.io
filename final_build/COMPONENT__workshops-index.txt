@@ -13,6 +13,7 @@ Outputs:
 - Hero + workshop section with one action button per card.
 - Workshops hero intentionally omits local hero chip/actions for a cleaner top block.
 - Replays and slides list sections sourced from core workshop links.
+- Workshop cards intentionally render only title, proof snippet text, and single CTA (no date line, no proof-label pill, no tag chips).
 
 State:
 - No client-side state.
@@ -23,7 +24,7 @@ Edge cases:
 - Replay/slide lists include only valid external links.
 
 Dependencies:
-- `CardGrid`, `TagList`.
+- `CardGrid`.
 - `src/lib/learn-pages.ts`.
 
 Acceptance checks:

@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CardGrid from '../components/CardGrid.astro';
-import TagList from '../components/TagList.astro';
 import { loadWorkshops } from '../lib/content';
 import {
   getCoreWorkshopCatalog,
@@ -29,17 +28,11 @@ const coreWorkshops: LearnCard[] = getCoreWorkshopCatalog(workshops);
         <p class="text-small">No workshop entries yet.</p>
       ) : (
         <CardGrid gap="var(--space-3)" align="start" motionGroup>
-          {coreWorkshops.map(({ cta, title, meta, proof, tags }, index) => {
+          {coreWorkshops.map(({ cta, title, proof }, index) => {
             return (
               <article class="card learn-card cog-entrance cog-accent-rail" style={`--reveal-delay:${index * 45}ms;`}>
-                <p class="text-small learn-card__meta">{meta}</p>
                 <h3>{title}</h3>
-                <p class="learn-card__proof-label cog-proof-chip">
-                  <span class="learn-card__proof-dot" aria-hidden="true"></span>
-                  Proof
-                </p>
                 <p class="text-small learn-card__proof">{proof}</p>
-                <TagList tags={tags} compact maxItems={3} />
                 <div class="learn-card__actions">
                   <a
                     class="button catalog-cta"
