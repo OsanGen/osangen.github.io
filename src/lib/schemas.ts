@@ -114,6 +114,8 @@ export const VisualClassSchema = z.object({
 export const ModuleSchema = z.object({
   id: z.string(),
   title: z.string(),
+  lessonTitle: z.string().optional(),
+  lessonDescription: z.string().optional(),
   format: z.string(),
   time: z.string(),
   level: z.string(),

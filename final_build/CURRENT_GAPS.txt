@@ -48,6 +48,7 @@
 - learn route tab rename | completed | Renamed the learn destination UI label from "Visual Classes" to "Modules" across header, footer, homepage card, workshops CTA, visual-classes page, and `/more` while keeping `/visual-classes` URL unchanged.
 - modules setup hardening | completed | Reworked `/visual-classes` catalog ordering to follow a learning progression and added proof snippets that explain each card’s continuity from the previous lesson.
 - visual modules deck refresh | completed | `/visual-classes` now uses strip-style lesson cards with cleaner scan rhythm and explicit lesson sequencing.
+- modules plain-language carousel rewrite | completed | Rewrote all nine module lesson titles/descriptions into plain English and replaced the strip with a one-at-a-time arrow carousel (`Previous`/`Next`, keyboard navigation, no loop, full descriptions visible).
 - modules slide link enrichment | completed | Added per-module slide links directly in `src/content/data/modules.json` and kept `/visual-classes` CTA precedence as `Slides`-first when configured.
 - header logo asset sync | completed | Replaced `/public/icons/osan-logo.png` and `/public/icons/osan-logo@2x.png` with the provided PNG lockup so header now renders the intended raster brand mark from the new asset.
 - header logo broken-state fix | completed | Switched header brand to versioned assets (`/icons/osan-logo-v2.png`, `/icons/osan-logo-v2@2x.png`) to avoid cached-path failures, and added a local fallback to `/icons/oscar-cog-brain.svg` when image decode/load fails.

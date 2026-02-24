@@ -6,7 +6,7 @@ import { getVisualClassCatalog, LEARN_VISUAL_ROUTE_LABEL, type LearnCard } from 
 const [modules, workshops] = await Promise.all([loadModules(), loadWorkshops()]);
 const updated = await loadLastModifiedISO('workshops.json');
 
-const visualClassCards: LearnCard[] = getVisualClassCatalog(modules, workshops);
+const visualClassCards: LearnCard[] = getVisualClassCatalog(modules, workshops, false);
 
 const updatedLabel = updated
   ? new Date(updated).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
@@ -32,40 +32,134 @@ const updatedLabel = updated
 
     <section id="visual-class-catalog" class="panel-shell learn-module-shell" data-motion-enter>
       <h2>Lessons</h2>
-      <p class="text-small learn-module-shell__subtitle">Evidence-first sequence from foundational simulation to operational controls.</p>
+      <p class="text-small learn-module-shell__subtitle">Step-by-step lessons in plain English, from basics to launch readiness.</p>
       {visualClassCards.length === 0 ? (
         <p class="text-small">No {LEARN_VISUAL_ROUTE_LABEL.toLowerCase()} are published yet.</p>
       ) : (
-        <div class="learn-module-deck" data-motion-group>
-          {visualClassCards.map(({ cta, title, meta, proof, lessonLabel }, index) => (
-            <article
-              class="card learn-card learn-card--module cog-entrance cog-accent-rail"
-              style={`--reveal-delay:${index * 55}ms;`}
-              aria-label={`Lesson ${index + 1}: ${title}`}
-            >
-              <p class="text-small learn-card__meta">{meta}</p>
-              <p class="text-small learn-card__lesson" aria-label={`Sequence ${index + 1}`}>{lessonLabel ?? `Lesson ${index + 1}`}</p>
-              <h3>{title}</h3>
-              <p class="learn-card__proof-label cog-proof-chip">
-                <span class="learn-card__proof-dot" aria-hidden="true"></span>
-                Proof
-              </p>
-              <p class="text-small learn-card__proof">{proof}</p>
-              <div class="learn-card__actions">
-                <a
-                  class="button catalog-cta"
-                  href={cta.href}
-                  target={cta.isExternal ? '_blank' : undefined}
-                  rel={cta.isExternal ? 'noopener noreferrer' : undefined}
-                >
-                  {cta.label}
-                </a>
-              </div>
-            </article>
-          ))}
+        <div class="learn-carousel" data-learn-carousel data-motion-group>
+          <div class="learn-carousel__header">
+            <p class="text-small learn-carousel__status" data-carousel-status aria-live="polite">
+              Lesson 1 of {visualClassCards.length}
+            </p>
+            <div class="learn-carousel__controls">
+              <button
+                class="button button--ghost learn-carousel__control"
+                type="button"
+                data-carousel-prev
+                aria-controls="learn-carousel-viewport"
+              >
+                &lt; Previous lesson
+              </button>
+              <button
+                class="button button--ghost learn-carousel__control"
+                type="button"
+                data-carousel-next
+                aria-controls="learn-carousel-viewport"
+              >
+                Next lesson &gt;
+              </button>
+            </div>
+          </div>
+          <div
+            id="learn-carousel-viewport"
+            class="learn-carousel__viewport"
+            tabindex="0"
+            aria-label="Lesson carousel"
+          >
+            {visualClassCards.map(({ cta, title, meta, description, lessonLabel }, index) => (
+              <article
+                class="card learn-card learn-card--module cog-entrance learn-carousel__slide"
+                style={`--reveal-delay:${index * 55}ms;`}
+                aria-label={`Lesson ${index + 1}: ${title}`}
+                data-carousel-slide
+                hidden={index === 0 ? undefined : true}
+                aria-hidden={index === 0 ? 'false' : 'true'}
+              >
+                <p class="text-small learn-card__meta">{meta}</p>
+                <p class="text-small learn-card__lesson" aria-label={`Sequence ${index + 1}`}>
+                  {lessonLabel ?? `Lesson ${index + 1}`}
+                </p>
+                <h3>{title}</h3>
+                <p class="text-small learn-card__description">{description}</p>
+                <div class="learn-card__actions">
+                  <a
+                    class="button catalog-cta"
+                    href={cta.href}
+                    target={cta.isExternal ? '_blank' : undefined}
+                    rel={cta.isExternal ? 'noopener noreferrer' : undefined}
+                  >
+                    {cta.label}
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       )}
     </section>
 
   </div>
+
+  <script is:inline>
+  (() => {
+    const carousels = document.querySelectorAll('[data-learn-carousel]');
+    if (!carousels.length) {
+      return;
+    }
+
+    for (const root of carousels) {
+      const slides = Array.from(root.querySelectorAll('[data-carousel-slide]'));
+      const prevButton = root.querySelector('[data-carousel-prev]');
+      const nextButton = root.querySelector('[data-carousel-next]');
+      const status = root.querySelector('[data-carousel-status]');
+      const viewport = root.querySelector('.learn-carousel__viewport');
+
+      if (!slides.length || !(prevButton instanceof HTMLButtonElement) || !(nextButton instanceof HTMLButtonElement)) {
+        continue;
+      }
+
+      let activeIndex = Math.max(0, slides.findIndex((slide) => !slide.hasAttribute('hidden')));
+
+      const setSlideState = (index) => {
+        activeIndex = Math.min(Math.max(index, 0), slides.length - 1);
+
+        slides.forEach((slide, currentIndex) => {
+          const isActive = currentIndex === activeIndex;
+          slide.toggleAttribute('hidden', !isActive);
+          slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+        });
+
+        prevButton.disabled = activeIndex === 0;
+        nextButton.disabled = activeIndex === slides.length - 1;
+
+        if (status) {
+          status.textContent = `Lesson ${activeIndex + 1} of ${slides.length}`;
+        }
+      };
+
+      prevButton.addEventListener('click', () => setSlideState(activeIndex - 1));
+      nextButton.addEventListener('click', () => setSlideState(activeIndex + 1));
+
+      if (viewport instanceof HTMLElement) {
+        viewport.addEventListener('keydown', (event) => {
+          if (event.key === 'ArrowLeft') {
+            event.preventDefault();
+            setSlideState(activeIndex - 1);
+          } else if (event.key === 'ArrowRight') {
+            event.preventDefault();
+            setSlideState(activeIndex + 1);
+          } else if (event.key === 'Home') {
+            event.preventDefault();
+            setSlideState(0);
+          } else if (event.key === 'End') {
+            event.preventDefault();
+            setSlideState(slides.length - 1);
+          }
+        });
+      }
+
+      setSlideState(activeIndex);
+    }
+  })();
+</script>
 </BaseLayout>

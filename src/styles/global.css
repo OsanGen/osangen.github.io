@@ -1721,46 +1721,68 @@ html.motion-enhanced [data-motion-enter][data-motion-done='true'] {
   max-width: 75ch;
 }
 
-:is(body[data-page='visual-classes']) .learn-module-deck {
+:is(body[data-page='visual-classes']) .learn-carousel {
   margin-top: 0.1rem;
   display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(17rem, 1fr);
   gap: var(--space-3);
-  overflow-x: auto;
-  overflow-y: visible;
-  padding-bottom: 0.25rem;
-  scrollbar-width: thin;
-  scroll-snap-type: x mandatory;
-  scroll-padding-inline: 0.15rem;
 }
 
-:is(body[data-page='visual-classes']) .learn-module-deck::-webkit-scrollbar {
-  height: 0.5rem;
+:is(body[data-page='visual-classes']) .learn-carousel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  flex-wrap: wrap;
 }
 
-:is(body[data-page='visual-classes']) .learn-module-deck::-webkit-scrollbar-thumb {
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--scene-accent, var(--accent)) 22%, var(--stroke));
+:is(body[data-page='visual-classes']) .learn-carousel__status {
+  margin: 0;
+  color: var(--ink-soft);
 }
 
-:is(body[data-page='visual-classes']) .learn-module-deck .learn-card--module {
-  scroll-snap-align: start;
-  min-width: 17rem;
-  min-height: 16.8rem;
+:is(body[data-page='visual-classes']) .learn-carousel__controls {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+:is(body[data-page='visual-classes']) .learn-carousel__control {
+  min-height: 2.75rem;
+  padding: 0.62rem 0.9rem;
+}
+
+:is(body[data-page='visual-classes']) .learn-carousel__control:disabled {
+  opacity: 0.52;
+  cursor: not-allowed;
+  transform: none;
+  border-color: var(--learn-structural-border);
+  color: var(--ink-subtle);
+}
+
+:is(body[data-page='visual-classes']) .learn-carousel__viewport {
+  min-height: 21rem;
+}
+
+:is(body[data-page='visual-classes']) .learn-carousel__viewport:focus-visible {
+  outline: 2px solid var(--scene-accent, var(--accent));
+  outline-offset: 4px;
+  border-radius: var(--radius-md);
+}
+
+:is(body[data-page='visual-classes']) .learn-carousel__slide {
+  min-height: 21rem;
   position: relative;
   border-left: 3px solid var(--scene-accent-marker);
   background:
     linear-gradient(
       180deg,
       color-mix(in srgb, var(--scene-accent-marker) 10%, transparent),
-      transparent 18%
+      transparent 20%
     ),
     var(--panel);
-  box-shadow: var(--shadow);
 }
 
-:is(body[data-page='visual-classes']) .learn-module-deck .learn-card--module::before {
+:is(body[data-page='visual-classes']) .learn-carousel__slide::before {
   content: '';
   position: absolute;
   inset: 0.55rem 0.64rem auto auto;
@@ -1770,9 +1792,14 @@ html.motion-enhanced [data-motion-enter][data-motion-done='true'] {
   background: color-mix(in srgb, var(--scene-accent, var(--accent)) 68%, transparent);
 }
 
-:is(body[data-page='visual-classes']) .learn-module-deck .learn-card--module .learn-card__meta {
-  color: var(--ink-subtle);
-  letter-spacing: 0.01em;
+:is(body[data-page='visual-classes']) .learn-card__description {
+  margin: 0;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+:is(body[data-page='visual-classes']) .learn-carousel__slide[hidden] {
+  display: none;
 }
 
 :is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-filter-list {

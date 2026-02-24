@@ -15,6 +15,7 @@ export interface LearnCard {
   title: string;
   meta: string;
   proof: string;
+  description: string;
   tags: string[];
   id?: string;
   lessonIndex?: number;
@@ -76,6 +77,19 @@ const withLearningProgress = (proof = '', previousTitle?: string) => {
   }
 
   return clampProof(`Builds on ${compactPreviousTitle(previousTitle)}. ${proof}`);
+};
+
+const withLearningProgressDescription = (description = '', previousTitle?: string) => {
+  const normalized = normalizeText(description);
+  if (!normalized) {
+    return '';
+  }
+
+  if (!previousTitle || /^builds on\s/i.test(normalized)) {
+    return normalized;
+  }
+
+  return `Builds on ${normalizeText(previousTitle)}. ${normalized}`;
 };
 
 const sortWorkshopsNewestFirst = (left: Workshop, right: Workshop) =>
@@ -146,6 +160,15 @@ export const buildModuleProofSnippet = (module: Module): string => {
   return clampProof(combined || module.title);
 };
 
+const buildModuleDescription = (module: Module): string => {
+  const lessonDescription = normalizeText(module.lessonDescription ?? '');
+  if (lessonDescription) {
+    return lessonDescription;
+  }
+
+  return buildModuleProofSnippet(module);
+};
+
 export const buildWorkshopProofSnippet = (workshop: Workshop): string => {
   const proofLine = normalizeText(workshop.proofLine ?? '');
   if (proofLine) {
@@ -155,7 +178,20 @@ export const buildWorkshopProofSnippet = (workshop: Workshop): string => {
   return clampProof(workshop.description || workshop.title);
 };
 
-export const buildModuleCta = (module: Module): CtaState => {
+const resolveVisualClassModuleSlideHref = (module: Module) => {
+  return resolveSlideHref(module.links?.slides);
+};
+
+export const buildModuleCta = (module: Module, slideHref = ''): CtaState => {
+  if (slideHref) {
+    const href = sanitizeLink(slideHref);
+    return {
+      href,
+      isExternal: isExternalUrl(href),
+      label: 'Slides',
+    };
+  }
+
   const href = sanitizeLink(module.cta?.href || '');
   const label = sanitizeLink(module.cta?.label || '');
 
@@ -174,8 +210,11 @@ const resolveSlideHref = (value = '') => {
 const resolveVisualClassSlideHref = (workshop: Workshop) =>
   resolveSlideHref(workshop.slidesUrl) || resolveSlideHref(workshop.replayUrl);
 
-const resolveVisualClassLessonLabel = (entryId: string) =>
-  `Lesson ${VISUAL_CLASS_DECK_SEQUENCE.indexOf(entryId) + 1}`;
+const resolveVisualClassLessonLabel = (entryId: string, fallbackIndex: number) => {
+  const sequenceIndex = VISUAL_CLASS_DECK_SEQUENCE.indexOf(entryId);
+  const labelIndex = sequenceIndex >= 0 ? sequenceIndex + 1 : fallbackIndex;
+  return `Lesson ${labelIndex}`;
+};
 
 const isVisualClassDeckCard = (entry: { id: string }) =>
   visualClassDeckPriority[entry.id] != null;
@@ -208,37 +247,45 @@ export const buildWorkshopCta = (workshop: Workshop, fallbackToIndex = false): C
 export const getVisualClassCatalog = (
   modules: Module[],
   workshops: Workshop[],
+  includeWorkshopCards = false,
 ): LearnCard[] => {
   const { visualClassWorkshops } = splitWorkshops(workshops);
   const modulesCards: VisualClassCardRecord[] = modules
     .filter(isDisplayableVisualClassModule)
-    .map((module) => ({
-      id: module.id,
-      kind: 'module' as const,
-      title: module.title,
-      meta: `${module.time} · ${module.level}`,
-      proof: buildModuleProofSnippet(module),
-      tags: module.topics,
-      slidesHref: resolveSlideHref(module.links?.slides),
-      slidesLabel: resolveSlideHref(module.links?.slides) ? 'Slides' : undefined,
-      cta: buildModuleCta(module),
-    }));
+    .map((module) => {
+      const resolvedSlideHref = resolveVisualClassModuleSlideHref(module);
+      return {
+        id: module.id,
+        kind: 'module' as const,
+        title: module.lessonTitle ?? module.title,
+        meta: `${module.time} · ${module.level}`,
+        proof: buildModuleProofSnippet(module),
+        description: buildModuleDescription(module),
+        tags: module.topics,
+        slidesHref: resolvedSlideHref,
+        slidesLabel: resolvedSlideHref ? 'Slides' : undefined,
+        cta: buildModuleCta(module, resolvedSlideHref),
+      };
+    });
 
-  const workshopCards: VisualClassCardRecord[] = visualClassWorkshops.map((workshop) => ({
-    id: workshop.id,
-    kind: 'workshop' as const,
-    title: workshop.title,
-    meta: workshop.date,
-    proof: buildWorkshopProofSnippet(workshop),
-    tags: workshop.tags,
-    slidesHref: resolveVisualClassSlideHref(workshop),
-    slidesLabel: isValidReplayOrSlides(workshop.slidesUrl)
-      ? 'Slides'
-      : isValidReplayOrSlides(workshop.replayUrl)
-        ? 'Replay'
-        : undefined,
-    cta: buildWorkshopCta(workshop, true),
-  }));
+  const workshopCards: VisualClassCardRecord[] = includeWorkshopCards
+    ? visualClassWorkshops.map((workshop) => ({
+        id: workshop.id,
+        kind: 'workshop' as const,
+        title: workshop.title,
+        meta: workshop.date,
+        proof: buildWorkshopProofSnippet(workshop),
+        description: buildWorkshopProofSnippet(workshop),
+        tags: workshop.tags,
+        slidesHref: resolveVisualClassSlideHref(workshop),
+        slidesLabel: isValidReplayOrSlides(workshop.slidesUrl)
+          ? 'Slides'
+          : isValidReplayOrSlides(workshop.replayUrl)
+            ? 'Replay'
+            : undefined,
+        cta: buildWorkshopCta(workshop, true),
+      }))
+    : [];
 
   const rawCards = [...modulesCards, ...workshopCards];
   const orderedCards = sortVisualClassCatalog(rawCards).filter(isVisualClassDeckCard);
@@ -250,10 +297,9 @@ export const getVisualClassCatalog = (
     return {
       ...card,
       lessonIndex,
-      lessonLabel: isVisualClassDeckCard(card)
-        ? resolveVisualClassLessonLabel(card.id)
-        : `Lesson ${lessonIndex}`,
+      lessonLabel: resolveVisualClassLessonLabel(card.id, lessonIndex),
       proof: withLearningProgress(card.proof, previousCard?.title),
+      description: withLearningProgressDescription(card.description, previousCard?.title),
     };
   });
 
@@ -269,6 +315,7 @@ export const getCoreWorkshopCatalog = (workshops: Workshop[]): LearnCard[] => {
       title: workshop.title,
       meta: workshop.date,
       proof: buildWorkshopProofSnippet(workshop),
+      description: buildWorkshopProofSnippet(workshop),
       slidesHref: resolveSlideHref(workshop.slidesUrl),
       slidesLabel: isValidReplayOrSlides(workshop.slidesUrl) ? 'Slides' : undefined,
       tags: workshop.tags,

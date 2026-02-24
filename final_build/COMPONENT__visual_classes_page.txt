@@ -1,9 +1,9 @@
 # Component: `src/pages/visual-classes.astro`
 
 Purpose:
-- Render a dedicated modules catalog composed only of visual-class catalog items:
-  - Module-driven visual classes.
-  - Non-core workshop-derived visual-class workshops.
+- Render a dedicated modules catalog composed only of visual-class module content:
+  - Module-driven visual lessons from `src/content/data/modules.json`.
+  - The page intentionally excludes workshop-derived visual-class entries so `/workshops` remains the workshop surface.
 
 Inputs:
 - `loadModules()` and `loadWorkshops()` from `src/lib/content.ts`.
@@ -14,21 +14,23 @@ Outputs:
 - Hero block with learn label, heading, subtitle, and last-updated marker.
 - One catalog section (`#visual-class-catalog`) with discoverable proof cards.
 - Hero actions include jump-to-catalog quick link and Workshop route link.
-- Lesson deck is rendered as a horizontal, snap-aligned `.learn-module-deck` strip on `/visual-classes`.
+- Lesson deck is rendered as a one-at-a-time carousel with explicit `Previous lesson` / `Next lesson` controls and `Lesson X of N` status.
 - No dedicated slides rail section is rendered; modules focus on a single proof-first card deck.
 - UI label is `Modules` and route remains `/visual-classes`.
-- Route now participates in shared motion hooks and premium proof-first visual utilities (`cog-proof-stack`, `cog-accent-rail`, `cog-proof-chip`) to keep rhythm with workshop/listing pages.
-- Card rows now omit topic chips; each card includes explicit lesson sequence metadata (`Lesson N`) and proof continuity context.
-- Deck cards use explicit `cog-entrance` and grouped motion timing for calm reveal sequencing.
+- Route now participates in shared motion hooks and proof-first visual utilities (`cog-proof-stack`) while keeping interaction controls low-noise.
+- Card rows omit topic chips; each card includes explicit lesson sequence metadata (`Lesson N`), plain-language title, and full non-truncated description text.
+- Carousel cards use explicit `cog-entrance` timing and lightweight inline JS for stepwise navigation (`ArrowLeft`, `ArrowRight`, `Home`, `End`) with non-loop boundaries.
 
 State:
-- No client-side state.
 - Build-time card derivation and deterministic sorting/filtering.
+- Client-side ephemeral carousel index state for the active lesson card.
 
 Edge cases:
 - Empty module/workshop inputs render a safe empty-state message.
 - Non-displayable visual classes are filtered through `isDisplayableVisualClassModule`.
-- Fallback CTAs and proof snippets preserve stable card affordances.
+- Primary card actions are slide-oriented for module entries when slide links exist in catalog data or curated module slide overrides, with graceful fallback to module CTA only when no deck link is available.
+- `src/content/data/modules.json` is treated as the curated module source and currently contains only the approved lesson sequence entries for `/visual-classes`.
+- Arrow controls disable correctly at first/last lesson; carousel does not loop.
 Dependencies:
 - `src/lib/content.ts`.
 - `src/lib/learn-pages.ts`.
@@ -37,4 +39,5 @@ Acceptance checks:
 - Page contains only visual-class content (no core workshop detail cards).
 - `/visual-classes` is discoverable from primary site navigation.
 - Empty state is readable and keeps spacing rhythm consistent with learn surfaces.
-- Module cards no longer render tag pills; card hierarchy remains proof-first and sequence-oriented.
+- Module cards no longer render tag pills; card hierarchy remains sequence-oriented and plain-language-first.
+- Full lesson descriptions are visible (no truncation).

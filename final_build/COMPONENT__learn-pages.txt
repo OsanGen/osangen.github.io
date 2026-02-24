@@ -21,13 +21,20 @@ Outputs:
   - `buildModuleCta`
   - `buildWorkshopCta`
   - Sequenced proof narration for `/visual-classes` that shows learning progression.
+- Module slide preference:
+  - `resolveVisualClassModuleSlideHref` resolves `module.links.slides` as the primary module deck destination when present.
+  - If no valid slide link is present, module cards fall back to module CTA defaults.
 - Visual-class sequencing now uses an explicit curriculum map:
   `VISUAL_CLASS_DECK_SEQUENCE` in `src/lib/learn-pages.ts`.
+- Current `/visual-classes` deck scope is focused on the nine provided slide-linked modules and excludes older placeholder/legacy module entries.
 - Extended `LearnCard` with lesson metadata and optional slide metadata:
-  - `lessonIndex`, `lessonLabel`, `slidesHref`, `slidesLabel`
-- `getVisualClassCatalog()` now assigns deterministic lesson numbering (Lesson 1, Lesson 2, …) to rendered cards so the curriculum progression is explicit.
-- Slide links for visual-class cards now prefer `slidesUrl` and fall back to `replayUrl`; those links are currently surfaced through each card's primary CTA/pattern, with no separate slide rail section.
-- Visual-class cards are filtered to curated deck IDs first; if no curated IDs are present, behavior falls back to the previous global visual-class ordering.
+  - `description`, `lessonIndex`, `lessonLabel`, `slidesHref`, `slidesLabel`
+  - `getVisualClassCatalog()` now defaults to modules-only and can optionally include visual-class workshop cards via a boolean flag for routes that require hybrid decks.
+  - It now assigns deterministic lesson numbering (Lesson 1, Lesson 2, …) to every rendered card so curriculum progression is explicit and continuous.
+  - Module cards prefer `module.lessonTitle` and `module.lessonDescription` for plain-language presentation, with fallback to existing proof-derived snippets when those fields are missing.
+  - Slide links for visual-class cards now prefer `slidesUrl` and fall back to `replayUrl`; those links are currently surfaced through each card's primary CTA/pattern, with no separate slide rail section.
+- `getVisualClassCatalog()` uses `module.links.slides` in the `/visual-classes` catalog so lesson cards can point directly to curated module decks when configured in content.
+- Visual-class cards are filtered to curated deck IDs first. If an ID is not in the curriculum map, it is excluded (so legacy or non-linked modules are not rendered on `/visual-classes`).
 
 State:
 - No persisted state; deterministic array transforms for each call.
@@ -39,6 +46,8 @@ Edge cases:
 - Visual-class catalog entries are sorted by explicit learning sequence keys (with stable id fallback) and stitched into a dependency-aware proof chain.
 - Lesson labels are emitted even when card proof chaining is not meaningful (fallback preserves card count visibility).
 - Slide helper export (`getVisualClassSlides`) removed; slide/link metadata remains in `LearnCard` for per-card actions.
+- Module CTA selection now prefers slides/deck links and only falls back to module `cta` defaults when no curated or explicit slide link exists.
+- Description progression preserves readability: if a description does not already start with "Builds on", continuity text is added from the previous lesson title.
 
 Dependencies:
 - `src/lib/workshop-catalog.ts`
