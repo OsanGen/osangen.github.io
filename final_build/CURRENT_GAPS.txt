@@ -1,7 +1,8 @@
 # CURRENT_GAPS
 - osan header brand icon refresh | completed | Replaced `/icons/oscar-cog-brain.svg` with a flat 2D yellow brain SVG and removed header square/chassis chrome via `.brand-mark` styling.
 - osan header brand icon polish | completed | Completed brand-lockup clean-up for OSAN 2D appearance: removed mark rounding and added block-level lockup rendering plus neutral highlight tint on the brain proof line.
-- live deploy trigger | blocked | CI is push-only (`Deploy Astro site to GitHub Pages` workflow has no `workflow_dispatch`); next action is commit/push to `main` from your Git client or repo environment.
+- live deploy trigger | completed | Pushed commit `a8d8a1606dfd8f6077bc0f3052f9f3a1549240ca` to `main`; push-based deployment pipeline triggered successfully.
+- deploy run monitoring | pending | Wait for CI run `22335360949` and Deploy run `22335360946` to complete, then confirm the live site reflects this commit.
 - executive evidence motion layer | completed | Added `motion`-powered OSAN-safe reveal + progress-rail system via `MotionEnhance` + `osan-motion.ts`, gated to `/`, `/workshops*`, and `/gpts*` by `data-page`.
 - motion runtime verification | completed | Ran `npm run check`, `npm run validate:content`, `npm run build`, `npm run verify:dist`, and `npm run verify:runtime` after motion integration.
 - motion visual QA pass | pending | Run manual browser pass on desktop/mobile for `/`, `/workshops`, `/gpts`, and verify reduced-motion behavior disables enhancement.
