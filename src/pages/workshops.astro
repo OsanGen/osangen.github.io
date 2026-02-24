@@ -2,19 +2,13 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CardGrid from '../components/CardGrid.astro';
 import TagList from '../components/TagList.astro';
-import { loadLastModifiedISO, loadWorkshops } from '../lib/content';
+import { loadWorkshops } from '../lib/content';
 import {
   getCoreWorkshopCatalog,
-  LEARN_VISUAL_ROUTE_LABEL,
   type LearnCard,
 } from '../lib/learn-pages';
 
 const workshops = await loadWorkshops();
-const updated = await loadLastModifiedISO('workshops.json');
-
-const updatedLabel = updated
-  ? new Date(updated).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-  : 'Not available';
 
 const coreWorkshops: LearnCard[] = getCoreWorkshopCatalog(workshops);
 ---
@@ -27,12 +21,6 @@ const coreWorkshops: LearnCard[] = getCoreWorkshopCatalog(workshops);
       </p>
       <h1>Workshops</h1>
       <p class="learn-hero__subtitle">Delivery sessions. Proof first. Low noise.</p>
-      <div class="learn-hero__proof">
-        <span class="learn-hero__chip" aria-label={`Last updated ${updatedLabel}`}>Last updated: {updatedLabel}</span>
-      </div>
-      <nav class="learn-hero__actions" aria-label="Jump to workshop sections">
-        <a class="button" href="/visual-classes">{LEARN_VISUAL_ROUTE_LABEL}</a>
-      </nav>
     </section>
 
     <section id="workshops" class="panel-shell">

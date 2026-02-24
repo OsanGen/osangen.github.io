@@ -9,11 +9,10 @@ Purpose:
 
 Inputs:
 - `loadWorkshops()` from `src/lib/content.ts`.
-- `loadLastModifiedISO('workshops.json')`.
 - Shared learn helpers from `src/lib/learn-pages.ts`.
 
 Outputs:
-- Intro with last-updated date.
+- Intro hero with eyebrow/title/subtitle only (no last-updated chip or hero action buttons).
 - `Workshops` section with core-workshop cards, sorted newest first.
 - Replays and slides quick-link sections sourced from core workshop CTAs.
 - Motion and visual hierarchy utilities (`cog-proof-stack`, `cog-accent-rail`, `cog-proof-chip`) are applied to hero/catalog/sections to match the premium-quiet pattern.

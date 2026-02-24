@@ -6,12 +6,12 @@ Purpose:
   - Replay + slide quick-link sections for proof-first entry.
 
 Inputs:
-- `loadWorkshops()`, `loadLastModifiedISO('workshops.json')`.
+- `loadWorkshops()`.
 - `getCoreWorkshopCatalog`, `getWorkshopReplayLinks`, `getWorkshopSlideLinks` from `src/lib/learn-pages.ts`.
 
 Outputs:
 - Hero + workshop section with one action button per card.
-- Last-updated timestamp for `workshops.json`.
+- Workshops hero intentionally omits local hero chip/actions for a cleaner top block.
 - Replays and slides list sections sourced from core workshop links.
 
 State:
