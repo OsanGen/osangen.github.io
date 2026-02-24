@@ -7,13 +7,12 @@ Purpose:
 
 Inputs:
 - `loadModules()` from `src/lib/content.ts`.
-- `loadLastModifiedISO('modules.json')` for last-updated chip text.
 - Shared catalog helpers from `src/lib/learn-pages.ts`.
 
 Outputs:
-- Hero block with learn label, heading, subtitle, and last-updated marker.
+- Hero block with learn label, heading, and subtitle (no hero chip/actions).
 - One catalog section (`#visual-class-catalog`) with discoverable proof cards.
-- Hero actions include jump-to-catalog quick link and Workshop route link.
+- Modules hero intentionally omits local shortcut buttons; navigation remains via header and in-page carousel controls.
 - Lesson deck is rendered as a one-at-a-time carousel with explicit `Previous lesson` / `Next lesson` controls and `Lesson X of N` status.
 - No dedicated slides rail section is rendered; modules focus on a single proof-first card deck.
 - UI label is `Modules` and route remains `/visual-classes`.

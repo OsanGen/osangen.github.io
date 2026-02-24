@@ -1,16 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { loadLastModifiedISO, loadModules } from '../lib/content';
+import { loadModules } from '../lib/content';
 import { getVisualClassCatalog, LEARN_VISUAL_ROUTE_LABEL, type LearnCard } from '../lib/learn-pages';
 
 const modules = await loadModules();
-const updated = await loadLastModifiedISO('modules.json');
 
 const visualClassCards: LearnCard[] = getVisualClassCatalog(modules);
-
-const updatedLabel = updated
-  ? new Date(updated).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-  : 'Not available';
 ---
 <BaseLayout title={`${LEARN_VISUAL_ROUTE_LABEL} - Oscar Sanchez`} description="Structured visual classes and practical proofs.">
   <div class="page-shell">
@@ -21,13 +16,6 @@ const updatedLabel = updated
       </p>
       <h1>{LEARN_VISUAL_ROUTE_LABEL}</h1>
       <p class="learn-hero__subtitle">Structured classes with practical proof and low noise.</p>
-      <div class="learn-hero__proof">
-        <span class="learn-hero__chip" aria-label={`Last updated ${updatedLabel}`}>Last updated: {updatedLabel}</span>
-      </div>
-      <nav class="learn-hero__actions" aria-label="Jump to visual class sections">
-        <a class="button" href="#visual-class-catalog">Browse lessons</a>
-        <a class="button" href="/workshops">Workshops</a>
-      </nav>
     </section>
 
     <section id="visual-class-catalog" class="panel-shell learn-module-shell" data-motion-enter>
