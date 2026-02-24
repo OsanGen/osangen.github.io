@@ -1,38 +1,9 @@
 [
   {
-    "id": "kinetic-proof",
-    "title": "Kinetic Proof: AI Governance Engine",
-    "lessonTitle": "How AI Decisions Work",
-    "lessonDescription": "Start here. You will see how an AI decision moves from input to final outcome, with each checkpoint visible so nothing feels like a black box.",
-    "format": "Interactive governance simulation",
-    "time": "90 minutes",
-    "level": "Intermediate",
-    "topics": [
-      "governance workflow",
-      "evidence validation",
-      "decision engine",
-      "policy checks"
-    ],
-    "proof": [
-      "An auditable governance engine where every decision stage is explicit and reproducible.",
-      "Users see why an action is approved, flagged, or blocked before moving forward."
-    ],
-    "links": {
-      "repo": "",
-      "slides": "https://aaot8-osan.manus.space/",
-      "notebook": ""
-    },
-    "cta": {
-      "label": "View deck",
-      "href": "/workshops"
-    },
-    "status": "seed"
-  },
-  {
     "id": "vpn-cost-lab",
     "title": "VPN Cost Lab",
-    "lessonTitle": "How Much This AI Costs",
-    "lessonDescription": "Builds on How AI Decisions Work. This lesson shows where cost appears in the same flow so you can compare speed, quality, and spend before launch.",
+    "lessonTitle": "Estimate Cost Before You Scale",
+    "lessonDescription": "Add cost visibility to your workflow so you can compare quality, speed, and spend before rollout.",
     "format": "Cost governance simulation",
     "time": "90 minutes",
     "level": "Intermediate",
@@ -60,8 +31,8 @@
   {
     "id": "vibe-to-pral",
     "title": "Vibe → PRAL",
-    "lessonTitle": "Turn Ideas Into an Action Plan",
-    "lessonDescription": "Builds on How Much This AI Costs. You will take a vague request and turn it into a clear plan with steps, ownership, and decision gates.",
+    "lessonTitle": "From Idea to Clear Plan",
+    "lessonDescription": "Learn how to turn a rough request into a concrete plan with clear steps, ownership, and decision checkpoints.",
     "format": "Intent-to-evidence flow simulation",
     "time": "90 minutes",
     "level": "All levels",
@@ -89,8 +60,8 @@
   {
     "id": "kinetic-kitchen-2-0",
     "title": "The Kinetic Kitchen 2.0",
-    "lessonTitle": "Build a Reliable AI Workflow",
-    "lessonDescription": "Builds on Turn Ideas Into an Action Plan. This lesson turns the plan into a repeatable workflow with routing, handoffs, and guardrails.",
+    "lessonTitle": "Build a Repeatable AI Workflow",
+    "lessonDescription": "Convert that plan into a repeatable workflow your team can run consistently, with clear handoffs and guardrails.",
     "format": "Agent operations simulation",
     "time": "90 minutes",
     "level": "Intermediate",
@@ -118,8 +89,8 @@
   {
     "id": "kitchen-x-ray",
     "title": "Kitchen X-Ray",
-    "lessonTitle": "Spot Risk Before It Breaks",
-    "lessonDescription": "Builds on Build a Reliable AI Workflow. You will identify weak points early and see how to catch safety and policy issues before they escalate.",
+    "lessonTitle": "Find Risk Before It Becomes an Incident",
+    "lessonDescription": "Identify weak points early and test safety and policy failure paths before they create real operational issues.",
     "format": "Security risk walkthrough",
     "time": "90 minutes",
     "level": "All levels",
@@ -145,38 +116,10 @@
     "status": "seed"
   },
   {
-    "id": "ghost-machine",
-    "title": "Ghost Machine",
-    "lessonTitle": "Track Every State Change",
-    "lessonDescription": "Builds on Spot Risk Before It Breaks. This lesson makes every state transition traceable so teams can audit what changed, when, and why.",
-    "format": "State-based workflow lab",
-    "time": "90 minutes",
-    "level": "All levels",
-    "topics": [
-      "workflow evolution",
-      "decision state tracking",
-      "evidence-first"
-    ],
-    "proof": [
-      "An evidence-first decision-state simulator that exposes transitions as auditable events.",
-      "Teams can justify recommendations by following each move from one state to the next."
-    ],
-    "links": {
-      "repo": "",
-      "slides": "https://ghostdemo-kjctspsn.manus.space/",
-      "notebook": ""
-    },
-    "cta": {
-      "label": "View deck",
-      "href": "/workshops"
-    },
-    "status": "seed"
-  },
-  {
     "id": "neural-glass",
     "title": "Neural Glass",
-    "lessonTitle": "Explain Why the AI Chose This",
-    "lessonDescription": "Builds on Track Every State Change. You will connect model signals to outputs so stakeholders can understand and challenge decisions with evidence.",
+    "lessonTitle": "Explain Every AI Decision",
+    "lessonDescription": "Make outputs explainable so teams can see why the model chose an answer and challenge decisions with evidence.",
     "format": "Decision-interpretability simulation",
     "time": "90 minutes",
     "level": "All levels",
@@ -202,39 +145,10 @@
     "status": "seed"
   },
   {
-    "id": "policy-gatekeeper",
-    "title": "Policy Gatekeeper",
-    "lessonTitle": "Set Rules and Escalation Paths",
-    "lessonDescription": "Builds on Explain Why the AI Chose This. This lesson adds clear policy rules, escalation paths, and stop conditions for operational control.",
-    "format": "Policy-routing lab",
-    "time": "90 minutes",
-    "level": "All levels",
-    "topics": [
-      "policy routing",
-      "escalation",
-      "safety checks",
-      "operational AI"
-    ],
-    "proof": [
-      "A policy-routing lab that makes escalation, guardrails, and rule evaluation visible.",
-      "Decision outcomes are interpreted before execution, reinforcing operational control."
-    ],
-    "links": {
-      "repo": "",
-      "slides": "https://policydemo-mpnai4wm.manus.space/",
-      "checklist": ""
-    },
-    "cta": {
-      "label": "View deck",
-      "href": "/workshops"
-    },
-    "status": "seed"
-  },
-  {
     "id": "ai-kitchen",
     "title": "The AI Kitchen",
-    "lessonTitle": "Final Readiness Check Before Launch",
-    "lessonDescription": "Builds on Set Rules and Escalation Paths. You will run a final readiness review that confirms controls, risk posture, and go-live confidence.",
+    "lessonTitle": "Final Launch Readiness Review",
+    "lessonDescription": "Run a final go-live review to confirm controls, risk posture, and decision quality before launch.",
     "format": "Deployment-readiness simulation",
     "time": "90 minutes",
     "level": "All levels",

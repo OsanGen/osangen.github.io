@@ -58,3 +58,4 @@
 - logo asset dedupe for dist weight | completed | Removed legacy duplicate lockup files (`public/icons/osan-logo.png`, `public/icons/osan-logo@2x.png`) and narrowed service-worker critical-logo matching to canonical `/icons/osan-logo-v2*` assets.
 - dependency patch hardening | completed | Upgraded direct deps (`astro` 5.17.3, `motion` 12.34.3), refreshed lockfile, and verified production dependency audit (`npm audit --omit=dev`) is now clean.
 - visual-classes data-path simplification | completed | Removed unused workshops load + hybrid catalog branch by making `getVisualClassCatalog()` modules-only and sourcing `/visual-classes` freshness from `modules.json`.
+- modules 6-lesson compounding rewrite | completed | Removed `kinetic-proof`, `ghost-machine`, and `policy-gatekeeper`; rewrote remaining lesson titles/descriptions, reset curriculum sequence to six lessons, and aligned homepage Modules counts/copy to modules-only lesson semantics.

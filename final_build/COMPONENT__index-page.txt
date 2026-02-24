@@ -9,6 +9,7 @@ Inputs:
 Outputs:
 - Hero shell with short headline, one-line lede, two top CTAs (OSAN Games, Book).
 - Four route cards (`OSAN GAMES`, `Workshops`, `Modules`, `Contribute`) with concise subtitle + CTA.
+- Modules route card and hero summary use modules-only lesson counts (no workshop-derived addition).
 - Page and hero accents follow `/` route token from `BaseLayout` instead of inline overrides.
 - Motion choreography hooks (`data-motion-enter`, `[data-motion-group]`) and proof-first utility classes (`cog-proof-stack`) are applied to route tiles without left accent rail decoration.
 
@@ -18,6 +19,7 @@ State:
 Edge cases:
 - Pluralization handles singular/plural and zero values.
 - Contribution card copy remains stable because it is no longer coupled to communities counts.
+- Modules copy uses `lesson(s)` wording so homepage terminology matches `/visual-classes` carousel semantics.
 
 Dependencies:
 - `Card` and `CardGrid` layout components.

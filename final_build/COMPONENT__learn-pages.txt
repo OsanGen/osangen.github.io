@@ -27,6 +27,7 @@ Outputs:
 - Visual-class sequencing now uses an explicit curriculum map:
   `VISUAL_CLASS_DECK_SEQUENCE` in `src/lib/learn-pages.ts`.
 - Current `/visual-classes` deck scope is focused on the nine provided slide-linked modules and excludes older placeholder/legacy module entries.
+- Current `/visual-classes` deck scope is focused on six curated modules (`vibe-to-pral`, `kinetic-kitchen-2-0`, `vpn-cost-lab`, `kitchen-x-ray`, `neural-glass`, `ai-kitchen`) after product-level removals.
 - Extended `LearnCard` with lesson metadata and optional slide metadata:
   - `description`, `lessonIndex`, `lessonLabel`, `slidesHref`, `slidesLabel`
   - `getVisualClassCatalog()` is now modules-only (workshop mixing removed) and assigns deterministic lesson numbering (Lesson 1, Lesson 2, …) to every rendered card so curriculum progression is explicit and continuous.
@@ -34,6 +35,7 @@ Outputs:
   - Slide links for visual-class cards now prefer `slidesUrl` and fall back to `replayUrl`; those links are currently surfaced through each card's primary CTA/pattern, with no separate slide rail section.
 - `getVisualClassCatalog()` uses `module.links.slides` in the `/visual-classes` catalog so lesson cards can point directly to curated module decks when configured in content.
 - Visual-class cards are filtered to curated deck IDs first. If an ID is not in the curriculum map, it is excluded (so legacy or non-linked modules are not rendered on `/visual-classes`).
+- Visual-class cards are filtered to curated deck IDs first. If an ID is not in the curriculum map, it is excluded (so removed modules and non-curated entries are not rendered on `/visual-classes`).
 
 State:
 - No persisted state; deterministic array transforms for each call.
@@ -47,6 +49,8 @@ Edge cases:
 - Slide helper export (`getVisualClassSlides`) removed; slide/link metadata remains in `LearnCard` for per-card actions.
 - Module CTA selection now prefers slides/deck links and only falls back to module `cta` defaults when no curated or explicit slide link exists.
 - Description progression preserves readability: if a description does not already start with "Builds on", continuity text is added from the previous lesson title.
+- Description progression preserves readability: if a description does not already start with "Builds on", continuity text is added from the previous lesson title.
+- The 6-lesson sequence now starts at planning (`vibe-to-pral`) and compounds through workflow, cost, risk, explainability, and final launch readiness.
 
 Dependencies:
 - `src/lib/workshop-catalog.ts`

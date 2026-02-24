@@ -13,9 +13,8 @@ const [games, modules, workshops] = await Promise.all([
   loadWorkshops(),
 ]);
 
-const { coreWorkshops, visualClassWorkshops } = splitWorkshops(workshops);
-const moduleVisualClassCount = modules.filter(isDisplayableVisualClassModule).length;
-const visualClassCount = moduleVisualClassCount + visualClassWorkshops.length;
+const { coreWorkshops } = splitWorkshops(workshops);
+const visualClassCount = modules.filter(isDisplayableVisualClassModule).length;
 
 const pluralize = (count: number, singular: string, plural: string) =>
   `${count} ${count === 1 ? singular : plural}`;
@@ -36,7 +35,7 @@ const routeCards = [
   {
     title: LEARN_VISUAL_ROUTE_LABEL,
     href: '/visual-classes',
-    subtitle: pluralize(visualClassCount, 'visual class', 'visual classes'),
+    subtitle: pluralize(visualClassCount, 'lesson', 'lessons'),
     action: `Open ${LEARN_VISUAL_ROUTE_NAME.toLowerCase()}`,
   },
   {
@@ -49,7 +48,7 @@ const routeCards = [
 
 const bookHref = sanitizeLink('https://calendly.com/abellou/30min');
 const visualClassSummary =
-  `${visualClassCount} ${visualClassCount === 1 ? 'visual class' : 'visual classes'} and growing public content.`;
+  `${visualClassCount} ${visualClassCount === 1 ? 'lesson' : 'lessons'} in the current modules track.`;
 ---
 <BaseLayout title="Oscar Sanchez" description="Open-source AI education, cleanly.">
   <section class="hero-shell scene-shell command-shell cog-proof-stack" data-motion-enter>

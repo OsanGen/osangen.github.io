@@ -20,6 +20,7 @@ Outputs:
 - Route now participates in shared motion hooks and proof-first visual utilities (`cog-proof-stack`) while keeping interaction controls low-noise.
 - Card rows omit topic chips; each card includes explicit lesson sequence metadata (`Lesson N`), plain-language title, and full non-truncated description text.
 - Carousel cards use explicit `cog-entrance` timing and lightweight inline JS for stepwise navigation (`ArrowLeft`, `ArrowRight`, `Home`, `End`) with non-loop boundaries.
+- Current product sequence is six lessons; status text and lesson labels render as `Lesson 1 of 6` through `Lesson 6 of 6`.
 
 State:
 - Build-time module-only card derivation and deterministic sorting/filtering.
@@ -31,6 +32,7 @@ Edge cases:
 - Primary card actions are slide-oriented for module entries when slide links exist in catalog data or curated module slide overrides, with graceful fallback to module CTA only when no deck link is available.
 - `src/content/data/modules.json` is treated as the curated module source and currently contains only the approved lesson sequence entries for `/visual-classes`.
 - Arrow controls disable correctly at first/last lesson; carousel does not loop.
+- Removed lessons (`kinetic-proof`, `ghost-machine`, `policy-gatekeeper`) are absent by data design, not hidden via UI-only filtering.
 Dependencies:
 - `src/lib/content.ts`.
 - `src/lib/learn-pages.ts`.

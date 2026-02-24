@@ -5,18 +5,18 @@ Purpose:
 
 Inputs:
 - `loadGames()`, `loadModules()`, `loadWorkshops()`.
-- `splitWorkshops()` and `isDisplayableVisualClassModule()` for workshop taxonomy-aware counts.
+- `splitWorkshops()` and `isDisplayableVisualClassModule()` for route counts, with modules metric now modules-only.
 
 Outputs:
 - Route cards (`OSAN GAMES`, `Workshops`, `Modules`, `Contribute`) with concise labels and direct actions.
-- Hero summary line showing visual-class count derived from module classes + visual-class workshops.
+- Hero summary line showing modules lesson count derived from displayable module entries only.
 
 State:
 - No client-side state.
 
 Edge cases:
 - `learn` card now reflects only canonical workshops (`splitWorkshops` output).
-- Visual-class summary includes both module visual classes and visual-class workshop-derived items.
+- Modules summary excludes workshop-derived items and uses lesson terminology (`lesson(s)`).
 - Contribution route card remains stable even when communities dataset changes (no card coupling to `communities.length`).
 
 Dependencies:
@@ -26,4 +26,4 @@ Acceptance checks:
 - `Workshops` subtitle equals count of canonical workshop routes.
 - `Contribute` card subtitle is static contribution framing (`Open-source contribution`).
 - Route-card CTA styling uses `button--ghost` for lower visual noise.
-- Visual class summary remains in sync with taxonomy split used on `/visual-classes` and `/workshops`.
+- Modules summary remains in sync with `/visual-classes` modules-only curriculum.
