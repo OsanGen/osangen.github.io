@@ -1,12 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { loadLastModifiedISO, loadModules, loadWorkshops } from '../lib/content';
+import { loadLastModifiedISO, loadModules } from '../lib/content';
 import { getVisualClassCatalog, LEARN_VISUAL_ROUTE_LABEL, type LearnCard } from '../lib/learn-pages';
 
-const [modules, workshops] = await Promise.all([loadModules(), loadWorkshops()]);
-const updated = await loadLastModifiedISO('workshops.json');
+const modules = await loadModules();
+const updated = await loadLastModifiedISO('modules.json');
 
-const visualClassCards: LearnCard[] = getVisualClassCatalog(modules, workshops, false);
+const visualClassCards: LearnCard[] = getVisualClassCatalog(modules);
 
 const updatedLabel = updated
   ? new Date(updated).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })

@@ -23,7 +23,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
         height="41"
         decoding="async"
         fetchpriority="high"
-        onerror="if (this.dataset.logoFallback) { return; } this.dataset.logoFallback='1'; this.classList.add('brand-lockup-image--fallback'); this.src='/icons/oscar-cog-brain.svg'; this.onerror=null;"
+        data-logo-fallback-src="/icons/oscar-cog-brain.svg"
       />
     </a>
     <div class="header-right">
@@ -50,3 +50,23 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
     </div>
   </div>
 </header>
+<script is:inline>
+  (() => {
+    const logos = document.querySelectorAll('.brand-lockup-image[data-logo-fallback-src]');
+    for (const node of logos) {
+      if (!(node instanceof HTMLImageElement)) continue;
+      if (node.dataset.logoBound === '1') continue;
+
+      const fallbackSrc = node.dataset.logoFallbackSrc;
+      if (!fallbackSrc) continue;
+
+      node.dataset.logoBound = '1';
+      node.addEventListener('error', () => {
+        if (node.dataset.logoFallback === '1') return;
+        node.dataset.logoFallback = '1';
+        node.classList.add('brand-lockup-image--fallback');
+        node.src = fallbackSrc;
+      });
+    }
+  })();
+</script>

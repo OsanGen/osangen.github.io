@@ -6,8 +6,8 @@ Purpose:
   - The page intentionally excludes workshop-derived visual-class entries so `/workshops` remains the workshop surface.
 
 Inputs:
-- `loadModules()` and `loadWorkshops()` from `src/lib/content.ts`.
-- `loadLastModifiedISO('workshops.json')` for last-updated chip text.
+- `loadModules()` from `src/lib/content.ts`.
+- `loadLastModifiedISO('modules.json')` for last-updated chip text.
 - Shared catalog helpers from `src/lib/learn-pages.ts`.
 
 Outputs:
@@ -22,11 +22,11 @@ Outputs:
 - Carousel cards use explicit `cog-entrance` timing and lightweight inline JS for stepwise navigation (`ArrowLeft`, `ArrowRight`, `Home`, `End`) with non-loop boundaries.
 
 State:
-- Build-time card derivation and deterministic sorting/filtering.
+- Build-time module-only card derivation and deterministic sorting/filtering.
 - Client-side ephemeral carousel index state for the active lesson card.
 
 Edge cases:
-- Empty module/workshop inputs render a safe empty-state message.
+- Empty module inputs render a safe empty-state message.
 - Non-displayable visual classes are filtered through `isDisplayableVisualClassModule`.
 - Primary card actions are slide-oriented for module entries when slide links exist in catalog data or curated module slide overrides, with graceful fallback to module CTA only when no deck link is available.
 - `src/content/data/modules.json` is treated as the curated module source and currently contains only the approved lesson sequence entries for `/visual-classes`.

@@ -1,4 +1,4 @@
-const VERSION = 'v1-2026-02-24';
+const VERSION = 'v1-2026-02-24-b';
 const CORE_CACHE = `osan-core-${VERSION}`;
 const ASSET_CACHE = `osan-assets-${VERSION}`;
 const DOC_CACHE = `osan-documents-${VERSION}`;
@@ -45,10 +45,7 @@ const isStaticAsset = (request) => {
 
 const isCriticalLogoRequest = (requestUrl) => {
   const path = requestUrl.pathname;
-  return (
-    path.startsWith('/icons/osan-logo-v2') ||
-    path.startsWith('/icons/osan-logo')
-  );
+  return path.startsWith('/icons/osan-logo-v2');
 };
 
 const cacheFirst = async (request, cacheName) => {

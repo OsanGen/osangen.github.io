@@ -29,8 +29,7 @@ Outputs:
 - Current `/visual-classes` deck scope is focused on the nine provided slide-linked modules and excludes older placeholder/legacy module entries.
 - Extended `LearnCard` with lesson metadata and optional slide metadata:
   - `description`, `lessonIndex`, `lessonLabel`, `slidesHref`, `slidesLabel`
-  - `getVisualClassCatalog()` now defaults to modules-only and can optionally include visual-class workshop cards via a boolean flag for routes that require hybrid decks.
-  - It now assigns deterministic lesson numbering (Lesson 1, Lesson 2, …) to every rendered card so curriculum progression is explicit and continuous.
+  - `getVisualClassCatalog()` is now modules-only (workshop mixing removed) and assigns deterministic lesson numbering (Lesson 1, Lesson 2, …) to every rendered card so curriculum progression is explicit and continuous.
   - Module cards prefer `module.lessonTitle` and `module.lessonDescription` for plain-language presentation, with fallback to existing proof-derived snippets when those fields are missing.
   - Slide links for visual-class cards now prefer `slidesUrl` and fall back to `replayUrl`; those links are currently surfaced through each card's primary CTA/pattern, with no separate slide rail section.
 - `getVisualClassCatalog()` uses `module.links.slides` in the `/visual-classes` catalog so lesson cards can point directly to curated module decks when configured in content.
