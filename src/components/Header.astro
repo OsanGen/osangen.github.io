@@ -14,11 +14,13 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
     <a class="brand brand-lockup" href="/" aria-label="OSAN home">
       <img
         class="brand-lockup-image"
-        src="/icons/osan-logo-v2.png"
-        srcset="/icons/osan-logo-v2.png 1x, /icons/osan-logo-v2@2x.png 2x"
+        src="/icons/osan-logo-v2.png?v=2026-02-24"
+        srcset="/icons/osan-logo-v2.png?v=2026-02-24 1x, /icons/osan-logo-v2@2x.png?v=2026-02-24 2x"
         sizes="(max-width: 760px) 8.6rem, 11rem"
         alt="OSAN"
         loading="eager"
+        width="176"
+        height="41"
         decoding="async"
         fetchpriority="high"
         onerror="if (this.dataset.logoFallback) { return; } this.dataset.logoFallback='1'; this.classList.add('brand-lockup-image--fallback'); this.src='/icons/oscar-cog-brain.svg'; this.onerror=null;"
