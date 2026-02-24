@@ -23,6 +23,6 @@ Primary site nav with explicit learn-surface discoverability and a prominent Boo
 - Header includes explicit `Modules` and `Workshops` links.
 - Existing active state and CTA behavior remain intact.
 - Book action is button-like on the right and not a nav link.
-- `src/components/Header.astro` renders a single image lockup in the brand link (no side-by-side text mark + wordmark).
-- Logo lockup sizing is tuned for readable presentation (`2rem` desktop header height and `1.72rem` mobile) and set to not shrink inside header flex.
+- `src/components/Header.astro` renders a single image lockup in the brand link (no side-by-side text mark + wordmark), with `alt="OSAN"` and high-priority header fetch behavior.
+- Logo lockup sizing is tuned for readable presentation via width-driven clamps (`clamp(8.8rem, 21vw, 11rem)` desktop, `clamp(7.6rem, 33vw, 8.6rem)` mobile), aspect ratio control, and a dedicated fallback variant class to prevent tiny square behavior on decode/load failure.
 - Logo lockup uses no rounded square/frame treatment; visual appears as a low-noise 2D image asset only.

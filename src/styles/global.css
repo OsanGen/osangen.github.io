@@ -1188,11 +1188,16 @@ main {
 
 .brand-lockup-image {
   display: block;
-  width: auto;
-  height: 2rem;
-  max-width: clamp(7.5rem, 18vw, 11.25rem);
+  width: clamp(8.8rem, 21vw, 11rem);
+  aspect-ratio: 1536 / 360;
+  height: auto;
   object-fit: contain;
   flex-shrink: 0;
+}
+
+.brand-lockup-image--fallback {
+  width: 2rem;
+  aspect-ratio: 1 / 1;
 }
 
 .brand-mark {
@@ -1417,7 +1422,7 @@ html.motion-enhanced [data-motion-enter][data-motion-done='true'] {
   }
 
   .brand-lockup-image {
-    height: 1.72rem;
+    width: clamp(7.6rem, 33vw, 8.6rem);
   }
 
   .cta-stack,

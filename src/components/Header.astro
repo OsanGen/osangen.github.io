@@ -16,12 +16,11 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
         class="brand-lockup-image"
         src="/icons/osan-logo-v2.png"
         srcset="/icons/osan-logo-v2.png 1x, /icons/osan-logo-v2@2x.png 2x"
-        alt=""
+        alt="OSAN"
         loading="eager"
-        width="180"
-        height="42"
         decoding="async"
-        onerror="this.onerror=null;this.src='/icons/oscar-cog-brain.svg';"
+        fetchpriority="high"
+        onerror="if (this.dataset.logoFallback) { return; } this.dataset.logoFallback='1'; this.classList.add('brand-lockup-image--fallback'); this.src='/icons/oscar-cog-brain.svg'; this.onerror=null;"
       />
     </a>
     <div class="header-right">
