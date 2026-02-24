@@ -69,3 +69,4 @@
 - nav active-route matcher hardening | completed | Added shared `isNavItemCurrent()` in `src/lib/site-nav.ts` and switched header/footer to exact-or-subpath matching so `/workshops` no longer false-matches non-route prefixes.
 - dependency + script hygiene pass | pending | Audit `package.json` scripts/dependencies for dead entries and simplify high-friction scripts without changing runtime behavior.
 - contribute beginner-to-teacher messaging rewrite | completed | Replaced `/join` copy model with beginner-friendly upskill-to-teach language, removed lede/impact truncation, and aligned Contribute summaries on `/` and `/more` with underserved-community teaching outcomes.
+- join scope-chip clipping mitigation | completed | Updated `/join` scope-chip grid to responsive auto-fit columns and removed ellipsis truncation so chip text wraps fully without cut-off.

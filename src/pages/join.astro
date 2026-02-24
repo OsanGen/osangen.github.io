@@ -156,18 +156,21 @@ const visibleChips = scopeChips?.slice(0, 6) ?? [];
 
   .join-scope-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 15.5rem), 1fr));
     gap: 0.42rem;
   }
 
   .join-scope-grid .proof-chip {
     justify-content: flex-start;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding: 0.28rem 0.62rem;
+    align-items: flex-start;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    overflow-wrap: anywhere;
+    padding: 0.4rem 0.68rem;
     font-size: 0.88rem;
-    line-height: 1.18;
+    line-height: 1.28;
+    min-height: 2.75rem;
   }
 
   .join-impact-label {
@@ -222,10 +225,6 @@ const visibleChips = scopeChips?.slice(0, 6) ?? [];
 
     .join-scope-grid {
       grid-template-columns: 1fr;
-    }
-
-    .join-scope-grid .proof-chip {
-      white-space: normal;
     }
   }
 </style>

@@ -22,6 +22,7 @@ Edge cases:
 - Missing/placeholder CTA URL suppresses button rendering and shows fallback text.
 - CTA keeps external-link safety attributes and explicit new-tab aria label.
 - Scope chips are capped to six entries for stable panel density.
+- Scope-chip copy can expand without clipping by wrapping within responsive grid columns.
 
 Dependencies:
 - `src/layouts/BaseLayout.astro`
@@ -33,5 +34,6 @@ Acceptance checks:
 - `/join` renders two-column desktop and stacked mobile layout.
 - Route copy frames this as a beginner-friendly upskill path to teach agentic AI classes in underserved communities.
 - Hero lede and impact copy render fully (no line clamp truncation).
+- Scope-chip text is fully visible with wrapping (no ellipsis cut-off) across desktop/tablet/mobile.
 - CTA uses `target="_blank"` and `rel="noopener noreferrer"`.
 - CTA is hidden for invalid/unavailable/placeholder links.
