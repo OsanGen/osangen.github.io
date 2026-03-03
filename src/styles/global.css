@@ -543,12 +543,7 @@ main {
   gap: 0.46rem;
   min-height: 9.6rem;
   padding: 0.2rem 0.3rem 0.3rem;
-  transition: transform 220ms ease, filter 220ms ease, border-color 220ms ease;
-}
-
-.route-card:hover {
-  transform: translateY(-1px);
-  border-color: var(--scene-accent-rail);
+  transition: background-color 220ms ease, border-color 220ms ease;
 }
 
 .route-card h2 {
@@ -571,6 +566,14 @@ main {
 body[data-page='home'] .route-grid .route-card::before,
 body[data-page='home'] .route-grid .route-card.cog-accent-rail::before {
   content: none;
+}
+
+body[data-page='home'] .route-grid .card:hover .route-card,
+body[data-page='home'] .route-grid .card:focus-within .route-card {
+  background: color-mix(in srgb, var(--scene-accent, var(--accent)) 6%, var(--surface));
+  border-color: transparent;
+  box-shadow: none;
+  transform: none;
 }
 
 .inspiration-card {
@@ -2005,8 +2008,8 @@ body[data-page='visual-classes'] .learn-detail-hero__top {
 }
 
 @media (hover: hover) {
-  :is(.card, .panel-shell, .visual-shell, .route-card, .agent-card, .surface-shell):hover,
-  :is(.card, .panel-shell, .visual-shell, .route-card, .agent-card, .surface-shell):focus-within {
+  :is(.card, .panel-shell, .visual-shell, .agent-card, .surface-shell):hover,
+  :is(.card, .panel-shell, .visual-shell, .agent-card, .surface-shell):focus-within {
     transform: translateY(-1px);
     border-color: var(--scene-accent-rail);
     box-shadow: var(--shadow);

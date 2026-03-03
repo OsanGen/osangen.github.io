@@ -11,6 +11,9 @@ Outputs:
 - Route cards (`OSAN GAMES`, `Workshops`, `Modules`, `Contribute`) with concise labels and direct actions.
 - Hero summary line showing modules lesson count derived from `getVisualClassCatalog(modules).length`.
 - Contribute route card copy reflects teaching-path positioning (`Upskill to teach AI in communities`).
+- Homepage route cards now use a single interaction surface model:
+  - outer `.card` wrapper handles hover/focus lift polish.
+  - inner `.route-card` no longer carries independent `cog-entrance` reveal timing.
 
 State:
 - No client-side state.
@@ -28,3 +31,4 @@ Acceptance checks:
 - `Contribute` card subtitle is teaching-path framing (`Upskill to teach AI in communities`).
 - Route-card CTA styling uses `button--ghost` for lower visual noise.
 - Modules summary remains in sync with `/visual-classes` active lesson deck count.
+- Hover/focus on homepage route tiles does not produce a nested inset box artifact.

@@ -41,6 +41,9 @@ Define and apply CogSec pastel token system with minimal, proof-first surface/st
   - low-opacity `.site-page` fallback bubble layer
 - Route accent tint drives motif color on each page (no fixed global red override).
 - Homepage route cards use minimal proof styling: no route-grid vertical rail, no per-card accent rail, and no floating accent dot on `.route-card`.
+- Homepage route-card interaction is single-surface:
+  - global hover lift targets exclude `.route-card` to prevent nested lift/shadow artifacts.
+  - home-scoped route-card polish uses only subtle background tint under `.card:hover` / `.card:focus-within`.
 - Unused keyframes are removed from global CSS to keep runtime style payload lean and maintainable.
 - `/visual-classes` module `Play` CTA styling remains token-driven (`--scene-accent` + neutrals), avoids glows/heavy gradients, and keeps reduced-motion-safe interaction cues.
 - `global.css` defines motion enhancement vars:

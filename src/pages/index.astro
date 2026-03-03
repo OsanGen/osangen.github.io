@@ -64,12 +64,9 @@ const visualClassSummary =
 
   <div class="route-grid">
     <CardGrid gap="var(--space-3)" align="start" motionGroup>
-      {routeCards.map((card, index) => (
+      {routeCards.map((card) => (
         <Card>
-          <article
-            class="route-card cog-entrance cog-proof-stack"
-            style={`--reveal-delay:${index * 60}ms;`}
-          >
+          <article class="route-card cog-proof-stack">
             <h2>{card.title}</h2>
             <p class="text-small">{card.subtitle}</p>
             <a class="button button--ghost" href={card.href}>
