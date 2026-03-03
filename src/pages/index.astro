@@ -4,8 +4,8 @@ import { loadGames, loadModules, loadWorkshops } from '../lib/content';
 import Card from '../components/Card.astro';
 import CardGrid from '../components/CardGrid.astro';
 import { sanitizeLink } from '../lib/link-utils';
-import { LEARN_VISUAL_ROUTE_LABEL, LEARN_VISUAL_ROUTE_NAME } from '../lib/learn-pages';
-import { isDisplayableVisualClassModule, splitWorkshops } from '../lib/workshop-catalog';
+import { getVisualClassCatalog, LEARN_VISUAL_ROUTE_LABEL, LEARN_VISUAL_ROUTE_NAME } from '../lib/learn-pages';
+import { splitWorkshops } from '../lib/workshop-catalog';
 
 const [games, modules, workshops] = await Promise.all([
   loadGames(),
@@ -14,7 +14,7 @@ const [games, modules, workshops] = await Promise.all([
 ]);
 
 const { coreWorkshops } = splitWorkshops(workshops);
-const visualClassCount = modules.filter(isDisplayableVisualClassModule).length;
+const visualClassCount = getVisualClassCatalog(modules).length;
 
 const pluralize = (count: number, singular: string, plural: string) =>
   `${count} ${count === 1 ? singular : plural}`;

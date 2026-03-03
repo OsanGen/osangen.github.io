@@ -1,22 +1,20 @@
 # FULL_TECH_BUILD
 
 ## 1) Snapshot header
-- UpdatedAt: 2026-03-03T16:42:25Z
+- UpdatedAt: 2026-03-03T17:00:14Z
 - RepoName: oscar-sanchez-portfolio
 - Branch: main
-- HEAD: cfd8254de0a2fea6afc6730c89a16f2d074dccb3
+- HEAD: 9d3aca8d30236f4fee8ab80335ad32a49cd7006f
 - Dirty state: yes (`git status --short` shows local edits)
-  - `final_build/BUILD_MAP.txt`
-  - `final_build/COMPONENT__tokens-global.css.txt`
+  - `FULL_TECH_BUILD.txt`
+  - `final_build/COMPONENT__homepage_index.txt`
+  - `final_build/COMPONENT__index-page.txt`
   - `final_build/COMPONENT__learn-pages.txt`
   - `final_build/COMPONENT__visual_classes_page.txt`
-  - `final_build/COMPONENT__workshops-index.txt`
-  - `final_build/COMPONENT__workshops_page.txt`
   - `final_build/CURRENT_GAPS.txt`
-  - `FULL_TECH_BUILD.txt`
   - `src/lib/learn-pages.ts`
+  - `src/pages/index.astro`
   - `src/pages/visual-classes.astro`
-  - `src/styles/global.css`
 - Primary languages + package managers detected:
   - TypeScript + Astro component templates (`.ts`, `.astro`)
   - CSS (`.css`)
@@ -90,6 +88,8 @@ To inspect dependency graph:
 - What is implemented:
   - Learn split and modules-only curriculum model (`/workshops` vs `/visual-classes`).
   - One-at-a-time Modules carousel with full descriptions, reduced labels, keyboard controls.
+  - Active `/visual-classes` sequence now starts at prior lesson 2 (`kinetic-kitchen-2-0`) and runs as a five-lesson deck with automatic `Lesson 1..5` renumbering.
+  - Modules lesson counts are now aligned to rendered deck output (`getVisualClassCatalog`) on both `/visual-classes` subtitle and homepage modules summary.
   - Module slide-backed CTA copy on `/visual-classes` now uses `Play` and adds a premium token-based button treatment (still no glow/heavy gradients).
   - OSAN route-accent hardening, footer/header parity, and SW cache-versioning hardening.
   - Documentation updates reflected in `final_build/*` and component spec set.
@@ -101,7 +101,9 @@ To inspect dependency graph:
 If DEV-mode spec is active, track operational gaps in `final_build/CURRENT_GAPS.txt`.
 
 ## 7) Recent change log (rolling)
-- 2026-03-03T16:42:25Z | cfd8254 | chore(modules): rename slide CTA to Play and apply premium OSAN CTA styling | `src/lib/learn-pages.ts`, `src/pages/visual-classes.astro`, `src/styles/global.css`, `final_build/COMPONENT__learn-pages.txt`, `final_build/COMPONENT__visual_classes_page.txt`, `final_build/COMPONENT__tokens-global.css.txt`, `final_build/CURRENT_GAPS.txt`, `FULL_TECH_BUILD.txt`
+- 2026-03-03T17:00:14Z | 9d3aca8 | chore(modules): remove vibe-to-pral from active deck and renumber lessons to 1..5 | `src/lib/learn-pages.ts`, `src/pages/visual-classes.astro`, `src/pages/index.astro`, `final_build/COMPONENT__learn-pages.txt`, `final_build/COMPONENT__visual_classes_page.txt`, `final_build/COMPONENT__homepage_index.txt`, `final_build/COMPONENT__index-page.txt`, `final_build/CURRENT_GAPS.txt`, `FULL_TECH_BUILD.txt`
+- 2026-03-03T16:45:02Z | 9d3aca8 | chore(deploy): verify CI and pages deploy completion for live release | `final_build/CURRENT_GAPS.txt`, `FULL_TECH_BUILD.txt`
+- 2026-03-03T16:44:11Z | 9d3aca8 | feat(modules): rename slides CTA to play and upgrade lesson button | `src/lib/learn-pages.ts`, `src/pages/visual-classes.astro`, `src/styles/global.css`, `final_build/COMPONENT__learn-pages.txt`, `final_build/COMPONENT__visual_classes_page.txt`, `final_build/COMPONENT__tokens-global.css.txt`, `final_build/CURRENT_GAPS.txt`, `FULL_TECH_BUILD.txt`
 - 2026-03-03T16:28:17Z | cfd8254 | full-build docs sync | `FULL_TECH_BUILD.txt`, `final_build/*`
 - 2026-02-24T17:00:19Z | cfd8254 | Fix join scope chip text clipping and responsive wrapping | `src/pages/join.astro`, `final_build/CURRENT_GAPS.txt`, `final_build/COMPONENT__join_page.txt`
 - 2026-02-24T15:51:58Z | 83a4ef1 | Harden nav matching and reframe Contribute as upskill-to-teach path | `src/pages/index.astro`, `src/components/Header.astro`, `src/components/Footer.astro`, `src/lib/site-nav.ts`, `src/pages/join.astro`, `src/pages/more.astro`, `src/content/data/join_project.json`
@@ -109,9 +111,6 @@ If DEV-mode spec is active, track operational gaps in `final_build/CURRENT_GAPS.
 - 2026-02-24T15:11:01Z | 56d8192 | chore(footer): mirror header tabs and update statement | `src/components/Footer.astro`, `src/styles/global.css`
 - 2026-02-24T15:05:01Z | 61ce4f2 | chore(workshops): remove card noise and hero shortcuts | `src/pages/workshops.astro`, `final_build/COMPONENT__workshops-index.txt`, `final_build/COMPONENT__workshops_page.txt`
 - 2026-02-24T15:02:04Z | 609459f | chore(workshops): remove hero chip and shortcut button | `src/pages/workshops.astro`, `final_build/COMPONENT__workshops-index.txt`, `final_build/COMPONENT__workshops_page.txt`
-- 2026-02-24T14:56:31Z | 15fc87a | chore(modules): remove visual-classes hero chip and actions | `src/pages/visual-classes.astro`, `final_build/COMPONENT__visual_classes_page.txt`
-- 2026-02-23T03:45:30Z | 55c886b | feat(modules): reduce to 6-lesson compounding track | `src/content/data/modules.json`, `src/lib/learn-pages.ts`, `src/pages/index.astro`, `src/pages/visual-classes.astro`
-- 2026-02-23T03:29:57Z | 47e72c8 | chore: update deploy tracking status | `final_build/CURRENT_GAPS.txt`
 
 ## 8) Refresh procedure
 - Refresh the snapshot:

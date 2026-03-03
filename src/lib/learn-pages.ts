@@ -102,7 +102,6 @@ const moduleSequencePriority: Record<string, number> = {
 };
 
 const VISUAL_CLASS_DECK_SEQUENCE: string[] = [
-  'vibe-to-pral',
   'kinetic-kitchen-2-0',
   'vpn-cost-lab',
   'kitchen-x-ray',

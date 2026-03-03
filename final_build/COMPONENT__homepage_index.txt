@@ -5,11 +5,11 @@ Purpose:
 
 Inputs:
 - `loadGames()`, `loadModules()`, `loadWorkshops()`.
-- `splitWorkshops()` and `isDisplayableVisualClassModule()` for route counts, with modules metric now modules-only.
+- `splitWorkshops()` and `getVisualClassCatalog()` for route counts, with modules metric tied to active `/visual-classes` deck output.
 
 Outputs:
 - Route cards (`OSAN GAMES`, `Workshops`, `Modules`, `Contribute`) with concise labels and direct actions.
-- Hero summary line showing modules lesson count derived from displayable module entries only.
+- Hero summary line showing modules lesson count derived from `getVisualClassCatalog(modules).length`.
 - Contribute route card copy reflects teaching-path positioning (`Upskill to teach AI in communities`).
 
 State:
@@ -17,7 +17,7 @@ State:
 
 Edge cases:
 - `learn` card now reflects only canonical workshops (`splitWorkshops` output).
-- Modules summary excludes workshop-derived items and uses lesson terminology (`lesson(s)`).
+- Modules summary excludes workshop-derived items and tracks active sequence filtering (for example, intentionally excluded `vibe-to-pral`) while using lesson terminology (`lesson(s)`).
 - Contribution route card remains stable even when communities dataset changes (no card coupling to `communities.length`).
 
 Dependencies:
@@ -27,4 +27,4 @@ Acceptance checks:
 - `Workshops` subtitle equals count of canonical workshop routes.
 - `Contribute` card subtitle is teaching-path framing (`Upskill to teach AI in communities`).
 - Route-card CTA styling uses `button--ghost` for lower visual noise.
-- Modules summary remains in sync with `/visual-classes` modules-only curriculum.
+- Modules summary remains in sync with `/visual-classes` active lesson deck count.

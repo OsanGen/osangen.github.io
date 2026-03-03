@@ -9,7 +9,7 @@ Inputs:
 Outputs:
 - Hero shell with short headline, one-line lede, two top CTAs (OSAN Games, Book).
 - Four route cards (`OSAN GAMES`, `Workshops`, `Modules`, `Contribute`) with concise subtitle + CTA.
-- Modules route card and hero summary use modules-only lesson counts (no workshop-derived addition).
+- Modules route card and hero summary use `getVisualClassCatalog(modules).length` so homepage counts match the active `/visual-classes` deck sequence.
 - Contribute route card uses beginner-to-teacher framing (`Upskill to teach AI in communities`) and teaching-path CTA copy.
 - Page and hero accents follow `/` route token from `BaseLayout` instead of inline overrides.
 - Motion choreography hooks (`data-motion-enter`, `[data-motion-group]`) and proof-first utility classes (`cog-proof-stack`) are applied to route tiles without left accent rail decoration.
@@ -20,7 +20,7 @@ State:
 Edge cases:
 - Pluralization handles singular/plural and zero values.
 - Contribution card copy remains stable because it is no longer coupled to communities counts.
-- Modules copy uses `lesson(s)` wording so homepage terminology matches `/visual-classes` carousel semantics.
+- Modules copy uses `lesson(s)` wording and remains aligned when sequence-level exclusions (like removed first lesson entries) change active deck size.
 
 Dependencies:
 - `Card` and `CardGrid` layout components.

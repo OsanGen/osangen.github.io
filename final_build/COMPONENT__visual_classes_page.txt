@@ -19,7 +19,8 @@ Outputs:
 - Route now participates in shared motion hooks and proof-first visual utilities (`cog-proof-stack`) while keeping interaction controls low-noise.
 - Card rows omit topic chips; each card includes explicit lesson sequence metadata (`Lesson N`), plain-language title, and full non-truncated description text.
 - Carousel cards use explicit `cog-entrance` timing and lightweight inline JS for stepwise navigation (`ArrowLeft`, `ArrowRight`, `Home`, `End`) with non-loop boundaries.
-- Current product sequence is six lessons; status text and lesson labels render as `Lesson 1 of 6` through `Lesson 6 of 6`.
+- Current product sequence is five lessons; status text and lesson labels render as `Lesson 1 of 5` through `Lesson 5 of 5`.
+- The prior `vibe-to-pral` lesson remains in data but is intentionally excluded from the active `/visual-classes` sequence so prior lesson 2 now appears as lesson 1.
 - Lesson cards use a premium, route-accented `Play` CTA treatment (module slide links) with a restrained micro-affordance marker and no glow/heavy gradient styling.
 
 State:
@@ -44,3 +45,4 @@ Acceptance checks:
 - Module cards no longer render tag pills; card hierarchy remains sequence-oriented and plain-language-first.
 - Full lesson descriptions are visible (no truncation).
 - Module card CTA text is `Play` when a slide link exists.
+- Subtitle and carousel status counts derive from rendered lesson count (`visualClassCards.length`) rather than hardcoded lesson totals.

@@ -6,6 +6,10 @@ import { getVisualClassCatalog, LEARN_VISUAL_ROUTE_LABEL, type LearnCard } from 
 const modules = await loadModules();
 
 const visualClassCards: LearnCard[] = getVisualClassCatalog(modules);
+const lessonsSubtitle =
+  visualClassCards.length > 0
+    ? `${visualClassCards.length} step-by-step ${visualClassCards.length === 1 ? 'lesson' : 'lessons'} from planning to launch readiness.`
+    : 'Step-by-step lessons from planning to launch readiness.';
 ---
 <BaseLayout title={`${LEARN_VISUAL_ROUTE_LABEL} - Oscar Sanchez`} description="Structured visual classes and practical proofs.">
   <div class="page-shell">
@@ -20,7 +24,7 @@ const visualClassCards: LearnCard[] = getVisualClassCatalog(modules);
 
     <section id="visual-class-catalog" class="panel-shell learn-module-shell" data-motion-enter>
       <h2>Lessons</h2>
-      <p class="text-small learn-module-shell__subtitle">Six step-by-step lessons from planning to launch readiness.</p>
+      <p class="text-small learn-module-shell__subtitle">{lessonsSubtitle}</p>
       {visualClassCards.length === 0 ? (
         <p class="text-small">No {LEARN_VISUAL_ROUTE_LABEL.toLowerCase()} are published yet.</p>
       ) : (
