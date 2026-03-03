@@ -1,23 +1,10 @@
 # FULL_TECH_BUILD
 
 ## 1) Snapshot header
-- UpdatedAt: 2026-03-03T18:17:01Z
+- UpdatedAt: 2026-03-03T18:17:18Z
 - RepoName: oscar-sanchez-portfolio
-- Branch, HEAD commit hash: main | 1c9d86a46eb482e298a362c3498d67222bbb7fad
-- Dirty state: yes (`git status --short`)
-  - `FULL_TECH_BUILD.txt`
-  - `final_build/COMPONENT__learn-pages.txt`
-  - `final_build/COMPONENT__workshop-catalog.txt`
-  - `final_build/COMPONENT__workshops-index.txt`
-  - `final_build/COMPONENT__workshops_page.txt`
-  - `final_build/CURRENT_GAPS.txt`
-  - `src/content/data/workshops.json`
-  - `src/lib/learn-pages.ts`
-  - `src/lib/schemas.ts`
-  - `src/lib/workshop-catalog.ts`
-  - `src/pages/index.astro`
-  - `src/pages/workshops.astro`
-  - `src/styles/global.css`
+- Branch, HEAD commit hash: main | ebf698d5f6ed1d7df2f98bf6fa31d9ad4bc6e0f0
+- Dirty state: no (`git status --short` is clean)
 - Primary languages + package managers detected:
   - TypeScript + Astro (`.ts`, `.astro`)
   - CSS (`.css`)
@@ -99,7 +86,7 @@ This is an Astro-based OSAN website for portfolio, workshops, and learning modul
   - Dedicated automated tests around new category helper output ordering and fallback grouping.
 
 ## 7) Recent change log (rolling)
-- 2026-03-03T18:17:01Z | 1c9d86a | chore: sync FULL_TECH_BUILD after workshops category refactor | `FULL_TECH_BUILD.txt`, `src/content/data/workshops.json`, `src/lib/learn-pages.ts`, `src/lib/schemas.ts`, `src/lib/workshop-catalog.ts`, `src/pages/workshops.astro`, `src/pages/index.astro`, `src/styles/global.css`, `final_build/CURRENT_GAPS.txt`, `final_build/COMPONENT__learn-pages.txt`, `final_build/COMPONENT__workshop-catalog.txt`, `final_build/COMPONENT__workshops-index.txt`, `final_build/COMPONENT__workshops_page.txt`
+- 2026-03-03T18:17:18Z | ebf698d | feat(workshops): add categorized curated workshops and grouped route | `src/content/data/workshops.json`, `src/lib/schemas.ts`, `src/lib/learn-pages.ts`, `src/lib/workshop-catalog.ts`, `src/pages/workshops.astro`, `src/pages/index.astro`, `src/styles/global.css`, `final_build/CURRENT_GAPS.txt`, `final_build/COMPONENT__learn-pages.txt`, `final_build/COMPONENT__workshop-catalog.txt`, `final_build/COMPONENT__workshops-index.txt`, `final_build/COMPONENT__workshops_page.txt`, `FULL_TECH_BUILD.txt`
 - 2026-03-03T18:10:34Z | 1c9d86a | chore: sync FULL_TECH_BUILD after home artifact deploy | `FULL_TECH_BUILD.txt`
 - 2026-03-03T18:10:07Z | aab3016 | fix(home): remove nested route-card artifact and polish hover state | `src/pages/index.astro`, `src/styles/global.css`, `final_build/CURRENT_GAPS.txt`, `final_build/COMPONENT__homepage_index.txt`, `final_build/COMPONENT__tokens-global.css.txt`
 - 2026-03-03T17:03:40Z | 17e23ff | feat(visual-classes): place new external modules in lesson flow | `src/content/data/modules.json`, `src/lib/learn-pages.ts`, `final_build/COMPONENT__learn-pages.txt`, `final_build/COMPONENT__visual_classes_page.txt`, `final_build/CURRENT_GAPS.txt`, `FULL_TECH_BUILD.txt`
