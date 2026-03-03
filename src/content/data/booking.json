@@ -2,15 +2,15 @@
   "calendly": {
     "one_on_one": {
       "label": "Book 1:1",
-      "url": ""
+      "url": "https://calendly.com/abellou/30min"
     },
     "teach_private": {
       "label": "Book a private workshop",
-      "url": ""
+      "url": "https://calendly.com/abellou/30min"
     },
     "teach_class": {
       "label": "Book a class",
-      "url": ""
+      "url": "https://calendly.com/abellou/30min"
     }
   },
   "note": "Add real Calendly URLs. Keep friction low. No dark patterns."

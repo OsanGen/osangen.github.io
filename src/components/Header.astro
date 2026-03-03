@@ -1,7 +1,7 @@
 ---
 import { PRIMARY_NAV_ITEMS, isNavItemCurrent } from '../lib/site-nav';
 
-const ctaHref = 'https://calendly.com/abellou/30min';
+const ctaHref = '/book';
 const currentPath = Astro.url.pathname;
 ---
 <header class="site-header">
@@ -35,8 +35,6 @@ const currentPath = Astro.url.pathname;
       <a
         class="button button--primary nav-cta"
         href={ctaHref}
-        target="_blank"
-        rel="noopener noreferrer"
       >
         Book
       </a>
