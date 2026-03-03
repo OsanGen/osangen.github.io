@@ -1,10 +1,10 @@
 # FULL_TECH_BUILD
 
 ## 1) Snapshot header
-- UpdatedAt: 2026-03-03T17:03:40Z
+- UpdatedAt: 2026-03-03T17:03:50Z
 - RepoName: oscar-sanchez-portfolio
 - Branch: main
-- HEAD: 17e23ff3f13214caa7f89e0bf88e89f028a0a5cc
+- HEAD: 76ec2a1c6ef473a0451d6773b2f4aa94f7c46b17
 - Dirty state: no
 - Primary languages + package managers detected:
   - TypeScript + Astro component templates (`.ts`, `.astro`)
