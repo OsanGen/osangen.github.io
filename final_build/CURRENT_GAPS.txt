@@ -1,4 +1,5 @@
 # CURRENT_GAPS
+- workshops deploy lint blocker hotfix | completed | Added optional `category` to `LearnCard` in `src/lib/learn-pages.ts` so `astro check` passes and Pages deploy can publish the curated workshops.
 - workshops category refactor | completed | Switched `/workshops` to category-based rendering with curated LinkedIn sessions and category metadata, adding grouped catalog helper + route count consistency.
 - homepage route-card nested surface artifact | completed | Removed nested `.route-card` hover/reveal behavior on `/` so only the outer `.card` handles lift/focus polish; this eliminates the inner pop-up box artifact and adds a restrained home-only route-card background tint on card hover/focus.
 - visual-classes lesson-1 removal | completed | Removed `vibe-to-pral` from `VISUAL_CLASS_DECK_SEQUENCE` so `/visual-classes` now starts at prior lesson 2, renumbers to `Lesson 1` through `Lesson 7` after subsequent additions, and keeps source module/workshop data unchanged.

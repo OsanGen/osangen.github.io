@@ -17,6 +17,7 @@ export interface LearnCard {
   proof: string;
   description: string;
   tags: string[];
+  category?: string;
   id?: string;
   lessonIndex?: number;
   lessonLabel?: string;

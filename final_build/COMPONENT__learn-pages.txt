@@ -20,6 +20,7 @@ Outputs:
   - optional `slidesHref` + `slidesLabel`.
   - computed CTA state (`cta.href`, `cta.label`, `cta.isExternal`).
   - module slide-backed CTA labels use `Play` on `/visual-classes`.
+  - optional `category` used for workshop grouping and CI-safe typing.
 
 Curriculum behavior:
 - `VISUAL_CLASS_DECK_SEQUENCE` controls explicit learning order for modules.
@@ -57,6 +58,7 @@ Dependencies:
 Acceptance checks:
 - `/visual-classes` renders exactly modules selected by schema + explicit sequence order.
 - `/workshops` can render canonical workshop catalog from `getCoreWorkshopCatalog()` and grouped category catalog from `getCoreWorkshopCatalogByCategory()`.
+- `npm run check` passes without `LearnCard.category` type errors on grouping logic.
 - Module and workshop CTA precedence is stable and label-safe.
 - Module slide-backed CTAs render `Play`, while workshop CTA labels remain unchanged (`Replay`/`Slides`/`Open details`).
 - Lesson count and labels are consistent with the page hero text (`Lesson 1 of 7`).

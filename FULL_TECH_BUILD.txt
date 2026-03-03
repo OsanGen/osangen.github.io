@@ -1,10 +1,14 @@
 # FULL_TECH_BUILD
 
 ## 1) Snapshot header
-- UpdatedAt: 2026-03-03T18:17:18Z
+- UpdatedAt: 2026-03-03T18:27:49Z
 - RepoName: oscar-sanchez-portfolio
-- Branch, HEAD commit hash: main | ebf698d5f6ed1d7df2f98bf6fa31d9ad4bc6e0f0
-- Dirty state: no (`git status --short` is clean)
+- Branch, HEAD commit hash: main | f67d69162ea37a682b08a0f1e9794aa426960637
+- Dirty state: yes (`git status --short`)
+  - `src/lib/learn-pages.ts`
+  - `final_build/CURRENT_GAPS.txt`
+  - `final_build/COMPONENT__learn-pages.txt`
+  - `FULL_TECH_BUILD.txt`
 - Primary languages + package managers detected:
   - TypeScript + Astro (`.ts`, `.astro`)
   - CSS (`.css`)
@@ -68,6 +72,7 @@ This is an Astro-based OSAN website for portfolio, workshops, and learning modul
 
 ## 6) Current implementation status
 - What is implemented:
+  - Deploy hotfix applied in `src/lib/learn-pages.ts`: `LearnCard` now includes optional `category`, matching grouped workshop rendering usage and removing CI `astro check` failures.
   - Workshop dataset replaced with curated events grouped into:
     - `Gen AI Live (Guests and Episodes)`
     - `Agents and Workflow Automation`
@@ -86,6 +91,7 @@ This is an Astro-based OSAN website for portfolio, workshops, and learning modul
   - Dedicated automated tests around new category helper output ordering and fallback grouping.
 
 ## 7) Recent change log (rolling)
+- 2026-03-03T18:27:49Z | f67d691 | fix(types): add LearnCard category for workshop grouping deploy gate | `src/lib/learn-pages.ts`, `final_build/CURRENT_GAPS.txt`, `final_build/COMPONENT__learn-pages.txt`, `FULL_TECH_BUILD.txt`
 - 2026-03-03T18:17:18Z | ebf698d | feat(workshops): add categorized curated workshops and grouped route | `src/content/data/workshops.json`, `src/lib/schemas.ts`, `src/lib/learn-pages.ts`, `src/lib/workshop-catalog.ts`, `src/pages/workshops.astro`, `src/pages/index.astro`, `src/styles/global.css`, `final_build/CURRENT_GAPS.txt`, `final_build/COMPONENT__learn-pages.txt`, `final_build/COMPONENT__workshop-catalog.txt`, `final_build/COMPONENT__workshops-index.txt`, `final_build/COMPONENT__workshops_page.txt`, `FULL_TECH_BUILD.txt`
 - 2026-03-03T18:10:34Z | 1c9d86a | chore: sync FULL_TECH_BUILD after home artifact deploy | `FULL_TECH_BUILD.txt`
 - 2026-03-03T18:10:07Z | aab3016 | fix(home): remove nested route-card artifact and polish hover state | `src/pages/index.astro`, `src/styles/global.css`, `final_build/CURRENT_GAPS.txt`, `final_build/COMPONENT__homepage_index.txt`, `final_build/COMPONENT__tokens-global.css.txt`
