@@ -1,16 +1,11 @@
 # FULL_TECH_BUILD
 
 ## 1) Snapshot header
-- UpdatedAt: 2026-03-03T17:03:24Z
+- UpdatedAt: 2026-03-03T17:03:40Z
 - RepoName: oscar-sanchez-portfolio
 - Branch: main
-- HEAD: 6fed93a7482b3f8a7ebed6df9aa8f2a5f2f4b8d1
-- Dirty state: yes (`git status --short` shows local edits)
-  - `src/lib/learn-pages.ts`
-  - `src/content/data/modules.json`
-  - `final_build/COMPONENT__learn-pages.txt`
-  - `final_build/COMPONENT__visual_classes_page.txt`
-  - `final_build/CURRENT_GAPS.txt`
+- HEAD: 17e23ff3f13214caa7f89e0bf88e89f028a0a5cc
+- Dirty state: no
 - Primary languages + package managers detected:
   - TypeScript + Astro component templates (`.ts`, `.astro`)
   - CSS (`.css`)
@@ -97,7 +92,7 @@ To inspect dependency graph:
 If DEV-mode spec is active, track operational gaps in `final_build/CURRENT_GAPS.txt`.
 
 ## 7) Recent change log (rolling)
-- 2026-03-03T17:02:58Z | local | chore(visual-classes): place hotel-onboarding (Module 5) after grounding-chamber in curriculum flow | `src/lib/learn-pages.ts`, `src/content/data/modules.json`, `FULL_TECH_BUILD.txt`
+- 2026-03-03T17:03:40Z | 17e23ff | feat(visual-classes): place new external modules in lesson flow | `FULL_TECH_BUILD.txt`, `final_build/COMPONENT__learn-pages.txt`, `final_build/COMPONENT__visual_classes_page.txt`, `final_build/CURRENT_GAPS.txt`, `src/content/data/modules.json`, `src/lib/learn-pages.ts`
 - 2026-03-03T17:01:02Z | 25a6d3a | feat(visual-classes): remove lesson 1 and promote lesson 2 in deck + homepage count alignment | `src/lib/learn-pages.ts`, `src/pages/visual-classes.astro`, `src/pages/index.astro`, `final_build/COMPONENT__learn-pages.txt`, `final_build/COMPONENT__visual_classes_page.txt`, `final_build/COMPONENT__homepage_index.txt`, `final_build/COMPONENT__index-page.txt`, `final_build/CURRENT_GAPS.txt`, `FULL_TECH_BUILD.txt`
 - 2026-03-03T16:45:02Z | 9d3aca8 | chore(deploy): verify CI and pages deploy completion for live release | `final_build/CURRENT_GAPS.txt`, `FULL_TECH_BUILD.txt`
 - 2026-03-03T16:44:11Z | 9d3aca8 | feat(modules): rename slides CTA to play and upgrade lesson button | `src/lib/learn-pages.ts`, `src/pages/visual-classes.astro`, `src/styles/global.css`, `final_build/COMPONENT__learn-pages.txt`, `final_build/COMPONENT__visual_classes_page.txt`, `final_build/COMPONENT__tokens-global.css.txt`, `final_build/CURRENT_GAPS.txt`, `FULL_TECH_BUILD.txt`
