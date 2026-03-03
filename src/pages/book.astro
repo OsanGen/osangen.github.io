@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Card from '../components/Card.astro';
+import CardGrid from '../components/CardGrid.astro';
 import { loadBooking } from '../lib/content';
 
 const booking = await loadBooking();
@@ -8,7 +9,48 @@ const embed = Astro.url.searchParams.get('embed') === '1';
 ---
 <BaseLayout title="Book - Oscar Sanchez" description="Book calls and workshops with explicit consent">
   <h1>Book</h1>
-  <p class="text-small">Choose the option that fits your next step.</p>
+  <p>Paid teaching events and paid consulting. Pick a path, then book a slot below.</p>
+  <p class="text-small">TL;DR: Teaching → workshops/classes. Consulting → 1:1 guidance. Choose the option that fits your next step.</p>
+
+  <CardGrid gap="var(--space-3)" align="stretch">
+    <Card>
+      <h2>Paid teaching</h2>
+      <p class="text-small">Workshops and classes for teams, schools, and communities.</p>
+      <ul>
+        <li>Formats: private workshop, guest lecture, hands-on build.</li>
+        <li>You get: agenda, slides/labs, and a reusable scaffold.</li>
+        <li>Best when: you want a shared baseline and a shipped demo.</li>
+      </ul>
+    </Card>
+    <Card>
+      <h2>Paid consulting</h2>
+      <p class="text-small">Short sessions to de-risk a build or a pilot.</p>
+      <ul>
+        <li>Format: 1:1 guidance or a team consult.</li>
+        <li>You get: scoped next steps, risks, and a simple plan.</li>
+        <li>Best when: you need a clear decision, not a long engagement.</li>
+      </ul>
+    </Card>
+  </CardGrid>
+
+  <Card>
+    <h2>Open by default</h2>
+    <p>Paid work funds the free OSAN artifacts: workshops, modules, labs, and docs.</p>
+    <p class="text-small">
+      When it makes sense, I turn outcomes into reusable templates and scaffolds. I never publish client data or private context.
+    </p>
+    <p class="text-small">
+      If you want the free path first, start here:
+      <a href="/workshops">Workshops</a>,
+      <a href="/visual-classes">Modules</a>,
+      <a href="/labs">Labs</a>,
+      <a href="/join">Contribute</a>,
+      or <a href="/resume">About</a>.
+    </p>
+  </Card>
+
+  <h2>Book a slot</h2>
+  <p class="text-small">Calendly opens in a new tab. Use the Back link if you want to exit.</p>
 
   <Card>
     <h2>1:1 guidance</h2>
@@ -39,6 +81,5 @@ const embed = Astro.url.searchParams.get('embed') === '1';
       <p class="text-small">Add your Calendly URL in booking.json</p>
     )}
   </Card>
-
-  <p class="text-small">Use the Back link if you want to exit this flow.</p>
+  <p class="muted">AI‑assisted; reviewed by humans; results vary.</p>
 </BaseLayout>
