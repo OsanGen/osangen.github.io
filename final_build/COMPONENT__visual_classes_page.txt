@@ -20,6 +20,7 @@ Outputs:
 - Card rows omit topic chips; each card includes explicit lesson sequence metadata (`Lesson N`), plain-language title, and full non-truncated description text.
 - Carousel cards use explicit `cog-entrance` timing and lightweight inline JS for stepwise navigation (`ArrowLeft`, `ArrowRight`, `Home`, `End`) with non-loop boundaries.
 - Current product sequence is six lessons; status text and lesson labels render as `Lesson 1 of 6` through `Lesson 6 of 6`.
+- Lesson cards use a premium, route-accented `Play` CTA treatment (module slide links) with a restrained micro-affordance marker and no glow/heavy gradient styling.
 
 State:
 - Build-time module-only card derivation and deterministic sorting/filtering.
@@ -42,3 +43,4 @@ Acceptance checks:
 - Empty state is readable and keeps spacing rhythm consistent with learn surfaces.
 - Module cards no longer render tag pills; card hierarchy remains sequence-oriented and plain-language-first.
 - Full lesson descriptions are visible (no truncation).
+- Module card CTA text is `Play` when a slide link exists.

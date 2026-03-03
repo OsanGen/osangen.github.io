@@ -1,0 +1,125 @@
+# FULL_TECH_BUILD
+
+## 1) Snapshot header
+- UpdatedAt: 2026-03-03T16:42:25Z
+- RepoName: oscar-sanchez-portfolio
+- Branch: main
+- HEAD: cfd8254de0a2fea6afc6730c89a16f2d074dccb3
+- Dirty state: yes (`git status --short` shows local edits)
+  - `final_build/BUILD_MAP.txt`
+  - `final_build/COMPONENT__tokens-global.css.txt`
+  - `final_build/COMPONENT__learn-pages.txt`
+  - `final_build/COMPONENT__visual_classes_page.txt`
+  - `final_build/COMPONENT__workshops-index.txt`
+  - `final_build/COMPONENT__workshops_page.txt`
+  - `final_build/CURRENT_GAPS.txt`
+  - `FULL_TECH_BUILD.txt`
+  - `src/lib/learn-pages.ts`
+  - `src/pages/visual-classes.astro`
+  - `src/styles/global.css`
+- Primary languages + package managers detected:
+  - TypeScript + Astro component templates (`.ts`, `.astro`)
+  - CSS (`.css`)
+  - JavaScript utilities/scripts (`.mjs`, `.ts` scripts run via `tsx`)
+  - `npm` (`package.json`, `package-lock.json`)
+
+## 2) What this repo is
+This is an Astro-based portfolio and learning-product site for OSAN. It hosts learn surfaces (Modules, Workshops, Labs), contributor flows (`/join`), proof/resume content, and GPT/game listings under a single OSAN v2 visual and motion framework.
+
+### User-facing artifacts
+- Public web routes driven by `src/pages/**` with shared shell in `src/layouts/BaseLayout.astro`.
+- Learn split:
+  - Workshops (`/workshops`)
+  - Modules (`/visual-classes`) with one-at-a-time carousel flow
+- Support surfaces: `/labs`, `/join`, `/gpts`, `/resume`, `/more`.
+- Static build + dist validation (`npm run verify:dist`) and runtime smoke (`npm run verify:runtime`).
+
+## 3) System map
+- Core shell:
+  - `src/layouts/BaseLayout.astro`: global metadata, nav/footer composition, motion mount, and route-level accent token.
+  - `src/components/Header.astro` + `src/components/Footer.astro`: nav chrome; both consume `src/lib/site-nav.ts`.
+  - `src/components/MotionEnhance.astro`: injects shared motion runtime host + top progress rail target.
+  - `src/scripts/osan-motion.ts`: route-gated reveal/scroll behavior and reduced-motion safeguards.
+  - `src/components/ServiceWorkerRegister.astro` + `public/sw.js`: caching/versioning/offline baseline.
+- Data and catalogs:
+  - `src/lib/content.ts` + `src/lib/schemas.ts`: content loading and typed validation.
+  - `src/lib/workshop-catalog.ts`: workshop taxonomy + module filtering constants.
+  - `src/lib/learn-pages.ts`: shared transformation helpers for modules and workshops.
+  - `src/content/data/*` JSON content sources.
+- Shared style system:
+  - `src/styles/tokens.css`, `src/styles/global.css`, and route/page scoped stylesheet additions.
+- Verification tooling:
+  - `scripts/check-dist-integrity.mjs`, `scripts/runtime-http-smoke.mjs`
+  - `npm` scripts for check/build/dist/runtime validation.
+
+## 4) Entrypoints and run commands
+- Local dev: `npm run dev`
+- Production build: `npm run build`
+- Content check: `npm run validate:content`
+- Runtime smoke: `npm run verify:runtime`
+- Dist verification: `npm run verify:dist`
+- Type/lint/check: `npm run check` (same as `npm run typecheck` and `npm run lint`)
+
+Environment/run notes:
+- Node >=20 required.
+- `PUBLIC_SW_VERSION` is used by `ServiceWorkerRegister.astro` and `public/sw.js` for deploy-safe cache versioning.
+
+## 5) Dependencies and toolchain summary
+- npm manifests:
+  - `package.json`
+  - `package-lock.json`
+- Top-level dependencies:
+  - `astro@5.17.3`
+  - `motion@12.34.3`
+  - `@fontsource/inter@5.1.1`
+  - `@fontsource/sora@5.1.0`
+  - `zod@3.24.1`
+  - `tsx@4.19.1`
+- Toolchain:
+  - `@astrojs/check`
+  - `typescript`
+  - `prettier`
+- Risk notes:
+  - Service-worker cache behavior still depends on correct `PUBLIC_SW_VERSION` propagation in CI.
+  - Motion behavior depends on `prefers-reduced-motion` and route dataset shape for selectors.
+
+To inspect dependency graph:
+- `npm ls --depth=2`
+
+## 6) Current implementation status
+- What is implemented:
+  - Learn split and modules-only curriculum model (`/workshops` vs `/visual-classes`).
+  - One-at-a-time Modules carousel with full descriptions, reduced labels, keyboard controls.
+  - Module slide-backed CTA copy on `/visual-classes` now uses `Play` and adds a premium token-based button treatment (still no glow/heavy gradients).
+  - OSAN route-accent hardening, footer/header parity, and SW cache-versioning hardening.
+  - Documentation updates reflected in `final_build/*` and component spec set.
+- What is in progress:
+  - Manual visual QA for reduced-motion behavior, 10% zoom readability, and cross-device spacing in a few high-signal screens.
+- What is not started:
+  - Broader dependency/script hygiene tasks beyond known pending entries (cleanup of scripts/dependencies).
+
+If DEV-mode spec is active, track operational gaps in `final_build/CURRENT_GAPS.txt`.
+
+## 7) Recent change log (rolling)
+- 2026-03-03T16:42:25Z | cfd8254 | chore(modules): rename slide CTA to Play and apply premium OSAN CTA styling | `src/lib/learn-pages.ts`, `src/pages/visual-classes.astro`, `src/styles/global.css`, `final_build/COMPONENT__learn-pages.txt`, `final_build/COMPONENT__visual_classes_page.txt`, `final_build/COMPONENT__tokens-global.css.txt`, `final_build/CURRENT_GAPS.txt`, `FULL_TECH_BUILD.txt`
+- 2026-03-03T16:28:17Z | cfd8254 | full-build docs sync | `FULL_TECH_BUILD.txt`, `final_build/*`
+- 2026-02-24T17:00:19Z | cfd8254 | Fix join scope chip text clipping and responsive wrapping | `src/pages/join.astro`, `final_build/CURRENT_GAPS.txt`, `final_build/COMPONENT__join_page.txt`
+- 2026-02-24T15:51:58Z | 83a4ef1 | Harden nav matching and reframe Contribute as upskill-to-teach path | `src/pages/index.astro`, `src/components/Header.astro`, `src/components/Footer.astro`, `src/lib/site-nav.ts`, `src/pages/join.astro`, `src/pages/more.astro`, `src/content/data/join_project.json`
+- 2026-02-24T15:23:38Z | f63769c | fix(cache): deploy-versioned service worker and footer consistency gate | `.github/workflows/ci.yml`, `.github/workflows/deploy-pages.yml`, `public/sw.js`, `scripts/check-dist-integrity.mjs`, `src/components/ServiceWorkerRegister.astro`
+- 2026-02-24T15:11:01Z | 56d8192 | chore(footer): mirror header tabs and update statement | `src/components/Footer.astro`, `src/styles/global.css`
+- 2026-02-24T15:05:01Z | 61ce4f2 | chore(workshops): remove card noise and hero shortcuts | `src/pages/workshops.astro`, `final_build/COMPONENT__workshops-index.txt`, `final_build/COMPONENT__workshops_page.txt`
+- 2026-02-24T15:02:04Z | 609459f | chore(workshops): remove hero chip and shortcut button | `src/pages/workshops.astro`, `final_build/COMPONENT__workshops-index.txt`, `final_build/COMPONENT__workshops_page.txt`
+- 2026-02-24T14:56:31Z | 15fc87a | chore(modules): remove visual-classes hero chip and actions | `src/pages/visual-classes.astro`, `final_build/COMPONENT__visual_classes_page.txt`
+- 2026-02-23T03:45:30Z | 55c886b | feat(modules): reduce to 6-lesson compounding track | `src/content/data/modules.json`, `src/lib/learn-pages.ts`, `src/pages/index.astro`, `src/pages/visual-classes.astro`
+- 2026-02-23T03:29:57Z | 47e72c8 | chore: update deploy tracking status | `final_build/CURRENT_GAPS.txt`
+
+## 8) Refresh procedure
+- Refresh the snapshot:
+  - `git rev-parse --abbrev-ref HEAD`
+  - `git rev-parse HEAD`
+  - `git status --short`
+  - `git log --date=iso --pretty='format:%h|%ad|%s' -n 10`
+  - `npm run check`
+  - `npm run build`
+  - `npm run verify:dist`
+  - `npm run verify:runtime`

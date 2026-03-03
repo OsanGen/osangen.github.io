@@ -1,56 +1,50 @@
 # Component: `src/lib/learn-pages.ts`
 
 Purpose:
-- Centralize shared learn-catalog derivations and CTA/proof helpers for learn-style pages.
-- Provide reusable, low-risk helpers so `/workshops` and `/visual-classes` keep identical behavior where intended.
+- Centralize learn-surface transformations for module and workshop cards.
+- Build deterministic curriculum sequencing, proof snippets, lesson metadata, and CTA selection in one place.
 
 Inputs:
-- `Module[]` from `src/lib/schemas.ts`.
-- `Workshop[]` from `src/lib/schemas.ts`.
-- Helpers from `src/lib/workshop-catalog.ts`, `src/lib/link-utils.ts`.
+- `Module[]` and `Workshop[]` from `src/lib/schemas.ts`.
+- Helper exports from `src/lib/workshop-catalog.ts` (`splitWorkshops`, `isDisplayableVisualClassModule`) and `src/lib/link-utils.ts`.
 
 Outputs:
-- Normalized card models for:
-  - Visual class catalog (`getVisualClassCatalog`)
-  - Core workshop catalog (`getCoreWorkshopCatalog`)
-  - Replay quick links (`getWorkshopReplayLinks`)
-  - Slides quick links (`getWorkshopSlideLinks`)
-- Shared proof snippets and CTA logic:
-  - `buildModuleProofSnippet`
-  - `buildWorkshopProofSnippet`
-  - `buildModuleCta`
-  - `buildWorkshopCta`
-  - Sequenced proof narration for `/visual-classes` that shows learning progression.
-- Module slide preference:
-  - `resolveVisualClassModuleSlideHref` resolves `module.links.slides` as the primary module deck destination when present.
-  - If no valid slide link is present, module cards fall back to module CTA defaults.
-- Visual-class sequencing now uses an explicit curriculum map:
-  `VISUAL_CLASS_DECK_SEQUENCE` in `src/lib/learn-pages.ts`.
-- Current `/visual-classes` deck scope is focused on the nine provided slide-linked modules and excludes older placeholder/legacy module entries.
-- Current `/visual-classes` deck scope is focused on six curated modules (`vibe-to-pral`, `kinetic-kitchen-2-0`, `vpn-cost-lab`, `kitchen-x-ray`, `neural-glass`, `ai-kitchen`) after product-level removals.
-- Extended `LearnCard` with lesson metadata and optional slide metadata:
-  - `description`, `lessonIndex`, `lessonLabel`, `slidesHref`, `slidesLabel`
-  - `getVisualClassCatalog()` is now modules-only (workshop mixing removed) and assigns deterministic lesson numbering (Lesson 1, Lesson 2, …) to every rendered card so curriculum progression is explicit and continuous.
-  - Module cards prefer `module.lessonTitle` and `module.lessonDescription` for plain-language presentation, with fallback to existing proof-derived snippets when those fields are missing.
-  - Slide links for visual-class cards now prefer `slidesUrl` and fall back to `replayUrl`; those links are currently surfaced through each card's primary CTA/pattern, with no separate slide rail section.
-- `getVisualClassCatalog()` uses `module.links.slides` in the `/visual-classes` catalog so lesson cards can point directly to curated module decks when configured in content.
-- Visual-class cards are filtered to curated deck IDs first. If an ID is not in the curriculum map, it is excluded (so legacy or non-linked modules are not rendered on `/visual-classes`).
-- Visual-class cards are filtered to curated deck IDs first. If an ID is not in the curriculum map, it is excluded (so removed modules and non-curated entries are not rendered on `/visual-classes`).
+- `getVisualClassCatalog(modules: Module[])`: modules-only curriculum cards for `/visual-classes`.
+- `getCoreWorkshopCatalog(workshops: Workshop[])`: canonical workshop cards for `/workshops`.
+- `getWorkshopReplayLinks(workshops: Workshop[])` and `getWorkshopSlideLinks(workshops: Workshop[])`: valid quick links for future reuse.
+- Learn card model (`LearnCard`) with:
+  - `title`, `meta`, `proof`, `description`.
+  - `lessonIndex` + `lessonLabel` for curriculum progression.
+  - optional `slidesHref` + `slidesLabel`.
+  - computed CTA state (`cta.href`, `cta.label`, `cta.isExternal`).
+  - module slide-backed CTA labels use `Play` on `/visual-classes`.
+
+Curriculum behavior:
+- `VISUAL_CLASS_DECK_SEQUENCE` controls explicit learning order for modules.
+- Current sequence is six lessons:
+  - `vibe-to-pral`, `kinetic-kitchen-2-0`, `vpn-cost-lab`, `kitchen-x-ray`, `neural-glass`, `ai-kitchen`.
+- `isDisplayableVisualClassModule()` removes blocked/non-approved module entries.
+- Results are filtered by module id against the explicit sequence map before final sort, so removed modules are never rendered.
+- Lesson labels are assigned from sequence position (`Lesson 1` ... `Lesson 6`) and remain stable even when copy changes.
+
+Proof and continuity:
+- `clampProof()` produces short proof lines for card surfaces.
+- `withLearningProgress()` adds progression sentence text for non-proof details on catalog output.
+- `withLearningProgressDescription()` similarly prefixes full descriptions with `Builds on <prior title>` when not already present.
+
+CTA logic:
+- Modules prefer `module.links.slides` via `buildModuleCta()`; when present, the module CTA label is `Play`. Fallback uses module-level CTA.
+- Workshops prefer `replayUrl`, then `slidesUrl`, then detail routes for deterministic labels.
+- `resolveVisualClassModuleSlideHref()` and `resolveSlideHref()` guard against unavailable links and internal fallback routes.
 
 State:
-- No persisted state; deterministic array transforms for each call.
+- Pure functions only; no mutable global state.
 
 Edge cases:
-- Non-displayable visual-class modules are excluded.
-- Invalid placeholder links are filtered from replay/slides lists.
-- Empty proof content falls back to sensible defaults.
-- Visual-class catalog entries are sorted by explicit learning sequence keys (with stable id fallback) and stitched into a dependency-aware proof chain.
-- Lesson labels are emitted even when card proof chaining is not meaningful (fallback preserves card count visibility).
-- Slide helper export (`getVisualClassSlides`) removed; slide/link metadata remains in `LearnCard` for per-card actions.
-- Module CTA selection now prefers slides/deck links and only falls back to module `cta` defaults when no curated or explicit slide link exists.
-- Description progression preserves readability: if a description does not already start with "Builds on", continuity text is added from the previous lesson title.
-- Description progression preserves readability: if a description does not already start with "Builds on", continuity text is added from the previous lesson title.
-- The 6-lesson sequence now starts at planning (`vibe-to-pral`) and compounds through workflow, cost, risk, explainability, and final launch readiness.
+- Invalid or placeholder links are removed before surfacing in catalogs.
+- Missing proof/description fallback to normalized safe defaults.
+- Description and proof fields remain non-empty to prevent layout collapse.
+- Empty catalog input returns an empty array with no runtime exception.
 
 Dependencies:
 - `src/lib/workshop-catalog.ts`
@@ -58,5 +52,8 @@ Dependencies:
 - `src/lib/schemas.ts`
 
 Acceptance checks:
-- Core/visual workshop classification remains aligned with `splitWorkshops`.
-- CTAs and proof snippets are rendered with the same precedence on both learn routes.
+- `/visual-classes` renders exactly modules selected by schema + explicit sequence order.
+- `/workshops` renders canonical workshop catalog from `splitWorkshops()`.
+- Module and workshop CTA precedence is stable and label-safe.
+- Module slide-backed CTAs render `Play`, while workshop CTA labels remain unchanged (`Replay`/`Slides`/`Open details`).
+- Lesson count and labels are consistent with the page hero text (`Lesson 1 of 6`).

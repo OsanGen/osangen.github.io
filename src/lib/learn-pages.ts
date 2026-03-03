@@ -169,7 +169,7 @@ export const buildModuleCta = (module: Module, slideHref = ''): CtaState => {
     return {
       href,
       isExternal: isExternalUrl(href),
-      label: 'Slides',
+      label: 'Play',
     };
   }
 
@@ -237,7 +237,7 @@ export const getVisualClassCatalog = (
         description: buildModuleDescription(module),
         tags: module.topics,
         slidesHref: resolvedSlideHref,
-        slidesLabel: resolvedSlideHref ? 'Slides' : undefined,
+        slidesLabel: resolvedSlideHref ? 'Play' : undefined,
         cta: buildModuleCta(module, resolvedSlideHref),
       };
     });

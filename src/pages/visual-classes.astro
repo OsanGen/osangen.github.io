@@ -71,7 +71,7 @@ const visualClassCards: LearnCard[] = getVisualClassCatalog(modules);
                 <p class="text-small learn-card__description">{description}</p>
                 <div class="learn-card__actions">
                   <a
-                    class="button catalog-cta"
+                    class={`button catalog-cta${cta.label === 'Play' ? ' learn-card__play-cta' : ''}`}
                     href={cta.href}
                     target={cta.isExternal ? '_blank' : undefined}
                     rel={cta.isExternal ? 'noopener noreferrer' : undefined}

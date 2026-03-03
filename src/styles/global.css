@@ -1744,6 +1744,46 @@ html.motion-enhanced [data-motion-enter][data-motion-done='true'] {
   min-height: 2.75rem;
 }
 
+:is(body[data-page='visual-classes']) .learn-card__actions .learn-card__play-cta {
+  --play-cta-border: color-mix(in srgb, var(--scene-accent, var(--accent)) 44%, var(--stroke));
+  --play-cta-surface: color-mix(in srgb, var(--scene-accent, var(--accent)) 11%, var(--surface));
+  --play-cta-pill: color-mix(in srgb, var(--scene-accent, var(--accent)) 22%, var(--surface));
+  background: var(--play-cta-surface);
+  border-color: var(--play-cta-border);
+  color: var(--accent-ink);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding-inline: 1rem 0.78rem;
+  box-shadow: 0 8px 14px rgba(16, 18, 26, 0.08);
+}
+
+:is(body[data-page='visual-classes']) .learn-card__actions .learn-card__play-cta::after {
+  content: '>';
+  width: 1.08rem;
+  height: 1.08rem;
+  border-radius: 999px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--scene-accent, var(--accent)) 34%, var(--stroke));
+  background: var(--play-cta-pill);
+  font-size: 0.68rem;
+  line-height: 1;
+  transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
+}
+
+:is(body[data-page='visual-classes']) .learn-card__actions .learn-card__play-cta:hover,
+:is(body[data-page='visual-classes']) .learn-card__actions .learn-card__play-cta:focus-visible {
+  background: color-mix(in srgb, var(--scene-accent, var(--accent)) 17%, var(--surface));
+  border-color: color-mix(in srgb, var(--scene-accent, var(--accent)) 58%, var(--stroke));
+}
+
+:is(body[data-page='visual-classes']) .learn-card__actions .learn-card__play-cta:hover::after,
+:is(body[data-page='visual-classes']) .learn-card__actions .learn-card__play-cta:focus-visible::after {
+  transform: translateX(1px);
+  background: color-mix(in srgb, var(--scene-accent, var(--accent)) 28%, var(--surface));
+  border-color: color-mix(in srgb, var(--scene-accent, var(--accent)) 52%, var(--stroke));
+}
+
 :is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-filter-section {
   gap: var(--space-3);
 }
@@ -1949,6 +1989,13 @@ body[data-page='visual-classes'] :where(
   body[data-page='workshops'] .learn-detail-hero,
   body[data-page='visual-classes'] .learn-detail-hero {
   padding: var(--space-4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :is(body[data-page='visual-classes']) .learn-card__actions .learn-card__play-cta,
+  :is(body[data-page='visual-classes']) .learn-card__actions .learn-card__play-cta::after {
+    transition: none;
+  }
 }
 
 body[data-page='workshops'] .learn-detail-hero__top,

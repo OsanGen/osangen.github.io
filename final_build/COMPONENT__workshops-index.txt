@@ -1,32 +1,40 @@
-# Component: `src/pages/workshops.astro` (visual taxonomy surface)
+# Component: `src/pages/workshops.astro` (workshops catalog surface)
 
 Purpose:
-- Provide the workshops-only Learn catalog route:
-  - Core workshop cards (with canonical detail pages).
-  - Replay + slide quick-link sections for proof-first entry.
+- Provide the `/workshops` learn surface as a workshop-only listing.
+- Keep card layout minimal: title, proof snippet, and one CTA.
 
 Inputs:
-- `loadWorkshops()`.
-- `getCoreWorkshopCatalog`, `getWorkshopReplayLinks`, `getWorkshopSlideLinks` from `src/lib/learn-pages.ts`.
+- `loadWorkshops()` from `src/lib/content.ts`.
+- `getCoreWorkshopCatalog()` from `src/lib/learn-pages.ts`.
 
 Outputs:
-- Hero + workshop section with one action button per card.
-- Workshops hero intentionally omits local hero chip/actions for a cleaner top block.
-- Replays and slides list sections sourced from core workshop links.
-- Workshop cards intentionally render only title, proof snippet text, and single CTA (no date line, no proof-label pill, no tag chips).
+- Hero block with route context (Learn/Workshops).
+- Workshops section (`<section id="workshops">`) containing one card grid of canonical workshop entries.
+- No quick-link rail, no card metadata chips, and no additional helper sections.
 
 State:
 - No client-side state.
-- All routing groups are computed at build time in page frontmatter.
+- Build-time catalog transformation and deterministic sorting by date.
+
+Card behavior:
+- Canonical workshop set is produced by `splitWorkshops()` in `getCoreWorkshopCatalog`.
+- Cards render:
+  - `title`
+  - `proof`
+  - one action button using `cta.label` / `cta.href`.
+- CTA precedence comes from shared helpers (`Replay` > `Slides` > `Open details`).
 
 Edge cases:
-- Workshop entries with missing replay/slides render non-proof route fallback (`/workshops`) or `/workshops/{id}` CTA.
-- Replay/slide lists include only valid external links.
+- Missing links resolve to safe fallback route/actions.
+- Empty workshop lists render a non-breaking copy fallback message.
 
 Dependencies:
-- `CardGrid`.
-- `src/lib/learn-pages.ts`.
+- `CardGrid`
+- `src/lib/content.ts`
+- `src/lib/learn-pages.ts`
 
 Acceptance checks:
-- Only canonical workshops render in this page’s card section (`leanagents-workshop-chatgpt-apps`, `manus-workshop`).
-- Replay and slides quick links stay current and open externally.
+- Only canonical core workshop cards render in this surface.
+- Cards do not include date text, proof badges, chip rows, or extra tag UI.
+- `Replay`/`Slides`/`Open details` behavior remains unchanged for valid workshop links.

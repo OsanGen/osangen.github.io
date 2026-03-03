@@ -1,25 +1,30 @@
 # BUILD_MAP
-- `src/styles/tokens.css`: defines canonical OSAN/CogSec pastel design tokens and baseline surfaces.
-- `src/styles/global.css`: global utility classes and component styles for layout, motion, nav, cards, and proof-first patterns using token palette.
-- `src/components/Header.astro` + header styles in global.css: controls global shell navigation and Book CTA.
-- `src/components/Footer.astro` + footer styles in global.css: controls global secondary navigation and trust/disclosure copy.
-- `src/lib/site-nav.ts`: shared top-tab navigation config used by both header and footer to keep route labels/hrefs synchronized.
-- `src/components/MotionEnhance.astro`: mounts top progress rail shell and bootstraps the motion runtime.
-- `src/components/GPTCard.astro`: card row for each GPT directory entry (name, one-line outcome, tags, Open button).
-- `src/pages/index.astro`: homepage router shell (hero + 4 route cards).
-- `src/pages/visual-classes.astro`: dedicated visual-class catalog page sourced from `src/lib/learn-pages.ts`.
-- `src/pages/join.astro`: GENMRKT quarter landing page driven by `src/content/data/join_project.json`.
-- `src/pages/workshops.astro`: workshops-only listing page with core workshop cards, replays, and slides.
-- `src/pages/workshops/[id].astro`: workshop detail page with proof line and teaching details.
-- `src/lib/workshop-catalog.ts`: canonical workshop taxonomy helpers (`CORE_WORKSHOP_IDS`, split + classification helpers).
-- `src/lib/learn-pages.ts`: shared learn catalog data transformations and CTA helpers for `/workshops` and `/visual-classes`.
-- `scripts/generate-sitemap.mjs` + `public/sitemap.xml`: build-time sitemap generation.
-- `scripts/check-dist-integrity.mjs`: static-output verification for sitemap route parity, internal href integrity, and dynamic route existence checks.
-- `scripts/runtime-http-smoke.mjs`: local preview HTTP smoke verification for core static and representative dynamic routes (`npm run verify:runtime`).
-- `src/scripts/osan-motion.ts`: route-gated in-view reveal + scroll progress enhancements powered by `motion`.
-- `src/lib/content.ts` + `src/lib/schemas.ts`: content loading, validation, and typing.
-- `src/content.config.ts`: explicit Astro content collection definition to avoid implicit collection generation and Astro 5 deprecation drift.
-- `src/layouts/BaseLayout.astro`: layout shell and host page chrome, now includes service worker registration component.
-- `src/components/ServiceWorkerRegister.astro`: registers the service worker in-browser for runtime caching/offline support.
-- `public/sw.js`: offline/runtime caching service worker (`core`, `asset`, and `document` caches).
-- `public/manifest.webmanifest`: manifest metadata for installability and offline entry behavior.
+- `src/styles/tokens.css`: canonical OSAN/CogSec pastel token definitions and surface variables.
+- `src/styles/global.css`: global utility classes and component styles for layout, motion, navigation, cards, and proof-first visual patterns.
+- `src/lib/site-nav.ts`: shared primary navigation schema and current-route matcher consumed by header/footer.
+- `src/components/Header.astro` + footer styles in `global.css`: shared site shell chrome and primary route tabs.
+- `src/components/Footer.astro` + footer styles in `global.css`: mirrored nav block and mission statement enforcement.
+- `src/components/MotionEnhance.astro`: injects motion mount and shared top progress rail.
+- `src/components/ServiceWorkerRegister.astro`: registers versioned service-worker runtime in the shared layout.
+- `src/components/GPTCard.astro`: reusable card for GPT directory entries.
+- `src/pages/index.astro`: homepage router shell with four route cards.
+- `src/pages/visual-classes.astro`: modules-only lesson deck (`Lesson 1..6`) and one-at-a-time carousel.
+- `src/pages/workshops.astro`: workshops-only listing with reduced card schema (title, proof snippet, one CTA).
+- `src/pages/workshops/[id].astro`: workshop detail page with proof, teaching bullets, and CTA precedence.
+- `src/pages/labs.astro`: OSAN GAMES listing surface and catalog wrappers.
+- `src/pages/labs/[gameId].astro`: game detail embedding route.
+- `src/pages/join.astro`: contribution landing page driven by `src/content/data/join_project.json`.
+- `src/pages/gpts.astro`: GPT catalog index; `src/pages/gpts/[id].astro` detail routes.
+- `src/pages/resume.astro`: resume/proof page with dedicated layout and motion hooks.
+- `src/pages/about.astro`: project about page shell.
+- `src/pages/docs.astro`, `src/pages/posts.astro`, `src/pages/more.astro`, `src/pages/book.astro`, `src/pages/code-of-conduct.astro`: static content surfaces.
+- `src/lib/workshop-catalog.ts`: workshop taxonomy helpers and visual-class module filters.
+- `src/lib/learn-pages.ts`: shared learn catalog transforms, card normalization, lesson metadata and CTA behavior.
+- `src/lib/content.ts` + `src/lib/schemas.ts`: content loading, type validation, and runtime-safe helpers.
+- `src/content.config.ts`: explicit Astro content collection definition.
+- `scripts/generate-sitemap.mjs` + `public/sitemap.xml`: sitemap generation and deployment parity source.
+- `scripts/check-dist-integrity.mjs`: integrity checks for routes, sitemap coverage, and footer/nav statements.
+- `scripts/runtime-http-smoke.mjs`: route smoke checks for `npm run verify:runtime`.
+- `src/scripts/osan-motion.ts`: route-gated reveal/scroll motion controls.
+- `public/sw.js`: service worker for cache namespaces, navigation fetch strategy, and offline fallback.
+- `public/manifest.webmanifest`: installability metadata.

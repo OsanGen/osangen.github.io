@@ -1,8 +1,11 @@
 # CURRENT_GAPS
+- visual-classes play cta upgrade | completed | Renamed module slide-backed CTA text from `Slides` to `Play` and added a route-scoped premium CTA treatment in `/visual-classes` with token-only color usage and reduced-motion-safe micro-interactions.
 - osan header brand icon refresh | completed | Replaced `/icons/oscar-cog-brain.svg` with a flat 2D yellow brain SVG and removed header square/chassis chrome via `.brand-mark` styling.
 - osan header brand icon polish | completed | Completed brand-lockup clean-up for OSAN 2D appearance: removed mark rounding and added block-level lockup rendering plus neutral highlight tint on the brain proof line.
+- final_build docs sync | completed | Synced `final_build/*` specs to current workshops/modules behavior and created `FULL_TECH_BUILD.txt` snapshot metadata.
+- full-build txt refresh pass | completed | Re-aligned `FULL_TECH_BUILD.txt` metadata with current HEAD/dirty state and corrected stale version notes in gap/component tracking during the docs-upkeep pass.
 - live deploy trigger | completed | Pushed commit `a8d8a1606dfd8f6077bc0f3052f9f3a1549240ca` to `main`; push-based deployment pipeline triggered successfully.
-- deploy run monitoring | pending | Wait for CI run `22335360949` and Deploy run `22335360946` to complete, then confirm the live site reflects this commit.
+- deploy run monitoring | pending | Validate the latest CI/deploy run for this commit set and confirm the live site reflects current production output.
 - executive evidence motion layer | completed | Added `motion`-powered OSAN-safe reveal + progress-rail system via `MotionEnhance` + `osan-motion.ts`, gated to `/`, `/workshops*`, and `/gpts*` by `data-page`.
 - motion runtime verification | completed | Ran `npm run check`, `npm run validate:content`, `npm run build`, `npm run verify:dist`, and `npm run verify:runtime` after motion integration.
 - motion visual QA pass | pending | Run manual browser pass on desktop/mobile for `/`, `/workshops`, `/gpts`, and verify reduced-motion behavior disables enhancement.
@@ -17,7 +20,7 @@
 - homepage route-card blue-rail removal | completed | Removed `cog-accent-rail` from homepage route cards and added a home-scoped CSS rail kill-switch so the first-page route tiles cannot render the vertical blue line.
 - osan premium-quiet upgrade | completed | Added scene depth tokens + proof stack utilities across `/`, `/workshops`, `/visual-classes`, `/gpts`, `/resume`, `/join`, `/labs`, and shared motion pages; resumed motion hooks now include grouped stagger behavior and per-page motion entry controls.
 - learn route split | completed | Added dedicated `/visual-classes` page, extracted shared `src/lib/learn-pages.ts`, and made `/workshops` workshops-only.
-- astro5 migration completion | completed | Upgraded `astro` to `5.17.2`, upgraded `@astrojs/check` to `0.9.6`, added explicit `src/content.config.ts`, and verified `npm audit --omit=dev` reports 0 vulnerabilities.
+- astro5 migration completion | completed | Upgraded `astro` to `5.17.3`, upgraded `@astrojs/check` to `0.9.6`, added explicit `src/content.config.ts`, and verified `npm audit --omit=dev` reports 0 vulnerabilities.
 - visual-pass for global shell effects | pending | Validate accent and motion behavior at /, /labs, /workshops, /gpts, and /resume on desktop/mobile, including new bubble motif visibility.
 - motion parser hardening | completed | Replaced fragile numeric parsing in `src/scripts/osan-motion.ts` with null-safe token parsing and removed `as any` casts while preserving reveal timing behavior.
 - global bubble motif rollout | completed | Added centralized route-tinted bubble system across hero shells, first major non-hero content surfaces, and subtle page-frame fallback.
@@ -43,13 +46,13 @@
 - modules lessonization pass | completed | Fixed `visualClass` gating for module visibility, added lesson labels and continuity proof chaining, with the `/visual-classes` deck focused on lesson cards only.
 - modules slide section removal | completed | Removed the detached `/visual-classes` slide rail/list section and jump chip so Modules displays a single lesson deck focused on proof-first card sequencing.
 - learn split QA pass | blocked | Manual browser smoke is pending on `/workshops` and `/visual-classes` for lesson sequence readability at 10% zoom, reduced-motion state, mobile tap target spacing, and route-link discoverability across header/footer/index/more/home with one-accent consistency.
-- visual-classes sequence integrity | completed | `/visual-classes` now intentionally renders only the nine provided slide-linked module IDs in explicit Lesson 1-9 order via `VISUAL_CLASS_DECK_SEQUENCE`, with proof copy tuned to progression and continuity.
+- visual-classes sequence integrity | completed | `/visual-classes` now intentionally renders the six curated slide-linked module IDs in explicit `Lesson 1`-through-`Lesson 6` order via `VISUAL_CLASS_DECK_SEQUENCE`, with proof copy tuned to progression and continuity.
 - visual-classes module scope | completed | `/visual-classes` now renders a modules-only lesson deck (workshop cards are intentionally excluded by default) so the route stays focused on curriculum modules and lesson progression.
 - modules data scope hardening | completed | Removed legacy module entries (`adl-browser-only`, `governed-genai-rollout`, `cogsec-playbooks`) from `src/content/data/modules.json` so source data matches the approved `/visual-classes` lesson set.
 - learn route tab rename | completed | Renamed the learn destination UI label from "Visual Classes" to "Modules" across header, footer, homepage card, workshops CTA, visual-classes page, and `/more` while keeping `/visual-classes` URL unchanged.
 - modules setup hardening | completed | Reworked `/visual-classes` catalog ordering to follow a learning progression and added proof snippets that explain each card’s continuity from the previous lesson.
 - visual modules deck refresh | completed | `/visual-classes` now uses strip-style lesson cards with cleaner scan rhythm and explicit lesson sequencing.
-- modules plain-language carousel rewrite | completed | Rewrote all nine module lesson titles/descriptions into plain English and replaced the strip with a one-at-a-time arrow carousel (`Previous`/`Next`, keyboard navigation, no loop, full descriptions visible).
+- modules plain-language carousel rewrite | completed | Rewrote the six module lesson titles/descriptions into plain English and replaced the strip with a one-at-a-time arrow carousel (`Previous`/`Next`, keyboard navigation, no loop, full descriptions visible).
 - modules slide link enrichment | completed | Added per-module slide links directly in `src/content/data/modules.json` and kept `/visual-classes` CTA precedence as `Slides`-first when configured.
 - header logo asset sync | completed | Replaced `/public/icons/osan-logo.png` and `/public/icons/osan-logo@2x.png` with the provided PNG lockup so header now renders the intended raster brand mark from the new asset.
 - header logo broken-state fix | completed | Switched header brand to versioned assets (`/icons/osan-logo-v2.png`, `/icons/osan-logo-v2@2x.png`) to avoid cached-path failures, and added a local fallback to `/icons/oscar-cog-brain.svg` when image decode/load fails.

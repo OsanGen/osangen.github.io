@@ -1,40 +1,40 @@
 # Component/page: `src/pages/workshops.astro`
 
 Purpose:
-- Render workshops-only listing:
-  - Hero + quick anchors for list entry points.
-  - Canonical core workshops (2 canonical workshop detail routes).
-- Keep behavior and CTAs identical to previous workshop card logic (Replay/Slides/Open details).
-- Keep output concise with stable CTA behavior and no broken detail route assumptions.
+- Render a workshops-only listing surface under `/workshops`.
+- Preserve the reduced UI contract: title + proof snippet + single action per card.
 
 Inputs:
 - `loadWorkshops()` from `src/lib/content.ts`.
-- Shared learn helpers from `src/lib/learn-pages.ts`.
+- `getCoreWorkshopCatalog()` from `src/lib/learn-pages.ts`.
 
 Outputs:
-- Intro hero with eyebrow/title/subtitle only (no last-updated chip or hero action buttons).
-- `Workshops` section with core-workshop cards, sorted newest first.
-- Replays and slides quick-link sections sourced from core workshop CTAs.
-- Motion and visual hierarchy utilities (`cog-proof-stack`, `cog-accent-rail`, `cog-proof-chip`) are applied to hero/catalog/sections to match the premium-quiet pattern.
-- Workshop cards render a reduced schema: title, proof snippet, and one CTA only.
+- Hero block with eyebrow/title/subtitle.
+- `Workshops` section with one card grid section and a canonical `coreWorkshops` list.
 
 State:
 - No client-side state.
-- Build-time derivations:
-  - `splitWorkshops(workshops)` for canonical workshop filtering.
-  - Shared card/link helpers from `src/lib/learn-pages.ts`.
+- Build-time derivation and stable sorted output (`sortWorkshopsNewestFirst` in the helper).
 
-Edge cases:
-- Missing dates/labels fall back to safe route text and/or `/workshops` cta.
-- Duplicate or empty workshop/module fields do not crash card rendering.
-- Module helper blocks display for configured non-visual-class modules.
+Card behavior:
+- Cards render:
+  - `title`
+  - `proof` (trimmed/clipped by helper)
+  - `cta` action button
+- CTA precedence is delegated to shared helper logic (Replay/Slides/Open details behavior where applicable).
+- No date/meta chips or topic rows are rendered for workshop cards.
 
 Dependencies:
-- `CardGrid`.
-- `src/lib/content.ts`, `src/lib/learn-pages.ts`.
+- `CardGrid`
+- `src/lib/content.ts`
+- `src/lib/learn-pages.ts`
+
+Edge cases:
+- Missing proof text is normalized before render.
+- Invalid CTAs receive fallback behavior from helper functions.
+- Empty dataset renders a safe fallback message.
 
 Acceptance checks:
-- Only core workshop detail links are generated from `coreWorkshops`.
-- Replays/Slides lists include only workshops with valid external CTAs.
-- `/workshops/{id}` details route remains reachable for `coreWorkshops`.
-- Workshop cards do not render date text, proof-label pill, or tag-chip rows.
+- Only canonical workshop details appear in `/workshops`.
+- `/workshops/{id}` remains reachable via generated page links.
+- Card UI remains noise-reduced with one CTA and no extra helper rows.
