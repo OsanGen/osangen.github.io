@@ -1,20 +1,11 @@
 # FULL_TECH_BUILD
 
 ## 1) Snapshot header
-- UpdatedAt: 2026-03-03T17:00:14Z
+- UpdatedAt: 2026-03-03T17:01:02Z
 - RepoName: oscar-sanchez-portfolio
 - Branch: main
-- HEAD: 9d3aca8d30236f4fee8ab80335ad32a49cd7006f
-- Dirty state: yes (`git status --short` shows local edits)
-  - `FULL_TECH_BUILD.txt`
-  - `final_build/COMPONENT__homepage_index.txt`
-  - `final_build/COMPONENT__index-page.txt`
-  - `final_build/COMPONENT__learn-pages.txt`
-  - `final_build/COMPONENT__visual_classes_page.txt`
-  - `final_build/CURRENT_GAPS.txt`
-  - `src/lib/learn-pages.ts`
-  - `src/pages/index.astro`
-  - `src/pages/visual-classes.astro`
+- HEAD: 25a6d3a5c545199a5d25ac6bde148a2498d4c8b7
+- Dirty state: no
 - Primary languages + package managers detected:
   - TypeScript + Astro component templates (`.ts`, `.astro`)
   - CSS (`.css`)
@@ -101,7 +92,7 @@ To inspect dependency graph:
 If DEV-mode spec is active, track operational gaps in `final_build/CURRENT_GAPS.txt`.
 
 ## 7) Recent change log (rolling)
-- 2026-03-03T17:00:14Z | 9d3aca8 | chore(modules): remove vibe-to-pral from active deck and renumber lessons to 1..5 | `src/lib/learn-pages.ts`, `src/pages/visual-classes.astro`, `src/pages/index.astro`, `final_build/COMPONENT__learn-pages.txt`, `final_build/COMPONENT__visual_classes_page.txt`, `final_build/COMPONENT__homepage_index.txt`, `final_build/COMPONENT__index-page.txt`, `final_build/CURRENT_GAPS.txt`, `FULL_TECH_BUILD.txt`
+- 2026-03-03T17:01:02Z | 25a6d3a | feat(visual-classes): remove lesson 1 and promote lesson 2 in deck + homepage count alignment | `src/lib/learn-pages.ts`, `src/pages/visual-classes.astro`, `src/pages/index.astro`, `final_build/COMPONENT__learn-pages.txt`, `final_build/COMPONENT__visual_classes_page.txt`, `final_build/COMPONENT__homepage_index.txt`, `final_build/COMPONENT__index-page.txt`, `final_build/CURRENT_GAPS.txt`, `FULL_TECH_BUILD.txt`
 - 2026-03-03T16:45:02Z | 9d3aca8 | chore(deploy): verify CI and pages deploy completion for live release | `final_build/CURRENT_GAPS.txt`, `FULL_TECH_BUILD.txt`
 - 2026-03-03T16:44:11Z | 9d3aca8 | feat(modules): rename slides CTA to play and upgrade lesson button | `src/lib/learn-pages.ts`, `src/pages/visual-classes.astro`, `src/styles/global.css`, `final_build/COMPONENT__learn-pages.txt`, `final_build/COMPONENT__visual_classes_page.txt`, `final_build/COMPONENT__tokens-global.css.txt`, `final_build/CURRENT_GAPS.txt`, `FULL_TECH_BUILD.txt`
 - 2026-03-03T16:28:17Z | cfd8254 | full-build docs sync | `FULL_TECH_BUILD.txt`, `final_build/*`
