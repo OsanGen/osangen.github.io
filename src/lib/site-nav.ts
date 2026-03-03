@@ -8,7 +8,7 @@ export const PRIMARY_NAV_ITEMS: SiteNavItem[] = [
   { label: 'Modules', href: '/visual-classes' },
   { label: 'Workshops', href: '/workshops' },
   { label: 'Contribute', href: '/join' },
-  { label: 'Resume', href: '/resume' },
+  { label: 'About Me', href: '/resume' },
 ];
 
 export function normalizePath(pathname: string): string {

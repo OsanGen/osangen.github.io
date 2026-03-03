@@ -24,6 +24,6 @@ Provide a single source of truth for primary site navigation labels and hrefs us
 - Consumed by `src/components/Footer.astro`.
 
 ## Acceptance Checks
-- Header and footer render the same five items in the same order: `OSAN GAMES`, `Modules`, `Workshops`, `Contribute`, `Resume`.
+- Header and footer render the same five items in the same order: `OSAN GAMES`, `Modules`, `Workshops`, `Contribute`, `About Me`.
 - Changing nav labels/hrefs requires a single edit in this module.
 - Shared active matcher marks a link current only when path is an exact match or nested subpath of that route.

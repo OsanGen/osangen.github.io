@@ -1,4 +1,5 @@
 # CURRENT_GAPS
+- nav resume-tab relabel | completed | Updated shared `PRIMARY_NAV_ITEMS` label from `Resume` to `About Me` (route remains `/resume`) so header/footer tabs use the requested title.
 - visual-classes lesson meta noise removal | completed | Removed the `90 minutes • Intermediate` row from `/visual-classes` carousel cards while keeping lesson sequencing, copy, and `Play` CTA behavior unchanged.
 - workshops deploy lint blocker hotfix | completed | Added optional `category` to `LearnCard` in `src/lib/learn-pages.ts` so `astro check` passes and Pages deploy can publish the curated workshops.
 - workshops category refactor | completed | Switched `/workshops` to category-based rendering with curated LinkedIn sessions and category metadata, adding grouped catalog helper + route count consistency.

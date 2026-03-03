@@ -5,7 +5,7 @@ Provide a clean footer that mirrors the top primary tabs and shows one compact O
 
 ## Inputs / Outputs
 - Inputs: current pathname from `Astro.url.pathname` for active-item highlighting.
-- Output: footer nav links mirroring header tabs (`OSAN GAMES`, `Modules`, `Workshops`, `Contribute`, `Resume`) plus a single statement line.
+- Output: footer nav links mirroring header tabs (`OSAN GAMES`, `Modules`, `Workshops`, `Contribute`, `About Me`) plus a single statement line.
 
 ## State
 - Stateless.
