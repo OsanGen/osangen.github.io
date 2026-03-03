@@ -1,14 +1,11 @@
 # FULL_TECH_BUILD
 
 ## 1) Snapshot header
-- UpdatedAt: 2026-03-03T19:25:27Z
+- UpdatedAt: 2026-03-03T19:26:48Z
 - RepoName: oscar-sanchez-portfolio
-- Branch, HEAD commit hash: main | 601a71dd822638e9c90d96132b40f870d0ce6bdf
+- Branch, HEAD commit hash: main | e14dadd1bd2deec385e74b55f8ada2098ff7225f
 - Dirty state: yes (`git status --short`)
   - `FULL_TECH_BUILD.txt`
-  - `src/pages/resume.astro`
-  - `final_build/CURRENT_GAPS.txt`
-  - `src/content/data/profile.json`
 - Primary languages + package managers detected:
   - TypeScript + Astro (`.ts`, `.astro`)
   - CSS (`.css`)
@@ -96,6 +93,7 @@ This is an Astro-based OSAN website for portfolio, workshops, and learning modul
   - Dedicated automated tests around new category helper output ordering and fallback grouping.
 
 ## 7) Recent change log (rolling)
+- 2026-03-03T19:26:48Z | e14dadd | chore(resume): update about-me hero and technical skills | `src/pages/resume.astro`, `src/content/data/profile.json`, `final_build/CURRENT_GAPS.txt`, `FULL_TECH_BUILD.txt`
 - 2026-03-03T19:25:27Z | 601a71d | chore(resume): relabel hero to about me and set creator headline | `src/pages/resume.astro`, `final_build/CURRENT_GAPS.txt`, `FULL_TECH_BUILD.txt`
 - 2026-03-03T19:19:02Z | 601a71d | chore(resume): replace skills chips with technical skill taxonomy | `src/content/data/profile.json`, `final_build/CURRENT_GAPS.txt`, `FULL_TECH_BUILD.txt`
 - 2026-03-03T19:17:40Z | 601a71d | chore(resume): remove education date subline | `src/pages/resume.astro`, `final_build/CURRENT_GAPS.txt`, `FULL_TECH_BUILD.txt`
