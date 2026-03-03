@@ -17,6 +17,8 @@ const VISUAL_CLASS_WORKSHOP_TITLE_BLOCKLIST = new Set([
 const normalizeWorkshopId = (id: string) => id.trim().toLowerCase();
 const normalizeText = (value = '') => value.trim().toLowerCase();
 
+const hasWorkshopCategory = (workshop: Workshop) => normalizeText(workshop.category).length > 0;
+
 const isBlockedVisualClassWorkshop = (workshop: Workshop): boolean =>
   VISUAL_CLASS_WORKSHOP_ID_BLOCKLIST.has(normalizeWorkshopId(workshop.id)) ||
   VISUAL_CLASS_WORKSHOP_TITLE_BLOCKLIST.has(normalizeText(workshop.title));
@@ -28,8 +30,15 @@ export const isDisplayableVisualClassModule = (module: Module): boolean =>
 export const isDisplayableVisualClassWorkshop = (workshop: Workshop): boolean =>
   !isCoreWorkshop(workshop.id) && !isBlockedVisualClassWorkshop(workshop);
 
-export const isCoreWorkshop = (id: string): boolean => CORE_WORKSHOP_IDS.has(normalizeWorkshopId(id));
-export const isCoreWorkshopId = isCoreWorkshop;
+export const isCoreWorkshop = (input: string | Workshop): boolean => {
+  if (typeof input === 'string') {
+    return CORE_WORKSHOP_IDS.has(normalizeWorkshopId(input));
+  }
+
+  return CORE_WORKSHOP_IDS.has(normalizeWorkshopId(input.id)) || hasWorkshopCategory(input);
+};
+
+export const isCoreWorkshopId = (id: string): boolean => isCoreWorkshop(id);
 
 export const isVisualClassWorkshopId = (id: string): boolean => !isCoreWorkshop(id);
 
@@ -42,7 +51,7 @@ export const splitWorkshops = (workshops: Workshop[]) => {
       return;
     }
 
-    if (isCoreWorkshopId(workshop.id)) {
+    if (isCoreWorkshop(workshop)) {
       coreWorkshops.push(workshop);
       return;
     }

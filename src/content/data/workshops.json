@@ -1,244 +1,478 @@
 [
   {
-    "id": "leanagents-workshop-chatgpt-apps",
-    "date": "2026-02-14",
-    "title": "Lean Agents Workshop: ChatGPT Apps",
-    "description": "A practical demo of a three-role AI content stack (Producer -> Art -> Post) for repeatable, reviewable 8-second intro content that scales across teams.",
-    "replayUrl": "https://www.linkedin.com/events/leanagentsworkshop-chatgptapps-7421924200531111937/theater/",
-    "slidesUrl": "/workshops/leanagents-workshop-chatgpt-apps",
+    "id": "gen-ai-live-data-and-ai-make-sense",
+    "date": "2026-03-28",
+    "title": "GEN AI LIVE: Make Data and AI Make Sense | Walter Shields (EP 05)",
+    "description": "A practical walkthrough of connecting operational data with defensible AI decisions, then translating outcomes into reliable shipping steps.",
+    "replayUrl": "https://www.linkedin.com/events/7419131096681975809/",
+    "slidesUrl": "https://www.linkedin.com/events/7419131096681975809/",
     "tags": [
-      "Visual learning",
-      "ChatGPT Apps",
-      "Video production workflow",
-      "Role-based AI stack",
-      "Reusable intro component"
+      "Gen AI Live (Guests and Episodes)",
+      "Data strategy",
+      "Live event",
+      "Production decisioning"
     ],
-    "proofLine": "A repeatable 3-role stack teaches decision ownership: structure first, visuals second, timing third.",
-    "teachingBullets": [
-      "Watch why single-tool prompts fail for production: roles and handoffs are the control points.",
-      "Producer (ChatGPT/OSAN Brand GPT) locks brief, constraints, and disclosure before visuals are created.",
-      "Art step generates a clean, readable hero frame first, then motion is applied only after approval gates.",
-      "Post/sequence step runs through timing and release checks (legibility, safety, length, margin, consistency) for reusable rollout."
-    ]
+    "proofLine": "The session turns messy telemetry into a reusable, evidence-first decision rhythm.",
+    "audienceLine": "Teams shipping AI-enabled services.",
+    "category": "Gen AI Live (Guests and Episodes)"
+  },
+  {
+    "id": "gen-ai-live-how-product-teams-actually-ship-ai-ep-04",
+    "date": "2026-03-27",
+    "title": "Gen AI Live Ep 04 - How Product Teams Actually Ship AI",
+    "description": "A candid field report on sequencing, validation, and delivery rituals that move Gen AI work from prototype to stable capability.",
+    "replayUrl": "https://www.linkedin.com/events/7416556382801358849/",
+    "slidesUrl": "https://www.linkedin.com/events/7416556382801358849/",
+    "tags": [
+      "Gen AI Live (Guests and Episodes)",
+      "Product delivery",
+      "Shipping discipline",
+      "Launch process"
+    ],
+    "proofLine": "Production stories are translated into concrete checkpoints teams can adopt immediately.",
+    "audienceLine": "Product teams and delivery leads.",
+    "category": "Gen AI Live (Guests and Episodes)"
+  },
+  {
+    "id": "gen-ai-live-with-david-whyte",
+    "date": "2026-03-26",
+    "title": "Gen-AI Live with David Whyte",
+    "description": "A guest-led live session translating architecture choices into practical outcomes with explicit quality and risk tradeoffs.",
+    "replayUrl": "https://www.linkedin.com/events/7390070209841217537/",
+    "slidesUrl": "https://www.linkedin.com/events/7390070209841217537/",
+    "tags": [
+      "Gen AI Live (Guests and Episodes)",
+      "Guest perspective",
+      "Design critique",
+      "Live workshop"
+    ],
+    "proofLine": "Expert framing keeps live experimentation tied to proof criteria instead of marketing claims.",
+    "audienceLine": "Product builders and AI strategists.",
+    "category": "Gen AI Live (Guests and Episodes)"
+  },
+  {
+    "id": "gen-ai-live-with-rodrigo-reyes",
+    "date": "2026-03-25",
+    "title": "Gen-AI Live with Rodrigo Reyes",
+    "description": "A live exchange focused on measurable implementation decisions, with practical tradeoff mapping for real workflows.",
+    "replayUrl": "https://www.linkedin.com/events/7372325879991148547/",
+    "slidesUrl": "https://www.linkedin.com/events/7372325879991148547/",
+    "tags": [
+      "Gen AI Live (Guests and Episodes)",
+      "Delivery heuristics",
+      "Workflow design",
+      "Live discussion"
+    ],
+    "proofLine": "Decision points are surfaced as explicit gates, reducing ambiguity between ideas and execution.",
+    "audienceLine": "Teams adopting AI in operational routines.",
+    "category": "Gen AI Live (Guests and Episodes)"
+  },
+  {
+    "id": "gen-ai-live-alfredo",
+    "date": "2026-03-24",
+    "title": "Gen AI Live w/ Alfredo - Sun 12PM ET",
+    "description": "A practical segment with scenario-driven guidance for applying Gen AI patterns in day-to-day teams.",
+    "replayUrl": "https://www.linkedin.com/events/7370132992737943552/",
+    "slidesUrl": "https://www.linkedin.com/events/7370132992737943552/",
+    "tags": [
+      "Gen AI Live (Guests and Episodes)",
+      "Operational session",
+      "Routine integration",
+      "AI workflow"
+    ],
+    "proofLine": "The format makes recurring AI operations clearer by pinning each suggestion to visible constraints.",
+    "audienceLine": "Teams introducing AI in weekly execution loops.",
+    "category": "Gen AI Live (Guests and Episodes)"
+  },
+  {
+    "id": "gen-ai-live-arslan",
+    "date": "2026-03-23",
+    "title": "Gen AI Live w/ Arslan - Thu 11am ET",
+    "description": "A focused workshop segment on execution patterns for AI work with an emphasis on measurable proof and team handoffs.",
+    "replayUrl": "https://www.linkedin.com/events/7363595035222654978/",
+    "slidesUrl": "https://www.linkedin.com/events/7363595035222654978/",
+    "tags": [
+      "Gen AI Live (Guests and Episodes)",
+      "Handoff discipline",
+      "Execution playbook",
+      "Live session"
+    ],
+    "proofLine": "Hand-off quality improves when each live decision is reduced to a tested contract.",
+    "audienceLine": "Delivery and coordination teams.",
+    "category": "Gen AI Live (Guests and Episodes)"
+  },
+  {
+    "id": "live-workshop-openai-atlas-gamma-agent-tool",
+    "date": "2026-03-22",
+    "title": "Live Workshop: OPENAI ATLAS × GAMMA × AGENT TOOL",
+    "description": "A live workflow workshop combining Atlas, Gamma, and agent tooling for reproducible workflow acceleration.",
+    "replayUrl": "https://www.linkedin.com/events/7390031508260151296/",
+    "slidesUrl": "https://www.linkedin.com/events/7390031508260151296/",
+    "tags": [
+      "Agents and Workflow Automation",
+      "Agent tooling",
+      "Atlas",
+      "Workflow automation"
+    ],
+    "proofLine": "The stack is exercised end-to-end to surface integration points and control boundaries.",
+    "audienceLine": "Teams exploring practical AI agent operations.",
+    "category": "Agents and Workflow Automation"
+  },
+  {
+    "id": "live-workshop-openai-atlas-browser-agent-tool",
+    "date": "2026-03-21",
+    "title": "Live Workshop: Open AI Atlas Browser + Agent Tool",
+    "description": "A live setup-and-run session for browser-level agent workflows that stay explainable and auditable.",
+    "replayUrl": "https://www.linkedin.com/events/7387549456944082944/",
+    "slidesUrl": "https://www.linkedin.com/events/7387549456944082944/",
+    "tags": [
+      "Agents and Workflow Automation",
+      "Browser automation",
+      "Agentic workflows",
+      "Live workshop"
+    ],
+    "proofLine": "Browser-led loops are constrained with checkpoints to preserve clarity and repeatability.",
+    "audienceLine": "Operators integrating web-first AI agents.",
+    "category": "Agents and Workflow Automation"
+  },
+  {
+    "id": "live-workshop-openai-agentkit-for-beginners",
+    "date": "2026-03-20",
+    "title": "Live Workshop: OpenAI AgentKit for Beginners",
+    "description": "A guided beginner-to-operator track on building and validating lightweight, useful AI agents.",
+    "replayUrl": "https://www.linkedin.com/events/7383870199894065152/",
+    "slidesUrl": "https://www.linkedin.com/events/7383870199894065152/",
+    "tags": [
+      "Agents and Workflow Automation",
+      "AgentKit",
+      "Beginner workflow",
+      "Live workshop"
+    ],
+    "proofLine": "The session prioritizes minimal viable agent design before adding complexity.",
+    "audienceLine": "AI builders new to agent patterns.",
+    "category": "Agents and Workflow Automation"
+  },
+  {
+    "id": "chatgpt-agent-workshop",
+    "date": "2026-03-19",
+    "title": "ChatGPT Agent Workshop",
+    "description": "A practical build workshop for turning prompts into dependable agent behavior with stable handoff and review gates.",
+    "replayUrl": "https://www.linkedin.com/events/7355308174800785408/",
+    "slidesUrl": "https://www.linkedin.com/events/7355308174800785408/",
+    "tags": [
+      "Agents and Workflow Automation",
+      "ChatGPT",
+      "Agent design",
+      "Live workshop"
+    ],
+    "proofLine": "Behavioral reliability is improved by explicitly testing agent boundaries and outcomes.",
+    "audienceLine": "Teams evaluating practical agent deployment patterns.",
+    "category": "Agents and Workflow Automation"
+  },
+  {
+    "id": "chatgpt-agent-trello-live-workshop",
+    "date": "2026-03-18",
+    "title": "ChatGPT Agent × Trello - Live Workshop",
+    "description": "A live integration workshop showing how to route AI tasks into an operational board with visible status and ownership.",
+    "replayUrl": "https://www.linkedin.com/events/7381316642846167040/",
+    "slidesUrl": "https://www.linkedin.com/events/7381316642846167040/",
+    "tags": [
+      "Agents and Workflow Automation",
+      "Project tooling",
+      "Task routing",
+      "Live workflow"
+    ],
+    "proofLine": "Task routing decisions are made explicit so ownership and escalation are always clear.",
+    "audienceLine": "Teams coordinating AI tasks with human collaborators.",
+    "category": "Agents and Workflow Automation"
+  },
+  {
+    "id": "chatgpt-agent-tool-lovable-launch-website-linkedin",
+    "date": "2026-03-17",
+    "title": "ChatGPT Agent Tool+Lovable: Launch a Website LIVE on LinkedIn",
+    "description": "A hands-on build-and-launch session for live website workflows from agent output to a publish-ready result.",
+    "replayUrl": "https://www.linkedin.com/events/7357867543673348098/",
+    "slidesUrl": "https://www.linkedin.com/events/7357867543673348098/",
+    "tags": [
+      "Agents and Workflow Automation",
+      "Lovable",
+      "Website launch",
+      "Live execution"
+    ],
+    "proofLine": "Agent-produced outputs are validated by checkpoints before becoming public-facing deliverables.",
+    "audienceLine": "Builders pairing ChatGPT agents with frontend workflows.",
+    "category": "Agents and Workflow Automation"
+  },
+  {
+    "id": "agent-lead-generation-workshop",
+    "date": "2026-03-16",
+    "title": "AGENT LEAD GENERATION WORKSHOP",
+    "description": "A focused session on designing agent-assisted lead systems with auditability and measurable lead quality outputs.",
+    "replayUrl": "https://www.linkedin.com/events/7365492752513515520/",
+    "slidesUrl": "https://www.linkedin.com/events/7365492752513515520/",
+    "tags": [
+      "Agents and Workflow Automation",
+      "Lead generation",
+      "Growth operations",
+      "Lead quality"
+    ],
+    "proofLine": "Lead systems are tuned for evidence of acquisition quality over volume noise.",
+    "audienceLine": "Go-to-market and growth teams.",
+    "category": "Agents and Workflow Automation"
+  },
+  {
+    "id": "leanagents-workshop-chatgpt-apps",
+    "date": "2026-03-15",
+    "title": "Lean Agents Workshop: ChatGPT Apps × Sora 2 Pro",
+    "description": "An integrated workflow for lean AI agents using ChatGPT apps and Sora 2 Pro in a compact production sequence.",
+    "replayUrl": "https://www.linkedin.com/events/7421924200531111937/",
+    "slidesUrl": "https://www.linkedin.com/events/7421924200531111937/",
+    "tags": [
+      "Agents and Workflow Automation",
+      "Sora 2 Pro",
+      "Lean workflows",
+      "Agent tooling"
+    ],
+    "proofLine": "The pipeline proves each automation layer before moving to the next for safer iteration.",
+    "audienceLine": "Teams building lean AI agent stacks.",
+    "category": "Agents and Workflow Automation"
+  },
+  {
+    "id": "chatgpt-images-workshop-gpt-image-15",
+    "date": "2026-03-14",
+    "title": "ChatGPT Images Workshop (GPT-Image 1.5)",
+    "description": "A concise image-creation workshop focused on controlled generation and repeatable prompt-to-artifact quality.",
+    "replayUrl": "https://www.linkedin.com/events/7407436670205337600/",
+    "slidesUrl": "https://www.linkedin.com/events/7407436670205337600/",
+    "tags": [
+      "Visual Media Creation (Image + Video)",
+      "Image generation",
+      "Prompt design",
+      "Live workshop"
+    ],
+    "proofLine": "Visual outcomes are assessed with quality checkpoints for composition consistency.",
+    "audienceLine": "Creators and operators testing image generation workflows.",
+    "category": "Visual Media Creation (Image + Video)"
+  },
+  {
+    "id": "nano-banana-workshop",
+    "date": "2026-03-13",
+    "title": "NANO BANANA WORKSHOP",
+    "description": "A practical workshop on fast-turnaround visual ideation and workflow consistency using Nano Banana.",
+    "replayUrl": "https://www.linkedin.com/events/7368014039550959616/",
+    "slidesUrl": "https://www.linkedin.com/events/7368014039550959616/",
+    "tags": [
+      "Visual Media Creation (Image + Video)",
+      "Nano Banana",
+      "Creative workflow",
+      "Live workshop"
+    ],
+    "proofLine": "Rapid generation sessions are constrained by visual criteria to protect signal quality.",
+    "audienceLine": "Creative teams building rapid concept decks.",
+    "category": "Visual Media Creation (Image + Video)"
+  },
+  {
+    "id": "nano-banana-pro-workshop",
+    "date": "2026-03-12",
+    "title": "NANO BANANA PRO WORKSHOP",
+    "description": "An advanced run-through of Nano Banana capabilities for refined image outputs and practical production pacing.",
+    "replayUrl": "https://www.linkedin.com/events/7398461952005623808/",
+    "slidesUrl": "https://www.linkedin.com/events/7398461952005623808/",
+    "tags": [
+      "Visual Media Creation (Image + Video)",
+      "Nano Banana Pro",
+      "Advanced media",
+      "Production pacing"
+    ],
+    "proofLine": "Advanced sessions emphasize quality gates and repeatable post-production handoffs.",
+    "audienceLine": "Media teams scaling creative throughput.",
+    "category": "Visual Media Creation (Image + Video)"
+  },
+  {
+    "id": "inside-sora-2-live-demo-invite-only-access",
+    "date": "2026-03-11",
+    "title": "Inside Sora 2: Live Demo from Invite-Only Access",
+    "description": "A high-clarity demonstration of Sora 2 workflows with practical constraints and reviewer-grade quality checks.",
+    "replayUrl": "https://www.linkedin.com/events/7379506100276051968/",
+    "slidesUrl": "https://www.linkedin.com/events/7379506100276051968/",
+    "tags": [
+      "Visual Media Creation (Image + Video)",
+      "Sora 2",
+      "Live demo",
+      "Motion storytelling"
+    ],
+    "proofLine": "Creative velocity is kept usable by checking motion, continuity, and output predictability in real time.",
+    "audienceLine": "Teams evaluating next-generation AI video tooling.",
+    "category": "Visual Media Creation (Image + Video)"
+  },
+  {
+    "id": "cinematic-workflows-with-veo-3-nano-banana",
+    "date": "2026-03-10",
+    "title": "Cinematic Workflows with Veo 3 + Nano Banana",
+    "description": "A live workflow on combining Veo and Nano Banana for cinematic media with explicit quality and pacing checks.",
+    "replayUrl": "https://www.linkedin.com/events/7371898165152620545/",
+    "slidesUrl": "https://www.linkedin.com/events/7371898165152620545/",
+    "tags": [
+      "Visual Media Creation (Image + Video)",
+      "Veo 3",
+      "Nano Banana",
+      "Cinematic workflow"
+    ],
+    "proofLine": "Pipeline consistency is preserved by coordinating timing, style, and quality signals across tools.",
+    "audienceLine": "Story-driven teams mixing tools in one production run.",
+    "category": "Visual Media Creation (Image + Video)"
+  },
+  {
+    "id": "google-veo-midjourney-video-workshop",
+    "date": "2026-03-09",
+    "title": "Google Veo + Midjourney Video Workshop",
+    "description": "An integrated video creation workshop with control points for style, consistency, and delivery criteria.",
+    "replayUrl": "https://www.linkedin.com/events/7352759377470128128/",
+    "slidesUrl": "https://www.linkedin.com/events/7352759377470128128/",
+    "tags": [
+      "Visual Media Creation (Image + Video)",
+      "Veo",
+      "Midjourney",
+      "Video workshop"
+    ],
+    "proofLine": "Tool transitions are controlled so each stage contributes measurable quality gains.",
+    "audienceLine": "Creators evaluating multi-tool video production.",
+    "category": "Visual Media Creation (Image + Video)"
+  },
+  {
+    "id": "midjourney-runway-workshop-video-image-generation",
+    "date": "2026-03-08",
+    "title": "MidJourney / Runway Workshop(Video/Image Generation Lesson)",
+    "description": "A practical lesson blending MidJourney and Runway for coherent image-to-video creation in production-ready cadence.",
+    "replayUrl": "https://www.linkedin.com/events/7350299579042390017/",
+    "slidesUrl": "https://www.linkedin.com/events/7350299579042390017/",
+    "tags": [
+      "Visual Media Creation (Image + Video)",
+      "MidJourney",
+      "Runway",
+      "Image-to-video"
+    ],
+    "proofLine": "Consistency between still frames and motion output is treated as a first-class acceptance criterion.",
+    "audienceLine": "Media teams using both still and motion generation.",
+    "category": "Visual Media Creation (Image + Video)"
+  },
+  {
+    "id": "chatgpt-52-workshop",
+    "date": "2026-03-07",
+    "title": "CHATGPT 5.2 WORKSHOP",
+    "description": "A focused update on practical ChatGPT 5.2 capabilities, use patterns, and decision checkpoints for rollout.",
+    "replayUrl": "https://www.linkedin.com/events/7405728326083874816/",
+    "slidesUrl": "https://www.linkedin.com/events/7405728326083874816/",
+    "tags": [
+      "Model and Platform Workshops",
+      "ChatGPT 5.2",
+      "Model rollout",
+      "Release review"
+    ],
+    "proofLine": "Capability updates are translated into repeatable, low-risk usage patterns.",
+    "audienceLine": "Teams planning model updates and governance.",
+    "category": "Model and Platform Workshops"
+  },
+  {
+    "id": "gemini-3-workshop",
+    "date": "2026-03-06",
+    "title": "GEMINI 3 WORKSHOP",
+    "description": "A practical workshop on Gemini 3 behavior, integration choices, and measurable quality testing in production settings.",
+    "replayUrl": "https://www.linkedin.com/events/7396919455924047872/",
+    "slidesUrl": "https://www.linkedin.com/events/7396919455924047872/",
+    "tags": [
+      "Model and Platform Workshops",
+      "Gemini 3",
+      "Model comparison",
+      "Evaluation"
+    ],
+    "proofLine": "Model behavior is benchmarked through observable checkpoints before scaling adoption.",
+    "audienceLine": "Teams comparing platform model options.",
+    "category": "Model and Platform Workshops"
+  },
+  {
+    "id": "google-anti-gravity-workshop",
+    "date": "2026-03-05",
+    "title": "Google Anti-Gravity Workshop",
+    "description": "A product review and integration workshop focused on use cases for the Google Anti-Gravity platform and workflow implications.",
+    "replayUrl": "https://www.linkedin.com/events/7401268195396911107/",
+    "slidesUrl": "https://www.linkedin.com/events/7401268195396911107/",
+    "tags": [
+      "Model and Platform Workshops",
+      "Google",
+      "Platform workshop",
+      "Workflow fit"
+    ],
+    "proofLine": "Platform claims are grounded against concrete use-case constraints and control requirements.",
+    "audienceLine": "Teams assessing enterprise platform adoption.",
+    "category": "Model and Platform Workshops"
+  },
+  {
+    "id": "custom-gpt-workshop",
+    "date": "2026-03-04",
+    "title": "Custom GPT Workshop",
+    "description": "A practical session on designing custom GPTs with explicit prompts, boundaries, and output quality metrics.",
+    "replayUrl": "https://www.linkedin.com/events/7348135160443232256/",
+    "slidesUrl": "https://www.linkedin.com/events/7348135160443232256/",
+    "tags": [
+      "Model and Platform Workshops",
+      "Custom GPT",
+      "Prompt controls",
+      "Deployment readiness"
+    ],
+    "proofLine": "Customization is paired with measurable guardrails to reduce drift and improve consistency.",
+    "audienceLine": "Teams building controlled GPT products.",
+    "category": "Model and Platform Workshops"
+  },
+  {
+    "id": "codex-53-spark-workshop",
+    "date": "2026-03-03",
+    "title": "CODEX 5.3 SPARK WORKSHOP",
+    "description": "A workshop framing new capabilities and deployment decisions around CODEX 5.3 with practical rollout and tuning steps.",
+    "replayUrl": "https://www.linkedin.com/events/7433873284875739136/",
+    "slidesUrl": "https://www.linkedin.com/events/7433873284875739136/",
+    "tags": [
+      "Model and Platform Workshops",
+      "CODEX 5.3",
+      "Tuning",
+      "Model rollout"
+    ],
+    "proofLine": "Model capabilities are mapped to explicit release criteria before practical adoption.",
+    "audienceLine": "Platform teams and model operators.",
+    "category": "Model and Platform Workshops"
   },
   {
     "id": "manus-workshop",
-    "date": "2026-02-14",
-    "title": "Manus Evidence-First Workshop",
-    "description": "Learn how to evaluate AI agent tools with public evidence, from rubric setup to candidate ranking and a procurement-ready recommendation pack.",
-    "replayUrl": "https://www.linkedin.com/events/manusworkshop7413933458843934720/theater/",
-    "slidesUrl": "/workshops/manus-workshop",
+    "date": "2026-03-02",
+    "title": "MANUS WORKSHOP",
+    "description": "A hands-on walk-through for evaluating Manus workflows, scoring outputs, and documenting decision quality.",
+    "replayUrl": "https://www.linkedin.com/events/7413933458843934720/",
+    "slidesUrl": "https://www.linkedin.com/events/7413933458843934720/",
     "tags": [
-      "Visual learning",
-      "AI procurement",
-      "Decision scoring",
-      "Citations",
-      "Agent evaluation"
+      "Model and Platform Workshops",
+      "Manus",
+      "Decision workflow",
+      "Evaluation"
     ],
-    "proofLine": "A repeatable evidence workflow that turns live web research into a defensible short-list and a deploy-ready decision artifact.",
-    "teachingBullets": [
-      "Set a decision rubric first so criteria, weights, and failure rules are fixed before research starts.",
-      "Pick eight candidate agents and assign neutral aliases to reduce brand bias while preserving source links.",
-      "Build a scored matrix from public evidence, with citations for each score and explicit \"Unknown\" where data is missing.",
-      "Run weighted ranking by scenario, then export the table, recommendations, and validation checklist for real decisions."
-    ]
+    "proofLine": "Evaluation methods are embedded directly in the workshop so teams can compare outputs without guesswork.",
+    "audienceLine": "Leads evaluating AI workflow platforms.",
+    "category": "Model and Platform Workshops"
   },
   {
-    "id": "ghost-machine",
-    "date": "2026-02-14",
-    "title": "Ghost Machine",
-    "description": "Learn stateless AI workflow evolution with high signal and low noise: each state is auditable, explainable, and built from visible evidence rather than hidden magic.",
-    "replayUrl": "https://ghostdemo-kjctspsn.manus.space",
-    "slidesUrl": "/workshops/ghost-machine",
+    "id": "open-claw-workshop",
+    "date": "2026-03-01",
+    "title": "OPEN CLAW WORKSHOP",
+    "description": "A platform-focused session on applying OpenClaw tooling with clear integration paths and transparent tradeoff analysis.",
+    "replayUrl": "https://www.linkedin.com/events/7426026784367882240/",
+    "slidesUrl": "https://www.linkedin.com/events/7426026784367882240/",
     "tags": [
-      "Workflow evolution",
-      "Stateless systems",
-      "Proof-first design",
-      "Decision states",
-      "High data-ink"
+      "Model and Platform Workshops",
+      "OpenClaw",
+      "Platform integration",
+      "Tradeoff analysis"
     ],
-    "proofLine": "A stateless, proof-first simulator where each transition is a testable evidence unit with transparent logic.",
-    "teachingBullets": [
-      "Start with a high-level intent and map it to the first state transition.",
-      "Advance through state-by-state snapshots so each step is complete and independently auditable.",
-      "Watch checks make tradeoffs explicit before each move is accepted or rejected.",
-      "Use the generated proof log to explain why the system moved, paused, or escalated."
-    ]
-  },
-  {
-    "id": "vibe-to-pral",
-    "date": "2026-02-14",
-    "title": "Vibe-to-PRAL",
-    "description": "Turn a vague idea into a diagram-first PRAL workflow: structure appears step by step while inputs, gates, and handoffs stay visible and teachable.",
-    "replayUrl": "https://vibetopal-vbc22hcv.manus.space",
-    "slidesUrl": "/workshops/vibe-to-pral",
-    "tags": [
-      "Diagram-first learning",
-      "PRAL workflow",
-      "Progressive disclosure",
-      "Systems thinking",
-      "Decision routing"
-    ],
-    "proofLine": "A guided workflow where uncertain input becomes an explainable PRAL sequence with transparent gates, explicit transitions, and understandable output.",
-    "teachingBullets": [
-      "Start with a vague intent and define objective, policy scope, and quality threshold.",
-      "Advance step-by-step as each validation gate confirms intent before progression.",
-      "Watch the diagram map intake to transformation, routing, and handoff with explicit state transitions.",
-      "Compare speed, confidence, and risk tradeoffs before each finalized action."
-    ]
-  },
-  {
-    "id": "vpn-cost-lab",
-    "date": "2026-02-14",
-    "title": "VPN Cost Lab",
-    "description": "Estimate AI deployment spend step-by-step: each request path, policy rule, and routing tradeoff stays visible so teams can reason from evidence to decision.",
-    "replayUrl": "https://vpncostlab-omvhm8um.manus.space",
-    "slidesUrl": "/workshops/vpn-cost-lab",
-    "tags": [
-      "AI cost modeling",
-      "Presenter-focused",
-      "Decision simulation",
-      "Policy checks",
-      "Cost transparency"
-    ],
-    "proofLine": "A presenter-friendly cost simulator that makes spend logic, policy checks, and tradeoffs explicit for fast teaching adoption.",
-    "teachingBullets": [
-      "Start with a concrete cost scenario: users, latency targets, and safety guardrails.",
-      "Compare request, policy, and routing choices while watching spend impact appear in real time.",
-      "Review why safety or policy checks are triggered before high-cost decisions are finalized.",
-      "Approve final outputs using outcome quality, confidence, and total cost tradeoffs."
-    ]
-  },
-  {
-    "id": "neural-glass",
-    "date": "2026-02-14",
-    "title": "Neural Glass",
-    "description": "Learn how a neural network turns raw signals into predictions in 90 seconds, with concepts, weights, and confidence made visible.",
-    "replayUrl": "https://neuralglass-3cjwdrjv.manus.space",
-    "slidesUrl": "/workshops/neural-glass",
-    "tags": [
-      "Neural Network",
-      "Explainable AI",
-      "Decision Logic",
-      "Interactive Learning",
-      "Feature Weights"
-    ],
-    "proofLine": "A proof-first walkthrough from inputs to concepts to outcomes, designed for zero-prior-knowledge learners while preserving enough technical structure for engineers.",
-    "teachingBullets": [
-      "Start with raw customer signals and let learners map inputs to outcomes.",
-      "Observe how adaptive weighting shifts focus between features.",
-      "Watch hidden concepts become visible as labels like Loyal, Frustrated, and Engaged.",
-      "Track how shifts in inputs affect churn prediction confidence in real time."
-    ]
-  },
-  {
-    "id": "kinetic-proof",
-    "date": "2026-02-14",
-    "title": "Kinetic Proof",
-    "description": "Learn how evidence-heavy governance flows work under pressure: validation, schema checks, and decision outcomes are visible end-to-end.",
-    "replayUrl": "https://aaot8-osan.manus.space",
-    "slidesUrl": "/workshops/kinetic-proof",
-    "tags": [
-      "Governance workflow",
-      "Laboratory instrument",
-      "Decision proof",
-      "Validation",
-      "Operational AI"
-    ],
-    "proofLine": "A low-noise, evidence-first simulation where each stage is auditable, deterministic, and directly tied to operational AI outcomes.",
-    "teachingBullets": [
-      "Input events enter a proof-first flow and stay visible through each validation stage.",
-      "Validation gates show schema and policy checks before any move is applied.",
-      "Decision outcomes report why a state passed, warned, or was blocked.",
-      "Quality and trust improve through traceable, explicit status signals."
-    ]
-  },
-  {
-    "id": "policy-gatekeeper",
-    "date": "2026-02-14",
-    "title": "Policy Gatekeeper",
-    "description": "Turn policy checks into a visual routing system you can teach from: policy tickets, rule evaluation, escalation, and outcome signals stay visible all the way through.",
-    "replayUrl": "https://policydemo-mpnai4wm.manus.space",
-    "slidesUrl": "/workshops/policy-gatekeeper",
-    "tags": [
-      "Policy",
-      "Workflow",
-      "Safety",
-      "Decision routing",
-      "Learning by simulation"
-    ],
-    "proofLine": "A visual policy-routing environment for teaching rule design with explicit escalation, guardrails, and visible decision outcomes.",
-    "teachingBullets": [
-      "Tickets enter as requests and are routed by policy lanes.",
-      "Policy checks are surfaced before any move is applied.",
-      "Weak-confidence decisions are explicitly escalated for review.",
-      "Outcome status updates show why a policy route was chosen or rejected."
-    ]
-  },
-  {
-    "id": "kinetic-kitchen-2-0",
-    "date": "2026-02-14",
-    "title": "The Kinetic Kitchen 2.0",
-    "description": "Watch an AI agent workflow as a restaurant order: intake, routing, escalation, and completion. No code, no jargon. Learners see decisions, guardrails, edge-case handling, and KPI behavior as the order moves.",
-    "replayUrl": "https://kinetickit-acameqrq.manus.space",
-    "slidesUrl": "/workshops/kinetic-kitchen-2-0",
-    "tags": [
-      "AI workflow",
-      "Interactive visual",
-      "Agent operations",
-      "No-code learning",
-      "Guardrails"
-    ],
-    "proofLine": "A compact, visible workflow simulation that makes routing, guardrails, and outcomes explicit so learners can follow policy reasoning and spot failure modes quickly.",
-    "teachingBullets": [
-      "Order enters as a request and travels through stations.",
-      "Route decisions are visible and explainable.",
-      "Escalation is explicit when confidence is low.",
-      "Throughput and accuracy are tracked as behavior changes."
-    ]
-  },
-  {
-    "id": "kitchen-x-ray",
-    "date": "2026-02-14",
-    "title": "Kitchen X-Ray",
-    "description": "A visual AI safety simulator that makes restaurant-style controls explicit before every routing decision.",
-    "replayUrl": "https://kitchenai-aujw29zx.manus.space",
-    "slidesUrl": "https://kitchenai-aujw29zx.manus.space",
-    "tags": [
-      "AI security",
-      "risk simulation",
-      "operations",
-      "guardrails",
-      "trust-first design"
-    ],
-    "proofLine": "Expose risk hotspots and policy controls in a visual flow so safety decisions are visible before action.",
-    "teachingBullets": [
-      "Start with a scenario and define scope, ownership, and failure boundaries.",
-      "Step through role-level controls that gate each routing choice.",
-      "Review warnings as first-class signals before state transitions are accepted.",
-      "Close with readiness checks so the model behavior is auditable and coachable."
-    ]
-  },
-  {
-    "id": "ai-kitchen",
-    "date": "2026-02-14",
-    "title": "The AI Kitchen",
-    "description": "A practical readiness sequence where AI workflows are checked, controlled, and approved before deployment.",
-    "replayUrl": "https://aikitch-hlmpwpfj.manus.space",
-    "slidesUrl": "https://aikitch-hlmpwpfj.manus.space",
-    "tags": [
-      "AI safety",
-      "readiness",
-      "controls",
-      "operations",
-      "decision framework"
-    ],
-    "proofLine": "Validate ideas through risk checkpoints and readiness gates so leadership can trust the launch path.",
-    "teachingBullets": [
-      "Capture initiative context and define the business guardrails before runtime.",
-      "Select controls and owners, then watch risk handling evolve through explicit checkpoints.",
-      "Track confidence, risk, and compliance signals as deployment readiness changes.",
-      "Finalize with one-page outcomes that map choices to outcomes and next actions."
-    ]
+    "proofLine": "Workflow adoption is treated as a staged decision, with explicit checks at each integration point.",
+    "audienceLine": "Platform teams evaluating new operational AI tools.",
+    "category": "Model and Platform Workshops"
   }
 ]

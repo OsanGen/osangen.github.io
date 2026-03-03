@@ -173,6 +173,7 @@ export const WorkshopSchema = z.object({
   date: z.string(),
   title: z.string(),
   description: z.string().max(240),
+  category: trimOptionalString,
   replayUrl: z.string(),
   slidesUrl: z.string(),
   tags: z.array(z.string()),

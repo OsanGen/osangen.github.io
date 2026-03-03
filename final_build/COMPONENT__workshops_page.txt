@@ -2,27 +2,32 @@
 
 Purpose:
 - Render a workshops-only listing surface under `/workshops`.
-- Preserve the reduced UI contract: title + proof snippet + single action per card.
+- Present curated workshops grouped by category with lightweight OSAN polish.
 
 Inputs:
 - `loadWorkshops()` from `src/lib/content.ts`.
-- `getCoreWorkshopCatalog()` from `src/lib/learn-pages.ts`.
+- `getCoreWorkshopCatalog()` and `getCoreWorkshopCatalogByCategory()` from `src/lib/learn-pages.ts`.
 
 Outputs:
-- Hero block with eyebrow/title/subtitle.
-- `Workshops` section with one card grid section and a canonical `coreWorkshops` list.
+- Hero block with Learn/Workshops context.
+- Workshops section with four ordered category shells and per-category card grids.
+- Session count chips in each category header.
 
 State:
 - No client-side state.
-- Build-time derivation and stable sorted output (`sortWorkshopsNewestFirst` in the helper).
+- Build-time derivation and stable output via shared helper ordering.
 
 Card behavior:
 - Cards render:
   - `title`
   - `proof` (trimmed/clipped by helper)
-  - `cta` action button
-- CTA precedence is delegated to shared helper logic (Replay/Slides/Open details behavior where applicable).
-- No date/meta chips or topic rows are rendered for workshop cards.
+  - one `cta` action button
+- CTA precedence is delegated to shared helper logic (`Replay` when replay URL is valid, then `Slides`, else detail fallback).
+- External links open in new tabs when `isExternal` is true.
+
+Styling:
+- Route-scoped category sections in `body[data-page='workshops']` receive muted structural polish, section headings, and subtle count pills.
+- Existing `learn-card` interaction token behavior is preserved for consistency with the learn surfaces.
 
 Dependencies:
 - `CardGrid`
@@ -31,10 +36,11 @@ Dependencies:
 
 Edge cases:
 - Missing proof text is normalized before render.
-- Invalid CTAs receive fallback behavior from helper functions.
-- Empty dataset renders a safe fallback message.
+- Empty dataset or empty category renders a safe fallback message.
+- Category metadata mismatch falls back to an "Other" section.
 
 Acceptance checks:
-- Only canonical workshop details appear in `/workshops`.
+- `/workshops` displays the provided titles/links grouped in the requested four categories.
+- Categories and counts render in requested order.
 - `/workshops/{id}` remains reachable via generated page links.
-- Card UI remains noise-reduced with one CTA and no extra helper rows.
+- `Replay` CTAs remain the external-first action for valid replay URLs.

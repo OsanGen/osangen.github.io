@@ -4,12 +4,14 @@ import CardGrid from '../components/CardGrid.astro';
 import { loadWorkshops } from '../lib/content';
 import {
   getCoreWorkshopCatalog,
+  getCoreWorkshopCatalogByCategory,
   type LearnCard,
 } from '../lib/learn-pages';
 
 const workshops = await loadWorkshops();
 
 const coreWorkshops: LearnCard[] = getCoreWorkshopCatalog(workshops);
+const workshopGroups = getCoreWorkshopCatalogByCategory(workshops);
 ---
 <BaseLayout title="Workshops - Oscar Sanchez" description="Delivery workshops with proof-backed content.">
   <div class="page-shell">
@@ -27,26 +29,44 @@ const coreWorkshops: LearnCard[] = getCoreWorkshopCatalog(workshops);
       {coreWorkshops.length === 0 ? (
         <p class="text-small">No workshop entries yet.</p>
       ) : (
-        <CardGrid gap="var(--space-3)" align="start" motionGroup>
-          {coreWorkshops.map(({ cta, title, proof }, index) => {
-            return (
-              <article class="card learn-card cog-entrance cog-accent-rail" style={`--reveal-delay:${index * 45}ms;`}>
-                <h3>{title}</h3>
-                <p class="text-small learn-card__proof">{proof}</p>
-                <div class="learn-card__actions">
-                  <a
-                    class="button catalog-cta"
-                    href={cta.href}
-                    target={cta.isExternal ? '_blank' : undefined}
-                    rel={cta.isExternal ? 'noopener noreferrer' : undefined}
-                  >
-                    {cta.label}
-                  </a>
+        <div class="workshops-category-grid">
+          {workshopGroups.map((group) => (
+            <section class="panel-shell workshops-category-panel">
+              <div class="workshops-category__header">
+                <div>
+                  <p class="workshops-category__label">Category</p>
+                  <h3 class="workshops-category__title">{group.category}</h3>
                 </div>
-              </article>
-            );
-          })}
-        </CardGrid>
+                <p class="workshops-category__count">
+                  {group.items.length} {group.items.length === 1 ? 'session' : 'sessions'}
+                </p>
+              </div>
+
+              {group.items.length === 0 ? (
+                <p class="text-small">No sessions yet.</p>
+              ) : (
+                <CardGrid gap="var(--space-3)" align="start" motionGroup>
+                  {group.items.map(({ cta, title, proof }, index) => (
+                    <article class="card learn-card" style={`--reveal-delay:${index * 45}ms;`}>
+                      <h3>{title}</h3>
+                      <p class="text-small learn-card__proof">{proof}</p>
+                      <div class="learn-card__actions">
+                        <a
+                          class="button catalog-cta"
+                          href={cta.href}
+                          target={cta.isExternal ? '_blank' : undefined}
+                          rel={cta.isExternal ? 'noopener noreferrer' : undefined}
+                        >
+                          {cta.label}
+                        </a>
+                      </div>
+                    </article>
+                  ))}
+                </CardGrid>
+              )}
+            </section>
+          ))}
+        </div>
       )}
     </section>
 

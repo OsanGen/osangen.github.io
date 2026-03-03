@@ -11,6 +11,7 @@ Outputs:
   - `CORE_WORKSHOP_IDS`
   - `isCoreWorkshop`
   - `isCoreWorkshopId` (alias)
+  - category-aware core treatment for sessions that define `category`
   - `isVisualClassWorkshopId`
   - `splitWorkshops`
   - `isDisplayableVisualClassModule`
@@ -28,4 +29,4 @@ Dependencies:
 
 Acceptance checks:
 - All callers use `splitWorkshops()` for workshop grouping.
-- Route-level logic and sitemap generation depend only on `CORE_WORKSHOP_IDS`.
+- Page-level grouping can include category-tagged workshops directly while sitemap generation still relies on `CORE_WORKSHOP_IDS`.

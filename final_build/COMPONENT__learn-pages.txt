@@ -11,9 +11,11 @@ Inputs:
 Outputs:
 - `getVisualClassCatalog(modules: Module[])`: modules-only curriculum cards for `/visual-classes`.
 - `getCoreWorkshopCatalog(workshops: Workshop[])`: canonical workshop cards for `/workshops`.
+- `getCoreWorkshopCatalogByCategory(workshops: Workshop[])`: grouped workshop cards for `/workshops` by configured categories.
 - `getWorkshopReplayLinks(workshops: Workshop[])` and `getWorkshopSlideLinks(workshops: Workshop[])`: valid quick links for future reuse.
 - Learn card model (`LearnCard`) with:
   - `title`, `meta`, `proof`, `description`.
+  - optional `category` for grouped workshop rendering.
   - `lessonIndex` + `lessonLabel` for curriculum progression.
   - optional `slidesHref` + `slidesLabel`.
   - computed CTA state (`cta.href`, `cta.label`, `cta.isExternal`).
@@ -54,7 +56,7 @@ Dependencies:
 
 Acceptance checks:
 - `/visual-classes` renders exactly modules selected by schema + explicit sequence order.
-- `/workshops` renders canonical workshop catalog from `splitWorkshops()`.
+- `/workshops` can render canonical workshop catalog from `getCoreWorkshopCatalog()` and grouped category catalog from `getCoreWorkshopCatalogByCategory()`.
 - Module and workshop CTA precedence is stable and label-safe.
 - Module slide-backed CTAs render `Play`, while workshop CTA labels remain unchanged (`Replay`/`Slides`/`Open details`).
 - Lesson count and labels are consistent with the page hero text (`Lesson 1 of 7`).

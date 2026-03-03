@@ -32,6 +32,11 @@ export interface LearnQuickLink {
   href: string;
 }
 
+export interface WorkshopCategoryGroup {
+  category: string;
+  items: LearnCard[];
+}
+
 const MAX_PROOF_CHARS = 140;
 
 const normalizeText = (value = '') => value.replace(/\s+/g, ' ').trim();
@@ -91,6 +96,13 @@ const withLearningProgressDescription = (description = '', previousTitle?: strin
 
   return `Builds on ${normalizeText(previousTitle)}. ${normalized}`;
 };
+
+const WORKSHOP_CATEGORY_ORDER: string[] = [
+  'Gen AI Live (Guests and Episodes)',
+  'Agents and Workflow Automation',
+  'Visual Media Creation (Image + Video)',
+  'Model and Platform Workshops',
+];
 
 const sortWorkshopsNewestFirst = (left: Workshop, right: Workshop) =>
   right.date.localeCompare(left.date, undefined, { numeric: true, sensitivity: 'base' });
@@ -271,11 +283,63 @@ export const getCoreWorkshopCatalog = (workshops: Workshop[]): LearnCard[] => {
       meta: workshop.date,
       proof: buildWorkshopProofSnippet(workshop),
       description: buildWorkshopProofSnippet(workshop),
+      category: workshop.category,
       slidesHref: resolveSlideHref(workshop.slidesUrl),
       slidesLabel: isValidReplayOrSlides(workshop.slidesUrl) ? 'Slides' : undefined,
       tags: workshop.tags,
       cta: buildWorkshopCta(workshop),
     }));
+};
+
+export const getCoreWorkshopCatalogByCategory = (
+  workshops: Workshop[],
+  categoryOrder: string[] = WORKSHOP_CATEGORY_ORDER,
+): WorkshopCategoryGroup[] => {
+  const cards = getCoreWorkshopCatalog(workshops);
+  const grouped = new Map<string, { category: string; items: LearnCard[] }>();
+
+  const addToGroup = (workshop: LearnCard) => {
+    const key = normalizeText(workshop.category || 'other');
+    const existing = grouped.get(key);
+    if (existing) {
+      existing.items.push(workshop);
+      return;
+    }
+
+    grouped.set(key, {
+      category: workshop.category?.trim() || 'Other',
+      items: [workshop],
+    });
+  };
+
+  cards.forEach(addToGroup);
+
+  const ordered = categoryOrder.map((categoryLabel) => {
+    const normalizedLabel = normalizeText(categoryLabel);
+    const group = grouped.get(normalizedLabel);
+    if (!group) {
+      return {
+        category: categoryLabel,
+        items: [],
+      };
+    }
+
+    grouped.delete(normalizedLabel);
+    return {
+      category: categoryLabel,
+      items: group.items,
+    };
+  });
+
+  const fallbackGroups: WorkshopCategoryGroup[] = [];
+  grouped.forEach((group) => {
+    if (!group.items.length) {
+      return;
+    }
+    fallbackGroups.push(group);
+  });
+
+  return ordered.concat(fallbackGroups);
 };
 
 export const getWorkshopReplayLinks = (workshops: Workshop[]): LearnQuickLink[] =>

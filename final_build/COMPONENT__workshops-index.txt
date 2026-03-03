@@ -2,32 +2,30 @@
 
 Purpose:
 - Provide the `/workshops` learn surface as a workshop-only listing.
-- Keep card layout minimal: title, proof snippet, and one CTA.
+- Keep card layout minimal while introducing category-first sectioning.
 
 Inputs:
 - `loadWorkshops()` from `src/lib/content.ts`.
-- `getCoreWorkshopCatalog()` from `src/lib/learn-pages.ts`.
+- `getCoreWorkshopCatalog()` and `getCoreWorkshopCatalogByCategory()` from `src/lib/learn-pages.ts`.
 
 Outputs:
-- Hero block with route context (Learn/Workshops).
-- Workshops section (`<section id="workshops">`) containing one card grid of canonical workshop entries.
-- No quick-link rail, no card metadata chips, and no additional helper sections.
+- Hero block with workshop route context.
+- Four section blocks under workshops, each with:
+  - Category title
+  - Session count chip
+  - Card grid of canonical sessions for that category.
 
 State:
 - No client-side state.
-- Build-time catalog transformation and deterministic sorting by date.
+- Build-time catalog transformation and deterministic output.
 
 Card behavior:
-- Canonical workshop set is produced by `splitWorkshops()` in `getCoreWorkshopCatalog`.
+- Canonical workshop set is produced via `getCoreWorkshopCatalog()` and grouped via `getCoreWorkshopCatalogByCategory()`.
 - Cards render:
   - `title`
   - `proof`
   - one action button using `cta.label` / `cta.href`.
-- CTA precedence comes from shared helpers (`Replay` > `Slides` > `Open details`).
-
-Edge cases:
-- Missing links resolve to safe fallback route/actions.
-- Empty workshop lists render a non-breaking copy fallback message.
+- CTA precedence remains from shared helpers (`Replay` > `Slides` > `Open details`).
 
 Dependencies:
 - `CardGrid`
@@ -35,6 +33,7 @@ Dependencies:
 - `src/lib/learn-pages.ts`
 
 Acceptance checks:
-- Only canonical core workshop cards render in this surface.
-- Cards do not include date text, proof badges, chip rows, or extra tag UI.
-- `Replay`/`Slides`/`Open details` behavior remains unchanged for valid workshop links.
+- Only canonical workshop cards render in this surface.
+- The ordered category labels match the requested names.
+- Empty categories render an explanatory fallback.
+- `Replay`/`Slides` behavior remains unchanged for valid workshop links.
