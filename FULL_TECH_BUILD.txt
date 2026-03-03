@@ -1,11 +1,14 @@
 # FULL_TECH_BUILD
 
 ## 1) Snapshot header
-- UpdatedAt: 2026-03-03T18:29:15Z
+- UpdatedAt: 2026-03-03T19:08:37Z
 - RepoName: oscar-sanchez-portfolio
-- Branch, HEAD commit hash: main | 5df76495370566b9496f2dbf86e8fa4a4d9e0c7f
+- Branch, HEAD commit hash: main | 5025e8fee6e1535da84e7edc6ae280b9975c2403
 - Dirty state: yes (`git status --short`)
   - `FULL_TECH_BUILD.txt`
+  - `src/pages/visual-classes.astro`
+  - `final_build/CURRENT_GAPS.txt`
+  - `final_build/COMPONENT__visual_classes_page.txt`
 - Primary languages + package managers detected:
   - TypeScript + Astro (`.ts`, `.astro`)
   - CSS (`.css`)
@@ -69,6 +72,7 @@ This is an Astro-based OSAN website for portfolio, workshops, and learning modul
 
 ## 6) Current implementation status
 - What is implemented:
+  - `/visual-classes` lesson cards now omit duration/level meta rows (`90 minutes • Intermediate`) so the carousel is lesson-title and action focused.
   - Deploy hotfix applied in `src/lib/learn-pages.ts`: `LearnCard` now includes optional `category`, matching grouped workshop rendering usage and removing CI `astro check` failures.
   - Workshop dataset replaced with curated events grouped into:
     - `Gen AI Live (Guests and Episodes)`
@@ -88,6 +92,8 @@ This is an Astro-based OSAN website for portfolio, workshops, and learning modul
   - Dedicated automated tests around new category helper output ordering and fallback grouping.
 
 ## 7) Recent change log (rolling)
+- 2026-03-03T19:08:37Z | 5025e8f | chore(visual-classes): remove lesson meta row from carousel cards | `src/pages/visual-classes.astro`, `final_build/CURRENT_GAPS.txt`, `final_build/COMPONENT__visual_classes_page.txt`, `FULL_TECH_BUILD.txt`
+- 2026-03-03T18:30:51Z | 5025e8f | chore: refresh FULL_TECH_BUILD after deploy | `FULL_TECH_BUILD.txt`
 - 2026-03-03T18:29:15Z | 5df7649 | fix(workshops): unblock deploy by adding LearnCard category typing | `src/lib/learn-pages.ts`, `final_build/CURRENT_GAPS.txt`, `final_build/COMPONENT__learn-pages.txt`, `FULL_TECH_BUILD.txt`
 - 2026-03-03T18:27:49Z | f67d691 | fix(types): add LearnCard category for workshop grouping deploy gate | `src/lib/learn-pages.ts`, `final_build/CURRENT_GAPS.txt`, `final_build/COMPONENT__learn-pages.txt`, `FULL_TECH_BUILD.txt`
 - 2026-03-03T18:17:18Z | ebf698d | feat(workshops): add categorized curated workshops and grouped route | `src/content/data/workshops.json`, `src/lib/schemas.ts`, `src/lib/learn-pages.ts`, `src/lib/workshop-catalog.ts`, `src/pages/workshops.astro`, `src/pages/index.astro`, `src/styles/global.css`, `final_build/CURRENT_GAPS.txt`, `final_build/COMPONENT__learn-pages.txt`, `final_build/COMPONENT__workshop-catalog.txt`, `final_build/COMPONENT__workshops-index.txt`, `final_build/COMPONENT__workshops_page.txt`, `FULL_TECH_BUILD.txt`

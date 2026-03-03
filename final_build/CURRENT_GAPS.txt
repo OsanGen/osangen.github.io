@@ -1,4 +1,5 @@
 # CURRENT_GAPS
+- visual-classes lesson meta noise removal | completed | Removed the `90 minutes • Intermediate` row from `/visual-classes` carousel cards while keeping lesson sequencing, copy, and `Play` CTA behavior unchanged.
 - workshops deploy lint blocker hotfix | completed | Added optional `category` to `LearnCard` in `src/lib/learn-pages.ts` so `astro check` passes and Pages deploy can publish the curated workshops.
 - workshops category refactor | completed | Switched `/workshops` to category-based rendering with curated LinkedIn sessions and category metadata, adding grouped catalog helper + route count consistency.
 - homepage route-card nested surface artifact | completed | Removed nested `.route-card` hover/reveal behavior on `/` so only the outer `.card` handles lift/focus polish; this eliminates the inner pop-up box artifact and adds a restrained home-only route-card background tint on card hover/focus.

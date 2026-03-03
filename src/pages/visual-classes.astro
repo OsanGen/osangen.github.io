@@ -58,7 +58,7 @@ const lessonsSubtitle =
             tabindex="0"
             aria-label="Lesson carousel"
           >
-            {visualClassCards.map(({ cta, title, meta, description, lessonLabel }, index) => (
+            {visualClassCards.map(({ cta, title, description, lessonLabel }, index) => (
               <article
                 class="card learn-card learn-card--module cog-entrance learn-carousel__slide"
                 style={`--reveal-delay:${index * 55}ms;`}
@@ -67,7 +67,6 @@ const lessonsSubtitle =
                 hidden={index === 0 ? undefined : true}
                 aria-hidden={index === 0 ? 'false' : 'true'}
               >
-                <p class="text-small learn-card__meta">{meta}</p>
                 <p class="text-small learn-card__lesson" aria-label={`Sequence ${index + 1}`}>
                   {lessonLabel ?? `Lesson ${index + 1}`}
                 </p>
