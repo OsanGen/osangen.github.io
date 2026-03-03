@@ -216,7 +216,7 @@ export const buildWorkshopCta = (workshop: Workshop, fallbackToIndex = false): C
     return {
       href: sanitizeLink(workshop.replayUrl || ''),
       isExternal: true,
-      label: 'Replay',
+      label: 'Play',
     };
   }
 
@@ -225,7 +225,7 @@ export const buildWorkshopCta = (workshop: Workshop, fallbackToIndex = false): C
     return {
       href,
       isExternal: isExternalUrl(href),
-      label: 'Slides',
+      label: 'Play',
     };
   }
 
@@ -286,7 +286,7 @@ export const getCoreWorkshopCatalog = (workshops: Workshop[]): LearnCard[] => {
       description: buildWorkshopProofSnippet(workshop),
       category: workshop.category,
       slidesHref: resolveSlideHref(workshop.slidesUrl),
-      slidesLabel: isValidReplayOrSlides(workshop.slidesUrl) ? 'Slides' : undefined,
+      slidesLabel: isValidReplayOrSlides(workshop.slidesUrl) ? 'Play' : undefined,
       tags: workshop.tags,
       cta: buildWorkshopCta(workshop),
     }));
