@@ -1,13 +1,10 @@
 # FULL_TECH_BUILD
 
 ## 1) Snapshot header
-- UpdatedAt: 2026-03-03T18:27:49Z
+- UpdatedAt: 2026-03-03T18:29:15Z
 - RepoName: oscar-sanchez-portfolio
-- Branch, HEAD commit hash: main | f67d69162ea37a682b08a0f1e9794aa426960637
+- Branch, HEAD commit hash: main | 5df76495370566b9496f2dbf86e8fa4a4d9e0c7f
 - Dirty state: yes (`git status --short`)
-  - `src/lib/learn-pages.ts`
-  - `final_build/CURRENT_GAPS.txt`
-  - `final_build/COMPONENT__learn-pages.txt`
   - `FULL_TECH_BUILD.txt`
 - Primary languages + package managers detected:
   - TypeScript + Astro (`.ts`, `.astro`)
@@ -91,6 +88,7 @@ This is an Astro-based OSAN website for portfolio, workshops, and learning modul
   - Dedicated automated tests around new category helper output ordering and fallback grouping.
 
 ## 7) Recent change log (rolling)
+- 2026-03-03T18:29:15Z | 5df7649 | fix(workshops): unblock deploy by adding LearnCard category typing | `src/lib/learn-pages.ts`, `final_build/CURRENT_GAPS.txt`, `final_build/COMPONENT__learn-pages.txt`, `FULL_TECH_BUILD.txt`
 - 2026-03-03T18:27:49Z | f67d691 | fix(types): add LearnCard category for workshop grouping deploy gate | `src/lib/learn-pages.ts`, `final_build/CURRENT_GAPS.txt`, `final_build/COMPONENT__learn-pages.txt`, `FULL_TECH_BUILD.txt`
 - 2026-03-03T18:17:18Z | ebf698d | feat(workshops): add categorized curated workshops and grouped route | `src/content/data/workshops.json`, `src/lib/schemas.ts`, `src/lib/learn-pages.ts`, `src/lib/workshop-catalog.ts`, `src/pages/workshops.astro`, `src/pages/index.astro`, `src/styles/global.css`, `final_build/CURRENT_GAPS.txt`, `final_build/COMPONENT__learn-pages.txt`, `final_build/COMPONENT__workshop-catalog.txt`, `final_build/COMPONENT__workshops-index.txt`, `final_build/COMPONENT__workshops_page.txt`, `FULL_TECH_BUILD.txt`
 - 2026-03-03T18:10:34Z | 1c9d86a | chore: sync FULL_TECH_BUILD after home artifact deploy | `FULL_TECH_BUILD.txt`
