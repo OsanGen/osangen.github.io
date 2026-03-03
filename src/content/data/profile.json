@@ -167,8 +167,20 @@
     "youtube": "https://www.youtube.com/@OscarSan-k7m"
   },
   "skills": [
-    "Multi-agent Systems",
-    "Clinical Research",
-    "Human Resources (HR)"
+    "Agentic Workflow Architecture",
+    "Multi-agent Orchestration",
+    "LLM Product Prototyping",
+    "Prompt Engineering and Evaluation",
+    "TypeScript and JavaScript",
+    "Astro Static Site Architecture",
+    "Component-driven Frontend Systems",
+    "Design Tokens and Systemized CSS",
+    "Motion-based Interaction Engineering",
+    "Service Worker Caching and Versioning",
+    "PWA Reliability Patterns",
+    "CI/CD with GitHub Actions",
+    "Schema Validation with Zod",
+    "Automated QA (Typecheck, Build, Smoke)",
+    "Educational Game Development (Web)"
   ]
 }

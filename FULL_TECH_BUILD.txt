@@ -1,16 +1,14 @@
 # FULL_TECH_BUILD
 
 ## 1) Snapshot header
-- UpdatedAt: 2026-03-03T19:11:51Z
+- UpdatedAt: 2026-03-03T19:25:27Z
 - RepoName: oscar-sanchez-portfolio
-- Branch, HEAD commit hash: main | 25f3837580c411270fda830b3439c4e0298ca07a
+- Branch, HEAD commit hash: main | 601a71dd822638e9c90d96132b40f870d0ce6bdf
 - Dirty state: yes (`git status --short`)
   - `FULL_TECH_BUILD.txt`
-  - `src/lib/site-nav.ts`
+  - `src/pages/resume.astro`
   - `final_build/CURRENT_GAPS.txt`
-  - `final_build/COMPONENT__site_nav.txt`
-  - `final_build/COMPONENT__header.txt`
-  - `final_build/COMPONENT__footer.txt`
+  - `src/content/data/profile.json`
 - Primary languages + package managers detected:
   - TypeScript + Astro (`.ts`, `.astro`)
   - CSS (`.css`)
@@ -74,6 +72,9 @@ This is an Astro-based OSAN website for portfolio, workshops, and learning modul
 
 ## 6) Current implementation status
 - What is implemented:
+  - `/resume` hero is now labeled `About Me` and uses creator-focused headline copy (`Creator of this site, games, workshops, and modules.`).
+  - `/resume` skills now use a technical, engineer-facing taxonomy aligned to delivered work (agentic systems, Astro/TS architecture, CI/CD, service worker reliability, and educational game development).
+  - `/resume` education cards now display only program and institution; the date subline under each education item is removed.
   - Shared primary nav label for `/resume` is now `About Me` across header and footer tabs via `src/lib/site-nav.ts`.
   - `/visual-classes` lesson cards now omit duration/level meta rows (`90 minutes • Intermediate`) so the carousel is lesson-title and action focused.
   - Deploy hotfix applied in `src/lib/learn-pages.ts`: `LearnCard` now includes optional `category`, matching grouped workshop rendering usage and removing CI `astro check` failures.
@@ -95,6 +96,10 @@ This is an Astro-based OSAN website for portfolio, workshops, and learning modul
   - Dedicated automated tests around new category helper output ordering and fallback grouping.
 
 ## 7) Recent change log (rolling)
+- 2026-03-03T19:25:27Z | 601a71d | chore(resume): relabel hero to about me and set creator headline | `src/pages/resume.astro`, `final_build/CURRENT_GAPS.txt`, `FULL_TECH_BUILD.txt`
+- 2026-03-03T19:19:02Z | 601a71d | chore(resume): replace skills chips with technical skill taxonomy | `src/content/data/profile.json`, `final_build/CURRENT_GAPS.txt`, `FULL_TECH_BUILD.txt`
+- 2026-03-03T19:17:40Z | 601a71d | chore(resume): remove education date subline | `src/pages/resume.astro`, `final_build/CURRENT_GAPS.txt`, `FULL_TECH_BUILD.txt`
+- 2026-03-03T19:16:58Z | 601a71d | chore(nav): rename resume tab label to about me | `src/lib/site-nav.ts`, `final_build/CURRENT_GAPS.txt`, `final_build/COMPONENT__site_nav.txt`, `final_build/COMPONENT__header.txt`, `final_build/COMPONENT__footer.txt`, `FULL_TECH_BUILD.txt`
 - 2026-03-03T19:11:51Z | 25f3837 | chore(nav): rename resume tab label to about me | `src/lib/site-nav.ts`, `final_build/CURRENT_GAPS.txt`, `final_build/COMPONENT__site_nav.txt`, `final_build/COMPONENT__header.txt`, `final_build/COMPONENT__footer.txt`, `FULL_TECH_BUILD.txt`
 - 2026-03-03T19:11:00Z | 25f3837 | chore(visual-classes): remove lesson meta noise | `src/pages/visual-classes.astro`, `final_build/CURRENT_GAPS.txt`, `final_build/COMPONENT__visual_classes_page.txt`, `FULL_TECH_BUILD.txt`
 - 2026-03-03T19:08:37Z | 5025e8f | chore(visual-classes): remove lesson meta row from carousel cards | `src/pages/visual-classes.astro`, `final_build/CURRENT_GAPS.txt`, `final_build/COMPONENT__visual_classes_page.txt`, `FULL_TECH_BUILD.txt`

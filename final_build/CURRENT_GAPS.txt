@@ -1,4 +1,7 @@
 # CURRENT_GAPS
+- resume hero about-me relabel | completed | Updated `/resume` hero to `About Me` with creator-focused headline (`Creator of this site, games, workshops, and modules.`) while preserving route and section structure.
+- resume technical-skills refresh | completed | Replaced generic skill tags with technical AI/web systems skills in `src/content/data/profile.json` for engineer-facing clarity on `/resume`.
+- resume education date-line removal | completed | Removed the date/subdate row from education cards on `/resume` so each entry now shows only program and institution.
 - nav resume-tab relabel | completed | Updated shared `PRIMARY_NAV_ITEMS` label from `Resume` to `About Me` (route remains `/resume`) so header/footer tabs use the requested title.
 - visual-classes lesson meta noise removal | completed | Removed the `90 minutes • Intermediate` row from `/visual-classes` carousel cards while keeping lesson sequencing, copy, and `Play` CTA behavior unchanged.
 - workshops deploy lint blocker hotfix | completed | Added optional `category` to `LearnCard` in `src/lib/learn-pages.ts` so `astro check` passes and Pages deploy can publish the curated workshops.

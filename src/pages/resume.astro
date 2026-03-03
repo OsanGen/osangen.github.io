@@ -14,12 +14,12 @@ const sectionLinks = [
   { href: '#skills', label: 'Skills' },
 ];
 ---
-<BaseLayout title="Resume - Oscar Sanchez" description="Professional experience, education, and selected proof highlights.">
+<BaseLayout title="About Me - Oscar Sanchez" description="Professional experience, education, and selected proof highlights.">
   <div class="page-shell resume-shell">
     <section class="card resume-hero cog-proof-stack" data-motion-enter>
-      <h1>Resume</h1>
+      <h1>About Me</h1>
       <p class="resume-hero__name">{profile.name}</p>
-      <p class="text-small resume-hero__headline">{profile.headline}</p>
+      <p class="text-small resume-hero__headline">Creator of this site, games, workshops, and modules.</p>
       <p class="text-small">Long-form work history and selected outcomes.</p>
       <div class="resume-hero__meta" aria-label="Location and profile links">
         <p class="meta">{profile.location}</p>
@@ -41,7 +41,7 @@ const sectionLinks = [
 
     <div class="resume-layout">
       <aside class="resume-layout__toc" data-motion-enter>
-        <nav class="card resume-toc resume-toc--sticky cog-accent-rail" aria-label="Resume section navigation">
+        <nav class="card resume-toc resume-toc--sticky cog-accent-rail" aria-label="About me section navigation">
           <h2 class="h3">On this page</h2>
           <ul class="resume-toc__list">
             {sectionLinks.map((section) => (
@@ -124,7 +124,6 @@ const sectionLinks = [
               {profile.education.map((entry) => (
                 <li class="resume-education-item resume-item" data-motion-enter>
                   <p><strong>{entry.program}</strong> - {entry.org}</p>
-                  <p class="text-small">{entry.start ?? 'start TBD'} to {entry.end ?? 'end TBD'}</p>
                 </li>
               ))}
             </ul>
