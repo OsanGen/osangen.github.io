@@ -105,6 +105,8 @@ const VISUAL_CLASS_DECK_SEQUENCE: string[] = [
   'kinetic-kitchen-2-0',
   'vpn-cost-lab',
   'kitchen-x-ray',
+  'grounding-chamber',
+  'hotel-onboarding',
   'neural-glass',
   'ai-kitchen',
 ];

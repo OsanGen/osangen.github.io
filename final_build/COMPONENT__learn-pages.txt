@@ -21,12 +21,12 @@ Outputs:
 
 Curriculum behavior:
 - `VISUAL_CLASS_DECK_SEQUENCE` controls explicit learning order for modules.
-- Current sequence is five lessons:
-  - `kinetic-kitchen-2-0`, `vpn-cost-lab`, `kitchen-x-ray`, `neural-glass`, `ai-kitchen`.
+- Current sequence is seven lessons:
+  - `kinetic-kitchen-2-0`, `vpn-cost-lab`, `kitchen-x-ray`, `grounding-chamber`, `hotel-onboarding`, `neural-glass`, `ai-kitchen`.
 - `vibe-to-pral` remains in module data but is intentionally excluded from the active `/visual-classes` deck sequence.
 - `isDisplayableVisualClassModule()` removes blocked/non-approved module entries.
 - Results are filtered by module id against the explicit sequence map before final sort, so removed modules are never rendered.
-- Lesson labels are assigned from sequence position (`Lesson 1` ... `Lesson 5`) and remain stable even when copy changes.
+- Lesson labels are assigned from sequence position (`Lesson 1` ... `Lesson 7`) and remain stable even when copy changes.
 
 Proof and continuity:
 - `clampProof()` produces short proof lines for card surfaces.
@@ -57,4 +57,4 @@ Acceptance checks:
 - `/workshops` renders canonical workshop catalog from `splitWorkshops()`.
 - Module and workshop CTA precedence is stable and label-safe.
 - Module slide-backed CTAs render `Play`, while workshop CTA labels remain unchanged (`Replay`/`Slides`/`Open details`).
-- Lesson count and labels are consistent with the page hero text (`Lesson 1 of 5`).
+- Lesson count and labels are consistent with the page hero text (`Lesson 1 of 7`).

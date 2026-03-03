@@ -87,6 +87,35 @@
     "status": "seed"
   },
   {
+    "id": "grounding-chamber",
+    "title": "The Grounding Chamber",
+    "lessonTitle": "Validate AI with Document Grounding",
+    "lessonDescription": "Practice grounding outputs in source documents before action, with reliability checks and visible fallbacks when evidence is weak.",
+    "format": "Document-grounding reliability simulation",
+    "time": "90 minutes",
+    "level": "All levels",
+    "topics": [
+      "RAG grounding",
+      "document fidelity",
+      "reliability checks",
+      "fallback behavior"
+    ],
+    "proof": [
+      "A before/after transformation flow that exposes why grounding quality changes decision quality.",
+      "Users compare raw responses against source-backed alternatives before committing to action."
+    ],
+    "links": {
+      "repo": "",
+      "slides": "https://groundchamber-vhq8qkba.manus.space/",
+      "templates": ""
+    },
+    "cta": {
+      "label": "View deck",
+      "href": "/workshops"
+    },
+    "status": "seed"
+  },
+  {
     "id": "kitchen-x-ray",
     "title": "Kitchen X-Ray",
     "lessonTitle": "Find Risk Before It Becomes an Incident",
@@ -108,6 +137,35 @@
       "repo": "",
       "slides": "https://kitchenai-aujw29zx.manus.space/",
       "cases": ""
+    },
+    "cta": {
+      "label": "View deck",
+      "href": "/workshops"
+    },
+    "status": "seed"
+  },
+  {
+    "id": "hotel-onboarding",
+    "title": "Hotel Onboarding",
+    "lessonTitle": "Guide New Hires Through AI-Assisted Onboarding",
+    "lessonDescription": "Step through a Day 1 concierge flow where AI support works with policy checks and clear operational handoffs.",
+    "format": "Enterprise onboarding simulation",
+    "time": "90 minutes",
+    "level": "Intermediate",
+    "topics": [
+      "AI concierge flow",
+      "onboarding workflows",
+      "handoff policy",
+      "role-aware interactions"
+    ],
+    "proof": [
+      "A practical orientation play that combines user intent, handoffs, and guardrails.",
+      "Teams inspect each step to ensure trust boundaries stay explicit during staff onboarding."
+    ],
+    "links": {
+      "repo": "",
+      "slides": "https://hotelguide-jae3cxpi.manus.space/",
+      "checklist": ""
     },
     "cta": {
       "label": "View deck",

@@ -1,5 +1,6 @@
 # CURRENT_GAPS
-- visual-classes lesson-1 removal | completed | Removed `vibe-to-pral` from `VISUAL_CLASS_DECK_SEQUENCE` so `/visual-classes` now starts at prior lesson 2, renumbers to `Lesson 1` through `Lesson 5`, and keeps source module/workshop data unchanged.
+- visual-classes lesson-1 removal | completed | Removed `vibe-to-pral` from `VISUAL_CLASS_DECK_SEQUENCE` so `/visual-classes` now starts at prior lesson 2, renumbers to `Lesson 1` through `Lesson 7` after subsequent additions, and keeps source module/workshop data unchanged.
+- visual-classes external modules insertion | completed | Added `grounding-chamber` and `hotel-onboarding` to `src/content/data/modules.json` and placed them into the explicit sequence as `kitchen-x-ray → grounding-chamber → hotel-onboarding → neural-glass`, then `ai-kitchen` as final readiness.
 - visual-classes play cta upgrade | completed | Renamed module slide-backed CTA text from `Slides` to `Play` and added a route-scoped premium CTA treatment in `/visual-classes` with token-only color usage and reduced-motion-safe micro-interactions.
 - osan header brand icon refresh | completed | Replaced `/icons/oscar-cog-brain.svg` with a flat 2D yellow brain SVG and removed header square/chassis chrome via `.brand-mark` styling.
 - osan header brand icon polish | completed | Completed brand-lockup clean-up for OSAN 2D appearance: removed mark rounding and added block-level lockup rendering plus neutral highlight tint on the brain proof line.

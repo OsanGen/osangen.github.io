@@ -1,11 +1,16 @@
 # FULL_TECH_BUILD
 
 ## 1) Snapshot header
-- UpdatedAt: 2026-03-03T17:01:11Z
+- UpdatedAt: 2026-03-03T17:03:24Z
 - RepoName: oscar-sanchez-portfolio
 - Branch: main
-- HEAD: 5a9697480c11d0f2b2a9a2d3a6f3f0f4d3b7c9d5
-- Dirty state: no
+- HEAD: 6fed93a7482b3f8a7ebed6df9aa8f2a5f2f4b8d1
+- Dirty state: yes (`git status --short` shows local edits)
+  - `src/lib/learn-pages.ts`
+  - `src/content/data/modules.json`
+  - `final_build/COMPONENT__learn-pages.txt`
+  - `final_build/COMPONENT__visual_classes_page.txt`
+  - `final_build/CURRENT_GAPS.txt`
 - Primary languages + package managers detected:
   - TypeScript + Astro component templates (`.ts`, `.astro`)
   - CSS (`.css`)
@@ -79,7 +84,7 @@ To inspect dependency graph:
 - What is implemented:
   - Learn split and modules-only curriculum model (`/workshops` vs `/visual-classes`).
   - One-at-a-time Modules carousel with full descriptions, reduced labels, keyboard controls.
-  - Active `/visual-classes` sequence now starts at prior lesson 2 (`kinetic-kitchen-2-0`) and runs as a five-lesson deck with automatic `Lesson 1..5` renumbering.
+  - Active `/visual-classes` sequence now starts at prior lesson 2 (`kinetic-kitchen-2-0`) and runs as a seven-lesson deck with automatic `Lesson 1..7` renumbering.
   - Modules lesson counts are now aligned to rendered deck output (`getVisualClassCatalog`) on both `/visual-classes` subtitle and homepage modules summary.
   - Module slide-backed CTA copy on `/visual-classes` now uses `Play` and adds a premium token-based button treatment (still no glow/heavy gradients).
   - OSAN route-accent hardening, footer/header parity, and SW cache-versioning hardening.
@@ -92,6 +97,7 @@ To inspect dependency graph:
 If DEV-mode spec is active, track operational gaps in `final_build/CURRENT_GAPS.txt`.
 
 ## 7) Recent change log (rolling)
+- 2026-03-03T17:02:58Z | local | chore(visual-classes): place hotel-onboarding (Module 5) after grounding-chamber in curriculum flow | `src/lib/learn-pages.ts`, `src/content/data/modules.json`, `FULL_TECH_BUILD.txt`
 - 2026-03-03T17:01:02Z | 25a6d3a | feat(visual-classes): remove lesson 1 and promote lesson 2 in deck + homepage count alignment | `src/lib/learn-pages.ts`, `src/pages/visual-classes.astro`, `src/pages/index.astro`, `final_build/COMPONENT__learn-pages.txt`, `final_build/COMPONENT__visual_classes_page.txt`, `final_build/COMPONENT__homepage_index.txt`, `final_build/COMPONENT__index-page.txt`, `final_build/CURRENT_GAPS.txt`, `FULL_TECH_BUILD.txt`
 - 2026-03-03T16:45:02Z | 9d3aca8 | chore(deploy): verify CI and pages deploy completion for live release | `final_build/CURRENT_GAPS.txt`, `FULL_TECH_BUILD.txt`
 - 2026-03-03T16:44:11Z | 9d3aca8 | feat(modules): rename slides CTA to play and upgrade lesson button | `src/lib/learn-pages.ts`, `src/pages/visual-classes.astro`, `src/styles/global.css`, `final_build/COMPONENT__learn-pages.txt`, `final_build/COMPONENT__visual_classes_page.txt`, `final_build/COMPONENT__tokens-global.css.txt`, `final_build/CURRENT_GAPS.txt`, `FULL_TECH_BUILD.txt`
