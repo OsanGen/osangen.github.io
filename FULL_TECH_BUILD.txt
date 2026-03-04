@@ -1,9 +1,9 @@
 # FULL_TECH_BUILD
 
 ## 1) Snapshot header
-- UpdatedAt: 2026-03-04T17:00:26Z
+- UpdatedAt: 2026-03-04T19:36:28Z
 - RepoName: oscar-sanchez-portfolio
-- Branch, HEAD commit hash: main | d81cf1d
+- Branch, HEAD commit hash: main | c1c925e
 - Dirty state: yes (`git status --short`)
   - `FULL_TECH_BUILD.txt`
   - `final_build/CURRENT_GAPS.txt`
@@ -96,6 +96,7 @@ This is an Astro-based OSAN website for portfolio, workshops, and learning modul
   - Dedicated automated tests around new category helper output ordering and fallback grouping.
 
 ## 7) Recent change log (rolling)
+- 2026-03-04T19:36:28Z | c1c925e | wip(book): remove hero noise and ship executive-depth visual polish | `src/pages/book.astro`, `final_build/CURRENT_GAPS.txt`, `FULL_TECH_BUILD.txt`
 - 2026-03-04T17:00:26Z | d81cf1d | wip(book): premium visual hierarchy and CTA polish | `src/pages/book.astro`, `final_build/CURRENT_GAPS.txt`, `FULL_TECH_BUILD.txt`
 - 2026-03-04T13:12:07Z | 5c1b0d1 | chore: finalize FULL_TECH_BUILD HEAD timestamp | `FULL_TECH_BUILD.txt`
 - 2026-03-04T13:10:47Z | 05267e0 | chore: correct FULL_TECH_BUILD dirty status | `FULL_TECH_BUILD.txt`

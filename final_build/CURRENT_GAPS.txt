@@ -1,5 +1,5 @@
 # CURRENT_GAPS
-- book premium visual uplift | completed | Upgraded `/book` visual hierarchy with hero panel styling, section badges, differentiated path/booking cards, and stronger CTA button treatment while preserving OSAN restraint and booking behavior.
+- book premium visual uplift | completed | Removed noisy hero chip/TL;DR on `/book`, added a two-zone executive hero with step stack, de-noised section kickers, rebalanced context vs action card tiers, and upgraded `book-cta` affordance while preserving all booking behavior.
 - book section copy/rhythm refactor | completed | Refactored `/book` into explicit section blocks (`hero`, `paths`, `open scope`, `booking`) with cleaner OSAN spacing and removed the extra reusable-outcomes sentence from Open-by-default copy.
 - resume hero about-me relabel | completed | Updated `/resume` hero to `About Me` with creator-focused headline (`Creator of this site, games, workshops, and modules.`) while preserving route and section structure.
 - resume technical-skills refresh | completed | Replaced generic skill tags with technical AI/web systems skills in `src/content/data/profile.json` for engineer-facing clarity on `/resume`.

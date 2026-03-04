@@ -10,10 +10,18 @@ const embed = Astro.url.searchParams.get('embed') === '1';
 <BaseLayout title="Book - Oscar Sanchez" description="Book calls and workshops with explicit consent">
   <div class="book-shell">
     <section class="book-hero">
-      <p class="book-eyebrow">Booking flow</p>
-      <h1>Book</h1>
-      <p>Paid teaching events and paid consulting. Pick a path, then book a slot below.</p>
-      <p class="text-small">TL;DR: Teaching → workshops/classes. Consulting → 1:1 guidance. Choose the option that fits your next step.</p>
+      <div class="book-hero-main">
+        <h1>Book</h1>
+        <p>Paid teaching events and paid consulting. Pick a path, then book a slot below.</p>
+      </div>
+      <aside class="book-hero-steps" aria-label="How this works">
+        <p class="book-hero-steps__title">How this works</p>
+        <ol>
+          <li><strong>Choose path</strong><span>Teaching or consulting.</span></li>
+          <li><strong>Pick slot</strong><span>Use Calendly to lock a session.</span></li>
+          <li><strong>Get outcome</strong><span>Leave with clear scoped next steps.</span></li>
+        </ol>
+      </aside>
     </section>
 
     <section class="book-section book-paths">
@@ -80,7 +88,7 @@ const embed = Astro.url.searchParams.get('embed') === '1';
               <h3>1:1 guidance</h3>
               {booking.calendly.one_on_one.url ? (
                 <>
-                  <a class="button" href={booking.calendly.one_on_one.url} target="_blank" rel="noopener noreferrer">{booking.calendly.one_on_one.label}</a>
+                  <a class="button book-cta" href={booking.calendly.one_on_one.url} target="_blank" rel="noopener noreferrer">{booking.calendly.one_on_one.label}</a>
                   {embed ? <iframe style="width:100%; margin-top:1rem; min-height:560px; border:1px solid var(--border);" src={booking.calendly.one_on_one.url} title="Calendly 1:1" loading="lazy"></iframe> : null}
                 </>
               ) : (
@@ -92,7 +100,7 @@ const embed = Astro.url.searchParams.get('embed') === '1';
             <Card>
               <h3>Private workshop</h3>
               {booking.calendly.teach_private.url ? (
-                <a class="button" href={booking.calendly.teach_private.url} target="_blank" rel="noopener noreferrer">{booking.calendly.teach_private.label}</a>
+                <a class="button book-cta" href={booking.calendly.teach_private.url} target="_blank" rel="noopener noreferrer">{booking.calendly.teach_private.label}</a>
               ) : (
                 <p class="text-small">Add your Calendly URL in booking.json</p>
               )}
@@ -102,7 +110,7 @@ const embed = Astro.url.searchParams.get('embed') === '1';
             <Card>
               <h3>Class or school booking</h3>
               {booking.calendly.teach_class.url ? (
-                <a class="button" href={booking.calendly.teach_class.url} target="_blank" rel="noopener noreferrer">{booking.calendly.teach_class.label}</a>
+                <a class="button book-cta" href={booking.calendly.teach_class.url} target="_blank" rel="noopener noreferrer">{booking.calendly.teach_class.label}</a>
               ) : (
                 <p class="text-small">Add your Calendly URL in booking.json</p>
               )}
@@ -117,109 +125,173 @@ const embed = Astro.url.searchParams.get('embed') === '1';
 
 <style>
   .book-shell {
-    --book-accent: color-mix(in srgb, var(--scene-accent, var(--accent)) 62%, var(--ink) 8%);
+    --book-accent: var(--scene-accent, var(--accent));
     display: grid;
-    gap: clamp(1.2rem, 2.2vw, 2rem);
-    max-width: min(1020px, calc(100vw - 2rem));
+    gap: clamp(1.2rem, 2.1vw, 2rem);
+    max-width: min(1040px, calc(100vw - 2rem));
     margin: 0 auto;
   }
 
   .book-hero {
     display: grid;
-    gap: 0.58rem;
-    border: 1px solid color-mix(in srgb, var(--scene-accent, var(--accent)) 16%, var(--stroke));
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.92fr);
+    gap: clamp(0.88rem, 2vw, 1.36rem);
+    border: 1px solid color-mix(in srgb, var(--book-accent) 20%, var(--stroke));
     border-radius: calc(var(--radius-lg) + 0.2rem);
-    background: linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--scene-accent-soft, color-mix(in srgb, var(--scene-accent, var(--accent)) 18%, transparent)) 38%, var(--panel)),
-      var(--panel)
-    );
-    box-shadow: 0 14px 32px color-mix(in srgb, var(--ink) 6%, transparent);
-    padding: clamp(1.05rem, 2vw, 1.45rem);
+    background: color-mix(in srgb, var(--panel) 94%, var(--book-accent) 6%);
+    box-shadow: 0 9px 21px color-mix(in srgb, var(--ink) 5%, transparent);
+    padding: clamp(1rem, 1.9vw, 1.45rem);
   }
 
-  .book-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    width: fit-content;
-    margin: 0;
-    border: 1px solid color-mix(in srgb, var(--scene-accent, var(--accent)) 28%, var(--stroke));
-    border-radius: var(--radius-pill);
-    padding: 0.22rem 0.62rem;
-    font-size: 0.76rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: color-mix(in srgb, var(--ink) 86%, var(--scene-accent, var(--accent)));
-    background: color-mix(in srgb, var(--surface) 90%, var(--scene-accent-soft));
+  .book-hero-main {
+    display: grid;
+    gap: 0.62rem;
+    align-content: start;
   }
 
-  .book-hero h1 {
+  .book-hero-main h1 {
     margin: 0;
-    font-size: clamp(2rem, 5vw, 2.85rem);
+    font-size: clamp(2rem, 4.8vw, 2.8rem);
     line-height: 0.98;
   }
 
-  .book-hero p {
+  .book-hero-main p {
     margin: 0;
-    max-width: 66ch;
+    max-width: 62ch;
+    color: var(--ink-soft);
+  }
+
+  .book-hero-steps {
+    display: grid;
+    gap: 0.58rem;
+    align-content: start;
+    border: 1px solid color-mix(in srgb, var(--book-accent) 26%, var(--stroke));
+    border-radius: calc(var(--radius-lg) - 0.08rem);
+    background: color-mix(in srgb, var(--surface) 92%, var(--book-accent) 8%);
+    padding: 0.9rem 0.95rem;
+  }
+
+  .book-hero-steps__title {
+    margin: 0;
+    font-size: 0.77rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-subtle);
+  }
+
+  .book-hero-steps ol {
+    list-style: none;
+    counter-reset: book-step;
+    display: grid;
+    gap: 0.52rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .book-hero-steps li {
+    counter-increment: book-step;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.52rem;
+    align-items: start;
+    color: var(--ink-soft);
+    font-size: 0.94rem;
+  }
+
+  .book-hero-steps li::before {
+    content: counter(book-step);
+    display: inline-grid;
+    place-items: center;
+    width: 1.1rem;
+    height: 1.1rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--book-accent) 42%, var(--stroke));
+    color: color-mix(in srgb, var(--ink) 85%, var(--book-accent));
+    font-size: 0.72rem;
+    font-weight: 600;
+    line-height: 1;
+    margin-top: 0.12rem;
+  }
+
+  .book-hero-steps strong {
+    display: block;
+    color: var(--ink);
+    font-size: 0.96rem;
+    font-weight: 600;
+  }
+
+  .book-hero-steps span {
+    display: block;
+    font-size: 0.9rem;
   }
 
   .book-section {
     display: grid;
-    gap: 0.85rem;
+    gap: 0.88rem;
   }
 
   .book-section-head {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.62rem;
+    gap: 0.66rem;
     align-items: center;
   }
 
   .book-section-head h2 {
+    position: relative;
     margin: 0;
+    padding-left: 0.74rem;
     letter-spacing: -0.01em;
-    font-size: clamp(1.18rem, 2.4vw, 1.38rem);
-    color: color-mix(in srgb, var(--ink) 94%, var(--scene-accent, var(--accent)));
+    font-size: clamp(1.16rem, 2.4vw, 1.34rem);
+    color: color-mix(in srgb, var(--ink) 94%, var(--book-accent));
+  }
+
+  .book-section-head h2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.46em;
+    width: 0.35rem;
+    height: 0.35rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--book-accent) 40%, var(--stroke));
   }
 
   .book-section-note {
     margin: 0;
-    font-size: 0.78rem;
-    color: var(--ink-subtle);
-    border: 1px solid color-mix(in srgb, var(--scene-accent, var(--accent)) 20%, var(--stroke));
-    border-radius: var(--radius-pill);
-    padding: 0.18rem 0.58rem;
-    background: color-mix(in srgb, var(--surface) 90%, var(--scene-accent-soft));
+    font-size: 0.74rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
   }
 
   .book-paths {
-    gap: 1rem;
+    gap: 0.98rem;
   }
 
   .book-path-card {
     min-height: 100%;
-    --path-accent: color-mix(in srgb, var(--scene-accent, var(--accent)) 42%, var(--stroke));
+    --path-accent: color-mix(in srgb, var(--book-accent) 42%, var(--stroke));
   }
 
   .book-path-card--teach {
-    --path-accent: color-mix(in srgb, var(--cog-blue) 58%, var(--stroke));
+    --path-accent: color-mix(in srgb, var(--cog-blue) 52%, var(--stroke));
   }
 
   .book-path-card--consult {
-    --path-accent: color-mix(in srgb, var(--cog-mint) 56%, var(--stroke));
+    --path-accent: color-mix(in srgb, var(--cog-mint) 50%, var(--stroke));
   }
 
   .book-path-card :global(.card) {
     position: relative;
     display: grid;
-    gap: 0.62rem;
+    gap: 0.6rem;
     min-height: 100%;
-    padding: clamp(0.95rem, 1.8vw, 1.24rem);
-    border-color: color-mix(in srgb, var(--path-accent) 56%, var(--stroke));
-    background: color-mix(in srgb, var(--panel) 92%, var(--scene-accent-soft));
-    box-shadow: 0 9px 22px color-mix(in srgb, var(--ink) 4%, transparent);
+    padding: clamp(0.92rem, 1.8vw, 1.2rem);
+    border-color: color-mix(in srgb, var(--path-accent) 50%, var(--stroke));
+    background: color-mix(in srgb, var(--surface) 64%, var(--panel));
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--ink) 3.2%, transparent);
     overflow: hidden;
   }
 
@@ -229,20 +301,20 @@ const embed = Astro.url.searchParams.get('embed') === '1';
     left: 0;
     top: 0;
     bottom: 0;
-    width: 0.2rem;
+    width: 0.17rem;
     background: var(--path-accent);
     border-radius: 999px;
-    opacity: 0.85;
+    opacity: 0.84;
   }
 
   .book-path-card h3 {
     margin: 0;
-    font-size: 1.45rem;
-    line-height: 1.08;
+    font-size: clamp(1.28rem, 2.7vw, 1.45rem);
+    line-height: 1.1;
   }
 
   .book-open {
-    gap: 0.9rem;
+    gap: 0.86rem;
   }
 
   .book-path-card ul {
@@ -263,10 +335,11 @@ const embed = Astro.url.searchParams.get('embed') === '1';
 
   .book-open-scope :global(.card) {
     display: grid;
-    gap: 0.45rem;
-    padding: clamp(0.95rem, 1.8vw, 1.2rem);
-    border-color: color-mix(in srgb, var(--scene-accent, var(--accent)) 24%, var(--stroke));
-    background: color-mix(in srgb, var(--panel) 88%, var(--scene-accent-soft));
+    gap: 0.48rem;
+    padding: clamp(0.92rem, 1.8vw, 1.16rem);
+    border-color: color-mix(in srgb, var(--book-accent) 24%, var(--stroke));
+    background: color-mix(in srgb, var(--surface) 66%, var(--panel));
+    box-shadow: 0 4px 11px color-mix(in srgb, var(--ink) 3%, transparent);
   }
 
   .book-open-scope p {
@@ -275,7 +348,7 @@ const embed = Astro.url.searchParams.get('embed') === '1';
   }
 
   .book-open-links a {
-    color: color-mix(in srgb, var(--ink) 88%, var(--scene-accent, var(--accent)));
+    color: color-mix(in srgb, var(--ink) 88%, var(--book-accent));
     font-weight: 600;
     text-decoration-thickness: 0.08em;
     text-underline-offset: 0.15em;
@@ -288,7 +361,7 @@ const embed = Astro.url.searchParams.get('embed') === '1';
   }
 
   .book-booking {
-    gap: 0.95rem;
+    gap: 0.92rem;
   }
 
   .book-booking .text-small {
@@ -298,11 +371,11 @@ const embed = Astro.url.searchParams.get('embed') === '1';
 
   .book-action {
     min-height: 100%;
-    --action-accent: color-mix(in srgb, var(--scene-accent, var(--accent)) 34%, var(--stroke));
+    --action-accent: color-mix(in srgb, var(--book-accent) 36%, var(--stroke));
   }
 
   .book-action--coaching {
-    --action-accent: color-mix(in srgb, var(--cog-blue) 56%, var(--stroke));
+    --action-accent: color-mix(in srgb, var(--cog-blue) 55%, var(--stroke));
   }
 
   .book-action--workshop {
@@ -315,12 +388,12 @@ const embed = Astro.url.searchParams.get('embed') === '1';
 
   .book-action :global(.card) {
     display: grid;
-    gap: 0.74rem;
+    gap: 0.72rem;
     min-height: 100%;
-    padding: clamp(0.9rem, 1.7vw, 1.15rem);
+    padding: clamp(0.9rem, 1.7vw, 1.18rem);
     border-color: color-mix(in srgb, var(--action-accent) 50%, var(--stroke));
-    background: color-mix(in srgb, var(--panel) 92%, var(--white));
-    box-shadow: 0 8px 20px color-mix(in srgb, var(--ink) 4%, transparent);
+    background: color-mix(in srgb, var(--panel) 86%, var(--surface));
+    box-shadow: 0 9px 20px color-mix(in srgb, var(--ink) 4%, transparent);
   }
 
   .book-action :global(h3) {
@@ -329,14 +402,16 @@ const embed = Astro.url.searchParams.get('embed') === '1';
     line-height: 1.1;
   }
 
-  .book-action :global(.button) {
+  .book-cta {
+    --cta-border: color-mix(in srgb, var(--action-accent) 64%, var(--ink));
     justify-self: start;
-    min-width: 13.2rem;
-    border-color: color-mix(in srgb, var(--action-accent) 72%, var(--ink));
-    background: color-mix(in srgb, var(--surface) 88%, var(--scene-accent-soft));
+    min-width: 13.4rem;
+    border-color: var(--cta-border);
+    background: color-mix(in srgb, var(--surface) 90%, var(--book-accent) 10%);
     font-weight: 600;
     letter-spacing: 0.01em;
-    padding: 0.68rem 1.05rem;
+    padding: 0.7rem 1.08rem;
+    color: color-mix(in srgb, var(--ink) 94%, var(--book-accent));
     transition:
       transform 180ms ease,
       border-color 180ms ease,
@@ -344,21 +419,23 @@ const embed = Astro.url.searchParams.get('embed') === '1';
       color 180ms ease;
   }
 
-  .book-action :global(.button)::after {
-    content: '>';
+  .book-cta::after {
+    content: '→';
+    opacity: 0;
+    transform: translateX(-2px);
+    transition: opacity 180ms ease, transform 180ms ease;
+  }
+
+  .book-cta:hover,
+  .book-cta:focus-visible {
+    border-color: color-mix(in srgb, var(--action-accent) 86%, var(--ink));
+    background: color-mix(in srgb, var(--surface) 80%, var(--book-accent) 20%);
+  }
+
+  .book-cta:hover::after,
+  .book-cta:focus-visible::after {
+    opacity: 1;
     transform: translateX(0);
-    transition: transform 180ms ease;
-  }
-
-  .book-action :global(.button:hover),
-  .book-action :global(.button:focus-visible) {
-    border-color: color-mix(in srgb, var(--action-accent) 90%, var(--ink));
-    background: color-mix(in srgb, var(--surface) 72%, var(--scene-accent-soft));
-  }
-
-  .book-action :global(.button:hover)::after,
-  .book-action :global(.button:focus-visible)::after {
-    transform: translateX(2px);
   }
 
   .book-booking .muted {
@@ -373,6 +450,8 @@ const embed = Astro.url.searchParams.get('embed') === '1';
     }
 
     .book-hero {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.78rem;
       padding: 1rem;
     }
 
@@ -384,10 +463,20 @@ const embed = Astro.url.searchParams.get('embed') === '1';
       min-height: auto;
     }
 
-    .book-action :global(.button) {
+    .book-cta {
       width: 100%;
       justify-self: stretch;
       min-width: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .book-path-card :global(.card),
+    .book-open-scope :global(.card),
+    .book-action :global(.card),
+    .book-cta,
+    .book-cta::after {
+      transition: none;
     }
   }
 </style>
