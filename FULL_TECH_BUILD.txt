@@ -1,9 +1,9 @@
 # FULL_TECH_BUILD
 
 ## 1) Snapshot header
-- UpdatedAt: 2026-03-04T13:08:22Z
+- UpdatedAt: 2026-03-04T13:09:20Z
 - RepoName: oscar-sanchez-portfolio
-- Branch, HEAD commit hash: main | 180a998
+- Branch, HEAD commit hash: main | 407cafe
 - Dirty state: yes (`git status --short`)
   - `FULL_TECH_BUILD.txt`
 - Primary languages + package managers detected:
@@ -93,6 +93,7 @@ This is an Astro-based OSAN website for portfolio, workshops, and learning modul
 - What is not started:
   - Dedicated automated tests around new category helper output ordering and fallback grouping.
 
+- 2026-03-04T13:09:20Z | 407cafe | chore: refresh FULL_TECH_BUILD snapshot for deploy fix | `FULL_TECH_BUILD.txt`
 ## 7) Recent change log (rolling)
 - 2026-03-04T13:08:22Z | 180a998 | fix(book): remove invalid Card/CardGrid class props | `src/pages/book.astro`
 - 2026-03-04T00:32:01Z | 29d4541 | chore(book): tighten /book section rhythm and copy polish | `src/pages/book.astro`
