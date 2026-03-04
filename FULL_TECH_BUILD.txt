@@ -1,11 +1,13 @@
 # FULL_TECH_BUILD
 
 ## 1) Snapshot header
-- UpdatedAt: 2026-03-03T19:26:48Z
+- UpdatedAt: 2026-03-04T00:32:01Z
 - RepoName: oscar-sanchez-portfolio
-- Branch, HEAD commit hash: main | e14dadd1bd2deec385e74b55f8ada2098ff7225f
+- Branch, HEAD commit hash: main | 29d4541
 - Dirty state: yes (`git status --short`)
   - `FULL_TECH_BUILD.txt`
+  - `src/pages/book.astro`
+  - `final_build/CURRENT_GAPS.txt`
 - Primary languages + package managers detected:
   - TypeScript + Astro (`.ts`, `.astro`)
   - CSS (`.css`)
@@ -87,12 +89,15 @@ This is an Astro-based OSAN website for portfolio, workshops, and learning modul
   - `isCoreWorkshop` now treats categorized rows as core entries, with legacy `CORE_WORKSHOP_IDS` fallback preserved.
   - Homepage workshops card count now uses the same curated helper list as `/workshops`.
   - Related component docs and current-gap tracker updated.
+  - `/book` page now uses explicit section wrappers (`book-shell`, `book-hero`, `book-paths`, `book-open`, `book-booking`) with restrained OSAN rhythm and reduced copy noise.
 - What is in progress:
   - Manual post-deploy verification on `/workshops` and mobile responsive behavior.
 - What is not started:
   - Dedicated automated tests around new category helper output ordering and fallback grouping.
 
 ## 7) Recent change log (rolling)
+- 2026-03-04T00:32:01Z | 29d4541 | chore(book): tighten /book section rhythm and copy polish | `src/pages/book.astro`
+- 2026-03-03T19:35:08Z | 736d21b | chore: refresh FULL_TECH_BUILD snapshot | `FULL_TECH_BUILD.txt`
 - 2026-03-03T19:26:48Z | e14dadd | chore(resume): update about-me hero and technical skills | `src/pages/resume.astro`, `src/content/data/profile.json`, `final_build/CURRENT_GAPS.txt`, `FULL_TECH_BUILD.txt`
 - 2026-03-03T19:25:27Z | 601a71d | chore(resume): relabel hero to about me and set creator headline | `src/pages/resume.astro`, `final_build/CURRENT_GAPS.txt`, `FULL_TECH_BUILD.txt`
 - 2026-03-03T19:19:02Z | 601a71d | chore(resume): replace skills chips with technical skill taxonomy | `src/content/data/profile.json`, `final_build/CURRENT_GAPS.txt`, `FULL_TECH_BUILD.txt`

@@ -1,4 +1,5 @@
 # CURRENT_GAPS
+- book section copy/rhythm refactor | completed | Refactored `/book` into explicit section blocks (`hero`, `paths`, `open scope`, `booking`) with cleaner OSAN spacing and removed the extra reusable-outcomes sentence from Open-by-default copy.
 - resume hero about-me relabel | completed | Updated `/resume` hero to `About Me` with creator-focused headline (`Creator of this site, games, workshops, and modules.`) while preserving route and section structure.
 - resume technical-skills refresh | completed | Replaced generic skill tags with technical AI/web systems skills in `src/content/data/profile.json` for engineer-facing clarity on `/resume`.
 - resume education date-line removal | completed | Removed the date/subdate row from education cards on `/resume` so each entry now shows only program and institution.

@@ -8,78 +8,208 @@ const booking = await loadBooking();
 const embed = Astro.url.searchParams.get('embed') === '1';
 ---
 <BaseLayout title="Book - Oscar Sanchez" description="Book calls and workshops with explicit consent">
-  <h1>Book</h1>
-  <p>Paid teaching events and paid consulting. Pick a path, then book a slot below.</p>
-  <p class="text-small">TL;DR: Teaching → workshops/classes. Consulting → 1:1 guidance. Choose the option that fits your next step.</p>
+  <div class="book-shell">
+    <section class="book-hero">
+      <h1>Book</h1>
+      <p>Paid teaching events and paid consulting. Pick a path, then book a slot below.</p>
+      <p class="text-small">TL;DR: Teaching → workshops/classes. Consulting → 1:1 guidance. Choose the option that fits your next step.</p>
+    </section>
 
-  <CardGrid gap="var(--space-3)" align="stretch">
-    <Card>
-      <h2>Paid teaching</h2>
-      <p class="text-small">Workshops and classes for teams, schools, and communities.</p>
-      <ul>
-        <li>Formats: private workshop, guest lecture, hands-on build.</li>
-        <li>You get: agenda, slides/labs, and a reusable scaffold.</li>
-        <li>Best when: you want a shared baseline and a shipped demo.</li>
-      </ul>
-    </Card>
-    <Card>
-      <h2>Paid consulting</h2>
-      <p class="text-small">Short sessions to de-risk a build or a pilot.</p>
-      <ul>
-        <li>Format: 1:1 guidance or a team consult.</li>
-        <li>You get: scoped next steps, risks, and a simple plan.</li>
-        <li>Best when: you need a clear decision, not a long engagement.</li>
-      </ul>
-    </Card>
-  </CardGrid>
+    <section class="book-section book-paths">
+      <h2>Paths</h2>
+      <CardGrid gap="var(--space-3)" align="stretch">
+        <Card class="book-path-card">
+          <h3>Paid teaching</h3>
+          <p class="text-small">Workshops and classes for teams, schools, and communities.</p>
+          <ul>
+            <li>Formats: private workshop, guest lecture, hands-on build.</li>
+            <li>You get: agenda, slides/labs, and a reusable scaffold.</li>
+            <li>Best when: you want a shared baseline and a shipped demo.</li>
+          </ul>
+        </Card>
+        <Card class="book-path-card">
+          <h3>Paid consulting</h3>
+          <p class="text-small">Short sessions to de-risk a build or a pilot.</p>
+          <ul>
+            <li>Format: 1:1 guidance or a team consult.</li>
+            <li>You get: scoped next steps, risks, and a simple plan.</li>
+            <li>Best when: you need a clear decision, not a long engagement.</li>
+          </ul>
+        </Card>
+      </CardGrid>
+    </section>
 
-  <Card>
-    <h2>Open by default</h2>
-    <p>Paid work funds the free OSAN artifacts: workshops, modules, labs, and docs.</p>
-    <p class="text-small">
-      When it makes sense, I turn outcomes into reusable templates and scaffolds. I never publish client data or private context.
-    </p>
-    <p class="text-small">
-      If you want the free path first, start here:
-      <a href="/workshops">Workshops</a>,
-      <a href="/visual-classes">Modules</a>,
-      <a href="/labs">Labs</a>,
-      <a href="/join">Contribute</a>,
-      or <a href="/resume">About</a>.
-    </p>
-  </Card>
+    <section class="book-section book-open">
+      <h2>Open by default</h2>
+      <Card class="book-open-scope">
+        <p>Paid work funds the free OSAN artifacts: workshops, modules, labs, and docs.</p>
+        <p class="text-small book-open-links">
+          If you want the free path first, start here:
+          <a href="/workshops">Workshops</a>,
+          <a href="/visual-classes">Modules</a>,
+          <a href="/labs">Labs</a>,
+          <a href="/join">Contribute</a>,
+          or <a href="/resume">About</a>.
+        </p>
+      </Card>
+    </section>
 
-  <h2>Book a slot</h2>
-  <p class="text-small">Calendly opens in a new tab. Use the Back link if you want to exit.</p>
-
-  <Card>
-    <h2>1:1 guidance</h2>
-    {booking.calendly.one_on_one.url ? (
-      <>
-        <a class="button" href={booking.calendly.one_on_one.url} target="_blank" rel="noopener noreferrer">{booking.calendly.one_on_one.label}</a>
-        {embed ? <iframe style="width:100%; margin-top:1rem; min-height:560px; border:1px solid var(--border);" src={booking.calendly.one_on_one.url} title="Calendly 1:1" loading="lazy"></iframe> : null}
-      </>
-    ) : (
-      <p class="text-small">Add your Calendly URL in booking.json</p>
-    )}
-  </Card>
-
-  <Card>
-    <h2>Private workshop</h2>
-    {booking.calendly.teach_private.url ? (
-      <a class="button" href={booking.calendly.teach_private.url} target="_blank" rel="noopener noreferrer">{booking.calendly.teach_private.label}</a>
-    ) : (
-      <p class="text-small">Add your Calendly URL in booking.json</p>
-    )}
-  </Card>
-
-  <Card>
-    <h2>Class or school booking</h2>
-    {booking.calendly.teach_class.url ? (
-      <a class="button" href={booking.calendly.teach_class.url} target="_blank" rel="noopener noreferrer">{booking.calendly.teach_class.label}</a>
-    ) : (
-      <p class="text-small">Add your Calendly URL in booking.json</p>
-    )}
-  </Card>
-  <p class="muted">AI‑assisted; reviewed by humans; results vary.</p>
+    <section class="book-section book-booking">
+      <h2>Book a slot</h2>
+      <p class="text-small">Calendly opens in a new tab. Use the Back link if you want to exit.</p>
+      <CardGrid gap="var(--space-3)" align="stretch" class="book-actions-grid">
+        <Card>
+          <h2>1:1 guidance</h2>
+          {booking.calendly.one_on_one.url ? (
+            <>
+              <a class="button" href={booking.calendly.one_on_one.url} target="_blank" rel="noopener noreferrer">{booking.calendly.one_on_one.label}</a>
+              {embed ? <iframe style="width:100%; margin-top:1rem; min-height:560px; border:1px solid var(--border);" src={booking.calendly.one_on_one.url} title="Calendly 1:1" loading="lazy"></iframe> : null}
+            </>
+          ) : (
+            <p class="text-small">Add your Calendly URL in booking.json</p>
+          )}
+        </Card>
+        <Card>
+          <h2>Private workshop</h2>
+          {booking.calendly.teach_private.url ? (
+            <a class="button" href={booking.calendly.teach_private.url} target="_blank" rel="noopener noreferrer">{booking.calendly.teach_private.label}</a>
+          ) : (
+            <p class="text-small">Add your Calendly URL in booking.json</p>
+          )}
+        </Card>
+        <Card>
+          <h2>Class or school booking</h2>
+          {booking.calendly.teach_class.url ? (
+            <a class="button" href={booking.calendly.teach_class.url} target="_blank" rel="noopener noreferrer">{booking.calendly.teach_class.label}</a>
+          ) : (
+            <p class="text-small">Add your Calendly URL in booking.json</p>
+          )}
+        </Card>
+      </CardGrid>
+      <p class="muted">AI‑assisted; reviewed by humans; results vary.</p>
+    </section>
+  </div>
 </BaseLayout>
+
+<style>
+  .book-shell {
+    display: grid;
+    gap: var(--space-4);
+    max-width: min(970px, calc(100vw - 2rem));
+    margin: 0 auto;
+  }
+
+  .book-hero {
+    display: grid;
+    gap: 0.45rem;
+    padding-bottom: 0.1rem;
+  }
+
+  .book-hero h1 {
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 2.85rem);
+    line-height: 0.98;
+  }
+
+  .book-hero p {
+    margin: 0;
+    max-width: 68ch;
+  }
+
+  .book-section {
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  .book-section h2 {
+    margin: 0;
+    letter-spacing: -0.01em;
+    font-size: 1.14rem;
+    color: color-mix(in srgb, var(--ink) 95%, var(--scene-accent));
+  }
+
+  .book-paths {
+    gap: 0.85rem;
+  }
+
+  .book-path-card {
+    display: grid;
+    gap: 0.55rem;
+    min-height: 100%;
+  }
+
+  .book-path-card h3 {
+    margin: 0;
+    font-size: 1.08rem;
+  }
+
+  .book-open {
+    gap: 0.7rem;
+  }
+
+  .book-path-card ul {
+    display: grid;
+    gap: 0.45rem;
+    margin: 0;
+    padding-left: 1.1rem;
+  }
+
+  .book-open-scope {
+    display: grid;
+    gap: 0.45rem;
+    margin: 0;
+  }
+
+  .book-open-scope p {
+    max-width: 72ch;
+    margin: 0;
+  }
+
+  .book-open-links a {
+    color: color-mix(in srgb, var(--ink) 84%, var(--ink-soft));
+    font-weight: 600;
+  }
+
+  .book-open-links a:hover,
+  .book-open-links a:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 0.12em;
+  }
+
+  .book-booking .card {
+    min-height: 12.1rem;
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  .book-actions-grid :global(.card) .button,
+  .book-actions-grid :global(.button) {
+    justify-self: start;
+    min-width: 13rem;
+  }
+
+  .book-booking .text-small {
+    margin: 0;
+  }
+
+  .book-booking .muted {
+    margin-top: 0.45rem;
+  }
+
+  @media (max-width: 720px) {
+    .book-shell {
+      gap: var(--space-3);
+    }
+
+    .book-booking .card {
+      min-height: auto;
+    }
+
+    .book-actions-grid :global(.card) .button,
+    .book-actions-grid :global(.button) {
+      width: 100%;
+      justify-self: stretch;
+      min-width: 0;
+    }
+  }
+</style>
