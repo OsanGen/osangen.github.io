@@ -18,74 +18,82 @@ const embed = Astro.url.searchParams.get('embed') === '1';
     <section class="book-section book-paths">
       <h2>Paths</h2>
       <CardGrid gap="var(--space-3)" align="stretch">
-        <Card class="book-path-card">
-          <h3>Paid teaching</h3>
-          <p class="text-small">Workshops and classes for teams, schools, and communities.</p>
-          <ul>
-            <li>Formats: private workshop, guest lecture, hands-on build.</li>
-            <li>You get: agenda, slides/labs, and a reusable scaffold.</li>
-            <li>Best when: you want a shared baseline and a shipped demo.</li>
-          </ul>
-        </Card>
-        <Card class="book-path-card">
-          <h3>Paid consulting</h3>
-          <p class="text-small">Short sessions to de-risk a build or a pilot.</p>
-          <ul>
-            <li>Format: 1:1 guidance or a team consult.</li>
-            <li>You get: scoped next steps, risks, and a simple plan.</li>
-            <li>Best when: you need a clear decision, not a long engagement.</li>
-          </ul>
-        </Card>
+        <div class="book-path-card">
+          <Card>
+            <h3>Paid teaching</h3>
+            <p class="text-small">Workshops and classes for teams, schools, and communities.</p>
+            <ul>
+              <li>Formats: private workshop, guest lecture, hands-on build.</li>
+              <li>You get: agenda, slides/labs, and a reusable scaffold.</li>
+              <li>Best when: you want a shared baseline and a shipped demo.</li>
+            </ul>
+          </Card>
+        </div>
+        <div class="book-path-card">
+          <Card>
+            <h3>Paid consulting</h3>
+            <p class="text-small">Short sessions to de-risk a build or a pilot.</p>
+            <ul>
+              <li>Format: 1:1 guidance or a team consult.</li>
+              <li>You get: scoped next steps, risks, and a simple plan.</li>
+              <li>Best when: you need a clear decision, not a long engagement.</li>
+            </ul>
+          </Card>
+        </div>
       </CardGrid>
     </section>
 
     <section class="book-section book-open">
       <h2>Open by default</h2>
-      <Card class="book-open-scope">
-        <p>Paid work funds the free OSAN artifacts: workshops, modules, labs, and docs.</p>
-        <p class="text-small book-open-links">
-          If you want the free path first, start here:
-          <a href="/workshops">Workshops</a>,
-          <a href="/visual-classes">Modules</a>,
-          <a href="/labs">Labs</a>,
-          <a href="/join">Contribute</a>,
-          or <a href="/resume">About</a>.
-        </p>
-      </Card>
+      <div class="book-open-scope">
+        <Card>
+          <p>Paid work funds the free OSAN artifacts: workshops, modules, labs, and docs.</p>
+          <p class="text-small book-open-links">
+            If you want the free path first, start here:
+            <a href="/workshops">Workshops</a>,
+            <a href="/visual-classes">Modules</a>,
+            <a href="/labs">Labs</a>,
+            <a href="/join">Contribute</a>,
+            or <a href="/resume">About</a>.
+          </p>
+        </Card>
+      </div>
     </section>
 
     <section class="book-section book-booking">
       <h2>Book a slot</h2>
       <p class="text-small">Calendly opens in a new tab. Use the Back link if you want to exit.</p>
-      <CardGrid gap="var(--space-3)" align="stretch" class="book-actions-grid">
-        <Card>
-          <h2>1:1 guidance</h2>
-          {booking.calendly.one_on_one.url ? (
-            <>
-              <a class="button" href={booking.calendly.one_on_one.url} target="_blank" rel="noopener noreferrer">{booking.calendly.one_on_one.label}</a>
-              {embed ? <iframe style="width:100%; margin-top:1rem; min-height:560px; border:1px solid var(--border);" src={booking.calendly.one_on_one.url} title="Calendly 1:1" loading="lazy"></iframe> : null}
-            </>
-          ) : (
-            <p class="text-small">Add your Calendly URL in booking.json</p>
-          )}
-        </Card>
-        <Card>
-          <h2>Private workshop</h2>
-          {booking.calendly.teach_private.url ? (
-            <a class="button" href={booking.calendly.teach_private.url} target="_blank" rel="noopener noreferrer">{booking.calendly.teach_private.label}</a>
-          ) : (
-            <p class="text-small">Add your Calendly URL in booking.json</p>
-          )}
-        </Card>
-        <Card>
-          <h2>Class or school booking</h2>
-          {booking.calendly.teach_class.url ? (
-            <a class="button" href={booking.calendly.teach_class.url} target="_blank" rel="noopener noreferrer">{booking.calendly.teach_class.label}</a>
-          ) : (
-            <p class="text-small">Add your Calendly URL in booking.json</p>
-          )}
-        </Card>
-      </CardGrid>
+      <div class="book-actions-grid">
+        <CardGrid gap="var(--space-3)" align="stretch">
+          <Card>
+            <h2>1:1 guidance</h2>
+            {booking.calendly.one_on_one.url ? (
+              <>
+                <a class="button" href={booking.calendly.one_on_one.url} target="_blank" rel="noopener noreferrer">{booking.calendly.one_on_one.label}</a>
+                {embed ? <iframe style="width:100%; margin-top:1rem; min-height:560px; border:1px solid var(--border);" src={booking.calendly.one_on_one.url} title="Calendly 1:1" loading="lazy"></iframe> : null}
+              </>
+            ) : (
+              <p class="text-small">Add your Calendly URL in booking.json</p>
+            )}
+          </Card>
+          <Card>
+            <h2>Private workshop</h2>
+            {booking.calendly.teach_private.url ? (
+              <a class="button" href={booking.calendly.teach_private.url} target="_blank" rel="noopener noreferrer">{booking.calendly.teach_private.label}</a>
+            ) : (
+              <p class="text-small">Add your Calendly URL in booking.json</p>
+            )}
+          </Card>
+          <Card>
+            <h2>Class or school booking</h2>
+            {booking.calendly.teach_class.url ? (
+              <a class="button" href={booking.calendly.teach_class.url} target="_blank" rel="noopener noreferrer">{booking.calendly.teach_class.label}</a>
+            ) : (
+              <p class="text-small">Add your Calendly URL in booking.json</p>
+            )}
+          </Card>
+        </CardGrid>
+      </div>
       <p class="muted">AI‑assisted; reviewed by humans; results vary.</p>
     </section>
   </div>
