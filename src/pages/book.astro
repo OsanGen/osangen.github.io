@@ -12,12 +12,15 @@ const embed = Astro.url.searchParams.get('embed') === '1';
     <section class="book-hero">
       <div class="book-hero-main">
         <h1>Book</h1>
-        <p>Paid teaching events and paid consulting. Pick a path, then book a slot below.</p>
+        <p>Paid teaching, consulting, and scoped builds. Pick a lane, then book below.</p>
+        <p class="text-small">
+          TL;DR: Teaching = workshops and talks. Consulting = advisory for orgs or individuals. Build = proposal-first delivery with acceptance checks.
+        </p>
       </div>
       <aside class="book-hero-steps" aria-label="How this works">
         <p class="book-hero-steps__title">How this works</p>
         <ol>
-          <li><strong>Choose path</strong><span>Teaching or consulting.</span></li>
+          <li><strong>Choose path</strong><span>Teaching, consulting, or build.</span></li>
           <li><strong>Pick slot</strong><span>Use Calendly to lock a session.</span></li>
           <li><strong>Get outcome</strong><span>Leave with clear scoped next steps.</span></li>
         </ol>
@@ -25,30 +28,38 @@ const embed = Astro.url.searchParams.get('embed') === '1';
     </section>
 
     <section class="book-section book-paths">
-      <div class="book-section-head">
-        <h2>Paths</h2>
-        <p class="book-section-note">Choose your lane</p>
-      </div>
       <CardGrid gap="var(--space-3)" align="stretch">
         <div class="book-path-card book-path-card--teach">
           <Card>
-            <h3>Paid teaching</h3>
-            <p class="text-small">Workshops and classes for teams, schools, and communities.</p>
-            <ul>
-              <li>Formats: private workshop, guest lecture, hands-on build.</li>
+            <h2>Teaching + speaking</h2>
+            <p class="text-small">Workshops, classes, and talks on practical GenAI.</p>
+            <ul class="text-small">
+              <li>Formats: keynote, guest lecture, private workshop.</li>
               <li>You get: agenda, slides/labs, and a reusable scaffold.</li>
-              <li>Best when: you want a shared baseline and a shipped demo.</li>
+              <li>Best when: you need a shared baseline fast.</li>
             </ul>
           </Card>
         </div>
         <div class="book-path-card book-path-card--consult">
           <Card>
-            <h3>Paid consulting</h3>
-            <p class="text-small">Short sessions to de-risk a build or a pilot.</p>
-            <ul>
-              <li>Format: 1:1 guidance or a team consult.</li>
-              <li>You get: scoped next steps, risks, and a simple plan.</li>
-              <li>Best when: you need a clear decision, not a long engagement.</li>
+            <h2>Consulting</h2>
+            <p class="text-small">Advisory for organizations and individuals. Clear scope. Clear next steps.</p>
+            <ul class="text-small">
+              <li>Orgs: GenAI integration, tool selection, evals, governance, AI marketing workflows.</li>
+              <li>Individuals: workflows, content engines, portfolio, ship faster with AI.</li>
+              <li>You get: next steps, risks, and a simple plan you can execute.</li>
+            </ul>
+          </Card>
+        </div>
+        <div class="book-path-card book-path-card--build">
+          <Card>
+            <h2>Build engagements</h2>
+            <p class="text-small">If you want delivery, not just advice.</p>
+            <ul class="text-small">
+              <li>Start: scope lock workshop (inputs, owner, acceptance checks).</li>
+              <li>Two paths: small pilot vs deeper build.</li>
+              <li>Controls: approvals, audit logs, humans-in-the-loop.</li>
+              <li>Handoff: runbook + docs + artifacts you keep.</li>
             </ul>
           </Card>
         </div>
@@ -56,13 +67,11 @@ const embed = Astro.url.searchParams.get('embed') === '1';
     </section>
 
     <section class="book-section book-open">
-      <div class="book-section-head">
-        <h2>Open by default</h2>
-        <p class="book-section-note">Free artifacts stay public</p>
-      </div>
+      <h2>Open by default</h2>
       <div class="book-open-scope">
         <Card>
           <p>Paid work funds the free OSAN artifacts: workshops, modules, labs, and docs.</p>
+          <p class="text-small">When it makes sense, outcomes become reusable templates and scaffolds. I never publish client data or private context.</p>
           <p class="text-small book-open-links">
             If you want the free path first, start here:
             <a href="/workshops">Workshops</a>,
@@ -76,16 +85,15 @@ const embed = Astro.url.searchParams.get('embed') === '1';
     </section>
 
     <section class="book-section book-booking">
-      <div class="book-section-head">
-        <h2>Book a slot</h2>
-        <p class="book-section-note">Choose one and lock it in</p>
-      </div>
+      <h2>Book a slot</h2>
+      <p class="text-small">Use 1:1 for individuals. Use Private workshop for teams, org consulting, or a scope lock. Use Class for teaching/speaking.</p>
       <p class="text-small">Calendly opens in a new tab. Use the Back link if you want to exit.</p>
       <div class="book-actions-grid">
         <CardGrid gap="var(--space-3)" align="stretch">
           <div class="book-action book-action--coaching">
             <Card>
-              <h3>1:1 guidance</h3>
+              <h2>1:1 consulting (individuals)</h2>
+              <p class="text-small">Best for personal workflows, content engines, and shipping faster with AI.</p>
               {booking.calendly.one_on_one.url ? (
                 <>
                   <a class="button book-cta" href={booking.calendly.one_on_one.url} target="_blank" rel="noopener noreferrer">{booking.calendly.one_on_one.label}</a>
@@ -98,7 +106,8 @@ const embed = Astro.url.searchParams.get('embed') === '1';
           </div>
           <div class="book-action book-action--workshop">
             <Card>
-              <h3>Private workshop</h3>
+              <h2>Org consulting or scope lock (teams)</h2>
+              <p class="text-small">Best for GenAI integration planning, tooling decisions, or a build kickoff.</p>
               {booking.calendly.teach_private.url ? (
                 <a class="button book-cta" href={booking.calendly.teach_private.url} target="_blank" rel="noopener noreferrer">{booking.calendly.teach_private.label}</a>
               ) : (
@@ -108,7 +117,8 @@ const embed = Astro.url.searchParams.get('embed') === '1';
           </div>
           <div class="book-action book-action--class">
             <Card>
-              <h3>Class or school booking</h3>
+              <h2>Teaching or speaking</h2>
+              <p class="text-small">Best for talks, classes, and workshops.</p>
               {booking.calendly.teach_class.url ? (
                 <a class="button book-cta" href={booking.calendly.teach_class.url} target="_blank" rel="noopener noreferrer">{booking.calendly.teach_class.label}</a>
               ) : (
@@ -283,6 +293,10 @@ const embed = Astro.url.searchParams.get('embed') === '1';
     --path-accent: color-mix(in srgb, var(--cog-mint) 50%, var(--stroke));
   }
 
+  .book-path-card--build {
+    --path-accent: color-mix(in srgb, var(--book-accent) 50%, var(--stroke));
+  }
+
   .book-path-card :global(.card) {
     position: relative;
     display: grid;
@@ -307,7 +321,8 @@ const embed = Astro.url.searchParams.get('embed') === '1';
     opacity: 0.84;
   }
 
-  .book-path-card h3 {
+  .book-path-card :global(h2),
+  .book-action :global(h2) {
     margin: 0;
     font-size: clamp(1.28rem, 2.7vw, 1.45rem);
     line-height: 1.1;
@@ -394,12 +409,6 @@ const embed = Astro.url.searchParams.get('embed') === '1';
     border-color: color-mix(in srgb, var(--action-accent) 50%, var(--stroke));
     background: color-mix(in srgb, var(--panel) 86%, var(--surface));
     box-shadow: 0 9px 20px color-mix(in srgb, var(--ink) 4%, transparent);
-  }
-
-  .book-action :global(h3) {
-    margin: 0;
-    font-size: clamp(1.22rem, 2.8vw, 1.42rem);
-    line-height: 1.1;
   }
 
   .book-cta {
