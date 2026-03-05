@@ -202,14 +202,19 @@ const embed = Astro.url.searchParams.get('embed') === '1';
   .book-hero-steps li {
     counter-increment: book-step;
     display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 0.52rem;
+    grid-template-columns: 1.2rem minmax(0, 1fr);
+    grid-template-areas:
+      "dot title"
+      "dot copy";
+    column-gap: 0.58rem;
+    row-gap: 0.14rem;
     align-items: start;
     color: var(--ink-soft);
     font-size: 0.94rem;
   }
 
   .book-hero-steps li::before {
+    grid-area: dot;
     content: counter(book-step);
     display: inline-grid;
     place-items: center;
@@ -225,15 +230,20 @@ const embed = Astro.url.searchParams.get('embed') === '1';
   }
 
   .book-hero-steps strong {
+    grid-area: title;
     display: block;
+    min-width: 0;
     color: var(--ink);
-    font-size: 0.96rem;
+    font-size: 0.95rem;
     font-weight: 600;
   }
 
   .book-hero-steps span {
+    grid-area: copy;
     display: block;
+    min-width: 0;
     font-size: 0.9rem;
+    line-height: 1.34;
   }
 
   .book-section {

@@ -1,12 +1,12 @@
 # FULL_TECH_BUILD
 
 ## 1) Snapshot header
-- UpdatedAt: 2026-03-04T19:36:28Z
+- UpdatedAt: 2026-03-05T00:55:02Z
 - RepoName: oscar-sanchez-portfolio
-- Branch, HEAD commit hash: main | c1c925e
+- Branch, HEAD commit hash: main | ded29d6
 - Dirty state: yes (`git status --short`)
   - `FULL_TECH_BUILD.txt`
-  - `final_build/CURRENT_GAPS.txt`
+  - `src/content/data/booking.json`
   - `src/pages/book.astro`
 - Primary languages + package managers detected:
   - TypeScript + Astro (`.ts`, `.astro`)
@@ -90,12 +90,16 @@ This is an Astro-based OSAN website for portfolio, workshops, and learning modul
   - Homepage workshops card count now uses the same curated helper list as `/workshops`.
   - Related component docs and current-gap tracker updated.
   - `/book` page now uses explicit section wrappers (`book-shell`, `book-hero`, `book-paths`, `book-open`, `book-booking`) with restrained OSAN rhythm and reduced copy noise.
+  - `/book` booking buttons now use lane-specific labels from `src/content/data/booking.json` (`1:1 (individual)`, `scope lock (teams)`, `teaching/speaking`).
+  - `/book` hero step card now uses explicit CSS grid areas (`dot/title/copy`) to prevent misaligned title/description flow in the “How this works” block.
 - What is in progress:
   - Manual post-deploy verification on `/workshops` and mobile responsive behavior.
 - What is not started:
   - Dedicated automated tests around new category helper output ordering and fallback grouping.
 
 ## 7) Recent change log (rolling)
+- 2026-03-05T00:55:02Z | wip | fix(book): align how-this-works step card using explicit grid areas | `src/pages/book.astro`
+- 2026-03-04T20:37:10Z | wip | chore(book): align booking labels with lane model | `src/content/data/booking.json`
 - 2026-03-04T19:36:28Z | c1c925e | wip(book): remove hero noise and ship executive-depth visual polish | `src/pages/book.astro`, `final_build/CURRENT_GAPS.txt`, `FULL_TECH_BUILD.txt`
 - 2026-03-04T17:00:26Z | d81cf1d | wip(book): premium visual hierarchy and CTA polish | `src/pages/book.astro`, `final_build/CURRENT_GAPS.txt`, `FULL_TECH_BUILD.txt`
 - 2026-03-04T13:12:07Z | 5c1b0d1 | chore: finalize FULL_TECH_BUILD HEAD timestamp | `FULL_TECH_BUILD.txt`

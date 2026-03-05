@@ -1,15 +1,15 @@
 {
   "calendly": {
     "one_on_one": {
-      "label": "Book 1:1",
+      "label": "Book 1:1 (individual)",
       "url": "https://calendly.com/abellou/30min"
     },
     "teach_private": {
-      "label": "Book a private workshop",
+      "label": "Book scope lock (teams)",
       "url": "https://calendly.com/abellou/30min"
     },
     "teach_class": {
-      "label": "Book a class",
+      "label": "Book teaching/speaking",
       "url": "https://calendly.com/abellou/30min"
     }
   },
