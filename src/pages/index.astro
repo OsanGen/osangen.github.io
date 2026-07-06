@@ -29,24 +29,28 @@ const routeCards = [
     href: '/labs',
     subtitle: pluralize(games.length, 'game', 'games'),
     action: 'Open OSAN games',
+    icon: '/icons/replay-slides.svg',
   },
   {
     title: 'Workshops',
     href: '/workshops',
     subtitle: pluralize(coreWorkshops.length, 'workshop', 'workshops'),
     action: 'Open workshops',
+    icon: '/icons/teaching-checklist.svg',
   },
   {
     title: LEARN_VISUAL_ROUTE_LABEL,
     href: '/visual-classes',
     subtitle: pluralize(visualClassCount, 'lesson', 'lessons'),
     action: `Open ${LEARN_VISUAL_ROUTE_NAME.toLowerCase()}`,
+    icon: '/icons/learn-catalog.svg',
   },
   {
     title: 'Contribute',
     href: '/join',
     subtitle: 'Upskill to teach AI in communities',
     action: 'View teaching path',
+    icon: '/icons/sora-prompt-coach.svg',
   },
 ];
 
@@ -56,6 +60,7 @@ const visualClassSummary =
 ---
 <BaseLayout title="Oscar Sanchez" description="Open-source AI education, cleanly.">
   <section class="hero-shell scene-shell command-shell cog-proof-stack" data-motion-enter>
+    <img class="hero-icon" src="/icons/oscar-cog-brain.svg" alt="" />
     <p class="hero-eyebrow">Open-source AI education</p>
     <h1>Choose your route. Learn fast.</h1>
     <p class="text-small deck-subtitle">Four clean paths for shipping AI capability: play, learn, and contribute.</p>
@@ -71,6 +76,7 @@ const visualClassSummary =
       {routeCards.map((card) => (
         <Card>
           <article class="route-card cog-proof-stack">
+            <img class="route-card__icon" src={card.icon} alt="" />
             <h2>{card.title}</h2>
             <p class="text-small">{card.subtitle}</p>
             <a class="button button--ghost" href={card.href}>
