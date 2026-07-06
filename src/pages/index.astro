@@ -10,6 +10,7 @@ import {
   LEARN_VISUAL_ROUTE_LABEL,
   LEARN_VISUAL_ROUTE_NAME,
 } from '../lib/learn-pages';
+import { HOME_ROUTE_ICONS } from '../lib/ui-icons';
 
 const [games, modules, workshops] = await Promise.all([
   loadGames(),
@@ -29,28 +30,28 @@ const routeCards = [
     href: '/labs',
     subtitle: pluralize(games.length, 'game', 'games'),
     action: 'Open OSAN games',
-    icon: '/icons/replay-slides.svg',
+    icon: HOME_ROUTE_ICONS.games,
   },
   {
     title: 'Workshops',
     href: '/workshops',
     subtitle: pluralize(coreWorkshops.length, 'workshop', 'workshops'),
     action: 'Open workshops',
-    icon: '/icons/teaching-checklist.svg',
+    icon: HOME_ROUTE_ICONS.workshops,
   },
   {
     title: LEARN_VISUAL_ROUTE_LABEL,
     href: '/visual-classes',
     subtitle: pluralize(visualClassCount, 'lesson', 'lessons'),
     action: `Open ${LEARN_VISUAL_ROUTE_NAME.toLowerCase()}`,
-    icon: '/icons/learn-catalog.svg',
+    icon: HOME_ROUTE_ICONS.visualClasses,
   },
   {
     title: 'Contribute',
     href: '/join',
     subtitle: 'Upskill to teach AI in communities',
     action: 'View teaching path',
-    icon: '/icons/sora-prompt-coach.svg',
+    icon: HOME_ROUTE_ICONS.contribute,
   },
 ];
 
@@ -60,7 +61,6 @@ const visualClassSummary =
 ---
 <BaseLayout title="Oscar Sanchez" description="Open-source AI education, cleanly.">
   <section class="hero-shell scene-shell command-shell cog-proof-stack" data-motion-enter>
-    <img class="hero-icon" src="/icons/oscar-cog-brain.svg" alt="" />
     <p class="hero-eyebrow">Open-source AI education</p>
     <h1>Choose your route. Learn fast.</h1>
     <p class="text-small deck-subtitle">Four clean paths for shipping AI capability: play, learn, and contribute.</p>

@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
 import {
   isCanonicalLink,
   isExternalUrl,
@@ -14,6 +16,81 @@ import {
   loadProfile,
   loadWorkshops,
 } from '../src/lib/content';
+import { HOME_ROUTE_ICONS } from '../src/lib/ui-icons';
+
+const PUBLIC_DIR = path.resolve(process.cwd(), 'public');
+
+const extractViewBoxSize = (svg: string): number | null => {
+  const match = svg.match(/viewBox=["']\s*0\s+0\s+(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)\s*["']/i);
+  if (!match) return null;
+  const [, w, h] = match;
+  return w === h ? Number(w) : null;
+};
+
+const isWhiteFill = (value: string) => /^#?(fff|ffffff|white)$/i.test(value.trim());
+
+const hasFullBleedWhiteBackground = (svg: string, size: number): boolean => {
+  const rectTagRe = /<rect\b([^>]*)\/?>/gi;
+  const attrRe = /([a-zA-Z-]+)=["']([^"']*)["']/g;
+  let rectMatch: RegExpExecArray | null;
+
+  while ((rectMatch = rectTagRe.exec(svg))) {
+    const attrs: Record<string, string> = {};
+    let attrMatch: RegExpExecArray | null;
+    attrRe.lastIndex = 0;
+    while ((attrMatch = attrRe.exec(rectMatch[1]))) {
+      attrs[attrMatch[1].toLowerCase()] = attrMatch[2];
+    }
+
+    const w = parseFloat(attrs.width ?? '');
+    const h = parseFloat(attrs.height ?? '');
+    const x = attrs.x !== undefined ? parseFloat(attrs.x) : 0;
+    const y = attrs.y !== undefined ? parseFloat(attrs.y) : 0;
+
+    if (w === size && h === size && x === 0 && y === 0 && attrs.fill && isWhiteFill(attrs.fill)) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
+const hasInkStroke = (svg: string): boolean => /stroke=["']#10121A["']/i.test(svg);
+
+/**
+ * Generic flat-line UI icons (see src/lib/ui-icons.ts) must all share the
+ * same visual template: a full-bleed white background + ink outline. This
+ * catches a branded/product icon (dark tile, no outline) being mistakenly
+ * wired in as a generic UI icon before it ships.
+ */
+const checkUiIconTemplate = (iconPath: string, label: string, messages: string[]) => {
+  const filePath = path.join(PUBLIC_DIR, iconPath.replace(/^\//, ''));
+  let svg: string;
+  try {
+    svg = readFileSync(filePath, 'utf8');
+  } catch {
+    messages.push(`${label}: icon file not found at ${filePath}`);
+    return;
+  }
+
+  const size = extractViewBoxSize(svg);
+  if (size === null) {
+    messages.push(`${label}: expected a square viewBox (e.g. "0 0 64 64")`);
+    return;
+  }
+
+  if (!hasFullBleedWhiteBackground(svg, size)) {
+    messages.push(
+      `${label}: missing a full-bleed white background rect — this looks like a branded/product icon, not a flat UI icon (match the template in replay-slides.svg / teaching-checklist.svg / learn-catalog.svg)`
+    );
+  }
+
+  if (!hasInkStroke(svg)) {
+    messages.push(
+      `${label}: missing an ink-colored stroke (#10121A) — flat UI icons must use ink line art, not solid fills`
+    );
+  }
+};
 
 const checkLinkField = ({
   label,
@@ -284,6 +361,10 @@ const main = async () => {
   if (gpts.length < 3) {
     messages.push(`gpts: expected at least 3 items, found ${gpts.length}`);
   }
+
+  Object.entries(HOME_ROUTE_ICONS).forEach(([key, iconPath]) => {
+    checkUiIconTemplate(iconPath, `home route icon (${key})`, messages);
+  });
 
   if (messages.length > 0) {
     console.error('Content validation issues:');
