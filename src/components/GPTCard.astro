@@ -22,6 +22,11 @@ const accentToken = sceneAccent || 'var(--scene-accent, var(--page-accent, var(-
     {gpt.icon ? <img src={gpt.icon.src} alt={gpt.icon.alt} class="gpt-icon" loading="lazy" decoding="async" /> : null}
     <h2>{gpt.name}</h2>
   </div>
+  <p class="meta-strip">
+    <span class="meta-strip__item meta-strip__item--accent">{gpt.status}</span>
+    <span class="meta-strip__sep" aria-hidden="true">·</span>
+    <span class="meta-strip__item">{gpt.tags.length} {gpt.tags.length === 1 ? 'tag' : 'tags'}</span>
+  </p>
   <p class="agent-summary line-clamp-2">
     <strong class="agent-label">Outcome:</strong> {gpt.ships}
   </p>

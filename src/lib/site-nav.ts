@@ -11,6 +11,13 @@ export const PRIMARY_NAV_ITEMS: SiteNavItem[] = [
   { label: 'About Me', href: '/resume' },
 ];
 
+export const SECONDARY_NAV_ITEMS: SiteNavItem[] = [
+  { label: 'About', href: '/about' },
+  { label: 'Posts', href: '/posts' },
+  { label: 'Docs', href: '/docs' },
+  { label: 'Code of Conduct', href: '/code-of-conduct' },
+];
+
 export function normalizePath(pathname: string): string {
   const path = pathname.replace(/\/+$/, '');
   return path || '/';

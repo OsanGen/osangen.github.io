@@ -47,7 +47,7 @@ const visibleChips = scopeChips?.slice(0, 6) ?? [];
     </section>
 
     <section class="panel-shell" data-motion-enter>
-      <h2 class="join-panel-title">{highLevelScopeTitle}</h2>
+      <h2 class="join-panel-title"><span class="join-panel-index" aria-hidden="true">01</span>{highLevelScopeTitle}</h2>
       <div class="join-scope-grid" aria-label="Scope chips">
         {visibleChips.map((chip) => (
           <span class="proof-chip">{chip}</span>
@@ -138,6 +138,16 @@ const visibleChips = scopeChips?.slice(0, 6) ?? [];
     display: grid;
     gap: 0.62rem;
     align-content: start;
+  }
+
+  .join-panel-index {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    line-height: 1;
+    color: var(--ink-faint);
+    font-weight: 400;
+    margin-bottom: 0.35rem;
   }
 
   .join-panel-title {

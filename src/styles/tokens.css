@@ -17,6 +17,8 @@
 
   --motion-entrance: 320ms;
 
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
   --bg: var(--white);
   --text: var(--ink);
   --border: var(--stroke);

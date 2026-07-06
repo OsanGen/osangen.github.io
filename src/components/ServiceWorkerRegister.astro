@@ -1,18 +1,21 @@
 ---
 const swVersion = (import.meta.env.PUBLIC_SW_VERSION ?? 'local').trim() || 'local';
 const swScriptUrl = `/sw.js?v=${encodeURIComponent(swVersion)}`;
+const swEnabled = !import.meta.env.DEV;
 ---
-<script is:inline define:vars={{ swScriptUrl }}>
-  if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker
-        .register(swScriptUrl, {
-          scope: '/'
-        })
-        .then((registration) => registration.update())
-        .catch(() => {
-          // Intentionally ignore registration failures in constrained contexts.
-        });
-    });
-  }
-</script>
+{swEnabled && (
+  <script is:inline define:vars={{ swScriptUrl }}>
+    if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker
+          .register(swScriptUrl, {
+            scope: '/'
+          })
+          .then((registration) => registration.update())
+          .catch(() => {
+            // Intentionally ignore registration failures in constrained contexts.
+          });
+      });
+    }
+  </script>
+)}

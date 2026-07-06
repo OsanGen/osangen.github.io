@@ -20,6 +20,7 @@
     "sitemap:generate": "tsx scripts/generate-sitemap.mjs"
   },
   "dependencies": {
+    "@fontsource/ibm-plex-mono": "^5.2.7",
     "@fontsource/inter": "^5.1.1",
     "@fontsource/sora": "^5.1.0",
     "astro": "^5.17.3",

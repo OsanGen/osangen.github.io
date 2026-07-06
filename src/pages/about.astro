@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Card from '../components/Card.astro';
 import { loadProfile } from '../lib/content';
 
 const profile = await loadProfile();
@@ -11,29 +10,36 @@ const proofBullets = profile.proof_selected.flatMap((entry) => entry.proof).slic
     <h1>About</h1>
   </header>
   <div class="page-shell">
-    <Card>
-      <h2>Snapshot</h2>
+    <section class="prose-measure">
+      <div class="section-spine">
+        <span class="section-spine__index" aria-hidden="true">01</span>
+        <h2 class="section-spine__label">Snapshot</h2>
+      </div>
       <p class="text-small">{profile.headline}</p>
       {profile.summary.slice(0, 2).map((item) => <p class="catalog-summary">{item}</p>)}
-    </Card>
+    </section>
 
-    <Card>
-      <h2>Proof highlights</h2>
+    <section class="prose-measure">
+      <div class="section-spine">
+        <span class="section-spine__index" aria-hidden="true">02</span>
+        <h2 class="section-spine__label">Proof highlights</h2>
+      </div>
       <ul>
         {proofBullets.map((item) => <li>{item}</li>)}
       </ul>
-    </Card>
+    </section>
 
-    <Card>
-      <h2>Links</h2>
+    <section class="prose-measure">
+      <div class="section-spine">
+        <span class="section-spine__index" aria-hidden="true">03</span>
+        <h2 class="section-spine__label">Links</h2>
+      </div>
       <div class="cta-stack">
-        <a class="button" href={profile.links.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a class="button" href={profile.links.youtube} target="_blank" rel="noopener noreferrer">YouTube</a>
-        <a class="button" href={profile.links.portfolio} target="_blank" rel="noopener noreferrer">Portfolio</a>
-      </div>
-      <div class="cta-stack" style="margin-top:0.75rem;">
         <a class="button button--primary" href="/resume">Open resume</a>
+        <a class="text-link-inline" href={profile.links.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a class="text-link-inline" href={profile.links.youtube} target="_blank" rel="noopener noreferrer">YouTube</a>
+        <a class="text-link-inline" href={profile.links.portfolio} target="_blank" rel="noopener noreferrer">Portfolio</a>
       </div>
-    </Card>
+    </section>
   </div>
 </BaseLayout>

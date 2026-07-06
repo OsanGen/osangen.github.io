@@ -25,16 +25,21 @@ const workshopGroups = getCoreWorkshopCatalogByCategory(workshops);
     </section>
 
     <section id="workshops" class="panel-shell">
-      <h2>Workshops</h2>
+      <div class="section-spine">
+        <span class="section-spine__index" aria-hidden="true">01</span>
+        <h2 class="section-spine__label">Workshops</h2>
+      </div>
       {coreWorkshops.length === 0 ? (
         <p class="text-small">No workshop entries yet.</p>
       ) : (
         <div class="workshops-category-grid">
-          {workshopGroups.map((group) => (
+          {workshopGroups.map((group, groupIndex) => (
             <section class="panel-shell workshops-category-panel">
               <div class="workshops-category__header">
                 <div>
-                  <p class="workshops-category__label">Category</p>
+                  <p class="workshops-category__label">
+                    {String(groupIndex + 1).padStart(2, '0')} / {String(workshopGroups.length).padStart(2, '0')}
+                  </p>
                   <h3 class="workshops-category__title">{group.category}</h3>
                 </div>
                 <p class="workshops-category__count">
@@ -46,9 +51,18 @@ const workshopGroups = getCoreWorkshopCatalogByCategory(workshops);
                 <p class="text-small">No sessions yet.</p>
               ) : (
                 <CardGrid gap="var(--space-3)" align="start" motionGroup>
-                  {group.items.map(({ cta, title, proof }, index) => (
+                  {group.items.map(({ cta, title, proof, meta, tags }, index) => (
                     <article class="card learn-card" style={`--reveal-delay:${index * 45}ms;`}>
                       <h3>{title}</h3>
+                      <p class="meta-strip">
+                        <span class="meta-strip__item meta-strip__item--accent">{meta}</span>
+                        {tags[0] ? (
+                          <>
+                            <span class="meta-strip__sep" aria-hidden="true">·</span>
+                            <span class="meta-strip__item">{tags[0]}</span>
+                          </>
+                        ) : null}
+                      </p>
                       <p class="text-small learn-card__proof">{proof}</p>
                       <div class="learn-card__actions">
                         <a
