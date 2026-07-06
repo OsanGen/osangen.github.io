@@ -554,13 +554,6 @@ main {
   object-fit: contain;
 }
 
-.hero-icon {
-  width: 2.5rem;
-  height: 2.5rem;
-  object-fit: contain;
-  margin-bottom: var(--space-1);
-}
-
 .route-card h2 {
   margin-inline-end: 0;
 }
