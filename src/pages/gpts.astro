@@ -19,7 +19,9 @@ const gpts = await loadGPTs();
   </section>
 
   <section class="scene-shell section" aria-labelledby="gpts-grid-heading">
-    <h2 id="gpts-grid-heading" class="text-small">Available Lean Agents</h2>
+    <div class="section-head">
+      <h2 id="gpts-grid-heading">Available Lean Agents</h2>
+    </div>
     <div id="gpt-grid" class="gpts-grid" data-motion-group>
       {gpts.map((gpt, idx) => (
         <GPTCard gpt={gpt} revealDelayMs={idx * 58} />

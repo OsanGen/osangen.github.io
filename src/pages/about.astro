@@ -7,7 +7,9 @@ const profile = await loadProfile();
 const proofBullets = profile.proof_selected.flatMap((entry) => entry.proof).slice(0, 3);
 ---
 <BaseLayout title="About - Oscar Sanchez" description="Short professional snapshot and proof highlights.">
-  <h1>About</h1>
+  <header class="page-head">
+    <h1>About</h1>
+  </header>
   <div class="page-shell">
     <Card>
       <h2>Snapshot</h2>
