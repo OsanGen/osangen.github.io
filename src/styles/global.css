@@ -574,6 +574,12 @@ main {
   margin-top: var(--space-2);
 }
 
+.route-grid .card,
+.catalog-shell .card {
+  height: 100%;
+  display: grid;
+}
+
 .reference-grid {
   margin-top: var(--space-3);
 }
