@@ -231,9 +231,11 @@ main {
 
 .card {
   background: var(--panel);
-  border: 1px solid var(--stroke);
+  border: var(--stroke-card) solid var(--stroke);
   border-radius: var(--radius-lg);
   padding: var(--space-4);
+  box-shadow: var(--shadow-rest);
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
 }
 
 .featured-section {
@@ -344,10 +346,10 @@ main {
 .surface-shell,
 .visual-shell {
   background: var(--panel);
-  border: 1px solid var(--stroke);
+  border: var(--stroke-card) solid var(--stroke);
   border-radius: var(--radius-lg);
   padding: var(--space-4);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-rest);
   position: relative;
   transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
 }
@@ -424,9 +426,9 @@ main {
 .hero-shell {
   padding: var(--space-6);
   background: var(--panel);
-  border: 1px solid var(--stroke);
-  border-radius: calc(var(--radius-lg) + 0.35rem);
-  box-shadow: var(--shadow);
+  border: var(--stroke-card) solid var(--stroke);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-rest);
   transition: transform var(--motion-entrance) ease, box-shadow var(--motion-entrance) ease;
 }
 
@@ -546,6 +548,19 @@ main {
   transition: background-color 220ms ease, border-color 220ms ease;
 }
 
+.route-card__icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  object-fit: contain;
+}
+
+.hero-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  object-fit: contain;
+  margin-bottom: var(--space-1);
+}
+
 .route-card h2 {
   margin-inline-end: 0;
 }
@@ -571,9 +586,6 @@ body[data-page='home'] .route-grid .route-card.cog-accent-rail::before {
 body[data-page='home'] .route-grid .card:hover .route-card,
 body[data-page='home'] .route-grid .card:focus-within .route-card {
   background: color-mix(in srgb, var(--scene-accent, var(--accent)) 6%, var(--surface));
-  border-color: transparent;
-  box-shadow: none;
-  transform: none;
 }
 
 .inspiration-card {
@@ -928,6 +940,11 @@ body[data-page='home'] .route-grid .card:focus-within .route-card {
   color: var(--ink);
 }
 
+.button.button--ghost:hover,
+.button.button--ghost:focus-visible {
+  background: color-mix(in srgb, var(--scene-accent, var(--accent)) 8%, var(--surface));
+}
+
 .cta-stack {
   display: inline-flex;
   flex-wrap: wrap;
@@ -1088,6 +1105,12 @@ body[data-page='home'] .route-grid .card:focus-within .route-card {
   font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.02em;
+  transition: background-color 160ms ease;
+}
+
+a.badge:hover,
+button.badge:hover {
+  background: color-mix(in srgb, var(--scene-accent, var(--accent)) 7%, transparent);
 }
 
 .badge::before {
@@ -1989,34 +2012,41 @@ body[data-page='workshops'] .agent-details > summary::before {
   background: var(--surface);
 }
 
-/* Learn: quiet background (no looping decor) */
+/* Learn + resume: quiet background (no looping decor) on dense content pages */
 body[data-page='workshops']::before,
 body[data-page='workshops']::after,
 body[data-page='visual-classes']::before,
-body[data-page='visual-classes']::after {
+body[data-page='visual-classes']::after,
+body[data-page='resume']::before,
+body[data-page='resume']::after {
   content: none;
 }
 
 body[data-page='workshops'] .site-page,
-body[data-page='visual-classes'] .site-page {
+body[data-page='visual-classes'] .site-page,
+body[data-page='resume'] .site-page {
   background-image: none;
 }
 
 body[data-page='workshops'] .site-page::before,
 body[data-page='workshops'] .site-page::after,
 body[data-page='visual-classes'] .site-page::before,
-body[data-page='visual-classes'] .site-page::after {
+body[data-page='visual-classes'] .site-page::after,
+body[data-page='resume'] .site-page::before,
+body[data-page='resume'] .site-page::after {
   animation: none;
 }
 
 /* Optional: keep a static, subtle border */
 body[data-page='workshops'] .site-page::before,
-body[data-page='visual-classes'] .site-page::before {
+body[data-page='visual-classes'] .site-page::before,
+body[data-page='resume'] .site-page::before {
   opacity: 0.14;
 }
 
 body[data-page='workshops'] .site-page::after,
-body[data-page='visual-classes'] .site-page::after {
+body[data-page='visual-classes'] .site-page::after,
+body[data-page='resume'] .site-page::after {
   opacity: 0.12;
 }
 
@@ -2048,6 +2078,20 @@ body[data-page='visual-classes'] :where(
   animation: none;
 }
 
+body[data-page='resume'] :where(
+    .hero-shell,
+    .bubble-surface,
+    .site-page > :is(.card, .panel-shell, .surface-shell, .visual-shell):first-of-type
+  )::before,
+body[data-page='resume'] :where(
+    .hero-shell,
+    .bubble-surface,
+    .site-page > :is(.card, .panel-shell, .surface-shell, .visual-shell):first-of-type
+  )::after {
+  content: none;
+  animation: none;
+}
+
 @media (max-width: 900px) {
   body[data-page='workshops'] .learn-detail-hero,
   body[data-page='visual-classes'] .learn-detail-hero {
@@ -2070,9 +2114,9 @@ body[data-page='visual-classes'] .learn-detail-hero__top {
 @media (hover: hover) {
   :is(.card, .panel-shell, .visual-shell, .agent-card, .surface-shell):hover,
   :is(.card, .panel-shell, .visual-shell, .agent-card, .surface-shell):focus-within {
-    transform: translateY(-1px);
+    transform: translateY(-2px);
     border-color: var(--scene-accent-rail);
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-hover);
   }
 
   :is(body[data-page='workshops'], body[data-page='visual-classes']) .learn-card {
