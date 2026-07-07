@@ -29,6 +29,7 @@ const routeCards = [
     title: 'OSAN GAMES',
     href: '/labs',
     subtitle: pluralize(games.length, 'game', 'games'),
+    isCount: true,
     action: 'Open OSAN games',
     icon: HOME_ROUTE_ICONS.games,
   },
@@ -36,6 +37,7 @@ const routeCards = [
     title: 'Workshops',
     href: '/workshops',
     subtitle: pluralize(coreWorkshops.length, 'workshop', 'workshops'),
+    isCount: true,
     action: 'Open workshops',
     icon: HOME_ROUTE_ICONS.workshops,
   },
@@ -43,6 +45,7 @@ const routeCards = [
     title: LEARN_VISUAL_ROUTE_LABEL,
     href: '/visual-classes',
     subtitle: pluralize(visualClassCount, 'lesson', 'lessons'),
+    isCount: true,
     action: `Open ${LEARN_VISUAL_ROUTE_NAME.toLowerCase()}`,
     icon: HOME_ROUTE_ICONS.visualClasses,
   },
@@ -50,14 +53,13 @@ const routeCards = [
     title: 'Contribute',
     href: '/join',
     subtitle: 'Upskill to teach AI in communities',
+    isCount: false,
     action: 'View teaching path',
     icon: HOME_ROUTE_ICONS.contribute,
   },
 ];
 
 const bookHref = sanitizeLink('https://calendly.com/abellou/30min');
-const visualClassSummary =
-  `${visualClassCount} ${visualClassCount === 1 ? 'lesson' : 'lessons'} in the current modules track.`;
 ---
 <BaseLayout title="Oscar Sanchez" description="Open-source AI education, cleanly.">
   <section class="hero-shell scene-shell command-shell cog-proof-stack" data-motion-enter>
@@ -66,19 +68,25 @@ const visualClassSummary =
     <p class="text-small deck-subtitle">Four clean paths for shipping AI capability: play, learn, and contribute.</p>
     <div class="cta-stack">
       <a class="button button--primary" href="/labs">Open OSAN Games</a>
-      <a class="button" href={bookHref} target="_blank" rel="noopener noreferrer">Book</a>
+      <a class="text-link-inline" href={bookHref} target="_blank" rel="noopener noreferrer">Book</a>
     </div>
-    <p class="muted">Plus {visualClassSummary}</p>
+    <pre class="terminal-block" aria-label="Site content counts"><span class="terminal-block__line">games: {games.length}</span><span class="terminal-block__line">workshops: {coreWorkshops.length}</span><span class="terminal-block__line">lessons: {visualClassCount}</span></pre>
   </section>
 
   <div class="route-grid">
-    <CardGrid gap="var(--space-3)" align="start" motionGroup>
+    <CardGrid gap="var(--space-3)" align="stretch" motionGroup>
       {routeCards.map((card) => (
         <Card>
           <article class="route-card cog-proof-stack">
             <img class="route-card__icon" src={card.icon} alt="" />
             <h2>{card.title}</h2>
-            <p class="text-small">{card.subtitle}</p>
+            {card.isCount ? (
+              <p class="meta-strip">
+                <span class="meta-strip__item meta-strip__item--accent">{card.subtitle}</span>
+              </p>
+            ) : (
+              <p class="text-small">{card.subtitle}</p>
+            )}
             <a class="button button--ghost" href={card.href}>
               {card.action}
             </a>

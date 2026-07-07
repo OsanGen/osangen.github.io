@@ -80,26 +80,38 @@ const demoCopy = formatFallbackText(gpt?.links.demo, 'Demo pending.');
       </section>
 
       <section class="panel-shell cog-proof-stack" data-motion-enter>
-        <h2>Proof</h2>
+        <div class="section-spine">
+          <span class="section-spine__index" aria-hidden="true">01</span>
+          <h2 class="section-spine__label">Proof</h2>
+        </div>
         <ProofIOBlock proof={gpt.proof} mode="full" />
       </section>
 
       <section class="panel-shell cog-proof-stack" data-motion-enter>
-        <h2>How to use</h2>
+        <div class="section-spine">
+          <span class="section-spine__index" aria-hidden="true">02</span>
+          <h2 class="section-spine__label">How to use</h2>
+        </div>
         <ol class="gpt-steps" data-motion-group>
           {gpt.how_to_use.map((step) => <li>{step}</li>)}
         </ol>
       </section>
 
       <section class="panel-shell cog-proof-stack" data-motion-enter>
-        <h2>Limits</h2>
+        <div class="section-spine">
+          <span class="section-spine__index" aria-hidden="true">03</span>
+          <h2 class="section-spine__label">Limits</h2>
+        </div>
         <ul class="gpt-limits" data-motion-group>
           {gpt.limits.map((limit) => <li>{limit}</li>)}
         </ul>
       </section>
 
       <section class="panel-shell cog-proof-stack" data-motion-enter>
-        <h2>Additional resources</h2>
+        <div class="section-spine">
+          <span class="section-spine__index" aria-hidden="true">04</span>
+          <h2 class="section-spine__label">Additional resources</h2>
+        </div>
         <div class="cta-stack">
           {promptPackCta.visible ? (
             <a

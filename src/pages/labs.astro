@@ -43,6 +43,7 @@ const gameCards = games.map((game, index) => {
     deployHref,
     repo,
     deployIsExternal: isExternal(deployHref),
+    statusToken: game.embed?.preferred ? 'playable' : 'in progress',
   };
 });
 ---
@@ -63,6 +64,11 @@ const gameCards = games.map((game, index) => {
           >
             <div class="catalog-card-stack">
               <h2>{item.game.title}</h2>
+              <p class="meta-strip">
+                <span class="meta-strip__item meta-strip__item--accent">{item.statusToken}</span>
+                <span class="meta-strip__sep" aria-hidden="true">·</span>
+                <span class="meta-strip__item">{item.game.concepts.length} {item.game.concepts.length === 1 ? 'concept' : 'concepts'}</span>
+              </p>
               <p class="catalog-summary">{item.game.tagline}</p>
               <div class="catalog-actions">
                 <a
@@ -73,10 +79,10 @@ const gameCards = games.map((game, index) => {
                 >
                   Play
                 </a>
-                <a class="button button--ghost" href={`/labs/${item.game.id}`}>Details</a>
+                <a class="text-link-inline" href={`/labs/${item.game.id}`}>Details</a>
                 {item.repo.visible ? (
                   <a
-                    class="button button--ghost"
+                    class="text-link-inline"
                     href={item.repo.href}
                     target={item.repo.isExternal ? '_blank' : undefined}
                     rel={item.repo.isExternal ? 'noopener noreferrer' : undefined}

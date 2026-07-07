@@ -1,20 +1,50 @@
 ---
-import { PRIMARY_NAV_ITEMS, isNavItemCurrent } from '../lib/site-nav';
+import { PRIMARY_NAV_ITEMS, SECONDARY_NAV_ITEMS, isNavItemCurrent } from '../lib/site-nav';
+import { loadProfile } from '../lib/content';
 
 const currentPath = Astro.url.pathname;
+const profile = await loadProfile();
+
+const externalLinks = [
+  { label: 'LinkedIn', href: profile.links.linkedin },
+  { label: 'YouTube', href: profile.links.youtube },
+  { label: 'Portfolio', href: profile.links.portfolio },
+];
 ---
 <footer>
   <div class="container footer-shell">
-    <nav class="footer-links" aria-label="Footer primary">
-      {PRIMARY_NAV_ITEMS.map((item) => {
-        const isCurrent = isNavItemCurrent(currentPath, item.href);
-        return (
-          <a href={item.href} aria-current={isCurrent ? 'page' : undefined}>
+    <div class="footer-columns">
+      <nav class="footer-col" aria-label="Footer primary">
+        <p class="footer-col__label">Routes</p>
+        {PRIMARY_NAV_ITEMS.map((item) => {
+          const isCurrent = isNavItemCurrent(currentPath, item.href);
+          return (
+            <a href={item.href} aria-current={isCurrent ? 'page' : undefined}>
+              {item.label}
+            </a>
+          );
+        })}
+      </nav>
+      <nav class="footer-col" aria-label="Footer secondary">
+        <p class="footer-col__label">More</p>
+        {SECONDARY_NAV_ITEMS.map((item) => {
+          const isCurrent = isNavItemCurrent(currentPath, item.href);
+          return (
+            <a href={item.href} aria-current={isCurrent ? 'page' : undefined}>
+              {item.label}
+            </a>
+          );
+        })}
+      </nav>
+      <nav class="footer-col" aria-label="Footer external">
+        <p class="footer-col__label">Elsewhere</p>
+        {externalLinks.map((item) => (
+          <a href={item.href} target="_blank" rel="noopener noreferrer">
             {item.label}
           </a>
-        );
-      })}
-    </nav>
+        ))}
+      </nav>
+    </div>
     <p class="footer-note">One domain per quarter. Open research. Ethical AI. Free skills, donor-sustained.</p>
   </div>
 </footer>

@@ -15,11 +15,17 @@ const moreLinks = [
 ];
 ---
 <BaseLayout title="More - Oscar Sanchez" description="Secondary site sections and references.">
-  <h1>More</h1>
-  <p class="text-small">Secondary pages and references in one place.</p>
+  <header class="page-head">
+    <h1>More</h1>
+    <p class="text-small">Secondary pages and references in one place.</p>
+  </header>
 
   <div class="catalog-shell">
-    <CardGrid gap="var(--space-3)" align="start">
+    <div class="section-spine">
+      <span class="section-spine__index" aria-hidden="true">01</span>
+      <h2 class="section-spine__label">Secondary routes</h2>
+    </div>
+    <CardGrid gap="var(--space-3)" align="stretch">
       {moreLinks.map((item) => (
         <Card>
           <div class="catalog-card-stack">

@@ -8,9 +8,11 @@ const posts = await loadPosts();
 const updated = await loadLastModifiedISO('posts.json');
 ---
 <BaseLayout title="Posts - Oscar Sanchez" description="Curated posts feed and LinkedIn import note">
-  <h1>Posts</h1>
-  <p class="text-small">Proof-first posts for project learning, not hype.</p>
-  <p class="text-small">Last updated: {updated ? new Date(updated).toLocaleString() : 'Not available'}</p>
+  <header class="page-head">
+    <h1>Posts</h1>
+    <p class="text-small">Proof-first posts for project learning, not hype.</p>
+    <p class="text-small">Last updated: {updated ? new Date(updated).toLocaleString() : 'Not available'}</p>
+  </header>
 
   {posts.length === 0 ? (
     <EmptyState
@@ -20,15 +22,24 @@ const updated = await loadLastModifiedISO('posts.json');
     />
   ) : (
     <div class="page-shell">
+      <div class="section-spine">
+        <span class="section-spine__index" aria-hidden="true">01</span>
+        <h2 class="section-spine__label">Recent posts</h2>
+      </div>
       {posts.map((post) => (
         <Card>
           <h2>{post.title}</h2>
-          <p class="text-small">{post.date}</p>
+          <p class="meta-strip">
+            <span class="meta-strip__item meta-strip__item--accent">{post.date}</span>
+            {post.proofLinks?.length ? (
+              <>
+                <span class="meta-strip__sep" aria-hidden="true">·</span>
+                <span class="meta-strip__item">{post.proofLinks.length} proof {post.proofLinks.length === 1 ? 'link' : 'links'}</span>
+              </>
+            ) : null}
+          </p>
           <p style="margin-top:0.5rem;">{post.summary}</p>
           <a class="button" href={post.url} target="_blank" rel="noopener noreferrer">Read source</a>
-          {post.proofLinks?.length ? (
-            <p class="text-small" style="margin-top:0.6rem;">Proof links: {post.proofLinks.length}</p>
-          ) : null}
         </Card>
       ))}
     </div>

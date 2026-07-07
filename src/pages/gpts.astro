@@ -14,12 +14,15 @@ const gpts = await loadGPTs();
     </p>
     <div class="cta-stack gpts-actions">
       <a class="button button--primary" href="#gpt-grid">Browse agents</a>
-      <a class="button" href="/book">Book a session</a>
+      <a class="text-link-inline" href="/book">Book a session</a>
     </div>
   </section>
 
   <section class="scene-shell section" aria-labelledby="gpts-grid-heading">
-    <h2 id="gpts-grid-heading" class="text-small">Available Lean Agents</h2>
+    <div class="section-spine">
+      <span class="section-spine__index" aria-hidden="true">01</span>
+      <h2 id="gpts-grid-heading" class="section-spine__label">Available Lean Agents</h2>
+    </div>
     <div id="gpt-grid" class="gpts-grid" data-motion-group>
       {gpts.map((gpt, idx) => (
         <GPTCard gpt={gpt} revealDelayMs={idx * 58} />
@@ -30,8 +33,8 @@ const gpts = await loadGPTs();
   <section class="panel-shell section gpts-cta-strip cog-proof-stack" data-motion-enter>
     <p class="text-small">Need learning paths, workshops, and contribution opportunities?</p>
     <div class="cta-stack">
-      <a class="button" href="/more">Open more</a>
       <a class="button" href="/resume">View resume</a>
+      <a class="text-link-inline" href="/more">Open more</a>
     </div>
   </section>
 </BaseLayout>

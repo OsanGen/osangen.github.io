@@ -24,27 +24,3 @@ body[data-page='labs'] .catalog-actions .button--ghost {
   background: var(--surface);
   border-color: var(--stroke);
 }
-
-body[data-page='labs'] .hero-shell::before {
-  animation: none;
-  opacity: 0.22;
-  background: color-mix(in srgb, var(--scene-accent, var(--accent)) 52%, transparent);
-}
-
-body[data-page='labs'] .hero-shell::after {
-  animation: none;
-  opacity: 0.48;
-}
-
-body[data-page='labs'] .site-page::before,
-body[data-page='labs'] .site-page::after {
-  animation: none;
-}
-
-body[data-page='labs'] .site-page::before {
-  opacity: 0.16;
-}
-
-body[data-page='labs'] .site-page::after {
-  opacity: 0.14;
-}
